@@ -43,6 +43,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (6.0.0.beta2)
     autoprefixer-rails (4.0.1)
       execjs
@@ -206,11 +209,13 @@ GEM
     wice_grid (3.4.10)
       coffee-rails
       kaminari (>= 0.13.0)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   arel (= 6.0.0.beta2)
   autoprefixer-rails
   better_errors
@@ -237,3 +242,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0.0.beta2)
   wice_grid
+  will_paginate

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :problems
   resources :contests
+  resources :posts
 
   get '/about', to: 'statics#about', as: :about
   get '/help', to: 'statics#help', as: :help

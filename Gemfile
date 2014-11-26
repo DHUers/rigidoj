@@ -38,11 +38,14 @@ gem 'formtastic', git: 'https://github.com/justinfrench/formtastic.git'
 
 gem 'seed-fu'
 
+gem 'will_paginate'
+
 # frontend assets
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
+
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
@@ -57,4 +60,5 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'annotate'
 end
