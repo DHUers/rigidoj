@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+    <%= button_to 'New problem', new_problem_path, class: 'btn btn-primary',
+                  html: {type: 'button'}, method: :get %>
+  </div>
+</div>
+<% if @programs %>
+  <% @programs.each do |p| %>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2><%= p.title %></h2>
+      <p><%= p.author %></p>
+      <%= p.raw %>
+    </div>
+  </div>
+  <% end %>
+<% end %>

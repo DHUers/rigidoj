@@ -1,4 +1,7 @@
 class Problem < ActiveRecord::Base
+  scope :published, -> { where(published: true) }
+
+  self.per_page = 30
 end
 
 # == Schema Information

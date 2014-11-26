@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <h2>Create a problem</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <%= form_for @problem, html: {role: 'form'} do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
+
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :published %> Publish now?
+        </label>
+      </div>
+      <%= f.button 'Create', class: 'btn btn-success' %>
+      <%= button_to 'Cancel', problems_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>

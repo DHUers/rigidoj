@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <h2><%= @problem.title %></h2>
+    <p><%= @problem.author %></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <%= h @problem.raw %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_problem_path(params[:id]) %>

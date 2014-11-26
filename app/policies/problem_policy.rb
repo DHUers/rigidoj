@@ -4,7 +4,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    post.published?
+    problem.published?
   end
 
   def permitted_attributes
