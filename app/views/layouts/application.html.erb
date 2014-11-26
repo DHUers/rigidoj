@@ -37,6 +37,7 @@
         <ul class="nav navbar-nav">
           <li><%= link_to 'Problem', problems_path %></li>
           <li><%= link_to 'Contest', contests_path %></li>
+          <li><%= link_to 'Post', posts_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <i class="fa fa-caret-down"></i></a>
             <ul class="dropdown-menu" role="menu">
@@ -65,11 +66,14 @@
     </div>
   </nav>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <section id="main">
+    <div class="container-fluid">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-  <%= yield %>
-
+      <%= yield %>
+    </div>
+  </section>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
