@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-
+    @posts = Post.published.paginate(page: params[:page])
   end
 
   def new
