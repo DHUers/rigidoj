@@ -28,6 +28,15 @@ gem 'rack-mini-profiler', require: false
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'devise'
+gem 'pundit'
+gem 'nokogiri'
+gem 'sidekiq'
+gem 'wice_grid'
+gem 'formtastic', git: 'https://github.com/justinfrench/formtastic.git'
+
+gem 'seed-fu'
+
 # frontend assets
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.1'
