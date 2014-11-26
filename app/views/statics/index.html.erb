@@ -1,5 +1,13 @@
 <div class="row">
   <div class="col-md-8">
-    <%= render Post.all %>
+    <% @posts.each do |p| %>
+      <section class="post">
+        <h2><%= p.title %></h2>
+        <%= p.raw %>
+      </section>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+
   </div>
 </div>
