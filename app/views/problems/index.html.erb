@@ -4,14 +4,21 @@
                   html: {type: 'button'}, method: :get %>
   </div>
 </div>
-<% if @problems %>
-  <% @problems.each do |p| %>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h2><%= p.title %></h2>
-      <p><%= p.author_id %></p>
-      <%= raw p.baked %>
-    </div>
-  </div>
-  <% end %>
-<% end %>
+<%= grid @problems, show_filters: :always, hide_submit_button: true do |g|
+
+  g.blank_slate do
+    'There is no problem.'
+  end
+
+  g.column name: 'ID', attribute: 'id', auto_reload: true
+
+  g.column name: 'Title', attribute: 'title', auto_reload: true
+
+  g.column do |problem|
+    problem.baked
+  end
+
+  g.column do |problem|
+    link_to('Edit', edit_problem_path(problem))
+  end
+end -%>

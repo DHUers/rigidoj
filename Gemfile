@@ -36,8 +36,6 @@ gem 'wice_grid'
 
 gem 'seed-fu'
 
-gem 'will_paginate'
-
 # frontend assets
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.1'

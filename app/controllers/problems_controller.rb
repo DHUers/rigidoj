@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   def index
-    @problems = Problem.published.paginate(page: params[:page])
+    @problems = initialize_grid(Problem.published)
   end
 
   def new
