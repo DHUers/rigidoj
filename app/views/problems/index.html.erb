@@ -4,12 +4,12 @@
                   html: {type: 'button'}, method: :get %>
   </div>
 </div>
-<% if @programs %>
-  <% @programs.each do |p| %>
+<% if @problems %>
+  <% @problems.each do |p| %>
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <h2><%= p.title %></h2>
-      <p><%= p.author %></p>
+      <p><%= p.author_id %></p>
       <%= p.raw %>
     </div>
   </div>

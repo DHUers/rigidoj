@@ -4,6 +4,7 @@ Problem.seed do |p|
   p.memory_limit = 65535
   p.time_limit = 1000
   p.author_id = -1
+  p.published = true
   p.raw = <<RAW
 ## Description
 Give you two integers A and B, please output A+B.
