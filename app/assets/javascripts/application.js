@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require highlight.pack
 
-Rigidoj = {}
+Rigidoj = {};
 
 //= require_tree lib
 //= require_self
