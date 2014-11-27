@@ -16,7 +16,8 @@ end
 #  memory_limit :integer          default("65535"), not null
 #  time_limit   :integer          default("1000"), not null
 #  source       :string           default("")
-#  author       :integer
+#  author_id    :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  published    :boolean
 #

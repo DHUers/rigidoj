@@ -11,8 +11,9 @@ end
 #  id         :integer          not null, primary key
 #  title      :string           not null
 #  raw        :string           not null
-#  baked      :string           not null
-#  author     :integer
+#  baked      :text             default(""), not null
+#  author_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  published  :boolean          default("false"), not null
 #
