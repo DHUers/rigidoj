@@ -34,7 +34,6 @@ gem 'pundit'
 gem 'nokogiri'
 gem 'sidekiq'
 gem 'wice_grid'
-gem 'formtastic', git: 'https://github.com/justinfrench/formtastic.git'
 
 gem 'seed-fu'
 

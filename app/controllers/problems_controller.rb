@@ -11,7 +11,7 @@ class ProblemsController < ApplicationController
     @problem = Problem.new(problem_params)
     authorize @problem
 
-    @problem.author = current_user.id
+    @problem.author_id = current_user.id
     if @problem.save
       redirect_to @problem
     else
