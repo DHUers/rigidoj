@@ -12,8 +12,6 @@ matrix:
 rvm:
   - 2.1
 
-services:
-
 sudo: false
 
 cache: bundler
@@ -28,4 +26,4 @@ before_script:
 
 bundler_args: --without development --deployment --retry=3 --jobs=3
 
-script: 'bundle exec rspec'
+script: 'CODECLIMATE_REPO_TOKEN=e756927d490a667f8c9bd8aafc5311598fd29e190b0ca8adde47b9006b5d0842 bundle exec rspec'
