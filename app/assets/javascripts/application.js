@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require highlight.pack
+//= require_self
+
+hljs.initHighlightingOnLoad();
