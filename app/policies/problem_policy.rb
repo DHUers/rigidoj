@@ -1,10 +1,10 @@
-class PostPolicy < ApplicationPolicy
+class ProblemPolicy < ApplicationPolicy
   def create?
     @user
   end
 
   def update?
-    problem.published?
+    @record.published?
   end
 
   def permitted_attributes

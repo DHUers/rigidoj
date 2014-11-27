@@ -31,7 +31,7 @@ class ProblemsController < ApplicationController
     @problem = Problem.find(params[:id])
     authorize @problem
 
-    if @problem.save
+    if @problem.update_attributes(problem_params)
       redirect_to @problem
     else
       render 'edit'
