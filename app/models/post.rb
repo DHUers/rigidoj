@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   include Cookable
 
+  belongs_to :author, class_name: :User, foreign_key: 'author_id'
   scope :published, -> { where(published: true) }
 
   self.per_page = 30
