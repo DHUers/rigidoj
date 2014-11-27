@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <h2><%= @post.title %></h2>
-    <p><%= @post.author %></p>
+    <p><%= @post.author_id %></p>
   </div>
 </div>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
-    <%= h @post.raw %>
+    <%= raw @post.baked %>
   </div>
 </div>
 

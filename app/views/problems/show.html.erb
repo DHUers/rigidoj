@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <h2><%= @problem.title %></h2>
-    <p><%= @problem.author %></p>
+    <p><%= @problem.author_id %></p>
   </div>
 </div>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
-    <%= h @problem.raw %>
+    <%= raw @problem.baked %>
   </div>
 </div>
 
