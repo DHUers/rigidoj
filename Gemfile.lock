@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/justinfrench/formtastic.git
-  revision: 2f0db5efaea5d8b331a51c31a74e780b9d822857
-  specs:
-    formtastic (3.2.0.pre)
-      actionpack (>= 3.2.13)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -224,7 +217,6 @@ DEPENDENCIES
   carrierwave
   devise
   font-awesome-rails
-  formtastic!
   jquery-rails
   mini_magick
   nokogiri
