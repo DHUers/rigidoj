@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include Cookable
+
   scope :published, -> { where(published: true) }
 
   self.per_page = 30
