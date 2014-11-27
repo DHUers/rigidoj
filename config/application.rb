@@ -24,5 +24,7 @@ module Rigidoj
     # config.i18n.default_locale = :de
     config.active_record.schema_format = :sql
 
+    config.autoload_paths << Rails.root.join('lib')
+
   end
 end
