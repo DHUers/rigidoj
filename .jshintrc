@@ -1,6 +1,10 @@
 {
   "predef":[
-    "moment"],
+    "jQuery",
+    "$",
+    "Rigidoj",
+    "moment",
+    "hljs"],
   "node" : false,
   "browser" : true,
   "boss" : true,
