@@ -15,6 +15,11 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack
+
+Rigidoj = {}
+
+//= require_tree lib
 //= require_self
 
 hljs.initHighlightingOnLoad();
+
