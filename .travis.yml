@@ -1,0 +1,31 @@
+language: ruby
+
+env:
+  global:
+    - RUBY_GC_MALLOC_LIMIT=50000000
+
+matrix:
+  allow_failures:
+    - rvm: 2.1
+  fast_finish: true
+
+rvm:
+  - 2.1
+
+services:
+
+sudo: false
+
+cache: bundler
+
+before_install:
+  - npm i -g jshint
+  - jshint .
+
+before_script:
+  - psql -c 'create database rigidoj_test;' -U postgres
+  - bundle exec rake db:migrate db:seed_fu
+
+bundler_args: --without development --deployment --retry=3 --jobs=3
+
+script: 'bundle exec rspec'
