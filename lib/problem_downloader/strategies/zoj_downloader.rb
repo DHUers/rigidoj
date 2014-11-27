@@ -1,0 +1,3 @@
+class ZOJDownloader
+
+end
