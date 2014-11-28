@@ -3,8 +3,6 @@ class Post < ActiveRecord::Base
 
   belongs_to :author, class_name: :User, foreign_key: 'author_id'
   scope :published, -> { where(published: true) }
-
-  self.per_page = 30
 end
 
 # == Schema Information
