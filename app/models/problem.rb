@@ -16,11 +16,11 @@ end
 #  excerpt      :string           default("")
 #  raw          :text             default("")
 #  baked        :text             default("")
-#  memory_limit :integer          default("65535"), not null
-#  time_limit   :integer          default("1000"), not null
 #  source       :string           default("")
 #  author_id    :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  published    :boolean          default("false")
+#  memory_limit :json             default("{\"default\":65535}")
+#  time_limit   :json             default("{\"default\":1000}")
 #
