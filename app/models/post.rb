@@ -1,8 +1,11 @@
 class Post < ActiveRecord::Base
   include Cookable
 
-  belongs_to :author, class_name: :User, foreign_key: 'author_id'
+  belongs_to :author, class_name: :User, foreign_key: 'author_id', inverse_of: :post
   scope :published, -> { where(published: true) }
+
+  validates :title, length: { in: 2..60 }, presence: true
+  validates :author, presence: true
 end
 
 # == Schema Information
