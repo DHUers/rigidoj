@@ -6,3 +6,9 @@
   padding-top: 5rem;
   z-index: 0;
 }
+
+.container-fluid, .container {
+  max-width: 1110px;
+  width: 95%;
+  margin: 0 auto;
+}

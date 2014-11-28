@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <h2><%= @contest.title %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <%= raw @contest.baked %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_contest_path(params[:id]) %>
