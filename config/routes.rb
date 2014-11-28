@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :problems
   resources :contests
   resources :posts
+  resources :solutions
+  resources :problems do
+    resources :solutions
+  end
 
   get '/about', to: 'statics#about', as: :about
   get '/help', to: 'statics#help', as: :help
