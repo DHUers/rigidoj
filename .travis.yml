@@ -10,6 +10,7 @@ matrix:
   fast_finish: true
 
 rvm:
+  - 2.0.0
   - 2.1.5
 
 sudo: false
