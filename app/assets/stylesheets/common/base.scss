@@ -1,5 +1,5 @@
 .profiler-results {
-  top: 5rem !important;
+  top: $navbar-height + 1 !important;
 }
 
 #main {
@@ -11,4 +11,8 @@
   max-width: 1110px;
   width: 95%;
   margin: 0 auto;
+}
+
+body {
+  padding-top: $navbar-height;
 }
