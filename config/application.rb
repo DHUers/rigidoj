@@ -26,5 +26,7 @@ module Rigidoj
 
     config.autoload_paths << Rails.root.join('lib')
 
+    config.pbkdf2_iterations = 64000
+    config.pbkdf2_algorithm = 'sha256'
   end
 end

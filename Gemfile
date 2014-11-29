@@ -29,6 +29,8 @@ gem 'wice_grid'
 
 gem 'seed-fu'
 
+gem 'fast_xor'
+
 # frontend assets
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.1'

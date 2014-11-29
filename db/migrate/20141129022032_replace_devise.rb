@@ -1,10 +1,11 @@
 class ReplaceDevise < ActiveRecord::Migration
   def change
-    drop_table :users
+    drop_table :users do end
 
     create_table :users do |t|
       t.string :username, null: false, length: 60
       t.string :name, length: 320
+      t.string :email, length: 300, null: false
       t.string :password_hash, length: 64
       t.string :salt, length: 32
       t.boolean :active, default: false, null: false
