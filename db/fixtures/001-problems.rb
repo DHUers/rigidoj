@@ -1,9 +1,9 @@
 Problem.seed do |p|
+  p.id = 1
   p.author_id = -1
   p.title = 'A + B Problem'
   p.memory_limit = 65535
   p.time_limit = 1000
-  p.author_id = -1
   p.published = true
   p.raw = <<RAW
 ## Description
