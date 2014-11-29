@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_password_is_hashed
 
+  after_initialize :set_default_active
+
   def self.username_length
     2..20
   end
@@ -57,6 +59,10 @@ class User < ActiveRecord::Base
   def hash_password(password, salt)
     raise "password is too long" if password.size > User.max_password_length
     Pbkdf2.hash_password(password, salt, Rails.configuration.pbkdf2_iterations, Rails.configuration.pbkdf2_algorithm)
+  end
+
+  def set_default_active
+    self.active = true
   end
 end
 
