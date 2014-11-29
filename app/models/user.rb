@@ -47,7 +47,14 @@ class User < ActiveRecord::Base
     @raw_password = password unless password.blank?
   end
 
+  def password_confirmation=(password_confirmation)
+    @password_confirmation = password_confirmation unless password_confirmation.blank?
+  end
+
   def password_validator
+    if @raw_password != @password_confirmation
+      errors.add(:password_confirmation, I18n.t('user.password_confirmation.not_match'))
+    end
     PasswordValidator.new(attributes: :password).validate_each(self, :password, @raw_password)
   end
 
