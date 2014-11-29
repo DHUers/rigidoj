@@ -1,9 +1,12 @@
+@import "font-awesome";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 .profiler-results {
   top: $navbar-height + 1 !important;
 }
 
 #main {
-  padding-top: 5rem;
   z-index: 0;
 }
 
@@ -11,8 +14,5 @@
   max-width: 1110px;
   width: 95%;
   margin: 0 auto;
-}
-
-body {
-  padding-top: $navbar-height;
+  padding: 0;
 }

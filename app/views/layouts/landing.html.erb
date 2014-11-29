@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= yield :head %>
+  <%= stylesheet_link_tag    'landing', media: 'all', 'data-turbolinks-track' => true %>
+</head>
+<body>
+  <!--[if lt IE 8]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <section id="landing-header">
+    <div class="container">
+      <div class="col-md-4">
+        <div class="branding">Rigid OJ</div>
+      </div>
+      <div class="col-md-8">
+        <div class="pull-right">
+          <%= link_to 'About' %>
+          <%= link_to 'Log In' %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="main">
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </section>
+  <%= javascript_include_tag 'landing', 'data-turbolinks-track' => true %>
+</body>
+</html>
