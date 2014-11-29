@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0.beta4'
-gem 'arel', '6.0.0.beta2'
-# Use postgresql as the database for Active Record
+gem 'rails', '4.2.0.rc1'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.0.beta1'
@@ -25,9 +22,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rack-mini-profiler', require: false
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
 gem 'devise'
 gem 'pundit'
 gem 'nokogiri'
@@ -44,19 +38,15 @@ gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 
 group :development, :test do
-  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  # Access an IRB console on exceptions page and /console in development
-  gem 'web-console', '~> 2.0.0.beta2'
   gem 'rspec-rails'
   gem 'codeclimate-test-reporter', require: nil
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
 group :development do
+  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'web-console'
   gem 'better_errors'
   gem 'annotate'
 end
