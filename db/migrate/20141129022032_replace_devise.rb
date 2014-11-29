@@ -3,11 +3,11 @@ class ReplaceDevise < ActiveRecord::Migration
     drop_table :users do end
 
     create_table :users do |t|
-      t.string :username, null: false, length: 60
-      t.string :name, length: 320
-      t.string :email, length: 300, null: false
-      t.string :password_hash, length: 64
-      t.string :salt, length: 32
+      t.string :username, null: false, limit: 60
+      t.string :name, limit: 320
+      t.string :email, limit: 300, null: false
+      t.string :password_hash, limit: 64
+      t.string :salt, limit: 32
       t.boolean :active, default: false, null: false
       t.datetime :last_seen_at
       t.string :grade_and_class

@@ -29,6 +29,7 @@ gem 'wice_grid'
 
 gem 'seed-fu'
 
+gem 'bcrypt'
 gem 'fast_xor'
 
 # frontend assets
