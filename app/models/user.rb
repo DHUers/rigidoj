@@ -124,6 +124,10 @@ class User < ActiveRecord::Base
   def authenticated?(remember_token)
     BCrypt::Password.new(remember_hash).is_password?(remember_token)
   end
+
+  def forget
+    update_column(:remember_hash, nil)
+  end
 end
 
 # == Schema Information
