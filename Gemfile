@@ -22,7 +22,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rack-mini-profiler', require: false
 
-gem 'devise'
 gem 'pundit'
 gem 'nokogiri'
 gem 'sidekiq'

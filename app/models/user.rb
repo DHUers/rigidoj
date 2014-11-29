@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable, :lockable
   has_many :solutions
   has_many :problems, foreign_key: 'author_id'
   has_many :posts, foreign_key: 'author_id'
