@@ -1,4 +1,4 @@
-#landing-header {
+.landing-header {
   background-image: image_url("landing-header.jpg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -6,5 +6,18 @@
   display: block;
   overflow: hidden;
   position: relative;
-  max-height: 460px;
+  height: 400px;
+  max-height: 500px;
+
+  color: rgba(255,255,255,1);
+}
+
+nav a {
+  color: rgba(255,255,255,1);
+}
+
+#landing-nav {
+  li > a:hover {
+    background: transparent;
+  }
 }

@@ -1,0 +1,48 @@
+<div class="landing-header">
+  <nav class="navbar navbar-success navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-drawer">
+          <span class="sr-only">切换导航面板</span>
+          <i class="fa fa-bars"></i>
+        </button>
+        <%= link_to 'Brand', root_path, class: 'navbar-brand' %>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-drawer">
+        <ul class="nav navbar-nav navbar-right" id="landing-nav">
+          <li><%= link_to 'Problem', problems_path %></li>
+          <li><%= link_to 'Contest', contests_path %></li>
+          <li><%= link_to 'Help', help_path %></li>
+          <li><%= link_to 'About', about_path %></li>
+          <li><%= button_to 'Log in', login_path, class: 'btn btn-default navbar-btn', method: :get %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header-content">
+    <div class="container">
+      <div class="row">
+        <div class="center-block text-center">
+          <h1>Conquer All puzzles</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <%= button_to 'Sign up', registration_path, class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</section>
