@@ -4,7 +4,6 @@ class Problem < ActiveRecord::Base
   has_many :solutions
   has_and_belongs_to_many :contests
   scope :published, -> { where(published: true) }
-
 end
 
 # == Schema Information

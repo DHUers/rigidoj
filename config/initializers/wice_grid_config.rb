@@ -13,7 +13,7 @@ if defined?(Wice::Defaults)
 
   # If REUSE_LAST_COLUMN_FOR_FILTER_ICONS is true and the last column doesn't have any filter and column name, it will be used
   # for filter related icons (filter icon, reset icon, show/hide icon), otherwise an additional table column is added.
-  Wice::Defaults::REUSE_LAST_COLUMN_FOR_FILTER_ICONS = true
+  Wice::Defaults::REUSE_LAST_COLUMN_FOR_FILTER_ICONS = false
 
   # The label of the first option of a custom dropdown list meaning 'All items'
   Wice::Defaults::CUSTOM_FILTER_ALL_LABEL = '--'
@@ -25,7 +25,7 @@ if defined?(Wice::Defaults)
   Wice::Defaults::ALLOW_MULTIPLE_SELECTION = true
 
   # Show the upper pagination panel by default or not
-  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = false
+  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = true
 
   # Disabling CSV export by default
   Wice::Defaults::ENABLE_EXPORT_TO_CSV = false
@@ -45,7 +45,7 @@ if defined?(Wice::Defaults)
 
 
   # SQL operator used for matching strings in string filters.
-  Wice::Defaults::STRING_MATCHING_OPERATOR = 'LIKE'
+  Wice::Defaults::STRING_MATCHING_OPERATOR = 'ILIKE'
   # STRING_MATCHING_OPERATOR = 'ILIKE' # Use this for Postgresql case-insensitive matching.
 
 

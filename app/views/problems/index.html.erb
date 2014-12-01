@@ -4,21 +4,24 @@
                   html: {type: 'button'}, method: :get %>
   </div>
 </div>
-<%= grid @problems, show_filters: :always, hide_submit_button: true do |g|
 
-  g.blank_slate do
-    'There is no problem.'
-  end
+<div class="row">
+  <%= grid @problems, show_filters: :always, hide_submit_button: true do |g|
 
-  g.column name: 'ID', attribute: 'id', auto_reload: true
+    g.blank_slate do
+      'There is no problem.'
+    end
 
-  g.column name: 'Title', attribute: 'title', auto_reload: true
+    g.column name: 'ID', attribute: 'id', auto_reload: true
 
-  g.column do |problem|
-    problem.baked
-  end
+    g.column name: 'Title', attribute: 'title', auto_reload: true
 
-  g.column do |problem|
-    link_to('Edit', edit_problem_path(problem))
-  end
-end -%>
+    g.column name: 'Description', attribute: 'baked', auto_reload: true do |problem|
+      sanitize(truncate(Nokogiri::HTML(problem.baked).css('p:first').inner_html, omission: '...', length: 240))
+    end
+
+    g.column name: 'Actions' do |problem|
+      link_to('Edit', edit_problem_path(problem))
+    end
+  end -%>
+</div>
