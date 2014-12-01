@@ -21,7 +21,9 @@
     end
 
     g.column name: 'Actions' do |problem|
-      link_to('Edit', edit_problem_path(problem))
+      buffer = link_to 'Show', problem_path(problem)
+      buffer += link_to 'Edit', edit_problem_path(problem)
+      buffer
     end
   end -%>
 </div>

@@ -1,6 +1,6 @@
 class Solution < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :problem
+  belongs_to :user, inverse_of: :solutions
+  belongs_to :problem, inverse_of: :solutions
 end
 
 # == Schema Information
