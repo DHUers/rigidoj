@@ -52,3 +52,9 @@ group :development do
   gem 'better_errors'
   gem 'annotate'
 end
+
+group :test do
+  gem 'fabrication'
+  gem 'shoulda'
+  gem 'timecop'
+end

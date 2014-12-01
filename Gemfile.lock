@@ -81,6 +81,7 @@ GEM
     docile (1.1.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    fabrication (2.9.8)
     fast_xor (1.1.3)
       rake
       rake-compiler
@@ -182,6 +183,12 @@ GEM
     seed-fu (2.3.3)
       activerecord (>= 3.1, < 4.2)
       activesupport (>= 3.1, < 4.2)
+    shoulda (3.5.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (>= 1.4.1, < 3.0)
+    shoulda-context (1.2.1)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     sidekiq (3.3.0)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.0.0)
@@ -210,6 +217,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (4.0.1)
       hitimes
     turbolinks (2.5.2)
@@ -240,6 +248,7 @@ DEPENDENCIES
   byebug
   carrierwave
   codeclimate-test-reporter
+  fabrication
   fast_xor
   font-awesome-rails
   jquery-rails
@@ -255,9 +264,11 @@ DEPENDENCIES
   sass-rails (= 5.0.0.beta1)
   sdoc (~> 0.4.0)
   seed-fu
+  shoulda
   sidekiq
   spring
   therubyracer
+  timecop
   turbolinks
   uglifier (>= 1.3.0)
   web-console
