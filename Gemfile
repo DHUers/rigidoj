@@ -26,6 +26,11 @@ gem 'pundit'
 gem 'nokogiri'
 gem 'sidekiq'
 gem 'wice_grid'
+gem 'bunny'
+gem 'hiredis'
+gem 'redis-store'
+gem 'redis-rails'
+gem 'redis', require: ['redis', 'redis/connection/hiredis']
 
 gem 'seed-fu'
 
@@ -43,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'codeclimate-test-reporter', require: nil
   gem 'spring'
+  gem 'librarian'
 end
 
 group :development do

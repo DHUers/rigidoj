@@ -26,6 +26,10 @@ module Rigidoj
 
     config.autoload_paths << Rails.root.join('lib')
 
+    config.cache_store = :redis_store, {
+        host: 'redis.server', port: 6379, compress: true,
+        expires_in: 8.hours, compress_threshold: 32.kilobytes}
+
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = 'sha256'
   end
