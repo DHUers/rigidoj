@@ -142,13 +142,23 @@ end
 #  salt                    :string(32)
 #  active                  :boolean          default("false"), not null
 #  last_seen_at            :datetime
-#  grade_and_class         :string
 #  admin                   :boolean          default("false"), not null
-#  solved_problem          :integer          default("0")
 #  ip_address              :inet
 #  registration_ip_address :inet
 #  remember_hash           :string(60)
-#  username_lower          :string(60)
+#  username_lower          :string(60)       not null
+#  suspended               :boolean          default("false"), not null
+#  suspended_at            :datetime
+#  suspended_till          :datetime
+#  last_emailed_at         :datetime
+#  moderator               :boolean          default("false")
+#  locale                  :string
+#  uploaded_avatar_id      :integer
+#  blocked                 :boolean          default("false")
+#  email_notification      :boolean          default("true")
+#  email_digest            :boolean          default("false")
+#  email_contest_result    :boolean          default("true")
+#  email_solution_result   :boolean          default("false")
 #
 # Indexes
 #
