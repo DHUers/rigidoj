@@ -152,7 +152,7 @@ end
 #  suspended_till          :datetime
 #  last_emailed_at         :datetime
 #  moderator               :boolean          default("false")
-#  locale                  :string
+#  locale                  :string(10)
 #  uploaded_avatar_id      :integer
 #  blocked                 :boolean          default("false")
 #  email_notification      :boolean          default("true")
