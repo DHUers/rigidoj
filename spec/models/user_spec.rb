@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
-  it { should validate_presence_of :username }
-  it { should validate_presence_of :email }
+  it { is_expected.to validate_presence_of :username }
+  it { is_expected.to validate_presence_of :email }
 
   describe 'change_username' do
     let(:user) { Fabricate(:user) }
@@ -16,17 +16,17 @@ describe User do
       end
 
       it 'returns true' do
-        @result.should == true
+        expect(@result).to eq(true)
       end
 
       it 'should change the username' do
         user.reload
-        user.username.should == new_username
+        expect(user.username).to eq(new_username)
       end
 
       it 'should change the username_lower' do
         user.reload
-        user.username_lower.should == new_username.downcase
+        expect(user.username_lower).to eq(new_username.downcase)
       end
     end
 
@@ -40,17 +40,17 @@ describe User do
       end
 
       it 'returns false' do
-        @result.should == false
+        expect(@result).to eq(false)
       end
 
       it 'should not change the username' do
         user.reload
-        user.username.should == username_before_change
+        expect(user.username).to eq(username_before_change)
       end
 
       it 'should not change the username_lower' do
         user.reload
-        user.username_lower.should == username_lower_before_change
+        expect(user.username_lower).to eq(username_lower_before_change)
       end
     end
 
@@ -58,12 +58,12 @@ describe User do
       let!(:myself) { Fabricate(:user, username: 'hansolo') }
 
       it 'should return true' do
-        myself.change_username('HanSolo').should == true
+        expect(myself.change_username('HanSolo')).to eq(true)
       end
 
       it 'should change the username' do
         myself.change_username('HanSolo')
-        myself.reload.username.should == 'HanSolo'
+        expect(myself.reload.username).to eq('HanSolo')
       end
     end
   end
@@ -72,13 +72,13 @@ describe User do
 
     subject { Fabricate.build(:user) }
 
-    it { should be_valid }
-    it { should_not be_admin }
+    it { is_expected.to be_valid }
+    it { is_expected.not_to be_admin }
 
     it 'downcases email addresses' do
       user = Fabricate.build(:user, email: 'Fancy.Caps.4.U@gmail.com')
       user.save
-      user.reload.email.should == 'fancy.caps.4.u@gmail.com'
+      expect(user.reload.email).to eq('fancy.caps.4.u@gmail.com')
     end
   end
 
@@ -86,26 +86,26 @@ describe User do
     it 'should be 2 chars or longer' do
       @user = Fabricate.build(:user)
       @user.username = 's'
-      @user.save.should == false
+      expect(@user.save).to eq(false)
     end
 
     it 'should never end with a .' do
       @user = Fabricate.build(:user)
       @user.username = 'sam.'
-      @user.save.should == false
+      expect(@user.save).to eq(false)
     end
 
     it 'should never contain spaces' do
       @user = Fabricate.build(:user)
       @user.username = 'sam s'
-      @user.save.should == false
+      expect(@user.save).to eq(false)
     end
 
     ['Bad One', 'Giraf%fe', 'Hello!', '@twitter', 'me@example.com', 'no.dots', 'purple.', '.bilbo', '_nope', 'sa$sy'].each do |bad_nickname|
       it "should not allow username '#{bad_nickname}'" do
         @user = Fabricate.build(:user)
         @user.username = bad_nickname
-        @user.save.should == false
+        expect(@user.save).to eq(false)
       end
     end
   end
@@ -119,29 +119,29 @@ describe User do
 
     it 'should not allow saving if username is reused' do
       @erick.username = @user.username
-      @erick.save.should == false
+      expect(@erick.save).to eq(false)
     end
 
     it 'should not allow saving if username is reused in different casing' do
       @erick.username = @user.username.upcase
-      @erick.save.should == false
+      expect(@erick.save).to eq(false)
     end
   end
 
   context '.username_available?' do
     it 'returns true for a username that is available' do
-      User.username_available?('BruceWayne').should == true
+      expect(User.username_available?('BruceWayne')).to eq(true)
     end
 
     it 'returns false when a username is taken' do
-      User.username_available?(Fabricate(:user).username).should == false
+      expect(User.username_available?(Fabricate(:user).username)).to eq(false)
     end
   end
 
   describe 'email_validator' do
     it 'should allow good emails' do
       user = Fabricate.build(:user, email: 'good@gmail.com')
-      user.should be_valid
+      expect(user).to be_valid
     end
 
   end
@@ -154,11 +154,11 @@ describe User do
     end
 
     it 'should have a valid password after the initial save' do
-      @user.authenticate!('ilovepasta').should == true
+      expect(@user.authenticate!('ilovepasta')).to eq(true)
     end
 
     it 'should not have an active account after initial save' do
-      @user.active.should == true
+      expect(@user.active).to eq(true)
     end
   end
 
@@ -166,7 +166,7 @@ describe User do
     let(:user) { Fabricate(:user) }
 
     it 'should have a blank last seen on creation' do
-      user.last_seen_at.should == nil
+      expect(user.last_seen_at).to eq(nil)
     end
 
     describe 'with no previous values' do
@@ -182,7 +182,7 @@ describe User do
       end
 
       it 'updates last_seen_at' do
-        user.last_seen_at.should be_within(1.second).of(date)
+        expect(user.last_seen_at).to be_within(1.second).of(date)
       end
 
     end
@@ -226,19 +226,19 @@ describe User do
     end
 
     it 'returns the same hash for the same password and salt' do
-      hash('poutine', 'gravy').should == hash('poutine', 'gravy')
+      expect(hash('poutine', 'gravy')).to eq(hash('poutine', 'gravy'))
     end
 
     it 'returns a different hash for the same salt and different password' do
-      hash('poutine', 'gravy').should_not == hash('fries', 'gravy')
+      expect(hash('poutine', 'gravy')).not_to eq(hash('fries', 'gravy'))
     end
 
     it 'returns a different hash for the same password and different salt' do
-      hash('poutine', 'gravy').should_not == hash('poutine', 'cheese')
+      expect(hash('poutine', 'gravy')).not_to eq(hash('poutine', 'cheese'))
     end
 
     it 'raises an error when passwords are too long' do
-      -> { hash(too_long, 'gravy') }.should raise_error
+      expect { hash(too_long, 'gravy') }.to raise_error
     end
 
   end

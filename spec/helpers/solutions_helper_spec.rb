@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe SolutionsHelper do
+describe SolutionsHelper, :type => :helper do
   pending "add some examples to (or delete) #{__FILE__}"
 end
