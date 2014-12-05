@@ -82,79 +82,6 @@ describe User do
     end
   end
 
-  describe 'ip address validation' do
-    it 'validates ip_address for new users' do
-      u = Fabricate.build(:user)
-      AllowedIpAddressValidator.any_instance.expects(:validate_each).with(u, :ip_address, u.ip_address)
-      u.valid?
-    end
-
-    it 'does not validate ip_address when updating an existing user' do
-      u = Fabricate(:user)
-      u.ip_address = '87.123.23.11'
-      AllowedIpAddressValidator.any_instance.expects(:validate_each).never
-      u.valid?
-    end
-  end
-
-  describe 'staff and regular users' do
-    let(:user) { Fabricate.build(:user) }
-
-    describe '#staff?' do
-      subject { user.staff? }
-
-      it { should == false }
-
-      context 'for a moderator user' do
-        before { user.moderator = true }
-
-        it { should == true }
-      end
-
-      context 'for an admin user' do
-        before { user.admin = true }
-
-        it { should == true }
-      end
-    end
-
-    describe '#regular?' do
-      subject { user.regular? }
-
-      it { should == true }
-
-      context 'for a moderator user' do
-        before { user.moderator = true }
-
-        it { should == false }
-      end
-
-      context 'for an admin user' do
-        before { user.admin = true }
-
-        it { should == false }
-      end
-    end
-  end
-
-  describe 'email_hash' do
-    before do
-      @user = Fabricate(:user)
-    end
-
-    it 'should have a sane email hash' do
-      @user.email_hash.should =~ /^[0-9a-f]{32}$/
-    end
-
-    it 'should use downcase email' do
-      @user.email = "example@example.com"
-      @user2 = Fabricate(:user)
-      @user2.email = "ExAmPlE@eXaMpLe.com"
-
-      @user.email_hash.should == @user2.email_hash
-    end
-  end
-
   describe 'username format' do
     it "should be 3 chars or longer" do
       @user = Fabricate.build(:user)
@@ -222,15 +149,15 @@ describe User do
   describe 'passwords' do
     before do
       @user = Fabricate.build(:user, active: false)
-      @user.password = "ilovepasta"
+      @user.password = 'ilovepasta'
       @user.save!
     end
 
-    it "should have a valid password after the initial save" do
-      @user.confirm_password?("ilovepasta").should == true
+    it 'should have a valid password after the initial save' do
+      @user.authenticate!('ilovepasta').should == true
     end
 
-    it "should not have an active account after initial save" do
+    it 'should not have an active account after initial save' do
       @user.active.should == false
     end
   end
