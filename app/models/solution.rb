@@ -1,6 +1,11 @@
 class Solution < ActiveRecord::Base
   belongs_to :user, inverse_of: :solutions
   belongs_to :problem, inverse_of: :solutions
+  enum solution_status: [:accept_answer, :wrong_answer, :time_limit_exceeded,
+                         :memory_limit_exceeded, :presentation_error,
+                         :runtime_error, :compile_error, :output_limit_exceeded,
+                         :waiting, :queueing, :network_error, :judge_error,
+                         :other_error]
 end
 
 # == Schema Information
