@@ -90,14 +90,7 @@ class User < ActiveRecord::Base
     @raw_password
   end
 
-  def password_confirmation=(password_confirmation)
-    @password_confirmation = password_confirmation unless password_confirmation.blank?
-  end
-
   def password_validator
-    if @raw_password != @password_confirmation
-      errors.add(:password_confirmation, 'Confirmation password is not match.')
-    end
     PasswordValidator.new(attributes: :password).validate_each(self, :password, @raw_password)
   end
 
@@ -107,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def hash_password(password, salt)
-    raise "password is too long" if password.length > User.max_password_length
+    raise 'password is too long' if password.length > User.max_password_length
     Pbkdf2.hash_password(password, salt, Rails.configuration.pbkdf2_iterations, Rails.configuration.pbkdf2_algorithm)
   end
 
@@ -137,6 +130,15 @@ class User < ActiveRecord::Base
     self.username = new_username
     save
   end
+
+  def update_last_seen!(now=Time.zone.now)
+    update_column(:last_seen_at, now)
+  end
+
+  def username_format_validator
+    UsernameValidator.perform_validation(self, 'username')
+  end
+
 end
 
 # == Schema Information

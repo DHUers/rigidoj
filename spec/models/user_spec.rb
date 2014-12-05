@@ -83,9 +83,9 @@ describe User do
   end
 
   describe 'username format' do
-    it "should be 3 chars or longer" do
+    it 'should be 2 chars or longer' do
       @user = Fabricate.build(:user)
-      @user.username = 'ss'
+      @user.username = 's'
       @user.save.should == false
     end
 
@@ -158,45 +158,8 @@ describe User do
     end
 
     it 'should not have an active account after initial save' do
-      @user.active.should == false
+      @user.active.should == true
     end
-  end
-
-  describe "previous_visit_at" do
-
-    let(:user) { Fabricate(:user) }
-    let!(:first_visit_date) { Time.zone.now }
-    let!(:second_visit_date) { 2.hours.from_now }
-    let!(:third_visit_date) { 5.hours.from_now }
-
-    before do
-      SiteSetting.stubs(:active_user_rate_limit_secs).returns(0)
-      SiteSetting.stubs(:previous_visit_timeout_hours).returns(1)
-    end
-
-    it "should act correctly" do
-      user.previous_visit_at.should == nil
-
-      # first visit
-      user.update_last_seen!(first_visit_date)
-      user.previous_visit_at.should == nil
-
-      # updated same time
-      user.update_last_seen!(first_visit_date)
-      user.reload
-      user.previous_visit_at.should == nil
-
-      # second visit
-      user.update_last_seen!(second_visit_date)
-      user.reload
-      user.previous_visit_at.should be_within_one_second_of(first_visit_date)
-
-      # third visit
-      user.update_last_seen!(third_visit_date)
-      user.reload
-      user.previous_visit_at.should be_within_one_second_of(second_visit_date)
-    end
-
   end
 
   describe 'last_seen_at' do
@@ -219,7 +182,7 @@ describe User do
       end
 
       it 'updates last_seen_at' do
-        user.last_seen_at.should be_within_one_second_of(date)
+        user.last_seen_at.should be_within(1.second).of(date)
       end
 
     end
