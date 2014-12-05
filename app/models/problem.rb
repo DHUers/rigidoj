@@ -4,6 +4,8 @@ class Problem < ActiveRecord::Base
   has_many :solutions
   has_and_belongs_to_many :contests
   scope :published, -> { where(published: true) }
+  enum judge_type: [:full_text, :program_comparasion, :remote_proxy]
+  ## TODO: Add an optional program comparasion column
 end
 
 # == Schema Information
