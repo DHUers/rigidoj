@@ -22,11 +22,10 @@
 //= require ace/worker-html
 //= require ace/theme-yesterday
 //= require ace/mode-markdown
-//= require_tree .
 //= require_self
+//= require_tree .
 
-Rigidoj = Rigidoj || {};
-
+Rigidoj = {};
 
 hljs.initHighlightingOnLoad();
 

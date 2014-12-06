@@ -1,7 +1,5 @@
 /*global Markdown, console */
 
-Rigidoj = Rigidoj || {};
-
 Rigidoj.Markdown = {
 
   /**
