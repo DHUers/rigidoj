@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack
+//= require nprogress
 
 Rigidoj = {};
 
@@ -25,3 +26,6 @@ Rigidoj = {};
 
 hljs.initHighlightingOnLoad();
 
+$(document).on('page:fetch',   function() { NProgress.start(); });
+$(document).on('page:change',  function() { NProgress.done(); });
+$(document).on('page:restore', function() { NProgress.remove(); });

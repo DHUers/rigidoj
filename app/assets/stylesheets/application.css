@@ -13,5 +13,6 @@
  *= require common
  *= require jquery-ui
  *= require highlightjs/default
+ *= require nprogress
  *= require_self
  */
