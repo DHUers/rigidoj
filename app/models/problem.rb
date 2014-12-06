@@ -5,7 +5,6 @@ class Problem < ActiveRecord::Base
   has_and_belongs_to_many :contests
   scope :published, -> { where(published: true) }
   enum judge_type: [:full_text, :program_comparasion, :remote_proxy]
-  ## TODO: Add an optional program comparasion column
 end
 
 # == Schema Information
@@ -25,5 +24,5 @@ end
 #  time_limit     :json             default("{\"default\":1000}")
 #  input_file_id  :integer
 #  output_file_id :integer
-#  jugde_type     :integer          default("0"), not null
+#  judge_type     :integer          default("0"), not null
 #
