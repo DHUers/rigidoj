@@ -1,10 +1,10 @@
+<% content_for :title, 'Create new problem' %>
+
 <div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <h2>Create a problem</h2>
+  <div class="col-md-2 text-right">
+    <i class="fa fa-puzzle-piece"></i>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-offset-1 col-md-10">
+  <div class="col-md-8">
     <%= form_for @problem, html: {role: 'form'} do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
 

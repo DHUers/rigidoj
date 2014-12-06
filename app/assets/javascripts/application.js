@@ -18,11 +18,15 @@
 //= require turbolinks
 //= require highlight.pack
 //= require nprogress
-
-Rigidoj = {};
-
-//= require_tree lib
+//= require ace/ace
+//= require ace/worker-html
+//= require ace/theme-yesterday
+//= require ace/mode-markdown
+//= require_tree .
 //= require_self
+
+Rigidoj = Rigidoj || {};
+
 
 hljs.initHighlightingOnLoad();
 

@@ -8,11 +8,9 @@
 
 #main {
   z-index: 0;
+  padding-top: 20px;
 }
 
-.container-fluid, .container {
-  max-width: 1110px;
-  width: 95%;
-  margin: 0 auto;
-  padding: 0;
+.meta {
+  text-shadow: 0 1px 0 #fff;
 }

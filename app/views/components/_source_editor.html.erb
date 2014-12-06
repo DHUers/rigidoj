@@ -1,43 +1,42 @@
-<div class="source-editor-container">
+<div class="source-editor">
   <div class="meta clearfix">
-    <ul class="nav nav-tabs">
-      <li role="presentation" class="active">
-        <a href="#">
-          <i class="fa fa-code"></i> Edit problem content
+    <ul class="edit-tabs">
+      <li role="presentation">
+        <a href="#" class="edit-tab selected">
+          <i class="fa fa-code"></i> <%= tab_label %>
         </a>
       </li>
       <li role="presentation">
-        <a href="#" data-preview-url="<%= preview_url %>">
+        <a href="#" class="edit-tab" data-preview-url="<%= preview_url %>">
           <i class="fa fa-eye"></i> Preview
         </a>
       </li>
-
-      <div class="actions pull-right">
-        <select>
-          <optgroup label="Indent mode">
-            <option value="tabs">Tabs</option>
-            <option value="spaces">Spaces</option>
-          </optgroup>
-        </select>
-
-        <% if indent_width %>
-          <select>
-            <optgroup label="Indent size">
-              <% indent_width.each do |i| %>
-                <option value="<%= i %>"><%= i %></option>
-              <% end %>
-            </optgroup>
-          </select>
-        <% end %>
-
-        <select>
-          <optgroup label="Line wrap mode">
-            <option value="off">No wrap</option>
-            <option value="on">Soft wrap</option>
-          </optgroup>
-        </select>
-      </div>
     </ul>
+    <div class="actions pull-right">
+      <select>
+        <optgroup label="Indent mode">
+          <option value="tabs">Tabs</option>
+          <option value="spaces">Spaces</option>
+        </optgroup>
+      </select>
+
+      <% if indent_width %>
+        <select>
+          <optgroup label="Indent size">
+            <% indent_width.each do |i| %>
+              <option value="<%= i %>"><%= i %></option>
+            <% end %>
+          </optgroup>
+        </select>
+      <% end %>
+
+      <select>
+        <optgroup label="Line wrap mode">
+          <option value="off">No wrap</option>
+          <option value="on">Soft wrap</option>
+        </optgroup>
+      </select>
+    </div>
   </div>
   <div class="<%= usage_classname %>">
     <div class="source-editor-textarea" id="<%= textarea_id %>"></div>
