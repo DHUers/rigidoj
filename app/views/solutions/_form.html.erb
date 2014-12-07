@@ -1,4 +1,10 @@
 <div class="form-group">
-  <label for="solution-title">Code</label>
-  <%= f.text_area :source, class: 'form-control', id: 'solution-title' %>
+  <%= f.hidden_field :source %>
+  <%= render partial: 'components/source_editor',
+             locals: {
+                 preview_url: '',
+                 indent_width: %w(2 4 8),
+                 tab_label: 'Edit content',
+                 usage_classname: 'problem-content-create',
+                 textarea_id: 'problem-content' } %>
 </div>

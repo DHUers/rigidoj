@@ -4,9 +4,20 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    @solution = Solution.new(solution_param)
+    @solution = Solution.new(solution_params)
 
-    Solution.find_by(user_id: params[:userd])
+    if @solution.save
+      publish_to_judgers
+      render @solution
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def publish_to_judgers
+    Rigidoj.judger_queue.publish
   end
 
   def solution_params

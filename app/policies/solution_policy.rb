@@ -7,6 +7,6 @@ class SolutionPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:language, :soource]
+    [:platform, :source]
   end
 end
