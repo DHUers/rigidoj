@@ -4,7 +4,12 @@
 </div>
 
 <div class="form-group">
-  <label for="post-content">Post content</label>
-  <%= f.text_area :raw, class: 'form-control', id: 'post-content' %>
+  <%= f.hidden_field :raw %>
+  <%= render partial: 'components/source_editor',
+             locals: {
+                 preview_url: '',
+                 indent_width: %w(2 4 8),
+                 tab_label: 'Edit post',
+                 usage_classname: 'post-content-create',
+                 textarea_id: 'post-content' } %>
 </div>
-
