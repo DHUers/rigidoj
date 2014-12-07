@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'admin#dashboard'
     get '/dashboard', to: 'admin#dashboard'
-    get '/settings', to: 'admin#required'
-    get '/settings/required', to: 'admin#required'
-    get '/settings/general', to: 'admin#general'
+    scope :settings do
+      get '/:category', to: 'admin#show_settings', as: :settings
+      put '/:category', to: 'admin#update_settings'
+    end
 
     root to: 'admin#dashboard'
   end

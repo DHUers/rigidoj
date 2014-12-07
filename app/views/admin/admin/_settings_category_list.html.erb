@@ -1,0 +1,9 @@
+<div class="col-md-2">
+  <ul class="nav nav-pills nav-stacked">
+    <% SiteSetting.category_listings.each do |category| %>
+      <li role="presentation" <%= active_class_if_category(category) %>>
+        <%= link_to category, admin_settings_path(category) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

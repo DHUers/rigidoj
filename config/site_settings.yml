@@ -1,0 +1,35 @@
+required:
+  title:
+    default: 'Rigidoj'
+  site_description:
+    default: ''
+  contact_email:
+    default: ''
+    type: email
+  notification_email:
+    default: 'info@unconfigured.example.com'
+    type: email
+  site_contact_username:
+    default: ''
+    type: username
+  logo_url:
+    default: '/images/d-logo-sketch.png'
+  digest_logo_url:
+    default: ''
+  mobile_logo_url:
+    default: ''
+  favicon_url:
+    default: '/images/default-favicon.ico'
+  apple_touch_icon_url: '/images/default-apple-touch-icon.png'
+
+basic:
+  default_locale:
+    default: 'en'
+    refresh: true
+  ga_universal_tracking_code:
+    client: true
+    default: ''
+    regex: "^UA-\\d+-\\d+$"
+  ga_universal_domain_name:
+    client: true
+    default: 'auto'
