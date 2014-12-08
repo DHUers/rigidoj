@@ -1,5 +1,7 @@
 class Admin::AdminController < ApplicationController
   def dashboard
+
+
     render 'admin/admin/dashboard'
   end
 

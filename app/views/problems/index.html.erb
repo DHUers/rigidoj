@@ -6,10 +6,31 @@
 </div>
 
 <div class="row">
-  <% @problems.each do |p| %>
-    <h2><%= p.title %></h2>
-    <p><%= raw p.baked %></p>
-  <% end %>
+  <div class="col-md-8">
+    <div class="table-responsive">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <th></th>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Submitted</th>
+          <th>AC%</th>
+        </thead>
+        <tbody>
+          <% @problems.each do |p| %>
+            <tr>
+              <td></td>
+              <td><%= p.id %></td>
+              <td><%= p.title %></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-  <%= paginate @problems, window: 3, remote: true %>
+      <%= paginate @problems, window: 3, remote: true %>
+    </div>
+</div>
+
 </div>
