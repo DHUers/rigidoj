@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   def index
-    @problems = initialize_grid(Problem.published)
+    @problems = Problem.published.order(:id).page(params[:page]).per(20)
   end
 
   def new
