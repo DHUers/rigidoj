@@ -8,7 +8,7 @@
 <div class="row">
   <div class="col-md-8">
     <div class="table-responsive">
-      <table class="table table-condensed table-hover">
+      <table id="problem-listings" class="table table-condensed table-hover">
         <thead>
           <th></th>
           <th>ID</th>
@@ -18,10 +18,10 @@
         </thead>
         <tbody>
           <% @problems.each do |p| %>
-            <tr>
+            <tr class="row-clickable">
               <td></td>
-              <td><%= p.id %></td>
-              <td><%= p.title %></td>
+              <td><%= link_to p.id, problem_path(p) %></td>
+              <td><%= link_to p.title, problem_path(p) %></td>
               <td></td>
               <td></td>
             </tr>

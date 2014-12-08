@@ -1,5 +1,6 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$('#problem-listings tbody').on('click', 'tr', function() {
+  window.location = $(this).find('a').attr('href');
+});
 
 $(document).ready(function() {
   if ($('#problem-content').length) {
