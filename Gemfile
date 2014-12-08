@@ -26,6 +26,8 @@ gem 'pundit'
 gem 'nokogiri'
 gem 'sidekiq'
 gem 'wice_grid'
+gem 'kaminari'
+
 gem 'bunny'
 gem 'hiredis'
 gem 'redis-store'

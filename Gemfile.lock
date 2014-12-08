@@ -279,6 +279,7 @@ DEPENDENCIES
   hiredis
   jquery-rails
   jquery-ui-rails
+  kaminari
   librarian
   mini_magick
   nokogiri
