@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validate :username_validator
   validates :email, presence: true, uniqueness: true
   validates :email, email: true, if: :email_changed?
-  validate :password_validator
+  validate :password_validator, on: [:create]
 
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
@@ -95,8 +95,10 @@ class User < ActiveRecord::Base
   end
 
   def ensure_password_is_hashed
-    self.salt = SecureRandom.hex(16)
-    self.password_hash = hash_password(@raw_password, salt)
+    if @raw_password
+      self.salt = SecureRandom.hex(16)
+      self.password_hash = hash_password(@raw_password, salt)
+    end
   end
 
   def hash_password(password, salt)
@@ -139,6 +141,13 @@ class User < ActiveRecord::Base
     UsernameValidator.perform_validation(self, 'username')
   end
 
+  def to_param
+    username_lower
+  end
+
+  def staff?
+    moderator? || admin?
+  end
 end
 
 # == Schema Information

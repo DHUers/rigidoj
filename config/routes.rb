@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resource :users
+  resources :users, param: :username do
+    resources :favroites
+    resources :notes
+  end
 
   resources :contests
   resources :posts

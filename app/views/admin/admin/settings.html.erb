@@ -9,7 +9,14 @@
 </div>
 
 <div class="row">
-  <%= render 'admin/admin/settings_category_list' %>
+  <div class="col-md-2">
+    <div class="list-group">
+      <% SiteSetting.category_listings.each do |category| %>
+        <%= link_to category, admin_settings_path(category),
+                    class: "list-group-item #{active_class_if_category(category)}" %>
+      <% end %>
+    </div>
+  </div>
 
   <div class="col-md-10">
     <%= form_for :settings,

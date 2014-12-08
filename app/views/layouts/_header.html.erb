@@ -34,9 +34,28 @@
             <li><%= link_to 'Log in', login_path %></li>
           <% else %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-comment"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><i class="icon-arrow-up"></i> Up</a></li>
+                <li><a href="#"><i class="icon-arrow-down"></i> Down</a></li>
+                <li><a href="#"><i class="icon-arrow-left"></i> Left</a></li>
+                <li><a href="#"><i class="icon-arrow-right"></i> Right</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <%= current_user.username %> <i class="fa fa-caret-down"></i>
+              </a>
               <ul class="dropdown-menu" role="menu">
-                <li><%= link_to 'Profile', users_path(params[:id]) %></li>
+                <li><%= link_to 'My profile', user_path(current_user) %></li>
+                <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
+                <li><%= link_to 'Favroites', user_favroites_path(current_user) %></li>
+                <li><%= link_to 'Notes', user_notes_path(current_user) %></li>
+                <% if current_user.staff? %>
+                  <li><%= link_to 'Admin', admin_dashboard_path %></li>
+                <% end%>
                 <li class="divider"></li>
                 <li><%= link_to 'Log out', logout_path, method: :delete, data: { confirm: 'Are you sure?' }  %></li>
               </ul>

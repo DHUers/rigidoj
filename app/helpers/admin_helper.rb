@@ -8,7 +8,7 @@ module AdminHelper
   end
 
   def active_class_if_category(category)
-    raw params[:category] == category ? 'class="active"': ''
+    raw params[:category] == category ? 'active': ''
   end
 
 end
