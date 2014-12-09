@@ -1,14 +1,22 @@
 <div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <h2><%= @problem.title %></h2>
-    <p><%= @problem.author_id %></p>
+  <div class="col-md-offset-1 col-md-7">
+    <div class="page-header">
+      <h1 class="problem-title"><%= @problem.id %> <%= @problem.title %></h1>
+    </div>
+    <div class="problem-body">
+      <%= raw @problem.baked %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <ul class="actions">
+      <li><%= link_to 'Submit', new_problem_solution_path(@problem) %></li>
+      <li><%= link_to 'Submitted records', new_problem_solution_path(@problem) %></li>
+    </ul>
+    <% if current_user.staff? %>
+      <div class="divider"></div>
+      <ul class="actions admin-actions">
+        <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
+      </ul>
+    <% end %>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <%= raw @problem.baked %>
-  </div>
-</div>
-
-<%= link_to 'Edit', edit_problem_path(params[:id]) %>
-<%= link_to 'Submit', new_problem_solution_path(params[:id]) %>

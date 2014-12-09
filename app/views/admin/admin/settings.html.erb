@@ -4,7 +4,10 @@
 
 <div class="container">
   <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+    <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <%= msg %>
+    </div>
   <% end %>
 </div>
 
