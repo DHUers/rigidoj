@@ -15,4 +15,8 @@ end
 #  updated_at         :datetime         not null
 #  description_cooked :text             default("")
 #  contest_status     :integer          default("0"), not null
+#  started_at         :datetime         not null
+#  end_at             :datetime         not null
+#  delayed_till       :datetime
+#  contest_type       :integer          default("0"), not null
 #
