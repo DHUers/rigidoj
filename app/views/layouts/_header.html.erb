@@ -1,6 +1,6 @@
-<% if current_user %>
-  <nav class="navbar navbar-success navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+<% cache "header-#{current_user ? current_user.id : 0}" do %>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-drawer">
           <span class="sr-only">切换导航面板</span>
@@ -15,18 +15,11 @@
         </div>
       </form>
       <div class="collapse navbar-collapse" id="navbar-drawer">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-links">
           <li><%= link_to 'Problem', problems_path %></li>
           <li><%= link_to 'Contest', contests_path %></li>
           <li><%= link_to 'Post', posts_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <i class="fa fa-caret-down"></i></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><%= link_to 'Help', help_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to 'About', about_path %></li>
-            </ul>
-          </li>
+          <li><%= link_to 'Help', help_path %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% unless current_user %>
@@ -34,18 +27,14 @@
             <li><%= link_to 'Log in', login_path %></li>
           <% else %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-comment"></i>
+              <a data-target="#" href="/notification" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                <span class="notification-badge">0</span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#"><i class="icon-arrow-up"></i> Up</a></li>
-                <li><a href="#"><i class="icon-arrow-down"></i> Down</a></li>
-                <li><a href="#"><i class="icon-arrow-left"></i> Left</a></li>
-                <li><a href="#"><i class="icon-arrow-right"></i> Right</a></li>
               </ul>
             </li>
             <li>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <a data-target="#" href="<%= user_path(current_user) %>" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" data-no-turbolink>
                 <%= current_user.username %> <i class="fa fa-caret-down"></i>
               </a>
               <ul class="dropdown-menu" role="menu">
@@ -65,5 +54,4 @@
       </div>
     </div>
   </nav>
-<% else %>
 <% end %>

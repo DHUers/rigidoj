@@ -5,11 +5,11 @@
 </div>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
-    <%= form_for @post, html: {role: 'form'} do |f| %>
-      <%= render partial: 'form', locals: { f: f } %>
+    <%= form_for @user, html: {role: 'form'} do |f| %>
+      <div class="form-group">
+      </div>
 
       <%= f.button 'Update', class: 'btn btn-warning' %>
-      <%= button_to 'Cancel', post_path(params[:id]), class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

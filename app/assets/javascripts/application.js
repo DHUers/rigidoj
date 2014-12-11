@@ -17,7 +17,6 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack
-//= require nprogress
 //= require ace/ace
 //= require ace/worker-html
 //= require ace/theme-yesterday
@@ -28,7 +27,11 @@
 Rigidoj = {};
 
 hljs.initHighlightingOnLoad();
-
+/*
+NProgress.configure({ minimum: 0.20, showSpinner: false });
 $(document).on('page:fetch',   function() { NProgress.start(); });
 $(document).on('page:change',  function() { NProgress.done(); });
 $(document).on('page:restore', function() { NProgress.remove(); });
+*/
+Turbolinks.enableTransitionCache();
+Turbolinks.enableProgressBar();

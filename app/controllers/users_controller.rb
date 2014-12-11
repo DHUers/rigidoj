@@ -16,6 +16,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find_by(username_lower: params[:username])
+  end
+
+  def edit
+    @user = User.find_by(username_lower: params[:username])
+  end
+
+  def update
+
+  end
+
+  private
+
   def user_params
     params.require(:user).permit(*policy(@user || User).permitted_attributes)
   end

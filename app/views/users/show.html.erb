@@ -1,13 +1,42 @@
 <div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <h2><%= @post.title %></h2>
-    <p><%= @post.author_id %></p>
+  <div class="col-md-offset-2 col-md-8">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="#">Home</a></li>
+      <li role="presentation"><a href="#">Profile</a></li>
+      <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <%= raw @post.baked %>
+  <div class="col-md-offset-2 col-md-8">
+    <ul>
+      <% if current_user == @user.id || current_user.staff? %>
+        <li>
+          <label>User ID:</label>
+          <span class="user-profile-content"><%= @user.id %></span>
+        </li>
+        <li>
+          <label>Email:</label>
+          <span class="user-profile-content"><%= @user.email %></span>
+        </li>
+      <% end %>
+      <li>
+        <label>Username:</label>
+        <span class="user-profile-content"><%= @user.username %></span>
+      </li>
+      <li>
+        <label>Name:</label>
+        <span class="user-profile-content"><%= @user.name %></span>
+      </li>
+      <li>
+        <label>Last seen at:</label>
+        <span class="user-profile-content"><%= @user.last_seen_at %></span>
+      </li>
+      <li class="divider"></li>
+    </ul>
+
+    <div class="avatar pull-right">
+
+    </div>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_post_path(params[:id]) %>
