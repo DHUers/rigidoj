@@ -22,3 +22,8 @@
     text-decoration: underline;
   }
 }
+
+html.turbolinks-progress-bar::before {
+  background-color: #cc0011 !important;
+  height: 2px !important;
+}
