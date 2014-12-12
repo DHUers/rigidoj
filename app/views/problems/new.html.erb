@@ -16,7 +16,7 @@
 
       <div class="checkbox">
         <label>
-          <%= f.check_box :published %> Publish now?
+          <%= f.check_box :public, value: 'yes' %> Public
         </label>
       </div>
       <%= f.button 'Create', class: 'btn btn-success' %>

@@ -20,15 +20,15 @@ end
 #  user_id                   :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  public                    :boolean          default("false"), not null
-#  default_memory_limit      :json             default("{\"default\":65535}")
-#  default_time_limit        :json             default("{\"default\":1000}")
+#  public                    :boolean          default("true"), not null
 #  input_file_id             :integer
 #  output_file_id            :integer
 #  judge_type                :integer          default("0"), not null
 #  uploaded_program_id       :integer
 #  uploaded_program_platform :string
 #  draft                     :boolean          default("false"), not null
+#  default_memory_limit      :string           default("65535"), not null
+#  default_time_limit        :string           default("1000"), not null
 #  additional_memory_limit   :hstore           default(""), not null
 #  additional_time_limit     :hstore           default(""), not null
 #

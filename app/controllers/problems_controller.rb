@@ -5,7 +5,7 @@ class ProblemsController < ApplicationController
 
   def new
     @problem = Problem.find_by(draft: true, user: current_user)
-    if @problem
+    unless @problem
       @problem = Problem.create(user: current_user)
     end
   end
