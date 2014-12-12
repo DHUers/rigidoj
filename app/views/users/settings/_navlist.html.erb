@@ -1,5 +1,8 @@
 <div class="col-md-3">
   <div class="list-group">
-    <%= link_to 'Profile', settings_profile_path, class: 'list-group-item' %>
+    <span>Personal settings</span>
+    <%= link_to 'Profile', settings_profile_path, class: "list-group-item #{active_if('profile')}" %>
+    <%= link_to 'Account settings', settings_account_path, class: "list-group-item #{active_if('account')}" %>
+    <%= link_to 'Notification center', settings_notification_path, class: "list-group-item #{active_if('notification')}" %>
   </div>
 </div>

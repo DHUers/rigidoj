@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 
   get '/settings', to: redirect('/settings/profile'), as: :settings_root
   get '/settings/profile', to: 'user_settings#profile', as: :settings_profile
+  post '/settings/profile', to: 'user_settings#update_profile'
+  get '/settings/account', to: 'user_settings#account', as: :settings_account
+  post '/settings/account', to: 'user_settings#update_account'
+  get '/settings/notifications', to: 'user_settings#notification', as: :settings_notification
+  post '/settings/notifications', to: 'user_settings#update_notification'
 
   get '/signup', to: 'users#new', as: :registration
   get '/login', to: 'sessions#new', as: :login

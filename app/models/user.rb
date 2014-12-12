@@ -4,7 +4,6 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessor :remember_token
 
-  has_one :user_profile, dependent: :destroy
   has_one :user_stat, dependent: :destroy
   has_many :solutions
   has_many :problems, foreign_key: 'author_id'
@@ -21,7 +20,6 @@ class User < ActiveRecord::Base
   validates :email, email: true, if: :email_changed?
   validate :password_validator, on: [:create]
 
-  before_create :build_user_profile
   before_create :build_user_stat
 
   before_save :update_username_lower
@@ -198,6 +196,7 @@ end
 #  avatar                  :string
 #  avatar_digest           :string
 #  show_email              :boolean          default("true"), not null
+#  website                 :string(255)
 #
 # Indexes
 #
