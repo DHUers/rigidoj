@@ -6,12 +6,6 @@ class Problem < ActiveRecord::Base
   scope :published, -> { where(public: true, draft: false) }
   enum judge_type: [:full_text, :program_comparasion, :remote_proxy]
 
-  def time_limit
-  end
-
-  def memory_limit
-
-  end
 end
 
 # == Schema Information
@@ -27,12 +21,14 @@ end
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  public                    :boolean          default("false"), not null
+#  default_memory_limit      :json             default("{\"default\":65535}")
+#  default_time_limit        :json             default("{\"default\":1000}")
 #  input_file_id             :integer
 #  output_file_id            :integer
 #  judge_type                :integer          default("0"), not null
 #  uploaded_program_id       :integer
 #  uploaded_program_platform :string
 #  draft                     :boolean          default("false"), not null
-#  memory_limit              :hstore           default(""), not null
-#  time_limit                :hstore           default(""), not null
+#  additional_memory_limit   :hstore           default(""), not null
+#  additional_time_limit     :hstore           default(""), not null
 #
