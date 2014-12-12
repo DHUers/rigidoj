@@ -11,18 +11,20 @@ end
 #
 # Table name: problems
 #
-#  id             :integer          not null, primary key
-#  title          :string           default(""), not null
-#  raw            :text             default(""), not null
-#  baked          :text             default("")
-#  source         :string           default("")
-#  author_id      :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  published      :boolean          default("false"), not null
-#  memory_limit   :json             default("{\"default\":65535}")
-#  time_limit     :json             default("{\"default\":1000}")
-#  input_file_id  :integer
-#  output_file_id :integer
-#  judge_type     :integer          default("0"), not null
+#  id                        :integer          not null, primary key
+#  title                     :string           default(""), not null
+#  raw                       :text             default(""), not null
+#  baked                     :text             default("")
+#  source                    :string           default("")
+#  author_id                 :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  published                 :boolean          default("false"), not null
+#  memory_limit              :json             default("{\"default\":65535}")
+#  time_limit                :json             default("{\"default\":1000}")
+#  input_file_id             :integer
+#  output_file_id            :integer
+#  judge_type                :integer          default("0"), not null
+#  uploaded_program_id       :integer
+#  uploaded_program_platform :string
 #

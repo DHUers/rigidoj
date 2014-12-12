@@ -4,10 +4,14 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessor :remember_token
 
+  has_one :user_profile, dependent: :destroy
+  has_one :user_stat, dependent: :destroy
   has_many :solutions
   has_many :problems, foreign_key: 'author_id'
   has_many :posts, foreign_key: 'author_id'
   has_many :contests, foreign_key: 'author_id'
+
+  mount_uploader :avatar, AvatarUploader
 
   before_validation :downcase_email
 
@@ -17,8 +21,12 @@ class User < ActiveRecord::Base
   validates :email, email: true, if: :email_changed?
   validate :password_validator, on: [:create]
 
+  before_create :build_user_profile
+  before_create :build_user_stat
+
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
+  before_save :update_avatar_digest
 
   after_initialize :set_default_active
 
@@ -147,7 +155,16 @@ class User < ActiveRecord::Base
 
   def staff?
     moderator? || admin?
+    end
+
+  private
+
+  def update_avatar_digest
+    if avatar.present? && avatar_changed?
+      self.avatar_digest  = avatar.hash
+    end
   end
+
 end
 
 # == Schema Information
@@ -173,15 +190,18 @@ end
 #  last_emailed_at         :datetime
 #  moderator               :boolean          default("false")
 #  locale                  :string(10)
-#  uploaded_avatar_id      :integer
 #  blocked                 :boolean          default("false")
 #  email_notification      :boolean          default("true")
 #  email_digest            :boolean          default("false")
 #  email_contest_result    :boolean          default("true")
 #  email_solution_result   :boolean          default("false")
+#  avatar                  :string
+#  avatar_digest           :string
+#  show_email              :boolean          default("true"), not null
 #
 # Indexes
 #
+#  index_users_on_avatar_digest   (avatar_digest) UNIQUE
 #  index_users_on_email           (email) UNIQUE
 #  index_users_on_last_seen_at    (last_seen_at)
 #  index_users_on_username        (username) UNIQUE

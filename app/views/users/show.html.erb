@@ -1,9 +1,28 @@
 <div class="row">
   <div class="col-md-3">
-    <div class="user-profile-details-card">
-      <%= link_to settings_profile_path do %>
-        <%= image_tag 'ew' %>
+    <div class="udcard">
+      <%= link_to current_user ? settings_profile_path : @user.avatar.large.url do %>
+        <%= image_tag @user.avatar.large %>
       <% end %>
+      <h1 class="udcard-names">
+        <span class="udcard-fullname"><%= @user.name %></span>
+        <span class="udcard-username"><%= @user.username %></span>
+      </h1>
+      <ul class="udcard-details">
+        <% if current_user.staff? or @user.show_email %>
+          <li class="udcard-detail"><a class="email" href="mailto:<%= @user.email %>"><%= @user.email %></a></li>
+        <% end %>
+      </ul>
+      <div class="udcard-stats">
+        <%= link_to user_solved_problems_path(@user), class: 'udcard-stat' do %>
+          <strong class="udcard-stat-count"><%= @user.user_stat.problems_solved %></strong>
+          <span class="text-muted">Problems solved</span>
+        <% end %>
+        <%= link_to user_joined_contests_path(@user), class: 'udcard-stat' do %>
+          <strong class="udcard-stat-count"><%= @user.user_stat.contests_joined %></strong>
+          <span class="text-muted">Contests joined</span>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="col-md-9">
@@ -12,38 +31,5 @@
       <li role="presentation"><a href="#">Profile</a></li>
       <li role="presentation"><a href="#">Messages</a></li>
     </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-9">
-    <ul>
-      <% if current_user == @user.id || current_user.staff? %>
-        <li>
-          <label>User ID:</label>
-          <span class="user-profile-content"><%= @user.id %></span>
-        </li>
-        <li>
-          <label>Email:</label>
-          <span class="user-profile-content"><%= @user.email %></span>
-        </li>
-      <% end %>
-      <li>
-        <label>Username:</label>
-        <span class="user-profile-content"><%= @user.username %></span>
-      </li>
-      <li>
-        <label>Name:</label>
-        <span class="user-profile-content"><%= @user.name %></span>
-      </li>
-      <li>
-        <label>Last seen at:</label>
-        <span class="user-profile-content"><%= @user.last_seen_at %></span>
-      </li>
-      <li class="divider"></li>
-    </ul>
-
-    <div class="avatar pull-right">
-
-    </div>
   </div>
 </div>
