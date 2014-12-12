@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :notes
     get '/solved_problems', to: 'users#solved_problems', as: :solved_problems
     get '/joined_contests', to: 'users#joined_contests', as: :joined_contests
+
+
   end
 
   resources :contests
@@ -23,10 +25,8 @@ Rails.application.routes.draw do
     root to: 'admin#dashboard'
   end
 
-  namespace :settings do
-    get '/profile', to: 'settings#profile', as: :profile
-    root to: 'settings#profile'
-  end
+  get '/settings', to: redirect('/settings/profile'), as: :settings_root
+  get '/settings/profile', to: 'user_settings#profile', as: :settings_profile
 
   get '/signup', to: 'users#new', as: :registration
   get '/login', to: 'sessions#new', as: :login
