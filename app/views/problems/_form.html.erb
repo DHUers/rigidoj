@@ -15,16 +15,16 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 time-limit-group">
     <div class="input-group">
-      <%= f.text_field :time_limit, class: 'form-control', placeholder: 'Time limit' %>
+      <%= f.text_field :default_time_limit, class: 'form-control', placeholder: 'Time limit' %>
       <span class="input-group-addon">KB</span>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 memory-limit-group">
     <div class="input-group">
-      <%= f.text_field :memory_limit, class: 'form-control', placeholder: 'Memory limit' %>
+      <%= f.text_field :default_time_limit, class: 'form-control', placeholder: 'Memory limit' %>
       <span class="input-group-addon">KB</span>
     </div>
   </div>
@@ -32,5 +32,5 @@
 
 <div class="form-group">
   <label for="problem-source">Source</label>
-  <%= f.text_area :source, class: 'form-control', id: 'problem-source' %>
+  <%= f.text_field :source, class: 'form-control', id: 'problem-source' %>
 </div>

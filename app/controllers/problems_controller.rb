@@ -4,14 +4,16 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @problem = Problem.new
+    @problem = Problem.find_by(draft: true, user: current_user)
+    if @problem
+      @problem = Problem.create(user: current_user)
+    end
   end
 
   def create
     @problem = Problem.new(problem_params)
     authorize @problem
 
-    @problem.author_id = current_user.id
     if @problem.save
       redirect_to @problem
     else

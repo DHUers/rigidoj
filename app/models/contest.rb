@@ -1,5 +1,5 @@
 class Contest < ActiveRecord::Base
-  belongs_to :author, class_name: :User, foreign_key: 'author_id'
+  belongs_to :user
   has_and_belongs_to_many :problems
 end
 
@@ -10,7 +10,7 @@ end
 #  id                 :integer          not null, primary key
 #  title              :string           not null
 #  description_raw    :text             default("")
-#  author_id          :integer
+#  user_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  description_cooked :text             default("")

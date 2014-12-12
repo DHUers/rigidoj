@@ -187,7 +187,6 @@ end
 #  suspended_till          :datetime
 #  last_emailed_at         :datetime
 #  moderator               :boolean          default("false")
-#  locale                  :string(10)
 #  blocked                 :boolean          default("false")
 #  email_notification      :boolean          default("true")
 #  email_digest            :boolean          default("false")

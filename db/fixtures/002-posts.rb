@@ -4,7 +4,7 @@ Post.seed do |p|
   p.raw = <<END
 Add or import problem to get started.
 END
-  p.author_id = -1
+  p.user_id = -1
   p.published = true
 end
 
@@ -16,7 +16,7 @@ Helpful information for your user.
 
 Edit this post to get started.
 END
-  p.author_id = -1
+  p.user_id = -1
   p.published = false
 end
 
@@ -28,6 +28,6 @@ About this site & TOS information.
 
 Edit this post to get started.
 END
-  p.author_id = -1
+  p.user_id = -1
   p.published = false
 end
