@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/', to: 'admin#dashboard'
     get '/dashboard', to: 'admin#dashboard'
     scope :settings do
       get '/:category', to: 'admin#show_settings', as: :settings
@@ -20,6 +19,11 @@ Rails.application.routes.draw do
     end
 
     root to: 'admin#dashboard'
+  end
+
+  namespace :settings do
+    get '/profile', to: 'settings#profile', as: :profile
+    root to: 'settings#profile'
   end
 
   get '/signup', to: 'users#new', as: :registration

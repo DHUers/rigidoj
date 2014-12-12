@@ -1,5 +1,12 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-md-3">
+    <div class="user-profile-details-card">
+      <%= link_to settings_profile_path do %>
+        <%= image_tag 'ew' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-9">
     <ul class="nav nav-tabs">
       <li role="presentation" class="active"><a href="#">Home</a></li>
       <li role="presentation"><a href="#">Profile</a></li>
@@ -8,7 +15,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-md-9">
     <ul>
       <% if current_user == @user.id || current_user.staff? %>
         <li>
