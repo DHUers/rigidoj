@@ -11,11 +11,11 @@
 
       <div class="collapse navbar-collapse" id="navbar-drawer">
         <ul class="nav navbar-nav navbar-right" id="landing-nav">
-          <li><%= link_to 'Problem', problems_path %></li>
-          <li><%= link_to 'Contest', contests_path %></li>
-          <li><%= link_to 'Help', help_path %></li>
-          <li><%= link_to 'About', about_path %></li>
-          <li><%= button_to 'Log in', login_path, class: 'btn btn-default navbar-btn', method: :get %></li>
+          <li><%= link_to 'Problem', problems_path %><span></span></li>
+          <li><%= link_to 'Contest', contests_path %><span></span></li>
+          <li><%= link_to 'Help', help_path %><span></span></li>
+          <li><%= link_to 'About', about_path %><span></span></li>
+          <li><%= button_to 'Log in', login_path, class: 'btn btn-default landing-btn', method: :get %></li>
         </ul>
       </div>
     </div>
@@ -25,12 +25,12 @@
     <div class="container">
       <div class="row">
         <div class="center-block text-center">
-          <h1>Conquer All puzzles</h1>
+          <h1>Conquer All Puzzles</h1>
         </div>
       </div>
       <div class="row">
         <div class="text-center">
-          <%= button_to 'Sign up', registration_path, class: 'btn btn-success', method: :get %>
+          <%= button_to 'Sign up', registration_path, class: 'btn btn-default landing-btn', method: :get %>
         </div>
       </div>
     </div>

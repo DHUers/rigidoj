@@ -3,4 +3,96 @@
  */
 
 @import "common/base";
-@import "common/landing";
+
+body {
+  font-weight: 100;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.landing-header {
+  padding-top: 20px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  height: 650px;
+  max-height: 90%;
+  background-image: image_url("landing-header.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: rgba(255,255,255,1);
+}
+.nav.navbar-nav {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.nav.navbar-nav li {
+  margin-right: 20px;
+}
+.nav.navbar-nav li a {
+  padding: 11px 0 0 0;
+  background: transparent;
+  color: #fff;
+  letter-spacing: 0.2rem;
+  padding-bottom: 2px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+}
+
+.nav.navbar-nav li span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: all 0.6s;
+}
+.nav.navbar-nav li:hover span {
+  width: 100%;
+}
+.landing-btn {
+  transition: all 250ms ease;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.3);
+  text-decoration: none;
+  text-shadow: none;
+
+  font-weight: 100;
+  color: #fff;
+  font-size: 1.7rem;
+}
+.navbar-btn:hover {
+  transition: all 250ms ease;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.3);
+  text-decoration: none;
+  text-shadow: none;
+
+  color: #fff;
+}
+
+.header-content h1 {
+  padding-top: 15rem;
+  font-weight: 300;
+  font-size: 4rem;
+  text-shadow: 0 0 8px #fff;
+}
+.header-content .btn {
+  margin-top: 3rem;
+  padding: 1.8rem 3.5rem;
+  font-size: 3rem;
+  border: none;
+  background-color: #56a07b;
+  color: #fff;
+}
+.header-content .btn:hover {
+  transform: scale(1.2);
+}

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <%= yield :head %>
-  <%= stylesheet_link_tag    'landing', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'landing', 'data-turbolinks-track' => false %>
+  <%= stylesheet_link_tag    'landing', media: 'all', 'data-turbolinks-track' => false %>
 </head>
 <body>
   <!--[if lt IE 8]>
   <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
   <%= yield %>
-  <%= javascript_include_tag 'landing', 'data-turbolinks-track' => true %>
 </body>
 </html>
