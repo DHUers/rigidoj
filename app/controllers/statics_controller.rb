@@ -1,11 +1,12 @@
 class StaticsController < ApplicationController
   def home
-    unless logged_in?
-      render 'landing', layout: 'landing'
-      return
-    end
+    return landing unless logged_in?
     @posts = Post.published.limit(10)
     render 'home', layout: 'application'
+  end
+
+  def landing
+    render 'landing', layout: 'landing'
   end
 
   def about

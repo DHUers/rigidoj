@@ -49,4 +49,6 @@ Rails.application.configure do
   config.load_mini_profiler = true
 
   config.assets.cache_store = :memory_store
+  config.cache_store = :null_store
+  config.action_controller.perform_caching = true
 end
