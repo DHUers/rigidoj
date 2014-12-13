@@ -6,12 +6,14 @@
           <span class="sr-only">切换导航面板</span>
           <i class="fa fa-bars"></i>
         </button>
-        <%= link_to 'Brand', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path, class: 'navbar-brand' do %>
+          <img src="<%= SiteSetting.logo_url %>" width="32">
+        <% end %>
       </div>
 
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" id="search-box">
         </div>
       </form>
       <div class="collapse navbar-collapse" id="navbar-drawer">
@@ -23,8 +25,12 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% unless current_user %>
-            <li><%= link_to 'Sign up', registration_path %></li>
-            <li><%= link_to 'Log in', login_path %></li>
+            <li><%= link_to 'Sign Up', registration_path %></li>
+            <li>
+              <%= link_to login_path, class: 'login-btn' do %>
+                <button type="button" class="btn btn-default navbar-btn">Log In</button>
+              <% end %>
+            </li>
           <% else %>
             <li class="dropdown">
               <a data-target="#" href="/notification" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
