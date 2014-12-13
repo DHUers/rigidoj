@@ -1,3 +1,4 @@
-/**
- * Created by fantasticfears on 11/29/14.
- */
+//
+//= require jquery
+//= require bootstrap-sprockets
+//= require_self

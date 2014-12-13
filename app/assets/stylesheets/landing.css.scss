@@ -182,3 +182,25 @@ body {
   border-radius: 90px;
   background-color: white;
 }
+#navbar-drawer.navbar-collapse {
+  box-shadow: none;
+
+  & li {
+    text-align: right;
+    & a {
+      text-align: right;
+    }
+    margin-top: 1px;
+  }
+
+  .in {
+    box-shadow: none;
+
+    & li {
+      text-align: right;
+      & a {
+        text-align: right;
+      }
+    }
+  }
+}
