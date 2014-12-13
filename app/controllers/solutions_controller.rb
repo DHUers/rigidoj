@@ -1,6 +1,7 @@
 class SolutionsController < ApplicationController
   def new
-    @solution = Solution.new
+    @problem = Problem.find(params[:problem_id])
+    @solution = Solution.new(problem: @problem)
   end
 
   def create

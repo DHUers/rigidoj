@@ -33,7 +33,7 @@ basic:
     default: 'auto'
 
 judger:
-  platform:
+  judger_platform:
     default: 'c|c++|java'
 
 user:

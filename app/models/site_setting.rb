@@ -217,6 +217,10 @@ class SiteSetting < ActiveRecord::Base
   end
 
   load_default_settings(File.join(Rails.root, 'config', 'site_settings.yml'))
+
+  def self.judger_platforms
+    @judger_platforms ||= self.judger_platform.split('|')
+  end
 end
 
 # == Schema Information

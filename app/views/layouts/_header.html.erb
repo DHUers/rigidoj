@@ -11,12 +11,12 @@
         <% end %>
       </div>
 
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" id="search-box">
-        </div>
-      </form>
       <div class="collapse navbar-collapse" id="navbar-drawer">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" id="search-box">
+          </div>
+        </form>
         <ul class="nav navbar-nav navbar-links">
           <li><%= link_to 'Problem', problems_path %></li>
           <li><%= link_to 'Contest', contests_path %></li>
