@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-3">
     <div class="udcard">
-      <%= link_to current_user ? settings_profile_path(current_user) : @user.avatar.large.url do %>
-        <%= image_tag @user.avatar.large %>
+      <%= link_to current_user ? settings_profile_path : @user.avatar.large.url do %>
+        <%= image_tag @user.avatar %>
       <% end %>
       <h1 class="udcard-names">
         <span class="udcard-fullname"><%= @user.name %></span>

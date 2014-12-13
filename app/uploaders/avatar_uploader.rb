@@ -10,7 +10,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @filename ||= "#{file_digest[2..-1]}#{File.extname(super)}" if super
+    @filename ||= "#{file_digest[2..-1]}.#{file.extension}" if original_filename.present?
   end
 
   def default_url
@@ -36,8 +36,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg png)
   end
-
-  private
 
   def file_digest
     chunk = model.send(mounted_as)

@@ -53,7 +53,7 @@ class UserSettingsController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:name, :username, :website)
+    params.require(:user).permit(:name, :username, :website, :avatar)
   end
 
   def account_params

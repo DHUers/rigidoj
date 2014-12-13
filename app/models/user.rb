@@ -159,7 +159,7 @@ class User < ActiveRecord::Base
 
   def update_avatar_digest
     if avatar.present? && avatar_changed?
-      self.avatar_digest  = avatar.hash
+      self.avatar_digest  = avatar.file_digest
     end
   end
 
