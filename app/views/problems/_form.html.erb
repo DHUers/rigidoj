@@ -7,7 +7,7 @@
   <%= f.hidden_field :raw, id: 'hidden-raw' %>
   <%= render partial: 'components/source_editor',
              locals: {
-                 preview_url: preview_path(@problem),
+                 preview_url: preview_problem_path(@problem),
                  ace_mode: 'markdown',
                  indent_width: %w(2 4 8),
                  tab_label: 'Edit content',
