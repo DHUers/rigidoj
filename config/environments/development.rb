@@ -47,4 +47,6 @@ Rails.application.configure do
 
   # Assets pipeline option
   config.load_mini_profiler = true
+
+  config.assets.cache_store = :memory_store
 end

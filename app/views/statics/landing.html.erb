@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-drawer">
-          <span class="sr-only">切换导航面板</span>
+          <span class="sr-only">Toogle navigation</span>
           <i class="fa fa-bars"></i>
         </button>
         <%= link_to 'Brand', root_path, class: 'navbar-brand' %>
@@ -15,7 +15,7 @@
           <li><%= link_to 'Contest', contests_path %><span></span></li>
           <li><%= link_to 'Help', help_path %><span></span></li>
           <li><%= link_to 'About', about_path %><span></span></li>
-          <li><%= button_to 'Log in', login_path, class: 'btn btn-default landing-btn', method: :get %></li>
+          <li><%= button_to 'Log in', login_path, class: 'btn btn-default', method: :get %></li>
         </ul>
       </div>
     </div>
@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <div class="text-center">
-          <%= button_to 'Sign up', registration_path, class: 'btn btn-default landing-btn', method: :get %>
+          <%= button_to 'Sign up', registration_path, class: 'btn btn-default', method: :get %>
         </div>
       </div>
     </div>
@@ -38,11 +38,59 @@
 </div>
 
 <section id="main">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <%= image_tag 'history.svg' %>
+          <div class="caption">
+            <h3>History</h3>
+            <p>Keeping all your data. And analyzed for you.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <%= image_tag 'notification.svg' %>
+          <div class="caption">
+            <h3>Notification</h3>
+            <p>Notification will be sent to you in real time or email. Never interrupt you.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <%= image_tag 'search.png' %>
+          <div class="caption">
+            <h3>Search</h3>
+            <p>Search everything. Problem, contests, old solution, whatever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="text-center">
+        <%= button_to 'Sign up', registration_path, class: 'btn btn-default landing-btn', method: :get %>
+      </div>
     </div>
   </div>
 </section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="cat-logo">
+      <%= image_tag 'pirate-cat.png' %>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        © 2014 Powered by <a href="https://github.com/fantasticfears/rigidoj" title="Rigid's Github">Rigid OJ</a>.
+      </div>
+      <div class="col-md-9">
+        <ul class="footer-nav navbar">
+          <li><%= link_to 'Help', help_path %></li>
+          <li><%= link_to 'About', about_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
