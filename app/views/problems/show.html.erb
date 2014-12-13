@@ -12,7 +12,7 @@
       <li><%= link_to 'Submit', new_problem_solution_path(@problem) %></li>
       <li><%= link_to 'Submitted records', new_problem_solution_path(@problem) %></li>
     </ul>
-    <% if current_user.staff? %>
+    <% if current_user && current_user.staff? %>
       <div class="divider"></div>
       <ul class="actions admin-actions">
         <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
