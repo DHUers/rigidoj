@@ -80,7 +80,7 @@ body {
 }
 
 .header-content h1 {
-  padding-top: 15rem;
+  padding-top: 10rem;
   font-weight: 300;
   font-size: 4rem;
   text-shadow: 0 0 8px #fff;
@@ -123,6 +123,7 @@ body {
 #footer {
   border-top: 1px solid #eee;
   color: #999;
+  font-size: 1.4rem;
 }
 #footer .cat-logo {
   position: relative;
@@ -139,7 +140,7 @@ body {
   float: right;
 }
 #footer .footer-nav li {
-  margin-left: 3rem;
+  margin-left: 0.6rem;
   display: inline-block;
 }
 #footer a {
