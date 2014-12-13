@@ -15,7 +15,7 @@ class Solution < ActiveRecord::Base
   validates :solution_hash, uniqueness: true
 
   def hash_solution
-    self.solution_hash = Digest::SHA1.hexdigest("#{problem_id}:#{source}")
+    self.solution_hash = Digest::SHA1.hexdigest("#{problem_id}:#{user_id}:#{source}")
   end
 end
 

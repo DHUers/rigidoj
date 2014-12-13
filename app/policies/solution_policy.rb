@@ -7,6 +7,6 @@ class SolutionPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:platform, :source]
+    [:platform, :source, :problem_id]
   end
 end

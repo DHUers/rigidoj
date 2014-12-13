@@ -5,7 +5,7 @@ class SolutionsController < ApplicationController
   end
 
   def create
-    @solution = Solution.new(solution_params)
+    @solution = Solution.new(solution_params.merge({user: current_user}))
 
     if @solution.save
       publish_to_judgers
