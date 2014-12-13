@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     root to: 'admin#dashboard'
   end
 
+  post '/preview/problems/:id', to: 'preview#problem', as: :preview
+
   get '/settings', to: redirect('/settings/profile'), as: :settings_root
   get '/settings/profile', to: 'user_settings#profile', as: :settings_profile
   post '/settings/profile', to: 'user_settings#update_profile'

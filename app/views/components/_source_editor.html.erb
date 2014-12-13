@@ -1,4 +1,4 @@
-<div class="source-editor">
+<div class="source-editor" data-mode="<%= ace_mode %>">
   <div class="meta clearfix">
     <ul class="edit-tabs">
       <li role="presentation">
@@ -8,20 +8,20 @@
       </li>
       <li role="presentation">
         <a href="#" class="edit-tab" data-preview-url="<%= preview_url %>">
-          <i class="fa fa-eye"></i> Preview
+          <i class="fa fa-eye"></i> <%= preview_label %>
         </a>
       </li>
     </ul>
     <div class="actions pull-right">
-      <select>
+      <select data-option="useSoftTabs">
         <optgroup label="Indent mode">
-          <option value="tabs">Tabs</option>
           <option value="spaces">Spaces</option>
+          <option value="tabs">Tabs</option>
         </optgroup>
       </select>
 
       <% if indent_width %>
-        <select>
+        <select data-option="tabSize">
           <optgroup label="Indent size">
             <% indent_width.each do |i| %>
               <option value="<%= i %>"><%= i %></option>
@@ -30,7 +30,7 @@
         </select>
       <% end %>
 
-      <select>
+      <select data-option="wrap">
         <optgroup label="Line wrap mode">
           <option value="off">No wrap</option>
           <option value="on">Soft wrap</option>
@@ -38,7 +38,8 @@
       </select>
     </div>
   </div>
-  <div class="<%= usage_classname %>">
+  <div>
     <div class="source-editor-textarea" id="<%= textarea_id %>"></div>
+    <div class="preview-area hidden"></div>
   </div>
 </div>
