@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   def index
-    @problems = Problem.published.order(:id).page(params[:page]).per(20)
+    @problems = policy_scope(Problem).order(:id).page(params[:page]).per(20)
   end
 
   def new
@@ -8,6 +8,7 @@ class ProblemsController < ApplicationController
     unless @problem
       @problem = Problem.create(user: current_user)
     end
+    authorize @problem
   end
 
   def create
@@ -23,10 +24,12 @@ class ProblemsController < ApplicationController
 
   def show
     @problem = Problem.find(params[:id])
+    authorize @problem
   end
 
   def edit
     @problem = Problem.find(params[:id])
+    authorize @problem
   end
 
   def update

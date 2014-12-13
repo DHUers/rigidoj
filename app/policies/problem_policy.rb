@@ -1,10 +1,15 @@
 class ProblemPolicy < ApplicationPolicy
   def create?
-    @user
+    raise Pundit::NotAuthorizedError, "must be logged in" unless user
+    user && user.staff?
   end
 
   def update?
-    @record.published?
+    create?
+  end
+
+  def destroy?
+    create?
   end
 
   def permitted_attributes

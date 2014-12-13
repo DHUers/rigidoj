@@ -1,6 +1,5 @@
 Problem.seed do |p|
   p.id = 1
-  p.user_id = -1
   p.title = 'A + B Problem'
   p.public = true
   p.draft = false

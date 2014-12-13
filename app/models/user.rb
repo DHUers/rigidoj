@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
 
   has_one :user_stat, dependent: :destroy
   has_many :solutions
-  has_many :problems, foreign_key: 'author_id'
-  has_many :posts, foreign_key: 'author_id'
-  has_many :contests, foreign_key: 'author_id'
+  has_many :posts
+  has_many :contests
+  has_many :problems
 
   mount_uploader :avatar, AvatarUploader
 
