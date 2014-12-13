@@ -12,6 +12,7 @@ $(document).on('page:change', function() {
 
   editor.setTheme('ace/theme/yesterday');
   editor.getSession().setMode('ace/mode/' + mode);
+  editor.setValue($('#hidden-raw').val(), -1);
   actions.each(function() {
     var select = $(this);
     var optionName = select.data('option');

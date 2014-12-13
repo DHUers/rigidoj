@@ -11,7 +11,7 @@
 </div>
 <div class="row">
   <div class="col-md-9">
-    <%= form_for @problem, html: {role: 'form'} do |f| %>
+    <%= form_for @problem, html: {role: 'form', class: 'create-problem problem-form'} do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
 
       <div class="checkbox">
