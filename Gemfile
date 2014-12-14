@@ -29,6 +29,7 @@ gem 'wice_grid'
 gem 'kaminari'
 
 gem 'bunny'
+gem 'msgpack'
 gem 'hiredis'
 gem 'redis-store'
 gem 'redis-rails'

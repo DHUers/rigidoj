@@ -6,6 +6,7 @@ class SolutionsController < ApplicationController
 
   def create
     @solution = Solution.new(solution_params.merge({user: current_user}))
+    @problem = @solution.problem
 
     if @solution.save
       publish_to_judgers
@@ -18,7 +19,7 @@ class SolutionsController < ApplicationController
   private
 
   def publish_to_judgers
-    Rigidoj.judger_queue.publish
+    Rigidoj.judger_queue.publish @solution.to_judger.to_msgpack
   end
 
   def solution_params

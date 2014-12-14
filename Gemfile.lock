@@ -119,6 +119,7 @@ GEM
     mini_magick (4.0.1)
     mini_portile (0.6.1)
     minitest (5.5.0)
+    msgpack (0.5.9)
     multi_json (1.10.1)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
@@ -283,6 +284,7 @@ DEPENDENCIES
   kaminari
   librarian
   mini_magick
+  msgpack
   nokogiri
   pg
   pundit

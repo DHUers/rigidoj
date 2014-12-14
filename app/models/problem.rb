@@ -9,6 +9,34 @@ class Problem < ActiveRecord::Base
   mount_uploader :input_file, PlainTextUploader
   mount_uploader :output_file, PlainTextUploader
   mount_uploader :judger_program_platform, PlainTextUploader
+
+  def judge_data
+    case judge_type
+      when :full_text
+        {
+            input_file_url: input_file,
+            output_file_url: output_file
+        }
+      when :program_comparasion
+        {
+            judger_program_url: judger_program,
+            input_file_url: input_file,
+            output_file_url: output_file
+        }
+      when :remote_proxy
+        {
+            vendor: remote_proxy_vendor,
+            source: remote_proxy_source_url
+        }
+    end
+  end
+
+  def to_judger
+    {
+        judge_type: judge_type.to_s,
+        data: judge_data
+    }
+  end
 end
 
 # == Schema Information
