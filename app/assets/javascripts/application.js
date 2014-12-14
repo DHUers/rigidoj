@@ -21,6 +21,8 @@
 //= require ace/worker-html
 //= require ace/theme-yesterday
 //= require ace/mode-markdown
+//= require ace/mode-c_cpp
+//= require ace/mode-java
 //= require_self
 //= require_tree .
 

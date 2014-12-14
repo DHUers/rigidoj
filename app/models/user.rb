@@ -153,7 +153,12 @@ class User < ActiveRecord::Base
 
   def staff?
     moderator? || admin?
-    end
+  end
+
+  def default_platform
+    # dummy
+    'c'
+  end
 
   private
 

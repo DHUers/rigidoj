@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def platform_select_options
-    @platform_options ||= SiteSetting.judger_platforms.each {|p| p.capitalize! }.zip(SiteSetting.judger_platforms)
+    @platform_options ||= SiteSetting.judger_platforms.map {|p| p.capitalize }.zip(SiteSetting.judger_platforms)
   end
 end
