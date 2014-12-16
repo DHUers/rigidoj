@@ -10,13 +10,13 @@ class StaticsController < ApplicationController
   end
 
   def about
-    @post = Post.find_by(author_id: Rigidoj.system_user.id, title: 'About')
+    @post = Post.find_by(user: Rigidoj.system_user, title: 'About')
 
     render 'posts/show'
   end
 
   def help
-    @post = Post.find_by(author_id: Rigidoj.system_user.id, title: 'Help')
+    @post = Post.find_by(user: Rigidoj.system_user, title: 'Help')
 
     render 'posts/show'
   end
