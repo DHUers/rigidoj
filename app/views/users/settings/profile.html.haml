@@ -1,0 +1,27 @@
+.row
+  = render 'users/settings/navlist'
+  .col-md-9
+    - flash.each do |name, msg|
+      %div{:class => "alert alert-#{name} alert-dismissible", :role => "alert"}
+        %button.close{"data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        = msg
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Public profile
+      .panel-body
+        = form_for current_user, html: {role: 'form'}, url: settings_profile_path, method: :post do |f|
+          .form-group
+            = f.label :avatar
+            = f.file_field :avatar
+          .form-group
+            = f.label :username
+            = f.text_field :username, class: 'form-control'
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :website
+            = f.text_field :website, class: 'form-control'
+          = f.submit 'Update profile', class: 'btn btn-success'

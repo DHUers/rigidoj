@@ -1,0 +1,9 @@
+.row
+  .col-md-10
+    %h2 Submit
+.row
+  .col-md-10
+    = form_for @solution, html: {role: 'form', class: 'solution-form'} do |f|
+      = render partial: 'form', locals: { f: f }
+      = f.button 'Submit', class: 'btn btn-success'
+      = link_to 'Cancel', problems_path

@@ -1,0 +1,13 @@
+.row
+  .col-md-offset-1.col-md-10
+    %h2 Create a post
+.row
+  .col-md-offset-1.col-md-10
+    = form_for @post, html: {role: 'form'} do |f|
+      = render partial: 'form', locals: { f: f }
+      .checkbox
+        %label
+          = f.check_box :published
+          Publish now?
+      = f.button 'Create', class: 'btn btn-success'
+      = link_to 'Cancel', problems_path

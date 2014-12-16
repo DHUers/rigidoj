@@ -1,0 +1,6 @@
+.row
+  .col-md-offset-1.col-md-10
+    = form_for @contest do |f|
+      = render partial: 'form', locals: { f: f }
+      = f.button 'Create', class: 'btn btn-success'
+      = button_to 'Cancel', problems_path, class: 'btn btn-default'

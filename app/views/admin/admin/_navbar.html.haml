@@ -1,0 +1,5 @@
+%ul#admin-navbar.nav.nav-pills
+  <li role="presentation" #{active_class_if_admin_action('dashboard')}>
+  \#{link_to 'Dashboard', admin_dashboard_path}
+  <li role="presentation" #{active_class_if_admin_action('show_settings')}>
+  \#{link_to 'Settings', admin_settings_path('required')}

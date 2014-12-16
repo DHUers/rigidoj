@@ -1,0 +1,74 @@
+.form-group
+  %label{:for => "problem-title"} Title
+  = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Concise, precise, or at least interesting.'
+.form-group
+  = f.hidden_field :raw, id: 'hidden-raw'
+  = render partial: 'components/source_editor',  |
+    locals: {                                    |
+    preview_url: preview_problem_path(@problem), |
+    ace_mode: 'markdown',                        |
+    indent_width: %w(2 4 8),                     |
+    tab_label: 'Edit content',                   |
+    preview_label: 'Preview',                    |
+    textarea_id: 'problem-content' }             |
+.form-group
+  %label{:for => "problem-source"} Source
+  = f.text_field :source, class: 'form-control', id: 'problem-source'
+.form-group.jugder-configuration
+  .row
+    .col-md-4
+      %label Jugder configuration
+  .row
+    .col-md-1
+      %span Default
+    .col-md-3.time-limit-group
+      .input-group
+        = f.text_field :default_time_limit, class: 'form-control', placeholder: 'Time limit'
+        %span.input-group-addon ms
+    .col-md-3.memory-limit-group
+      .input-group
+        = f.text_field :default_memory_limit, class: 'form-control', placeholder: 'Memory limit'
+        %span.input-group-addon KB
+  - @problem.additional_limits.each do |limit|
+    .row
+      .col-md-1
+        %span= limit['name'].capitalize
+      .col-md-3.time-limit-group
+        .input-group
+          = text_field_tag "additional_limits[#{limit['name']}][time]", limit['time'], class: 'form-control', placeholder: 'Time limit'
+          %span.input-group-addon ms
+      .col-md-3.memory-limit-group
+        .input-group
+          = text_field_tag "additional_limits[#{limit['name']}][memory]", limit['memory'], class: 'form-control', placeholder: 'Memory limit'
+          %span.input-group-addon KB
+      .col-md-1
+        %button.btn.btn-default{:type => "button"} -
+  .row
+    .col-md-1
+      %button#add-new-judger-configuration.btn.btn-default{:type => "button"} +
+.form-group
+  .row
+    .col-md-4
+      = f.label :judge_type
+      = f.select :judge_type, options_for_select([['Full text', 0], ['Program comparasion', 1], ['Remote proxy', 2]]), {}, class: 'form-control'
+%div{:class => "form-group judge-source-group #{'hidden' unless @problem.full_text?}"}
+  .row
+    .col-md-6
+      = f.label :input_file
+      = f.file_field :input_file
+    .col-md-6
+      = f.label :output_file
+      = f.file_field :output_file
+%div{:class => "form-group judge-source-group #{'hidden' unless @problem.program_comparasion?}"}
+  .row
+    .col-md-6
+      = f.label :judger_program
+      = f.file_field :judger_program
+    .col-md-6
+      = f.label :judger_program_platform
+      = f.text_field :judger_program_platform, class: 'form-control'
+%div{:class => "form-group judge-source-group #{'hidden' unless @problem.remote_proxy?}"}
+  .row
+    .col-md-5
+      = f.label :remote_proxy_vendor
+      = f.text_field :remote_proxy_vendor, class: 'form-control'

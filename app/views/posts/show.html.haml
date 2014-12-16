@@ -1,0 +1,8 @@
+.row
+  .col-md-offset-1.col-md-10
+    %h2= @post.title
+    %p= @post.user_id
+.row
+  .col-md-offset-1.col-md-10
+    = raw @post.baked
+= link_to 'Edit', edit_post_path(@post.id)

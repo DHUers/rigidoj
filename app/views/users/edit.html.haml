@@ -1,0 +1,8 @@
+.row
+  .col-md-offset-1.col-md-10
+    %h2 Update a post
+.row
+  .col-md-offset-1.col-md-10
+    = form_for @user, html: {role: 'form'} do |f|
+      .form-group
+      = f.button 'Update', class: 'btn btn-warning'

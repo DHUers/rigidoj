@@ -27,6 +27,7 @@ gem 'nokogiri'
 gem 'sidekiq'
 gem 'wice_grid'
 gem 'kaminari'
+gem 'haml'
 
 gem 'bunny'
 gem 'msgpack'

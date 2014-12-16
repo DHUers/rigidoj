@@ -1,0 +1,23 @@
+.row
+  .col-md-2.col-md-offset-10
+    = button_to 'New problem', new_problem_path, class: 'btn btn-primary', |
+      html: {type: 'button'}, method: :get                                 |
+.row
+  .col-md-8
+    .table-responsive
+      %table#problem-listings.table.table-condensed.table-hover
+        %thead
+          %th
+          %th ID
+          %th Title
+          %th Submitted
+          %th AC%
+        %tbody
+          - @problems.each do |p|
+            %tr.row-clickable
+              %td
+              %td= link_to p.id, problem_path(p)
+              %td= link_to p.title, problem_path(p)
+              %td
+              %td
+      = paginate @problems, window: 3, remote: true

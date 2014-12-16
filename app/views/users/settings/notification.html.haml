@@ -1,0 +1,13 @@
+.row
+  = render 'users/settings/navlist'
+  .col-md-9
+    - flash.each do |name, msg|
+      %div{:class => "alert alert-#{name} alert-dismissible", :role => "alert"}
+        %button.close{"data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        = msg
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title How you receive notifications
+      .panel-body

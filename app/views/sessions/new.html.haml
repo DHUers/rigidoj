@@ -1,0 +1,14 @@
+.row
+  .col-md-offset-3.col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h2 Log in
+      .panel-body
+        = form_for :session, html: {role: 'form'}, url: login_path do |f|
+          .form-group
+            = f.label :login, 'Username or Email'
+            = f.text_field :login, class: 'form-control'
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control'
+          = button_tag 'Sign in', class: 'btn btn-default'

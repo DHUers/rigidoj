@@ -1,0 +1,18 @@
+.row
+  .col-md-8
+    - @posts.each do |p|
+      %section.pined-post
+        %h2= p.title
+        = p.raw
+  .col-md-4
+    .panel.panel-default
+      .panel-heading Links
+      .panel-body
+        Related links.
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-heading Contests
+      .panel-body
+        There is no contest.
+  .col-md-4

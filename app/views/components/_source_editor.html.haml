@@ -1,0 +1,28 @@
+.source-editor{"data-mode" => ace_mode}
+  .meta.clearfix
+    %ul.edit-tabs
+      %li{:role => "presentation"}
+        %a.edit-tab.selected{:href => "#"}
+          %i.fa.fa-code
+          = tab_label
+      %li{:role => "presentation"}
+        %a.edit-tab{"data-preview-url" => preview_url, :href => "#"}
+          %i.fa.fa-eye
+          = preview_label
+    .actions.pull-right
+      %select{"data-option" => "useSoftTabs"}
+        %optgroup{:label => "Indent mode"}
+          %option{:value => "true"} Spaces
+          %option{:value => "false"} Tabs
+      - if indent_width
+        %select{"data-option" => "tabSize"}
+          %optgroup{:label => "Indent size"}
+            - indent_width.each do |i|
+              %option{:value => i}= i
+      %select{"data-option" => "wrap"}
+        %optgroup{:label => "Line wrap mode"}
+          %option{:value => "off"} No wrap
+          %option{:value => "on"} Soft wrap
+  %div
+    .source-editor-textarea{:id => textarea_id}
+    .preview-area.hidden

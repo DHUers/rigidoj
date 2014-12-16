@@ -1,0 +1,17 @@
+- content_for :title, "Editing #{@problem.title}"
+.row
+  .col-md-9
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Problem', problems_path
+      %li.active Update problem
+.row
+  .col-md-9
+    = form_for @problem, html: {role: 'form', class: 'problem-form'} do |f|
+      = render partial: 'form', locals: { f: f }
+      .checkbox
+        %label
+          = f.check_box :public, value: 'yes'
+          Public
+      = f.button 'Update', class: 'btn btn-warning'
+      = link_to 'Cancel', problems_path
