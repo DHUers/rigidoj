@@ -28,6 +28,7 @@ gem 'sidekiq'
 gem 'wice_grid'
 gem 'kaminari'
 gem 'haml'
+gem 'haml-rails'
 
 gem 'bunny'
 gem 'msgpack'
