@@ -13,6 +13,7 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:title, :raw, :author, :published]
+    %i(title raw source default_time_limit default_memory_limit judge_type
+       judger_program_platform remote_proxy_vendor public)
   end
 end
