@@ -10,7 +10,8 @@
     indent_width: %w(2 4 8),                     |
     tab_label: 'Edit content',                   |
     preview_label: 'Preview',                    |
-    textarea_id: 'problem-content' }             |
+    textarea_id: 'problem-content',              |
+    raw_text: @problem.raw }                     |
 .form-group
   %label{:for => "problem-source"} Source
   = f.text_field :source, class: 'form-control', id: 'problem-source'

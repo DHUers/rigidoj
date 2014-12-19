@@ -24,5 +24,6 @@
           %option{:value => "off"} No wrap
           %option{:value => "on"} Soft wrap
   %div
-    .source-editor-textarea{:id => textarea_id}
+    = content_tag :textarea, class: 'source-editor-textarea', id: textarea_id do
+      = raw_text
     .preview-area.hidden
