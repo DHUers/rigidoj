@@ -50,7 +50,7 @@
     .col-md-4
       = f.label :judge_type
       = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparasion'], ['Remote proxy', 'remote_proxy']]), {}, class: 'form-control'
-%div{:class => "form-group judge-source-group #{'hidden' unless @problem.full_text?}"}
+.form-group.judge-source-group{data: {type: 'full_text'}}
   .row
     .col-md-6
       = f.label :input_file
@@ -58,7 +58,7 @@
     .col-md-6
       = f.label :output_file
       = f.file_field :output_file
-%div{:class => "form-group judge-source-group #{'hidden' unless @problem.program_comparasion?}"}
+.form-group.judge-source-group{data: {type: 'program_comparasion'}}
   .row
     .col-md-6
       = f.label :judger_program
@@ -66,7 +66,7 @@
     .col-md-6
       = f.label :judger_program_platform
       = f.text_field :judger_program_platform, class: 'form-control'
-%div{:class => "form-group judge-source-group #{'hidden' unless @problem.remote_proxy?}"}
+.form-group.judge-source-group{data: {type: 'remote_proxy'}}
   .row
     .col-md-5
       = f.label :remote_proxy_vendor
