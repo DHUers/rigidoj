@@ -9,9 +9,5 @@
   .col-md-9
     = form_for @problem, html: {role: 'form', class: 'create-problem problem-form'} do |f|
       = render partial: 'form', locals: { f: f }
-      .checkbox
-        %label
-          = f.check_box :public, value: 'yes'
-          Public
       = f.button 'Create', class: 'btn btn-success'
       = link_to 'Cancel', problems_path

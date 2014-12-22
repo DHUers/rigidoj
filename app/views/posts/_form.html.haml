@@ -2,11 +2,11 @@
   %label{:for => "post-title"} Post title
   = f.text_field :title, class: 'form-control', id: 'post-title', placeholder: 'Are you ok?'
 .form-group
-  = f.hidden_field :raw
-  = render partial: 'components/source_editor', |
-    locals: {                                   |
-    preview_url: '',                            |
-    indent_width: %w(2 4 8),                    |
-    tab_label: 'Edit post',                     |
-    usage_classname: 'post-content-create',     |
-    textarea_id: 'post-content' }               |
+  = render partial: 'components/source_editor',  |
+    locals: {                                    |
+    preview_url: '',                             |
+    ace_mode: 'markdown',                        |
+    indent_width: %w(2 4 8),                     |
+    tab_label: 'Edit post',                      |
+    preview_label: 'Preview',                    |
+    attribute: f.text_area(:raw) }               |

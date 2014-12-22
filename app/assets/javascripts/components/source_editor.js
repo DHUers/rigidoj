@@ -21,6 +21,12 @@ $(document).on('page:change', function() {
 
     editor.setTheme('ace/theme/yesterday');
     editor.getSession().setMode('ace/mode/' + mode);
+    editor.getSession().setValue(editorArea.val());
+
+    editorArea.closest('form').submit(function() {
+      editorArea.val(editor.getSession().getValue());
+    });
+
     actions.each(function() {
       var select = $(this);
       var optionName = select.data('option');

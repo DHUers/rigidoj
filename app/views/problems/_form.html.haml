@@ -2,7 +2,6 @@
   %label{:for => "problem-title"} Title
   = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Concise, precise, or at least interesting.'
 .form-group
-  = f.hidden_field :raw, id: 'hidden-raw'
   = render partial: 'components/source_editor',  |
     locals: {                                    |
     preview_url: preview_problem_path(@problem), |
@@ -10,8 +9,7 @@
     indent_width: %w(2 4 8),                     |
     tab_label: 'Edit content',                   |
     preview_label: 'Preview',                    |
-    textarea_id: 'problem-content',              |
-    raw_text: @problem.raw }                     |
+    attribute: f.text_area(:raw) }               |
 .form-group
   %label{:for => "problem-source"} Source
   = f.text_field :source, class: 'form-control', id: 'problem-source'
@@ -73,3 +71,10 @@
     .col-md-5
       = f.label :remote_proxy_vendor
       = f.text_field :remote_proxy_vendor, class: 'form-control'
+.form-group
+  .row
+    .col-md-4
+      .checkbox
+        %label
+          = f.check_box :public, value: 'yes'
+          Public
