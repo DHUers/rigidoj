@@ -1,13 +1,5 @@
 .form-group
-  %label{:for => "contest-title"} Contest title
-  = f.text_field :title, class: 'form-control', id: 'contest-title', placeholder: 'Are you ok?'
-= f.hidden_field :description_raw
-= render partial: 'components/source_editor', |
-  locals: {                                   |
-  preview_url: '',                            |
-  indent_width: %w(2 4 8),                    |
-  tab_label: 'Edit content',                  |
-  usage_classname: 'problem-content-create',  |
-  textarea_id: 'problem-content' }            |
+  %label{:for => "problem-title"} Title
+  = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Descriptive'
 .form-group
   %h2 Problem listing

@@ -12,7 +12,7 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @contests = initialize_grid(Contest.all)
+    @contests = Contest.all
   end
 
   private
