@@ -18,19 +18,19 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :tiny do
-    process :resize_to_fit => [60, 60]
+    process resize_to_fit: [60, 60]
   end
 
   version :small do
-    process :resize_to_fit => [100, 100]
+    process resize_to_fit: [100, 100]
   end
 
   version :medium do
-    process :resize_to_fit => [200, 200]
+    process resize_to_fit: [200, 200]
   end
 
   version :large do
-    process :resize_to_fit => [500, 500]
+    process resize_to_fit: [500, 500]
   end
 
   def extension_white_list

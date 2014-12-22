@@ -53,7 +53,7 @@ RSpec.configure do |config|
   # You can disable this behaviour by removing the line below, and instead
   # explictly tag your specs with their type, e.g.:
   #
-  #     describe UsersController, :type => :controller do
+  #     describe UsersController, type: :controller do
   #       # ...
   #     end
   #
