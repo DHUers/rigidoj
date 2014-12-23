@@ -2,4 +2,13 @@
   %label{:for => "problem-title"} Title
   = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Descriptive'
 .form-group
-  %h2 Problem listing
+  = render partial: 'components/source_editor',  |
+    locals: {                                    |
+    preview_url: '',                             |
+    ace_mode: 'markdown',                        |
+    indent_width: %w(2 4 8),                     |
+    tab_label: 'Edit description',               |
+    preview_label: 'Preview',                    |
+    attribute: f.text_area(:description_raw) }
+.form-group
+  %h3 Problem listing

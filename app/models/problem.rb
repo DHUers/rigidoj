@@ -1,10 +1,20 @@
 class Problem < ActiveRecord::Base
   include Cookable
+  include PgSearch
   belongs_to :user
   has_many :solutions
   has_and_belongs_to_many :contests
   scope :published, -> { where(public: true, draft: false) }
   enum judge_type: [:full_text, :program_comparasion, :remote_proxy]
+
+  pg_search_scope :search_title_and_content_and_source,
+                  against: %i(title raw source),
+                  using: {
+                      tsearch: {
+                          tsvector_column: %w(title_tsvector content_tsvector source_tsvector)
+                      }
+                  }
+
 
   mount_uploader :input_file, PlainTextUploader
   mount_uploader :output_file, PlainTextUploader
