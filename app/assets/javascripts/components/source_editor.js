@@ -36,7 +36,6 @@ $(document).on('page:change', function() {
     $(this).watch({
       properties: 'attr_data-mode',
       callback: function(data) {
-        console.log(data.vals[0]);
         editor.getSession().setMode(data.vals[0]);
       }
     });
