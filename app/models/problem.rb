@@ -57,10 +57,10 @@ end
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
-#  judger_program_platform :integer
-#  input_file              :string
-#  output_file             :string
-#  judger_program          :string
+#  judger_program_platform :string           default("")
+#  input_file              :string           default("")
+#  output_file             :string           default("")
+#  judger_program          :string           default("")
 #  remote_proxy_vendor     :string           default("")
 #  additional_limits       :jsonb            default("[]")
 #
