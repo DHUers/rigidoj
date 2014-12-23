@@ -27,6 +27,7 @@ $(document).on('page:change', function() {
     var config = $('.limit-group:first').clone();
     config.removeClass('limit-group').addClass('additional-limit-group');
     config.find('.platform span').prop('contenteditable', true);
+    config.append('<div class="col-md-1"><button class="btn btn-default" type="button"> -</button></div>');
     config.appendTo(judgerConfiguration);
   });
 
