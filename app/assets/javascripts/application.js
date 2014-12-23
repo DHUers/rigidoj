@@ -13,12 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery-watch
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack
 //= require ace/ace
 //= require ace/worker-html
 //= require ace/theme-yesterday
+//= require ace/ext-language_tools
 //= require ace/mode-markdown
 //= require ace/mode-c_cpp
 //= require ace/mode-java

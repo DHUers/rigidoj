@@ -26,6 +26,13 @@ class Solution < ActiveRecord::Base
         source: source
     }
   end
+
+  def ace_mode
+    case self.platform
+      when 'c', 'c++' then 'c_cpp'
+      else self.platform
+    end
+  end
 end
 
 # == Schema Information

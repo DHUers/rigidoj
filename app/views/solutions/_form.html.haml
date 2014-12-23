@@ -11,12 +11,11 @@
   = @problem.default_time_limit
   = @problem.default_memory_limit
 .form-group
-  = f.hidden_field :source, id: 'hidden-raw'
-  = render partial: 'components/source_editor',    |
-    locals: {                                      |
-    preview_url: preview_solution_path(@solution), |
-    ace_mode: @solution.platform,                  |
-    indent_width: %w(2 4 8),                       |
-    tab_label: 'Edit content',                     |
-    preview_label: 'Preview',                      |
-    textarea_id: 'solution-content' }              |
+  = render partial: 'components/source_editor',  |
+    locals: {                                    |
+    preview_url: '',                             |
+    ace_mode: @solution.ace_mode,                |
+    indent_width: %w(2 4 8),                     |
+    tab_label: 'Edit content',                   |
+    preview_label: 'Preview',                    |
+    attribute: f.text_area(:source) }            |

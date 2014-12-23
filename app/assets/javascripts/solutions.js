@@ -1,16 +1,14 @@
 $(document).on('page:change', function() {
 
   $('#solution_platform').on('change', function() {
-    var selectedValue = $(this).val().toLowerCase();
-    var editorArea = $('.source-editor .source-editor-textarea'),
-        editorId = editorArea.attr('id');
+    var selectedValue = $(this).val().toLowerCase(),
+        editorContainer = $('.source-editor');
 
-    // if cannot find the file, continue
-    if (!editorId)
+    if (!editorContainer)
       return true;
 
-    var editor = ace.edit(editorId);
-    editor.getSession().setMode('ace/mode/' + selectedValue);
+    if (selectedValue === 'c' || selectedValue === 'c++')
+      selectedValue = 'c_cpp';
+    editorContainer.attr('data-mode', 'ace/mode/' + selectedValue);
   });
-
 });

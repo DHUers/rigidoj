@@ -20,6 +20,9 @@ $(document).on('page:change', function() {
     var editor = ace.edit(editDiv[0]);
 
     editor.setFontSize('14px');
+    editor.setOptions({
+      enableBasicAutocompletion: true
+    });
     editor.setTheme('ace/theme/yesterday');
     editor.getSession().setMode('ace/mode/' + mode);
     editor.getSession().setValue(editorArea.val());
@@ -27,6 +30,15 @@ $(document).on('page:change', function() {
     // save back to the textarea when submit
     editorArea.closest('form').submit(function() {
       editorArea.val(editor.getSession().getValue());
+    });
+
+    // watch DOM data-mode for setting mode. a bit hacky
+    $(this).watch({
+      properties: 'attr_data-mode',
+      callback: function(data) {
+        console.log(data.vals[0]);
+        editor.getSession().setMode(data.vals[0]);
+      }
     });
 
     actions.each(function() {
