@@ -17,7 +17,5 @@ Problem.seed do |p|
     |```
     |3
     |```
-    |RAW
-    |end
   END
 end
