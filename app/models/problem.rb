@@ -56,11 +56,11 @@ end
 #  draft                   :boolean          default("false"), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
-#  additional_limits       :hstore           default("{}"), not null, is an Array
 #  slug                    :string           default("")
 #  judger_program_platform :integer
 #  input_file              :string
 #  output_file             :string
 #  judger_program          :string
 #  remote_proxy_vendor     :string           default("")
+#  additional_limits       :jsonb            default("[]")
 #

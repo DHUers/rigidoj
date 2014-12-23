@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/SamSaffron/seed-fu.git
+  revision: d93df3b6364ea938d87c5629bf950b0d1ffe037e
+  branch: discourse
+  specs:
+    seed-fu (2.3.3)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -297,8 +306,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    seed-fu (1.2.3)
-      rails (>= 2.1)
     sexp_processor (4.4.4)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -388,7 +395,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0.0)
   sdoc (~> 0.4.0)
-  seed-fu
+  seed-fu!
   shoulda
   sidekiq
   spring

@@ -23,6 +23,7 @@ $(document).on('page:change', function() {
     editor.getSession().setMode('ace/mode/' + mode);
     editor.getSession().setValue(editorArea.val());
 
+    // save back to the textarea when submit
     editorArea.closest('form').submit(function() {
       editorArea.val(editor.getSession().getValue());
     });

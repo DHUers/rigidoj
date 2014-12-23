@@ -17,8 +17,8 @@
   .row
     .col-md-4
       %label Jugder configuration
-  .row
-    .col-md-1
+  .row.limit-group
+    .col-md-1.platform
       %span Default
     .col-md-3.time-limit-group
       .input-group
@@ -28,23 +28,24 @@
       .input-group
         = f.text_field :default_memory_limit, class: 'form-control', placeholder: 'Memory limit'
         %span.input-group-addon KB
+  = f.hidden_field :additional_limits
   - @problem.additional_limits.each do |limit|
-    .row
-      .col-md-1
-        %span= limit['name'].capitalize
+    .row.additional-limit-group
+      .col-md-1.platform
+        %span(contenteditable="true")= limit['platform'] || ''.capitalize
       .col-md-3.time-limit-group
         .input-group
-          = text_field_tag "additional_limits[#{limit['name']}][time]", limit['time'], class: 'form-control', placeholder: 'Time limit'
+          = text_field_tag "[#{limit['platform']}][time]", limit['timeLimit'], class: 'form-control', placeholder: 'Time limit'
           %span.input-group-addon ms
       .col-md-3.memory-limit-group
         .input-group
-          = text_field_tag "additional_limits[#{limit['name']}][memory]", limit['memory'], class: 'form-control', placeholder: 'Memory limit'
+          = text_field_tag "additional_limits[#{limit['name']}][memory]", limit['memoryLimit'], class: 'form-control', placeholder: 'Memory limit'
           %span.input-group-addon KB
       .col-md-1
         %button.btn.btn-default{:type => "button"} -
-  .row
-    .col-md-1
-      %button#add-new-judger-configuration.btn.btn-default{:type => "button"} +
+.row
+  .col-md-1
+    %button#add-new-judger-configuration.btn.btn-default{type: 'button'} +
 .form-group
   .row
     .col-md-4
