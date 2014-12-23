@@ -19,6 +19,7 @@ $(document).on('page:change', function() {
 
     var editor = ace.edit(editDiv[0]);
 
+    editor.setFontSize('14px');
     editor.setTheme('ace/theme/yesterday');
     editor.getSession().setMode('ace/mode/' + mode);
     editor.getSession().setValue(editorArea.val());
