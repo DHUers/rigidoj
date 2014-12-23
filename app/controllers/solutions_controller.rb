@@ -16,6 +16,11 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def show
+    @solution = Solution.find(params[:id])
+    authorize @solution
+  end
+
   private
 
   def publish_to_judgers
