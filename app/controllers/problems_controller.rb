@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   def index
-    @problems = policy_scope(Problem).order(:id).page(params[:page]).per(20)
+    @problems = policy_scope(Problem.published).order(:id).page(params[:page]).per(20)
   end
 
   def new
