@@ -37,7 +37,7 @@ class ProblemsController < ApplicationController
     authorize @problem
 
     if @problem.update_attributes(problem_params)
-      render 'edit'
+      render @problem
     else
       render 'edit'
     end
