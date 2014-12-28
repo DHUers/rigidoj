@@ -3,14 +3,16 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
+  after :cache, :update_digest
+
   storage :file
 
   def store_dir
-    "uploads/avatars/#{file_digest[0..1]}"
+    "uploads/avatars/#{uuid[0..1]}"
   end
 
   def filename
-    @filename ||= "#{file_digest[2..-1]}.#{file.extension}" if original_filename.present?
+    @filename = "#{uuid}.#{file.extension}" if original_filename.present?
   end
 
   def default_url
@@ -37,8 +39,16 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg png)
   end
 
-  def file_digest
-    chunk = model.send(mounted_as)
-    @digest ||= Digest::SHA1.hexdigest(chunk.read.to_s)
+  protected
+
+  def uuid
+    @uuid ||= SecureRandom.uuid
+  end
+
+  private
+
+  def update_digest(file)
+    var = :"#{mounted_as}_digest="
+    model.send(var, uuid)
   end
 end

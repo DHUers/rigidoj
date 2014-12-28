@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
 
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
-  before_save :update_avatar_digest
 
   after_initialize :set_default_active
 
@@ -158,14 +157,6 @@ class User < ActiveRecord::Base
   def default_platform
     # dummy
     'c'
-  end
-
-  private
-
-  def update_avatar_digest
-    if avatar.present? && avatar_changed?
-      self.avatar_digest  = avatar.file_digest
-    end
   end
 
 end
