@@ -165,39 +165,40 @@ end
 #
 # Table name: users
 #
-#  id                      :integer          not null, primary key
-#  username                :string(60)       not null
-#  name                    :string(320)
-#  email                   :string(300)      not null
-#  password_hash           :string(64)
-#  salt                    :string(32)
-#  active                  :boolean          default("false"), not null
-#  last_seen_at            :datetime
-#  admin                   :boolean          default("false"), not null
-#  ip_address              :inet
-#  registration_ip_address :inet
-#  remember_hash           :string(60)
-#  username_lower          :string(60)       not null
-#  suspended               :boolean          default("false"), not null
-#  suspended_at            :datetime
-#  suspended_till          :datetime
-#  last_emailed_at         :datetime
-#  moderator               :boolean          default("false")
-#  blocked                 :boolean          default("false")
-#  email_notification      :boolean          default("true")
-#  email_digest            :boolean          default("false")
-#  email_contest_result    :boolean          default("true")
-#  email_solution_result   :boolean          default("false")
-#  avatar                  :string
-#  avatar_digest           :string
-#  show_email              :boolean          default("true"), not null
-#  website                 :string(255)
+#  id                       :integer          not null, primary key
+#  username                 :string(60)       not null
+#  name                     :string(320)
+#  email                    :string(300)      not null
+#  password_hash            :string(64)
+#  salt                     :string(32)
+#  active                   :boolean          default("false"), not null
+#  last_seen_at             :datetime
+#  admin                    :boolean          default("false"), not null
+#  ip_address               :inet
+#  registration_ip_address  :inet
+#  remember_hash            :string(60)
+#  username_lower           :string(60)       not null
+#  suspended                :boolean          default("false"), not null
+#  suspended_at             :datetime
+#  suspended_till           :datetime
+#  last_emailed_at          :datetime
+#  moderator                :boolean          default("false")
+#  blocked                  :boolean          default("false")
+#  email_notification       :boolean          default("true")
+#  email_digest             :boolean          default("false")
+#  email_contest_result     :boolean          default("true")
+#  email_solution_result    :boolean          default("false")
+#  avatar                   :string
+#  avatar_original_filename :string
+#  show_email               :boolean          default("true"), not null
+#  website                  :string(255)
+#  avatar_uuid              :string
 #
 # Indexes
 #
-#  index_users_on_avatar_digest   (avatar_digest) UNIQUE
-#  index_users_on_email           (email) UNIQUE
-#  index_users_on_last_seen_at    (last_seen_at)
-#  index_users_on_username        (username) UNIQUE
-#  index_users_on_username_lower  (username_lower) UNIQUE
+#  index_users_on_avatar_original_filename  (avatar_original_filename) UNIQUE
+#  index_users_on_email                     (email) UNIQUE
+#  index_users_on_last_seen_at              (last_seen_at)
+#  index_users_on_username                  (username) UNIQUE
+#  index_users_on_username_lower            (username_lower) UNIQUE
 #

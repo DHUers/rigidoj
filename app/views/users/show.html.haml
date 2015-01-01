@@ -2,7 +2,7 @@
   .col-md-3
     .udcard
       = link_to current_user ? settings_profile_path : @user.avatar.large.url do
-        = image_tag @user.avatar
+        = image_tag @user.avatar.url, alt: 'People avatar'
       %h1.udcard-names
         %span.udcard-fullname= @user.name
         %span.udcard-username= @user.username
