@@ -1,6 +1,7 @@
 class Problem < ActiveRecord::Base
   include Cookable
   include PgSearch
+
   belongs_to :user
   has_many :solutions
   has_and_belongs_to_many :contests
@@ -73,4 +74,7 @@ end
 #  judger_program          :string           default("")
 #  remote_proxy_vendor     :string           default("")
 #  additional_limits       :jsonb            default("[]")
+#  input_file_uuid         :string
+#  output_file_uuid        :string
+#  judger_program_uuid     :string
 #

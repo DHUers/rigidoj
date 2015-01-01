@@ -4,6 +4,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   include UploaderBaseHelper
+  include UploaderOriginalFilenameHelper
 
   storage :file
 
