@@ -1,5 +1,6 @@
 class Problem < ActiveRecord::Base
   include Cookable
+  include Searchable
 
   belongs_to :user
   has_one :problem_search_data
@@ -11,6 +12,13 @@ class Problem < ActiveRecord::Base
   mount_uploader :input_file, PlainTextUploader
   mount_uploader :output_file, PlainTextUploader
   mount_uploader :judger_program_platform, PlainTextUploader
+
+  def update_index
+    return unless baked_changed? || title_changed? || source_changed?
+
+    search_data = title << ' ' << scrub_html_for_search(baked) << ' ' << source
+    update_search_index self, search_data
+  end
 
   def judge_data
     case judge_type
