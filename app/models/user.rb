@@ -2,6 +2,8 @@ require 'pbkdf2'
 require 'bcrypt'
 
 class User < ActiveRecord::Base
+  include Searchable
+
   attr_accessor :remember_token
 
   has_one :user_stat, dependent: :destroy
@@ -64,6 +66,12 @@ class User < ActiveRecord::Base
   def self.username_available?(username)
     lower = username.downcase
     User.where(username_lower: lower).blank?
+  end
+
+  def update_index
+    return unless username_changed? || name_changed?
+
+    User.update_search_index 'user', self.id, "#{username} #{name}"
   end
 
   def update_username_lower
