@@ -40,6 +40,7 @@ gem 'seed-fu', git: 'https://github.com/SamSaffron/seed-fu.git', branch: 'discou
 gem 'bcrypt'
 gem 'fast_xor'
 gem 'fog', require: false
+gem 'rmmseg-cpp', require: false
 
 # frontend assets
 gem 'jquery-rails'

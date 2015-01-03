@@ -6,7 +6,7 @@ class CreateProblemSearchData < ActiveRecord::Migration
       t.text :raw_data
     end
 
-    execute 'CREATE INDEX idx_search_data ON problem_search_data USING gin(search_data)'
+    execute 'CREATE INDEX idx_search_problem ON problem_search_data USING gin(search_data)'
   end
 
   def down

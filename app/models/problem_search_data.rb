@@ -1,5 +1,7 @@
 class ProblemSearchData < ActiveRecord::Base
   belongs_to :problem
+
+  validates_presence_of :search_data
 end
 
 # == Schema Information
@@ -12,5 +14,5 @@ end
 #
 # Indexes
 #
-#  idx_search_data  (search_data)
+#  idx_search_problem  (search_data)
 #

@@ -4,8 +4,6 @@ Rails.application.routes.draw do
     resources :notes
     get '/solved_problems', to: 'users#solved_problems', as: :solved_problems
     get '/joined_contests', to: 'users#joined_contests', as: :joined_contests
-
-
   end
 
   resources :contests
@@ -42,5 +40,8 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy', as: :logout
   get '/about', to: 'statics#about', as: :about
   get '/help', to: 'statics#help', as: :help
+
+  get 'search', to: 'search#query'
+
   root to: 'statics#home'
 end
