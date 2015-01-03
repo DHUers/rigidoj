@@ -47,7 +47,6 @@ gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
-gem 'pg_search'
 
 group :development, :test do
   gem 'rspec-rails'
