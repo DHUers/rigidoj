@@ -16,8 +16,8 @@ class Problem < ActiveRecord::Base
   def update_index
     return unless baked_changed? || title_changed? || source_changed?
 
-    search_data = title << ' ' << scrub_html_for_search(baked) << ' ' << source
-    update_search_index self, search_data
+    search_data = title << ' ' << Problem.scrub_html_for_search(baked) << ' ' << source
+    Problem.update_search_index 'problem', self.id, search_data
   end
 
   def judge_data
