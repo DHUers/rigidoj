@@ -23,18 +23,19 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    @problem = Problem.find(params[:id])
-    authorize @problem
+    load_resource
+  end
+
+  def excerpt
+    load_resource
   end
 
   def edit
-    @problem = Problem.find(params[:id])
-    authorize @problem
+    load_resource
   end
 
   def update
-    @problem = Problem.find(params[:id])
-    authorize @problem
+    load_resource
 
     if @problem.update_attributes(problem_params)
       render @problem
@@ -44,8 +45,7 @@ class ProblemsController < ApplicationController
   end
 
   def destory
-    @problem = Problem.find(params[:id])
-    authorize @problem
+    load_resource
 
     if @problem.destroy
       render 'index'
@@ -56,5 +56,10 @@ class ProblemsController < ApplicationController
 
   def problem_params
     params.require(:problem).permit(*policy(@problem || Problem).permitted_attributes)
+  end
+
+  def load_resource
+    @problem = Problem.find(params[:id])
+    authorize @problem
   end
 end
