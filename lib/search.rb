@@ -14,7 +14,6 @@ module Search
     end
   end
 
-
   def self.prepare_data(search_data)
     data = search_data.squish
     if ['zh_TW', 'zh_CN'].include?(SiteSetting.default_locale)
@@ -35,4 +34,18 @@ module Search
     data
   end
 
+  def initialize(term, opts=nil)
+    if term.present?
+      @term = Search.prepare_data(term.to_s)
+      @original_term = PG::Connection.escape_string(@term)
+    end
+  end
+
+  def self.execute(term, opts=nil)
+    self.new(term, opts).execute
+  end
+
+  # Query a term
+  def execute
+  end
 end
