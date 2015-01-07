@@ -1,6 +1,6 @@
 .form-group
   %label{:for => "problem-title"} Title
-  = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Descriptive'
+  = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Be descriptive'
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |
@@ -12,3 +12,24 @@
     attribute: f.text_area(:description_raw) }
 .form-group
   %h3 Problem listing
+  .problems
+  .row
+    .col-md-12
+      %input.form-control{placeholder: 'Search problem'}
+.form-group
+  %h3 Time settings
+  .row
+    .col-md-2
+      %label Started at
+    .col-md-10
+      = f.datetime_select :started_at
+  .row
+    .col-md-2
+      %label End at
+    .col-md-10
+      = f.datetime_select :end_at
+  .row
+    .col-md-2
+      %label Delayed till
+    .col-md-10
+      = f.datetime_select :delayed_till
