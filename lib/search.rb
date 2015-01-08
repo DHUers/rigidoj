@@ -1,4 +1,6 @@
-module Search
+require 'grouped_search_results'
+
+class Search
   def self.per_facet
     5
   end
@@ -39,6 +41,18 @@ module Search
       @term = Search.prepare_data(term.to_s)
       @original_term = PG::Connection.escape_string(@term)
     end
+
+    @opts = opts || {}
+    @user = opts[:user] || nil
+    @search_context = @opts[:search_context]
+    @include_blurbs = @opts[:include_blurbs] || false
+    @limit = Search.per_facet
+
+    if @opts[:type_filter].present?
+      @limit = Search.per_filter
+    end
+
+    @results = GroupedSearchResults.new(@opts[:type_filter], term, @search_context, @include_blurbs)
   end
 
   def self.execute(term, opts=nil)
@@ -47,5 +61,32 @@ module Search
 
   # Query a term
   def execute
+    if @opts[:search_for_id] && @results.type_filter == 'problem'
+      find_single_problem
+    end
+
+    @results
+  end
+
+  private
+
+  def find_single_problem
+    if @term =~ /^\d+$/
+      single_problem(@term.to_i)
+    else
+      begin
+        route = Rails.application.routes.recognize_path(@term)
+        single_problem(route[:problem_id]) if route[:problem_id].present?
+      rescue ActionController::RoutingError
+      end
+    end
+  end
+
+  def single_problem(id)
+    problem = Problem.find(id)
+    return nil unless ProblemPolicy.new(@user, problem).show?
+
+    @results.add(problem)
+    @results
   end
 end

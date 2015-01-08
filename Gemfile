@@ -39,6 +39,7 @@ gem 'seed-fu', git: 'https://github.com/SamSaffron/seed-fu.git', branch: 'discou
 
 gem 'active_model_serializers'
 gem 'bcrypt'
+gem 'sanitize'
 gem 'fast_xor'
 gem 'fog', require: false
 gem 'rmmseg-cpp', require: false
