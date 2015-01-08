@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   get '/about', to: 'statics#about', as: :about
   get '/help', to: 'statics#help', as: :help
 
-  get 'search', to: 'search#query'
+  get '/query', to: 'search#query'
 
   root to: 'statics#home'
 end

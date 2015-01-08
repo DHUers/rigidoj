@@ -1,5 +1,5 @@
-class BasicSolutionSerializer < ActiveModel::Serializer
-  attributes :id, :platform, :source, :revision
+class BasicSolutionSerializer < ApplicationSerializer
+  attributes :platform, :source, :revision
 
   has_one :problem, serializer: BasicProblemSerializer
 end
