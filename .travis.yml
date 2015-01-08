@@ -29,3 +29,8 @@ addons:
     repo_token: e756927d490a667f8c9bd8aafc5311598fd29e190b0ca8adde47b9006b5d0842
 
 script: 'bundle exec rspec'
+
+notifications:
+  slack:
+    rooms:
+      - algalon:WMv6lsjFAFOWoKTSevTWsbu4#rigidoj
