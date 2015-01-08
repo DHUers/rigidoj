@@ -17,16 +17,7 @@ class Solution < ActiveRecord::Base
   def hash_solution
     self.solution_hash = Digest::SHA1.hexdigest("#{problem_id}:#{user_id}:#{source}")
   end
-
-  def to_judger
-    {
-        solution_id: id,
-        problem: problem.to_judger,
-        platform: platform,
-        source: source
-    }
-  end
-
+  
   def ace_mode
     case self.platform
       when 'c', 'c++' then 'c_cpp'

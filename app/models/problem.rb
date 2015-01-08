@@ -7,7 +7,7 @@ class Problem < ActiveRecord::Base
   has_many :solutions
   has_and_belongs_to_many :contests
   scope :published, -> { where(public: true, draft: false) }
-  enum judge_type: [:full_text, :program_comparasion, :remote_proxy]
+  enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
   mount_uploader :input_file, PlainTextUploader
   mount_uploader :output_file, PlainTextUploader
@@ -18,34 +18,6 @@ class Problem < ActiveRecord::Base
 
     search_data = title << ' ' << Problem.scrub_html_for_search(baked) << ' ' << source
     Problem.update_search_index 'problem', self.id, search_data
-  end
-
-  def judge_data
-    case judge_type
-      when :full_text
-        {
-            input_file_url: input_file,
-            output_file_url: output_file
-        }
-      when :program_comparasion
-        {
-            judger_program_url: judger_program,
-            input_file_url: input_file,
-            output_file_url: output_file
-        }
-      when :remote_proxy
-        {
-            vendor: remote_proxy_vendor,
-            source: remote_proxy_source_url
-        }
-    end
-  end
-
-  def to_judger
-    {
-        judge_type: judge_type.to_s,
-        data: judge_data
-    }
   end
 end
 

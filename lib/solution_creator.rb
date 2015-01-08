@@ -20,5 +20,6 @@ class SolutionCreator
   end
 
   def publish_to_judger
+    solution_json = BasicSolutionSerializer.new(@solution).to_json
   end
 end
