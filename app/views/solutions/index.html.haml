@@ -1,0 +1,29 @@
+- content_for :title, 'Solutions'
+
+.row
+  .col-md-2.col-md-offset-10
+    = button_to 'Submit', new_solution_path, class: 'btn btn-primary', |
+      html: {type: 'button'}, method: :get
+.row
+  .col-md-12
+    .table-responsive
+      %table#solution-listings.table.table-condensed.table-hover
+        %thead
+          %th Submission time
+          %th Status
+          %th Problem ID
+          %th Execution time
+          %th Source length
+          %th Platform
+          %th Author
+        %tbody
+          - @solutions.each do |s|
+            %tr.row-clickable
+              %td s.updated_at
+              %td s.solution_status
+              %td= link_to p.id, problem_path(p)
+              %td s.time_usage
+              %td
+              %td s.platform
+              %td s.user.name
+      = paginate @solutions, window: 3, remote: true

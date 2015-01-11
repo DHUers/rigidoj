@@ -14,10 +14,14 @@ class SolutionsController < ApplicationController
 
     if @solution.save
       publish_to_judgers
-      render @solution
+      render 'show'
     else
       render 'new'
     end
+  end
+
+  def index
+    @solutions = policy_scope(Solution).order(:id).page(params[:page]).per(20)
   end
 
   def show
