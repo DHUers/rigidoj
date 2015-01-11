@@ -5,6 +5,9 @@ class SearchController < ApplicationController
     params.require(:term)
 
     search_args = {}
+    if params[:type_filter].present?
+      search_args[:type_filter] = params[:type_filter]
+    end
     if params[:include_blurbs].present?
       search_args[:include_blurbs] = params[:include_blurbs] == "true"
     end
@@ -12,7 +15,7 @@ class SearchController < ApplicationController
 
     search = Search.new(params[:term], search_args.symbolize_keys)
     result = search.execute
-    render json: result
+    render_serialized(result, GroupedSearchResultSerializer, context: result)
   end
 
 

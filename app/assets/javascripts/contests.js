@@ -2,8 +2,21 @@
 // All this logic will automatically be available in application.js.
 $(function() {
   var engine = new Bloodhound({
-    remote: '/query?include_blurbs=true&type_filter=problem&term=%QUERY',
+    remote: {
+      url: '/query?include_blurbs=true&search_for_id=true&type_filter=problem&term=%QUERY',
+      filter: function(parsedResponse) {
+        var a = $.map(parsedResponse.problems, function(problem) {
+          return {
+            id: problem.id,
+            value: problem.baked
+          }
+        });
+        console.log(a);
+        return a;
+      }
+    },
     datumTokenizer: function(d) {
+      console.log(d);
       return Bloodhound.tokenizers.whitespace(d.val);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace
@@ -14,8 +27,8 @@ $(function() {
     minLength: 1,
     highlight: true
   }, {
-    name: 'someName',
-    displayKey: 'DisplayText',
+    name: 'problem-item',
+    displayKey: 'value',
     source: engine.ttAdapter()
   });
 });

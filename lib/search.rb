@@ -9,7 +9,7 @@ class Search
     50
   end
 
-  def self. long_locale
+  def self.long_locale
     case SiteSetting.default_locale.to_sym
       when :en     then 'english'
       else 'simple' # use the 'simple' stemmer for other languages

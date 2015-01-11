@@ -26,14 +26,6 @@ class Search
       @users = []
     end
 
-    def blurb(post)
-      cooked = HtmlScrubber.scrub(post.cooked).squish
-      terms = @term.split(/\s+/)
-      blurb = TextHelper.excerpt(cooked, terms.first, radius: 100)
-      blurb = TextHelper.truncate(cooked, length: 200) if blurb.blank?
-      Sanitize.clean(blurb)
-    end
-
     def add(object)
       type = object.class.to_s.downcase.pluralize
 

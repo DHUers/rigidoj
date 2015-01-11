@@ -19,6 +19,15 @@ class Problem < ActiveRecord::Base
     search_data = title << ' ' << Problem.scrub_html_for_search(baked) << ' ' << source
     Problem.update_search_index 'problem', self.id, search_data
   end
+
+  def blurb(problem)
+    cooked = HtmlScrubber.scrub(baked).squish
+    terms = @term.split(/\s+/)
+    blurb = TextHelper.excerpt(cooked, terms.first, radius: 100)
+    blurb = TextHelper.truncate(cooked, length: 200) if blurb.blank?
+    Sanitize.clean(blurb)
+  end
+
 end
 
 # == Schema Information
