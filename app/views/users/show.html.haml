@@ -9,6 +9,7 @@
       %ul.udcard-details
         - if current_user.staff? or @user.show_email
           %li.udcard-detail
+            %i.fa.fa-envelope-o
             %a.email{:href => "mailto:#{@user.email}"}= @user.email
       .udcard-stats
         = link_to user_solved_problems_path(@user), class: 'udcard-stat' do

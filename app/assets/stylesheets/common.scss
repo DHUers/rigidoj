@@ -7,3 +7,47 @@
 body {
   padding-top: $navbar-height;
 }
+
+.udcard img {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+.udcard .udcard-names {
+  margin: 10px 0;
+}
+.udcard .udcard-names span {
+  display: block;
+}
+.udcard .udcard-names .udcard-fullname {
+  font-size: 3.5rem;
+}
+.udcard .udcard-names .udcard-username {
+  color: #777;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+.udcard .udcard-details {
+  margin: 5px 0;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  list-style: none;
+  color: #aaa;
+  font-size: 1.5rem;
+}
+.udcard .udcard-detail .fa {
+  margin-right: 3px;
+}
+.udcard .udcard-stats {
+  text-align: center;
+}
+.udcard .udcard-stat {
+  float: left;
+  width: 50%;
+  font-size: 2.8rem;
+}
+.udcard .udcard-stat span {
+  display: block;
+  font-size: 1.2rem;
+}
