@@ -1,3 +1,5 @@
+require 'bunny'
+
 module Rigidoj
 
   SYSTEM_USER_ID = -1 unless defined? SYSTEM_USER_ID
@@ -19,6 +21,7 @@ module Rigidoj
   end
 
   JUDGER_QUEUE_NAME = 'judger_queue' unless defined? JUDGER_QUEUE_NAME
+  JUDGER_PROXY_QUEUE_NAME = 'judger_proxy_queue' unless defined? JUDGER_PROXY_QUEUE_NAME
   RESULT_QUEUE_NAME = 'result_queue' unless defined? RESULT_QUEUE_NAME
 
   def self.judger_queue
@@ -26,6 +29,13 @@ module Rigidoj
       @judger_queue = self.rabbitmq_channel.queue(JUDGER_QUEUE_NAME, durable: true)
     end
     @judger_queue
+  end
+
+  def self.judger_proxy_queue
+    unless @judger_proxy_queue
+      @judger_proxy_queue = self.rabbitmq_channel.queue(JUDGER_PROXY_QUEUE_NAME, durable: true)
+    end
+    @judger_proxy_queue
   end
 
   def self.result_queue

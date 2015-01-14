@@ -1,5 +1,5 @@
 class BasicProblemSerializer < ApplicationSerializer
-  attributes :judge_type
+  attributes :judge_type, :judge_data
 
   def limits
     limits = {default: {
@@ -11,7 +11,7 @@ class BasicProblemSerializer < ApplicationSerializer
   end
 
   def judge_data
-    case object.judge_type
+    case object.judge_type.to_sym
     when :full_text
       {
         input_file_url: object.input_file_url,
@@ -26,8 +26,7 @@ class BasicProblemSerializer < ApplicationSerializer
       }
     when :remote_proxy
       {
-        vendor: object.remote_proxy_vendor,
-        source: object.remote_proxy_source_url
+        vendor: object.remote_proxy_vendor
       }
     end
   end
