@@ -9,10 +9,10 @@
     .problem-body
       = raw @problem.baked
   .col-md-3
-    %ul.actions
+    %ul.actions.problem-actions
       %li= link_to 'Submit', new_problem_solution_path(@problem)
       %li= link_to 'Submitted records', new_problem_solution_path(@problem)
     - if current_user && current_user.staff?
       .divider
-      %ul.actions.admin-actions
+      %ul.actions.problem-admin-actions
         %li= link_to 'Edit', edit_problem_path(@problem)

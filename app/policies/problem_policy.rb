@@ -13,7 +13,18 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    %i(title raw source default_time_limit default_memory_limit judge_type
-       judger_program_platform remote_proxy_vendor public additional_limits)
+    %i(title
+       raw
+       source
+       default_time_limit
+       default_memory_limit
+       judge_type
+       judger_program_platform
+       remote_proxy_vendor
+       public
+       input_file
+       output_file
+       judger_program
+       additional_limits)
   end
 end
