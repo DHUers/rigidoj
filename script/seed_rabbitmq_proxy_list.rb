@@ -4,6 +4,7 @@ def publish_to_proxy_queue(solution)
   proxy_queue = Rigidoj::judger_proxy_queue
   s = BasicSolutionSerializer.new(solution, root: 'solution')
   puts s.to_json
+  proxy_queue.publish s.to_json
 end
 
 frog = Problem.seed do |p|
