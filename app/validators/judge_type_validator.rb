@@ -1,4 +1,4 @@
-class JudgeTypeValidator < ActiveModel::EachValidator
+class JudgeTypeValidator < ActiveModel::Validator
   def validate(record)
     return if record.send(:draft)
 
@@ -23,7 +23,7 @@ class JudgeTypeValidator < ActiveModel::EachValidator
   end
 
   def judger_program_platform_validator(problem)
-    unless SiteSetting.judger_platforms.include? problem.send(:judger_program_platform)
+    unless SiteSetting.judger_platforms.split('|').include? problem.send(:judger_program_platform)
       record.errors.add(:judger_program_platform, :invalid, options)
     end
   end

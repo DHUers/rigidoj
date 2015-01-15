@@ -18,4 +18,6 @@ Problem.seed do |p|
     |3
     |```
   END
+  p.input_file = 'a'
+  p.output_file = 'b'
 end

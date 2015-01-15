@@ -13,9 +13,7 @@ class Problem < ActiveRecord::Base
   mount_uploader :output_file, PlainTextUploader
   mount_uploader :judger_program_platform, PlainTextUploader
 
-  validates_with ::JudgeTypeValidator, fields: [:judge_type, :judger_program_platform,
-                                                :input_file, :output_file, :judger_program,
-                                                :remote_proxy_vendor]
+  validates_with ::JudgeTypeValidator
   validates :title, presence: true
   validates :raw, presence: true
 
