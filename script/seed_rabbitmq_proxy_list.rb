@@ -16,4 +16,4 @@ def publish_to_proxy_queue(solution_json)
   proxy_queue.publish solution_json
 end
 
-publish_to_proxy_queue('{"solution":{"platform":"c","source":"fake","revision":0,"problem_id":41},"problems":[{"judge_type":"remote_proxy","judge_data":{"vendor":"HDU,5037"}}]}')
+publish_to_proxy_queue('{"solution":{"id":49,"platform":"c","source":"fake","revision":0,"problem_id":41},"problems":[{"id":41,"judge_type":"remote_proxy","judge_data":{"vendor":"HDU,5037"}}]}')

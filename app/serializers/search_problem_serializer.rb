@@ -1,3 +1,3 @@
-class SearchProblemSerializer < ApplicationSerializer
-  attributes :id, :baked
+class SearchProblemSerializer < ActiveModel::Serializer
+  attributes :baked
 end

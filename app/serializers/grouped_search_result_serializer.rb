@@ -1,4 +1,4 @@
-class GroupedSearchResultSerializer < ApplicationSerializer
+class GroupedSearchResultSerializer < ActiveModel::Serializer
   #has_many :posts, serializer: BasicPostSerializer
   #has_many :users, serializer: BasicUserSerializer
   has_many :problems, serializer: SearchProblemSerializer

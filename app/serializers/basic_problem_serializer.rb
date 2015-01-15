@@ -1,5 +1,5 @@
-class BasicProblemSerializer < ApplicationSerializer
-  attributes :judge_type, :judge_data
+class BasicProblemSerializer < ActiveModel::Serializer
+  attributes :id, :judge_type, :judge_data
 
   def limits
     limits = {default: {
