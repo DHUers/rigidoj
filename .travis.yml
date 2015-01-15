@@ -13,7 +13,7 @@ rvm:
   - 2.0.0
   - 2.1.5
 
-sudo: false
+sudo: true
 
 cache: bundler
 
@@ -29,7 +29,6 @@ before_install:
 bundler_args: --without development --deployment --retry=3 --jobs=3
 
 addons:
-  postgresql: 9.4
   code_climate:
     repo_token: e756927d490a667f8c9bd8aafc5311598fd29e190b0ca8adde47b9006b5d0842
 
