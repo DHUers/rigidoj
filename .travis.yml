@@ -18,14 +18,16 @@ sudo: true
 cache: bundler
 
 before_script:
-  - psql -c 'create database rigidoj_test;' -U postgres
+  - psql -c "CREATE ROLE travis WITH CREATEDB SUPERUSER LOGIN PASSWORD '';" -U postgres
+  - psql -c 'CREATE DATABASE rigidoj_test;' -U postgres
   - bundle exec rake db:migrate db:seed_fu
 
 before_install:
  - sudo apt-get update
  - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
- - sudo apt-get install postgresql-client-common postgresql-9.4
- - sudo service postgresql start
+ - sudo apt-get install postgresql-client-common postgresql-9.4 postgresql-contrib-9.4
+ - echo "local all all trust" | sudo tee /etc/postgresql/9.4/main/pg_hba.conf
+ - sudo service postgresql restart
 
 bundler_args: --without development --deployment --retry=3 --jobs=3
 
