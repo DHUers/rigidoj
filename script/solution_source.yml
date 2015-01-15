@@ -1,0 +1,444 @@
+HDU_5037: |
+  #include <iostream>
+  #include <algorithm>
+  #include <cstdio>
+  using namespace std;
+
+  const int MAXN = 200010;
+  int a[MAXN], n, m, l, nCase, cnt;
+
+  void input() {
+      scanf("%d%d%d", &n, &m, &l);
+      for (int i = 1; i <= n; i++) {
+          scanf("%d", &a[i]);
+      }
+      a[n+1] = m;
+  }
+
+  void solve() {
+      sort(a, a+n+2);
+
+      int cur = 0, pre = -l, ans = 0, i = 0;
+      while (cur < m) {
+          while (i < n+2 && a[i] <= cur + l) i++;
+          if (a[i-1] > cur && a[i-1] <= cur + l) {  // jump directly
+              pre = cur;
+              cur = a[i-1];
+              ans++;
+          } else {  // need help
+              int t = (a[i] - cur) / (l + 1) - 1;
+              int tmp = max(pre + l + 1, cur + 1);
+              if (t) {
+                  pre = tmp + (t - 1) * (l + 1);
+                  cur += t * (l + 1);
+                  ans += 2 * t;
+              } else {
+                  pre = cur;
+                  cur = tmp;
+                  ans++;
+              }
+          }
+      }
+
+      printf("Case #%d: %d\n", ++cnt, ans);
+  }
+
+  int main() {
+      scanf("%d", &nCase);
+      while (nCase--) {
+          input();
+          solve();
+      }
+      return 0;
+  }
+
+UVA_12682: |
+  #include <iostream>
+  #include <cstdio>
+  #include <cstring>
+  #include <vector>
+  #include <string>
+  #include <algorithm>
+  #include <set>
+  using namespace std;
+
+  set<string> mem[6];
+  int n;
+  vector<string> vs;
+
+  void init() {
+      for (int i = 0; i <= 5; i++) {
+          mem[i].clear();
+      }
+      mem[1].insert("joe");
+      vs.clear();
+  }
+
+  bool isEnd(string tmp) {
+      return tmp == "." || tmp == "," || tmp == ":" || tmp == "?" || tmp == "!";
+  }
+
+  void learnSentence(vector<string> words) {
+      for (int i = 0 ; i  < words.size(); i++) {
+          transform(words[i].begin(), words[i].end(), words[i].begin(), ::tolower);
+      }
+      for (int i = 0; i < words.size(); i++) {
+          string temp = words[i] ;
+          if (mem[1].find(temp) == mem[1].end()) {
+              mem[1].insert(temp);
+          }
+          for (int len = 2; len <= n && i + len - 1 < words.size(); len++) {
+              temp = temp + '#' + words[i + len - 1];
+              if (mem[len] .find(temp) == mem[len] .end()) {
+                  mem[len] .insert(temp);
+              }
+          }
+      }
+  }
+
+  void judge(vector<string> ss) {
+      int len = ss.size();
+      for (int i = 0 ; i  < len; i++) {
+          transform(ss[i].begin(), ss[i].end(), ss[i].begin(), ::tolower);
+      }
+      bool flag = false;
+      string tst;
+      tst += vs[0];
+      for (int i = 1; i < len; i++) {
+          tst += " ";
+          tst += vs[i];
+      }
+      for (int i = 0; i < len; i++) {
+          if (mem[1].find(ss[i]) == mem[1].end()) {
+              mem[1].insert(ss[i]);
+              printf("What does the word \"%s\" mean?\n", vs[i].c_str());
+              flag = 1;
+          }
+      }
+      if (flag) {
+          if (len > 1) printf("What does the sentence \"%s\" mean?\n", tst.c_str());
+          learnSentence(ss);
+          return;
+      }
+      for (int i = 2; i <= n; i++) {
+          for (int j = 0; j < len - i + 1; j++) {
+              string tmp;
+              tmp.clear();
+              tmp += ss[j];
+              for (int k = 1; k < i; k++) {
+                  tmp += "#";
+                  tmp += ss[j + k];
+              }
+              if (mem[i].find(tmp) == mem[i].end()) {
+                  flag = true;
+                  break;
+              }
+          }
+      }
+      if (flag)  {
+          learnSentence(ss);
+          if (len > 1) printf("What does the sentence \"%s\" mean?\n", tst.c_str());
+      }
+  }
+
+  int main() {
+      int T = 1;
+      while (~scanf("%d", &n)) {
+          init();
+          if (T != 1) puts("");
+          string str;
+          while (cin >> str) {
+              if (isEnd(str)) {
+                  learnSentence(vs);
+                  vs.clear();
+              } else if (str == "*") {
+                  if (vs.size() != 0) learnSentence(vs);
+                  vs.clear();
+                  break;
+              } else {
+                  vs.push_back(str);
+              }
+          }
+          printf("Learning case %d\n", T++);
+          while (cin >> str) {
+              if (isEnd(str)) {
+                  judge(vs);
+                  vs.clear();
+              } else if(str == "#") {
+                  if (vs.size() != 0) judge(vs);
+                  vs.clear();
+                  break;
+              } else {
+                  vs.push_back(str);
+              }
+          }
+      }
+      return 0;
+  }
+
+ZOJ_3826: |
+  #include <iostream>
+  #include <cstdio>
+  #include <string>
+  #include <map>
+  using namespace std;
+
+  const int MAXN = 10010;
+  const int ROOT = 0;
+  map<string, int> mp[MAXN];
+  int T, Q, curPos, mpCnt;
+  string text;
+
+  int parse(int cnt, int deep) {
+      mp[cnt].clear();
+
+      if (text[curPos] == '{') {  // multiple
+          while (text[curPos++] != '}') {
+              if (text[curPos] == '"') {
+                  int startPos = curPos, len = 1;
+                  while (text[++curPos] != '"') len++;
+                  string key = text.substr(startPos, len + 1);
+                  if (text[++curPos] == ':') {
+                      curPos++;
+                      mp[cnt][key] = parse(++mpCnt, deep + 1);
+                  }
+              }
+          }
+      } else {  // single
+          if (text[curPos] == '"') {
+              int startPos = curPos, len = 1;
+              while (text[++curPos] != '"') len++;
+              string value = text.substr(startPos, len + 1);
+              mp[cnt][value] = -1;
+          }
+      }
+      return cnt;
+  }
+
+  void print(int father) {
+      if (mp[father].size() == 1 && mp[father].begin()->second == -1) {
+          cout << mp[father].begin()->first;
+          return;
+      }
+      cout << '{';
+      map<string, int>::iterator it;
+      for (it = mp[father].begin(); it != mp[father].end(); it++) {
+          cout << it->first << ':';
+          print(it->second);
+          if (it != --mp[father].end()) cout << ',';
+      }
+      cout << '}';
+  }
+
+  void init() {
+      getline(cin, text);
+      mpCnt = curPos = 0;
+      parse(0, 1);
+  }
+
+  void solve() {
+      cin >> Q;
+      getline(cin, text);
+      while (Q--) {
+          bool flag = true;
+          int curMp = ROOT;
+
+          getline(cin, text);
+          curPos = -1;
+          while (++curPos < text.size()) {
+              int startPos = curPos, len = 1;
+              while (curPos < text.size() && text[++curPos] != '.') len++;
+              string key = text.substr(startPos, len);
+              if (mp[curMp].find(key) != mp[curMp].end()) {
+                  curMp = mp[curMp][key];
+              } else {
+                  flag = false;
+                  break;
+              }
+          }
+          if (flag) {
+              print(curMp);
+              cout << endl;
+          } else {
+              cout << "Error!" << endl;
+          }
+      }
+  }
+
+  int main() {
+      ios::sync_with_stdio(false);
+      cin >> T;
+      getline(cin, text);
+      while (T--) {
+          init();
+          solve();
+      }
+      return 0;
+  }
+
+POJ_1147: |
+  #include <iostream>
+  using namespace std;
+
+  const int MAXN = 3010;
+  int a[MAXN], b[MAXN], cnt, n;
+
+  void init() {
+      cnt = 0;
+  }
+
+  void input() {
+      for (int i = 0; i < n; i++) {
+          cin >> a[i];
+      }
+  }
+
+  void solve() {
+      for (int i = 0; i < n; i++) {
+          if (a[i] == 0) {
+              b[cnt++] = i;
+          }
+      }
+      for (int i = 0; i < n; i++) {
+          if (a[i] == 1) {
+              b[cnt++] = i;
+          }
+      }
+
+      int t = 0;
+      for (int i = 0; i < n; i++) {
+          cout << a[b[t]] << " ";
+          t = b[t];
+      }
+      cout << endl;
+  }
+
+  int main() {
+      ios::sync_with_stdio(false);
+      while (cin >> n) {
+          init();
+          input();
+          solve();
+      }
+      return 0;
+  }
+
+HDU_4043: |
+  import java.io.BufferedInputStream;
+  import java.math.BigInteger;
+  import java.util.Scanner;
+
+  public class Main {
+      static BigInteger fz[] = new BigInteger[510], fm[] = new BigInteger[510];
+      static Scanner cin = new Scanner(new BufferedInputStream(System.in));
+      static int n, nCase;
+
+      private static void init() {
+          fz[1] = BigInteger.ONE;
+          fm[1] = BigInteger.valueOf(2);
+          for (int i = 2; i <= 500; i++) {
+              fz[i] = fz[i-1].multiply(BigInteger.valueOf(2*i-1));
+              fm[i] = fm[i-1].multiply(BigInteger.valueOf(2*i));
+              BigInteger gcd = fz[i].gcd(fm[i]);
+              fz[i] = fz[i].divide(gcd);
+              fm[i] = fm[i].divide(gcd);
+          }
+      }
+
+      public static void main(String[] args) {
+          init();
+          nCase = cin.nextInt();
+          cin.nextLine();
+          while (nCase-- > 0) {
+              n = cin.nextInt();
+              System.out.println(fz[n] + "/" + fm[n]);
+          }
+      }
+  }
+
+UVALive_6803: |
+  #include <iostream>
+  #include <cstring>
+  #include <cstdio>
+  #include <vector>
+  using namespace std;
+
+  const int MAXN = 20010;
+  int nCase, cCase, n, a[MAXN], sg[MAXN], ans;
+  vector<int> G[MAXN];
+
+  void init() {
+      for (int i = 0; i < MAXN; i++) {
+          G[i].clear();
+      }
+      ans = 0;
+  }
+
+  void input() {
+      scanf("%d", &n);
+      for (int i = 1; i <= n; i++) {
+          scanf("%d", &a[i]);
+      }
+      for (int i = 1; i <= n; i++) {
+          int father;
+          scanf("%d", &father);
+          G[father].push_back(i);
+      }
+  }
+
+  void dfs(int x) {
+      if (G[x].size() == 0) {
+          sg[x] = 0;
+          return;
+      }
+      bool visited[15];
+      memset(visited, false, sizeof(visited));
+      for (int i = 0; i < G[x].size(); i++) {
+          int v = G[x][i];
+          dfs(v);
+          visited[sg[v]] = true;
+      }
+      for (int i = 0; i < 15; i++) {
+          if (!visited[i]) {
+              sg[x] = i;
+              break;
+          }
+      }
+  }
+
+  void solve() {
+      dfs(1);
+      for (int i = 1; i <= n; i++) {
+          if (a[i] % 2 == 0) {
+              ans ^= 0;
+          } else {
+              ans ^= sg[i];
+          }
+      }
+      if (ans) {
+          printf("Case #%d: first\n", ++cCase);
+      } else {
+          printf("Case #%d: second\n", ++cCase);
+      }
+  }
+
+  int main() {
+      scanf("%d", &nCase);
+      while (nCase--) {
+          init();
+          input();
+          solve();
+      }
+      return 0;
+  }
+
+SGU_100: |
+  #include <iostream>
+  using namespace std;
+  int a, b;
+  int main() {
+  	while (cin >> a >> b) {
+  		cout << a + b << endl;
+  	}
+  	return 0;
+  }

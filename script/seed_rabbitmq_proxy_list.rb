@@ -1,5 +1,9 @@
 require 'optparse'
+require 'yaml'
 require_relative '../lib/rigidoj'
+
+solution_source_file = File.open(File.expand_path(File.dirname(__FILE__) + '/solution_source.yml'))
+solution_source = YAML.load(solution_source_file)
 
 opts = OptionParser.new do |o|
   o.banner = "Usage: ruby seed_rabbitmq_proxy_list.rb [options]"
