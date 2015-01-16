@@ -4,10 +4,7 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @problem = Problem.find_by(draft: true, user: current_user)
-    unless @problem
-      @problem = Problem.create(user: current_user, draft: true)
-    end
+    @problem = Problem.new(user: current_user)
     authorize @problem
   end
 

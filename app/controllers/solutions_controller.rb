@@ -21,10 +21,10 @@ class SolutionsController < ApplicationController
   end
 
   def index
-    solution_scope = Solution.submitted
+    solution_scope = Solution
     if params[:problem_id]
       @problem = Problem.find(params[:problem_id])
-      solution_scope = @problem.solutions.submitted
+      solution_scope = @problem.solutions
     end
     @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
   end
@@ -37,7 +37,11 @@ class SolutionsController < ApplicationController
   private
 
   def publish_to_judgers
-    Rigidoj.judger_queue.publish @solution.to_judger.to_msgpack
+    solution_json = BasicSolutionSerializer.new(@solution, root: 'solution').to_json
+    case @problem.judge_type.to_sym
+    when :remote_proxy
+      Rigidoj::judger_proxy_queue.publish solution_json
+    end
   end
 
   def solution_params
