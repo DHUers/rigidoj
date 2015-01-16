@@ -26,4 +26,4 @@
               %td= s.source_length == 0 ? '-' : s.source_length
               %td= s.platform
               %td= link_to s.user.name, s.user
-      = paginate @solutions, window: 3, remote: true
+      = paginate @solutions, window: 3
