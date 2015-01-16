@@ -6,5 +6,5 @@
 %link{:href => SiteSetting.favicon_url, :rel => "shortcut icon", :type => "image/x-icon"}/
 %link{:href => SiteSetting.apple_touch_icon_url, :rel => "apple-touch-icon", :sizes => "256x256"}/
 /[if lt IE 9]
-  <haml:loud> javascript_include_tag &amp;#39;html5shiv&amp;#39; </haml:loud>
+  = javascript_include_tag 'html5shiv'
 = javascript_include_tag 'application', 'data-turbolinks-track' => true
