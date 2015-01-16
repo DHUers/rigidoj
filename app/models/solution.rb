@@ -43,11 +43,6 @@ end
 #  source          :text             default("")
 #  type            :string
 #  report          :text             default("")
-#  solution_hash   :string
 #  solution_status :string           default(""), not null
 #  source_length   :integer          default("0")
-#
-# Indexes
-#
-#  index_solutions_on_solution_hash  (solution_hash)
 #

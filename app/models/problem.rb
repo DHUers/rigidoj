@@ -24,9 +24,34 @@ class Problem < ActiveRecord::Base
     self.baked = add_description_class(PrettyText::cook(self.raw))
   end
 
+  # Separate elements by header tag for better styling
   def add_description_class(html)
     fragment = Nokogiri::HTML.fragment(html)
-    fragment.to_html
+    processed = ''
+    first_header_node = true
+    valid_description_class_names = %w(description
+                                       sample-input
+                                       sample-output
+                                       source)
+    fragment.xpath('./*').each do |node|
+      # Split blocks according to h* tags
+      if %w(h1 h2 h3 h4 h5 h6).include? node.name
+        unless first_header_node
+          processed << "</div>"
+        else
+          first_header_node = false
+        end
+
+        # Try to extract the class name from header tag's text
+        parsed_header_text = node.text.strip.downcase.gsub(' ', '-')
+        class_name = valid_description_class_names.include?(parsed_header_text) ?
+            parsed_header_text : ''
+        processed << "<div class='problem-section #{class_name}'>"
+      end
+
+      processed << node.to_html
+    end
+    processed << '</div>'
   end
 
   def update_index
