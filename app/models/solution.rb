@@ -7,8 +7,6 @@ class Solution < ActiveRecord::Base
   #                        :memory_limit_exceeded, :presentation_error,
   #                        :runtime_error, :compile_error, :output_limit_exceeded]
 
-  scope :submitted, -> { where(draft: false) }
-
   before_validation :hash_solution
   validates_presence_of :source
   validates_presence_of :problem_id
@@ -53,7 +51,6 @@ end
 #  report          :text             default("")
 #  solution_hash   :string
 #  solution_status :string           default(""), not null
-#  draft           :boolean          default("false"), not null
 #  source_length   :integer          default("0")
 #
 # Indexes

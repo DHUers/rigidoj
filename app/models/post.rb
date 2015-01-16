@@ -1,11 +1,17 @@
-class Post < ActiveRecord::Base
-  include Cookable
+require 'pretty_text'
 
+class Post < ActiveRecord::Base
   belongs_to :user
   scope :published, -> { where(published: true) }
 
   validates :title, length: { in: 2..60 }, presence: true
   validates :author, presence: true
+
+  before_save :cook
+
+  def cook
+    self.baked = PrettyText::cook(self.raw)
+  end
 end
 
 # == Schema Information

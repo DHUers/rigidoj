@@ -1,12 +1,13 @@
+require 'pretty_text'
+
 class Problem < ActiveRecord::Base
-  include Cookable
   include Searchable
 
   belongs_to :user
   has_one :problem_search_data
   has_many :solutions
   has_and_belongs_to_many :contests
-  scope :published, -> { where(public: true, draft: false) }
+  scope :published, -> { where(public: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
   mount_uploader :input_file, PlainTextUploader
@@ -16,6 +17,17 @@ class Problem < ActiveRecord::Base
   validates_with ::JudgeTypeValidator
   validates :title, presence: true
   validates :raw, presence: true
+
+  before_save :cook
+
+  def cook
+    self.baked = add_description_class(PrettyText::cook(self.raw))
+  end
+
+  def add_description_class(html)
+    fragment = Nokogiri::HTML.fragment(html)
+    fragment.to_html
+  end
 
   def update_index
     return unless baked_changed? || title_changed?
@@ -52,7 +64,6 @@ end
 #  updated_at              :datetime         not null
 #  public                  :boolean          default("true"), not null
 #  judge_type              :integer          default("0"), not null
-#  draft                   :boolean          default("false"), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
