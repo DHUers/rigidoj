@@ -1,26 +1,30 @@
+= content_for :title, 'Sign up'
+
 .row
   .col-md-offset-1.col-md-10
     %h1 Join RigidOJ
     %p Conquer the problems and win the contests.
 .row
   .col-md-offset-1.col-md-7
+    = render 'shared/error_messages', record: @user
     = form_for @user, html: {role: 'form'} do |f|
       %h2 Create your personal account
       .form-group
         = f.label :username
         = f.text_field :username, class: 'form-control'
-        %p.note This will be your username.
+        = field_describer @user.errors[:username], 'This will be your username.'
       .form-group
         = f.label :email, 'Email Address'
         = f.text_field :email, class: 'form-control'
-        %p.note You will occasionally receive account related emails.
+        = field_describer @user.errors[:email], 'You will occasionally receive account related emails.'
       .form-group
         = f.label :name
         = f.text_field :name, class: 'form-control'
-        %p.note Your full name.
+        = field_describer @user.errors[:name], 'Your full name.'
       .form-group
         = f.label :password
         = f.password_field :password, class: 'form-control'
+        = field_describer @user.errors[:password]
       %p.tos-info
         By clicking on "Create an account" below, you are agreeing to the
         \#{link_to 'Terms of Service'} and the

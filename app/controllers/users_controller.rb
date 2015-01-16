@@ -8,8 +8,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:success] = "Successfully created your account. You can log in now."
       redirect_to login_path
     else
+      flash[:danger] = "There were problems creating your account."
       render 'new'
     end
   end
