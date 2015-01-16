@@ -17,7 +17,7 @@ class Solution < ActiveRecord::Base
   after_save :increment_problem_submission_count
 
   def increment_problem_submission_count
-    self.problem.submission_count += 1
+    self.problem.submission_count += 1 if self.problem
   end
 
   def hash_solution
