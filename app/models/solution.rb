@@ -7,12 +7,10 @@ class Solution < ActiveRecord::Base
   #                        :memory_limit_exceeded, :presentation_error,
   #                        :runtime_error, :compile_error, :output_limit_exceeded]
 
-  before_validation :hash_solution
   validates_presence_of :source
   validates_presence_of :problem_id
   validates_presence_of :user_id
   validates_presence_of :platform
-  validates :solution_hash, uniqueness: true
 
   after_save :increment_problem_submission_count
 
@@ -20,10 +18,6 @@ class Solution < ActiveRecord::Base
     self.problem.submission_count += 1 if self.problem
   end
 
-  def hash_solution
-    self.solution_hash = Digest::SHA1.hexdigest("#{problem_id}:#{user_id}:#{source}")
-  end
-  
   def ace_mode
     case self.platform
       when 'c', 'c++' then 'c_cpp'
