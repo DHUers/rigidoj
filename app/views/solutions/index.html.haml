@@ -19,11 +19,11 @@
         %tbody
           - @solutions.each do |s|
             %tr.row-clickable
-              %td s.updated_at
-              %td s.solution_status
-              %td= link_to p.id, problem_path(p)
-              %td s.time_usage
-              %td
-              %td s.platform
-              %td s.user.name
+              %td= s.updated_at
+              %td= s.solution_status
+              %td= link_to s.problem_id, problem_path(s.problem_id)
+              %td= s.time_usage == 0 ? '-' : s.time_usage
+              %td= s.source_length == 0 ? '-' : s.source_length
+              %td= s.platform
+              %td= link_to s.user.name, s.user
       = paginate @solutions, window: 3, remote: true

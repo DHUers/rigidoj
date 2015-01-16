@@ -21,7 +21,12 @@ class SolutionsController < ApplicationController
   end
 
   def index
-    @solutions = policy_scope(Solution).order(:id).page(params[:page]).per(20)
+    solution_scope = Solution.submitted
+    if params[:problem_id]
+      @problem = Problem.find(params[:problem_id])
+      solution_scope = @problem.solutions.submitted
+    end
+    @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
   end
 
   def show

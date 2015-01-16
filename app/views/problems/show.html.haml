@@ -1,17 +1,19 @@
 - content_for :title, @problem.title
 
 .row
-  .col-md-offset-1.col-md-7
+  .col-md-12
     .page-header
       %h1.problem-title
         = @problem.id
         = @problem.title
+.row
+  .col-md-9
     .problem-body
       = raw @problem.baked
   .col-md-3
     %ul.actions.problem-actions
       %li= link_to 'Submit', new_problem_solution_path(@problem)
-      %li= link_to 'Submitted records', new_problem_solution_path(@problem)
+      %li= link_to 'Submitted records', problem_solutions_path(@problem)
     - if current_user && current_user.staff?
       .divider
       %ul.actions.problem-admin-actions
