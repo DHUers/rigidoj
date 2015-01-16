@@ -10,7 +10,7 @@ class SolutionsController < ApplicationController
 
   def create
     @solution = Solution.new(solution_params.merge({user: current_user}))
-    @solution.problem = Problem.find_by(params[:problem_id])
+    @solution.problem = Problem.find(params[:problem_id])
     @problem = @solution.problem
 
     if @solution.save
