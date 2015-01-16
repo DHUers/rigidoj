@@ -14,6 +14,12 @@ class Solution < ActiveRecord::Base
   validates_presence_of :platform
   validates :solution_hash, uniqueness: true
 
+  after_save :increment_problem_submission_count
+
+  def increment_problem_submission_count
+    self.problem.submission_count += 1
+  end
+
   def hash_solution
     self.solution_hash = Digest::SHA1.hexdigest("#{problem_id}:#{user_id}:#{source}")
   end

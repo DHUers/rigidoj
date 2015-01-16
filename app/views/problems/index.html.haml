@@ -20,6 +20,6 @@
               %td
               %td= link_to p.id, problem_path(p)
               %td= link_to p.title, problem_path(p)
-              %td
-              %td
+              %td= "#{p.accepted_count} / #{p.submission_count}"
+              %td= "#{p.accepted_rate}"
       = paginate @problems, window: 3, remote: true

@@ -18,9 +18,9 @@ class Problem < ActiveRecord::Base
   validates :raw, presence: true
 
   def update_index
-    return unless baked_changed? || title_changed? || source_changed?
+    return unless baked_changed? || title_changed?
 
-    search_data = title << ' ' << Problem.scrub_html_for_search(baked) << ' ' << source
+    search_data = title << ' ' << Problem.scrub_html_for_search(baked)
     Problem.update_search_index 'problem', self.id, search_data
   end
 
@@ -32,6 +32,11 @@ class Problem < ActiveRecord::Base
     Sanitize.clean(blurb)
   end
 
+  def accepted_rate
+    return '-' if self.submission_count == 0
+
+    "#{self.accepted_count / self.submission_count * 100}%"
+  end
 end
 
 # == Schema Information
@@ -42,7 +47,6 @@ end
 #  title                   :string           default(""), not null
 #  raw                     :text             default(""), not null
 #  baked                   :text             default("")
-#  source                  :string           default("")
 #  user_id                 :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
@@ -61,4 +65,6 @@ end
 #  input_file_uuid         :string
 #  output_file_uuid        :string
 #  judger_program_uuid     :string
+#  submission_count        :integer          default("0"), not null
+#  accepted_count          :integer          default("0"), not null
 #
