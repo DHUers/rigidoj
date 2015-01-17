@@ -5,30 +5,38 @@ $(function() {
     remote: {
       url: '/query?include_blurbs=true&search_for_id=true&type_filter=problem&term=%QUERY',
       filter: function(parsedResponse) {
-        var a = $.map(parsedResponse.problems, function(problem) {
+        return $.map(parsedResponse.problems, function(problem) {
           return {
             id: problem.id,
-            value: problem.baked
+            value: "<h1><span>" + problem.id + "</span>" + problem.title + "</h1>" +
+                   "<div class='content'><p>" + problem.description_blurb + "</p></div>"
           }
         });
-        console.log(a);
-        return a;
       }
     },
     datumTokenizer: function(d) {
-      console.log(d);
       return Bloodhound.tokenizers.whitespace(d.val);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace
   });
   engine.initialize();
-  $('#search-add-problem').typeahead({
+
+  var addProblemInputElement = $('#search-add-problem'),
+      problemLists = $('#problem-lists');
+  addProblemInputElement.typeahead({
     hint: true,
     minLength: 1,
     highlight: true
   }, {
     name: 'problem-item',
-    displayKey: 'value',
     source: engine.ttAdapter()
+  }).on('typeahead:selected', function(e, suggestion, name) {
+    addProblemInputElement.val('');
+    var item = "<div class='well "+ name +"' data-problem-id='" + suggestion.id + "'>" +
+               suggestion.value + "</div>";
+    problemLists.append(item);
+  }).on('blur', function() {
+    // typeahead will set query according to value, so nuke it
+    addProblemInputElement.val('');
   });
 });

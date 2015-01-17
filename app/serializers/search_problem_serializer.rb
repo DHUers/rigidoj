@@ -1,3 +1,3 @@
 class SearchProblemSerializer < ActiveModel::Serializer
-  attributes :baked
+  attributes :id, :title, :description_blurb
 end
