@@ -1,40 +1,44 @@
 require 'open-uri'
 require 'nokogiri'
 
+
 class ProblemDownloader::HDUStrategy
+  def problem_params
+    params = {
+        title: @title,
+        raw: content_to_makedown(@raw_content),
+        remote_proxy_vendor: "HDU,#{@id}",
+        default_time_limit: @time_limit[2],
+        default_memory_limit: @memory_limit[2]
+    }
+    params
+  end
+
   def download(context)
-    url = "http://acm.hdu.edu.cn/showproblem.php?pid=#{context.problem_index}"
+    params = {
+        pid: context.problem_index
+    }
+    url = "http://acm.hdu.edu.cn/showproblem.php?#{params.to_query}"
     html = Nokogiri::HTML(open(url))
     raw = html.inner_html.encode('utf-8')
 
-    return '' if raw.include?('No such problem') or raw.include?('Invalid Parameter')
+    return false if raw.include?('No such problem') or raw.include?('Invalid Parameter')
 
-    raw_content = ''
+    @id = context.problem_index
+    @raw_content = ''
     html.css('.panel_title').zip(html.css('.panel_content')).each do |x,y|
       unless y.content == ''
-        raw_content += <<EOF
+        @raw_content += <<EOF
 #{x.content.gsub(/\r?\n/, '')}
 #{y.content.gsub(/\r?\n/, '')}
 EOF
       end
     end
-    title = html.css('h1')[0].content
-    time_limit = /Time Limit: (\d*)\/(\d*)/i.match(raw)
-    memory_limit = /Memory Limit: (\d*)\/(\d*)/i.match(raw)
+    @title = html.css('h1')[0].content
+    @time_limit = /Time Limit: (\d*)\/(\d*)/i.match(raw)
+    @memory_limit = /Memory Limit: (\d*)\/(\d*)/i.match(raw)
 
-    {
-        title: title,
-        raw: content_to_makedown(raw_content),
-        source: "<a href='#{url}' rel='nofollow'>HDU #{html.title}: #{title}</a>",
-        time_limit: {
-            default: time_limit[2],
-            java: time_limit[1]
-        },
-        memory_limit: {
-          default: memory_limit[2],
-          java: memory_limit[1]
-      }
-    }
+    html
   end
 
   private
