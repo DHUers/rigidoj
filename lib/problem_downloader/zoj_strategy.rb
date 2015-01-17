@@ -1,0 +1,3 @@
+class ProblemDownloader::ZOJStrategy
+
+end

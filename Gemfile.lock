@@ -99,6 +99,7 @@ GEM
     excon (0.43.0)
     execjs (2.2.2)
     fabrication (2.12.0)
+    fakeweb (1.3.0)
     fast_xor (1.1.3)
       rake
       rake-compiler
@@ -392,6 +393,7 @@ DEPENDENCIES
   carrierwave
   codeclimate-test-reporter
   fabrication
+  fakeweb
   fast_xor
   fog
   font-awesome-rails

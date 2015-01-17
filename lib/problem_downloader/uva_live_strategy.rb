@@ -1,0 +1,3 @@
+class ProblemDownloader::UVALiveStrategy
+
+end

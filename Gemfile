@@ -70,4 +70,5 @@ group :test do
   gem 'fabrication'
   gem 'shoulda'
   gem 'timecop'
+  gem 'fakeweb'
 end

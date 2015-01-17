@@ -1,4 +1,6 @@
 class ProblemDownloader
+  class NoDownloadStrategy < Exception; end
+
   attr_reader :problem_index
 
   def initialize(oj_name, problem_index, opts={})
@@ -12,11 +14,12 @@ class ProblemDownloader
 
   def set_downloader_strategy
     case @oj_name
-      when :hdu then @downloader = HDUStrategy.new
-      when :poj then @downloader = POJStrategy.new
-      when :uva then @downloader = UVAStrategy.new
-      when :uva_live then @downloader = UVALiveStrategy.new
-      when :zoj then @downloader = ZOJStrategy.new
+    when :hdu then @downloader = HDUStrategy.new
+    when :poj then @downloader = POJStrategy.new
+    when :uva then @downloader = UVAStrategy.new
+    when :uva_live then @downloader = UVALiveStrategy.new
+    when :zoj then @downloader = ZOJStrategy.new
+    else raise NoDownloadStrategy
     end
   end
 

@@ -39,4 +39,21 @@ $(function() {
     // typeahead will set query according to value, so nuke it
     addProblemInputElement.val('');
   });
+
+  // extract problem lists when submit
+  problemLists.closest('form').submit(function() {
+    var additionalLimitGroup = $('.additional-limit-group').map(function(_,v) {
+      var group = $(v),
+          platform = group.find('.platform span').text(),
+          timeLimit = group.find('.time-limit-group input').val(),
+          memoryLimit = group.find('.memory-limit-group input').val();
+      return {
+        platform: platform,
+        timeLimit: timeLimit,
+        memoryLimit: memoryLimit
+      };
+    }).get();
+    $('#problem_additional_limits').val(JSON.stringify(additionalLimitGroup));
+  });
+
 });
