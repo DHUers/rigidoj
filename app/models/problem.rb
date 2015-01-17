@@ -20,6 +20,10 @@ class Problem < ActiveRecord::Base
 
   before_save :cook
 
+  class TextHelper
+    extend ActionView::Helpers::TextHelper
+  end
+
   def cook
     self.baked = add_description_class(PrettyText::cook(self.raw))
   end
@@ -73,6 +77,17 @@ class Problem < ActiveRecord::Base
     return '-' if self.submission_count == 0
 
     "#{self.accepted_count / self.submission_count * 100}%"
+  end
+
+  def description_blurb
+    fragment = Nokogiri::HTML.fragment(self.baked)
+    processed = ''
+    fragment.css('.problem-section.description p').each do |node|
+      processed << node.to_html
+    end
+    cooked = HtmlScrubber.scrub(processed).squish
+    blurb = TextHelper.truncate(cooked, length: 200)
+    Sanitize.clean(blurb)
   end
 end
 

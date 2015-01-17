@@ -1,6 +1,7 @@
 .problem-info.well
   %h1
+    %span= @problem.id
     = @problem.title
   .content
-    = raw @problem.baked
+    %p= @problem.description_blurb
 
