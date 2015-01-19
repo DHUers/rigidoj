@@ -30,32 +30,19 @@ class ProblemDownloader::HDUStrategy
       case title
       when 'Problem Description'
         content.css('br').each { |br| br.replace("\n") }
-        @raw_content << "## Description\n" << content.text.strip.gsub(/\s+$/, "\n") << "\n\n"
+        @raw_content << "## Description\n" << content.text.strip.gsub(/\s+$/, "\n")
+        content.search('img').each {|img| @raw_content << "\n\n" << img.to_html}
+        @raw_content << "\n\n"
       when 'Sample Input', 'Sample Output'
         @raw_content << "## #{title}\n" << content.text.strip.gsub(/^(\S)/, '    \1').gsub(/\r\n|\r|\n/, "\n") << "\n\n"
       else
-        @raw_content << "## #{title}\n" << content.text.strip << "\n\n" unless content.text.empty?
+        @raw_content << "## #{title}\n" << content.text.strip.gsub(/\s+$/, "\n") << "\n\n" unless content.text.empty?
       end
     end
     @title = html.css('h1')[0].content
     @time_limit = /Time Limit: (\d*)\/(\d*)/i.match(raw)
     @memory_limit = /Memory Limit: (\d*)\/(\d*)/i.match(raw)
-    @raw_content << "\n\n## Remote Url" << "[HDU #{@id}: #{@title}](#{url})"
+    @raw_content << "## Remote Url\n\n" << "[HDU #{@id}: #{@title}](#{url})\n"
     html
-  end
-
-  private
-
-  def content_to_makedown(raw)
-    raw = raw.sub(/(\S)input\n/i, "\\1\n\n## Input\n")
-    raw = raw.sub(/(\S)output\n/i, "\\1\n\n## Output\n")
-    raw = raw.sub(/sample input\n/i, "\n\n## Sample Input\n```\n")
-    raw = raw.sub(/sample output\n/i, "\n```\n\n## Sample Output\n```\n")
-    raw = raw.sub(/source\n/i, "\n\n## Source\n")
-    raw = raw.sub(/author\n/i, "\n\n## Author\n")
-    raw = raw.sub(/recommend\n/i, "\n\n## Recommend\n")
-    raw = raw.gsub(/\s+$/, "\n")
-    #raw = raw.gsub(/## Sample Input\n(.*)\n\n##/, "## Sample Input\n```\\1```\n\n##")
-    #raw.gsub(/## Sample Output\n(.*)\n\n##/, "## Sample Output\n```\\1```\n\n##")
   end
 end
