@@ -31,7 +31,10 @@ class ProblemDownloader::HDUStrategy
       when 'Problem Description'
         content.css('br').each { |br| br.replace("\n") }
         @raw_content << "## Description\n" << content.text.strip.gsub(/\s+$/, "\n")
-        content.search('img').each {|img| @raw_content << "\n\n" << img.to_html}
+        content.search('img').each do |img|
+          img_html = img.to_html
+          @raw_content << "\n\n" << img_html.gsub(/src="/, 'src="http://acm.hdu.edu.cn')
+        end
         @raw_content << "\n\n"
       when 'Sample Input', 'Sample Output'
         @raw_content << "## #{title}\n" << content.text.strip.gsub(/^(\S)/, '    \1').gsub(/\r\n|\r|\n/, "\n") << "\n\n"
