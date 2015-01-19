@@ -30,5 +30,10 @@ describe ProblemDownloader do
       expect(problem).not_to be_nil
       expect(problem.valid?).to be_truthy
     end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.new('hdu', 1025).download_and_create_problem
+      expect(problem.raw) == parsed_markdown('hdu_1025')
+    end
   end
 end

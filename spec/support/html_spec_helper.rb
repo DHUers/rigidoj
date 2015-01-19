@@ -11,4 +11,9 @@ module HTMLSpecHelper
     file = File.join("spec", "fixtures", "external_oj_problems", "#{file}.response")
     File.exists?(file) ? File.read(file) : ""
   end
+
+  def parsed_markdown(file)
+    file = File.join("spec", "fixtures", "external_oj_markdown", "#{file}.md")
+    File.exists?(file) ? File.read(file) : ""
+  end
 end

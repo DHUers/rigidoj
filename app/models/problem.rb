@@ -34,6 +34,9 @@ class Problem < ActiveRecord::Base
     processed = ''
     first_header_node = true
     valid_description_class_names = %w(description
+                                       input
+                                       output
+                                       author
                                        sample-input
                                        sample-output
                                        source)
