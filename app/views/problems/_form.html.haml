@@ -47,7 +47,7 @@
   .row
     .col-md-4
       = f.label :judge_type
-      = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparasion'], ['Remote proxy', 'remote_proxy']]), {}, class: 'form-control'
+      = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparasion'], ['Remote proxy', 'remote_proxy']], @problem.judge_type || 'full_text'), {}, class: 'form-control'
 .form-group.judge-source-group{data: {type: 'full_text'}}
   .row
     .col-md-6
