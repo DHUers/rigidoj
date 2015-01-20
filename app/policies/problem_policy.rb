@@ -4,6 +4,10 @@ class ProblemPolicy < ApplicationPolicy
     user && user.staff?
   end
 
+  def import?
+    create?
+  end
+
   def update?
     create?
   end

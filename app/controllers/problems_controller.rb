@@ -4,8 +4,14 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @problem = Problem.new(user: current_user)
+    @problem = Problem.new
     authorize @problem
+  end
+
+  def import
+    @problem = ProblemDownloader.download_and_create_problem(params[:vendor].to_s, params[:id])
+    authorize @problem
+    render 'new'
   end
 
   def create

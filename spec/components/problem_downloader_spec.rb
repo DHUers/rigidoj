@@ -21,18 +21,18 @@ describe ProblemDownloader do
     end
 
     it 'create nil when the problem is not exists' do
-      problem = ProblemDownloader.new('hdu', 0).download_and_create_problem
+      problem = ProblemDownloader.download_and_create_problem('hdu', 0)
       expect(problem).to be_nil
     end
 
     it 'downloads and creates valid problem' do
-      problem = ProblemDownloader.new('hdu', 1025).download_and_create_problem
+      problem = ProblemDownloader.download_and_create_problem('hdu', 1025)
       expect(problem).not_to be_nil
       expect(problem.valid?).to be_truthy
     end
 
     it 'should parsed accordingly' do
-      problem = ProblemDownloader.new('hdu', 1025).download_and_create_problem
+      problem = ProblemDownloader.download_and_create_problem('hdu', 1025)
       expect(problem.raw).to eq parsed_markdown('hdu_1025')
     end
   end

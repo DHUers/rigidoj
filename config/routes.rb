@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :problems do
     resources :solutions
   end
+  post '/problems/import', to: 'problems#import'
   get '/problems/:id/excerpt', to: 'problems#excerpt'
 
   namespace :admin do
