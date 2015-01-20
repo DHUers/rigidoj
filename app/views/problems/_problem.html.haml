@@ -1,4 +1,7 @@
-.problem-info.well
+%button.delete-problem{type: 'button', class: 'close', data: {label: 'Close'}}
+  %span{aria: {hidden: 'true'}}
+    &times;
+.problem-info{data: {'problem-id' => @problem.id}}
   %h1
     %span= @problem.id
     = @problem.title

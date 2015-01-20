@@ -8,6 +8,10 @@ class ProblemPolicy < ApplicationPolicy
     create?
   end
 
+  def excerpt?
+    create?
+  end
+
   def update?
     create?
   end

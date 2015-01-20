@@ -22,7 +22,13 @@ $(function() {
   engine.initialize();
 
   var addProblemInputElement = $('#search-add-problem'),
-      problemLists = $('#problem-lists');
+      problemLists = $('#problem-lists'),
+      appendProblemItem = function(id, name) {
+        $.get("/problems/" + id + "/excerpt", function(data) {
+          problemLists.append('<li class="well ' + name + '">' + data + '</li>');
+        });
+      };
+
   addProblemInputElement.typeahead({
     hint: true,
     minLength: 1,
@@ -32,9 +38,7 @@ $(function() {
     source: engine.ttAdapter()
   }).on('typeahead:selected', function(e, suggestion, name) {
     addProblemInputElement.val('');
-    var item = "<div class='well "+ name +"' data-problem-id='" + suggestion.id + "'>" +
-               suggestion.value + "</div>";
-    problemLists.append(item);
+    appendProblemItem(suggestion.id, name);
   }).on('blur', function() {
     // typeahead will set query according to value, so nuke it
     addProblemInputElement.val('');
@@ -54,6 +58,19 @@ $(function() {
       };
     }).get();
     $('#problem_additional_limits').val(JSON.stringify(additionalLimitGroup));
+  });
+
+  problemLists.sortable({
+    update: function() {
+      $('.problem-info', problemLists).each(function(index, elem) {
+        var $listItem = $(elem),
+            newIndex = $listItem.index();
+
+        // Persist the new indices.
+      });
+    }
+  }).on('click', '.delete-problem', function() {
+    $(this).parent().remove();
   });
 
 });

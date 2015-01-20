@@ -32,6 +32,7 @@ class ProblemsController < ApplicationController
 
   def excerpt
     load_resource
+    render partial: 'problems/problem'
   end
 
   def edit
