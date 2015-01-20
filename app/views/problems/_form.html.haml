@@ -1,3 +1,4 @@
+= render 'shared/error_messages', record: @problem
 .form-group
   %label{:for => "problem-title"} Title
   = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Concise, precise, or at least interesting.'

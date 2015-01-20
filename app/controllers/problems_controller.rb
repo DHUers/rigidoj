@@ -21,6 +21,7 @@ class ProblemsController < ApplicationController
     if @problem.save
       redirect_to @problem
     else
+      flash[:danger] = 'Something wrong when creating problem.'
       render 'new'
     end
   end
@@ -43,6 +44,7 @@ class ProblemsController < ApplicationController
     if @problem.update_attributes(problem_params)
       render @problem
     else
+      flash[:danger] = 'Something wrong when updating problem.'
       render 'edit'
     end
   end
