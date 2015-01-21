@@ -1,4 +1,4 @@
-require 'pretty_text'
+require_dependency 'pretty_text'
 
 class Contest < ActiveRecord::Base
   belongs_to :user
@@ -10,6 +10,7 @@ class Contest < ActiveRecord::Base
   def cook
     self.description_baked = PrettyText::cook(self.description_raw)
   end
+
 end
 
 # == Schema Information

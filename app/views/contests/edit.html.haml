@@ -1,9 +1,15 @@
+- content_for :title, 'Editing ' + @contest.title
+
 .row
-  .col-md-offset-1.col-md-10
-    %h2 Update a contest
+  .col-md-9
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Contest', contests_path
+      %li= link_to @contest.title, contests_path(@contest.id)
+      %li.active Update the contest
 .row
-  .col-md-offset-1.col-md-10
-    = form_for @contest, html: {role: 'form', class: 'form-horizontal'} do |f|
+  .col-md-9
+    = form_for @contest, html: {role: 'form', class: 'contest-form'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Update', class: 'btn btn-warning'
       = button_to 'Cancel', contests_path(params[:id]), class: 'btn btn-default'

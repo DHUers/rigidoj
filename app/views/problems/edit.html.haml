@@ -5,7 +5,7 @@
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Problem', problems_path
-      %li= link_to @problem.id, problems_path(@problem.id)
+      %li= link_to @problem.title, problems_path(@problem.id)
       %li.active Update problem
 .row
   .col-md-9
