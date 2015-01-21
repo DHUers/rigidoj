@@ -1,9 +1,9 @@
 .row
   .col-md-offset-1.col-md-10
-    %h2 Update a post
+    %h2 Update a contest
 .row
   .col-md-offset-1.col-md-10
-    = form_for @post, html: {role: 'form', class: 'form-horizontal'} do |f|
+    = form_for @contest, html: {role: 'form', class: 'form-horizontal'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Update', class: 'btn btn-warning'
-      = button_to 'Cancel', post_path(params[:id]), class: 'btn btn-default'
+      = button_to 'Cancel', contests_path(params[:id]), class: 'btn btn-default'

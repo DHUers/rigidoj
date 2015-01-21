@@ -15,7 +15,10 @@
   .problems
   .row
     .col-md-12
+      = hidden_field_tag :problems, nil, id: 'hidden-problem-list'
       %ul#problem-lists
+        - @contest.problems.each do |p|
+          = render partial: 'problems/problem_item', locals: {removable: true, :@problem => p}
       %input#search-add-problem.form-control{placeholder: 'Search problem', type: 'text'}
 .form-group
   %h3 Time settings

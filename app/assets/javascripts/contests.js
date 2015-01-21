@@ -23,9 +23,9 @@ $(function() {
 
   var addProblemInputElement = $('#search-add-problem'),
       problemLists = $('#problem-lists'),
-      appendProblemItem = function(id, name) {
+      appendProblemItem = function(id) {
         $.get("/problems/" + id + "/excerpt", function(data) {
-          problemLists.append('<li class="well ' + name + '">' + data + '</li>');
+          problemLists.append(data);
         });
       };
 
@@ -36,9 +36,9 @@ $(function() {
   }, {
     name: 'problem-item',
     source: engine.ttAdapter()
-  }).on('typeahead:selected', function(e, suggestion, name) {
+  }).on('typeahead:selected', function(e, suggestion) {
     addProblemInputElement.val('');
-    appendProblemItem(suggestion.id, name);
+    appendProblemItem(suggestion.id);
   }).on('blur', function() {
     // typeahead will set query according to value, so nuke it
     addProblemInputElement.val('');
@@ -46,31 +46,14 @@ $(function() {
 
   // extract problem lists when submit
   problemLists.closest('form').submit(function() {
-    var additionalLimitGroup = $('.additional-limit-group').map(function(_,v) {
-      var group = $(v),
-          platform = group.find('.platform span').text(),
-          timeLimit = group.find('.time-limit-group input').val(),
-          memoryLimit = group.find('.memory-limit-group input').val();
-      return {
-        platform: platform,
-        timeLimit: timeLimit,
-        memoryLimit: memoryLimit
-      };
+    var lists = $('#problem-lists .problem-info').map(function() {
+      return String($(this).data('problem-id'));
     }).get();
-    $('#problem_additional_limits').val(JSON.stringify(additionalLimitGroup));
+    $('#hidden-problem-list').val(JSON.stringify(lists));
   });
 
-  problemLists.sortable({
-    update: function() {
-      $('.problem-info', problemLists).each(function(index, elem) {
-        var $listItem = $(elem),
-            newIndex = $listItem.index();
-
-        // Persist the new indices.
-      });
-    }
-  }).on('click', '.delete-problem', function() {
+  problemLists.sortable();
+  problemLists.on('click', '.delete-problem', function() {
     $(this).parent().remove();
   });
-
 });

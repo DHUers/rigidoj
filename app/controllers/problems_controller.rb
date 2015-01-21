@@ -32,7 +32,7 @@ class ProblemsController < ApplicationController
 
   def excerpt
     load_resource
-    render partial: 'problems/problem', locals: {removable: params[:removeable] == true || true}
+    render partial: 'problems/problem_item', locals: {removable: params[:removeable] == true || true}
   end
 
   def edit

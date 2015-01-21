@@ -6,7 +6,8 @@ class Problem < ActiveRecord::Base
   belongs_to :user
   has_one :problem_search_data
   has_many :solutions
-  has_and_belongs_to_many :contests
+  has_many :contest_problems
+  has_many :contests, through: :contest_problems
   scope :published, -> { where(public: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 

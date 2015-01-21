@@ -3,5 +3,5 @@
     %h2= @contest.title
 .row
   .col-md-offset-1.col-md-10
-    = raw @contest.baked
+    = raw @contest.description_baked
 = link_to 'Edit', edit_contest_path(params[:id])

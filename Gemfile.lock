@@ -89,6 +89,8 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     columnize (0.9.0)
+    composite_primary_keys (8.0.0)
+      activerecord (~> 4.2.0)
     connection_pool (2.1.0)
     crass (1.0.1)
     debug_inspector (0.0.2)
@@ -392,6 +394,7 @@ DEPENDENCIES
   byebug
   carrierwave
   codeclimate-test-reporter
+  composite_primary_keys (~> 8.0.0)
   fabrication
   fakeweb
   fast_xor
