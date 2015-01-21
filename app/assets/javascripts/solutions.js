@@ -11,4 +11,5 @@ $(document).on('page:change', function() {
       selectedValue = 'c_cpp';
     editorContainer.attr('data-mode', 'ace/mode/' + selectedValue);
   });
+
 });

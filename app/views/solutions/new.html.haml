@@ -1,6 +1,14 @@
+- content_for :title, @problem ? 'Submit for ' + @problem.title : 'Submit'
+
 .row
   .col-md-10
-    %h2 Submit
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Problem', problems_path
+      - if @problem
+        %li= link_to @problem.title, problems_path(@problem.id)
+      %li.active Submit new solution
+
 .row
   .col-md-10
     = form_for [@problem, @solution], html: {role: 'form', class: 'solution-form'} do |f|

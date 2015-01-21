@@ -6,9 +6,10 @@
     .col-md-4
       = f.label :platform
       = f.select :platform, platform_select_options, {}, class: 'form-control'
-.form-group
+.form-group.problem-excerpt
+- if @problem
   .well
-    = render partial: 'problems/problem', locals: {removable: false} if @problem
+    = render partial: 'problems/problem', locals: {removable: false}
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |
