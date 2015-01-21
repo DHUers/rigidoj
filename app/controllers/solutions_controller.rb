@@ -10,12 +10,12 @@ class SolutionsController < ApplicationController
 
   def create
     @solution = Solution.new(solution_params.merge({user: current_user}))
-    @solution.problem = Problem.find(params[:problem_id])
+    @solution.problem = Problem.find(solution_params[:problem_id])
     @problem = @solution.problem
 
     if @solution.save
       publish_to_judgers
-      render 'show'
+      redirect_to problem_path(@problem)
     else
       render 'new'
     end
