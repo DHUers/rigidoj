@@ -1,7 +1,16 @@
+- content_for :title, @contest.title
+
 .row
-  .col-md-offset-1.col-md-10
-    %h2= @contest.title
+  .col-md-12
+    .page-header
+      %h1.contest-title= @contest.title
 .row
-  .col-md-offset-1.col-md-10
-    = raw @contest.description_baked
-= link_to 'Edit', edit_contest_path(params[:id])
+  .col-md-9
+    .contest-content
+      = raw @contest.description_baked
+    .contest-problem-list
+      - @contest.problems.each do |p|
+        .well
+          = render partial: 'problems/problem', locals: {:@problem => p, removable: false}
+  .col-md-3
+    = link_to 'Edit', edit_contest_path(params[:id])

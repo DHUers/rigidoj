@@ -15,7 +15,9 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @contests = Contest.all
+    @incoming_contests = Contest.incoming
+    @delayed_contests = Contest.delayed
+    @finished_contests = Contest.finished
   end
 
   def show

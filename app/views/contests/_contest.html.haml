@@ -1,0 +1,11 @@
+= link_to contest_path(@contest) do
+  .contest-content
+    %h2= @contest.title
+    = raw @contest.description_baked
+    .contest-stats
+      .stat-problem-count
+        %strong.contest-stat-count= @contest.problems.count
+        %span.text-muted Problems
+      .stat-people-joined
+        %strong.contest-stat-count
+        %span.text-muted People joined

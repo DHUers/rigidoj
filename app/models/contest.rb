@@ -5,6 +5,12 @@ class Contest < ActiveRecord::Base
   has_many :contest_problems
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
 
+  enum contest_status: [:incoming, :delayed, :finished]
+
+  scope :incoming, -> { where(contest_status: 'incoming') }
+  scope :delayed, -> { where(contest_status: 'delayed') }
+  scope :finished, -> { where(contest_status: 'finished') }
+
   before_save :cook
 
   def cook
