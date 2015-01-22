@@ -10,7 +10,7 @@ class SolutionsController < ApplicationController
 
   def create
     @solution = Solution.new(solution_params.merge({user: current_user}))
-    @solution.problem = Problem.find(solution_params[:problem_id])
+    @solution.problem = Problem.find_(solution_params[:problem_id])
     @problem = @solution.problem
 
     if @solution.save
@@ -41,7 +41,9 @@ class SolutionsController < ApplicationController
     solution_json = BasicSolutionSerializer.new(@solution, root: 'solution').to_json
     case @problem.judge_type.to_sym
     when :remote_proxy
-      Rigidoj::judger_proxy_queue.publish solution_json
+      $rabbitmq_judger_proxy_queue.publish solution_json
+    else
+      $rabbitmq_proxy_queue.publish solution_json
     end
   end
 
