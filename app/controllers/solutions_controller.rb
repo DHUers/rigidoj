@@ -41,8 +41,10 @@ class SolutionsController < ApplicationController
     case @solution.problem.judge_type.to_sym
     when :remote_proxy
       $rabbitmq_judger_proxy_queue.publish solution_json
+      Rails.logger.info "[Rabbitmq] Sent Solution #{@solution.id} to remote proxy queue"
     else
-      $rabbitmq_proxy_queue.publish solution_json
+      $rabbitmq_judger_queue.publish solution_json
+      Rails.logger.info "[Rabbitmq] Sent Solution #{@solution.id} to judge queue"
     end
   end
 

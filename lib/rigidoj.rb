@@ -31,9 +31,21 @@ module Rigidoj
     $rabbitmq_result_queue = $rabbitmq_channel.queue(RESULT_QUEUE_NAME, auto_delete: false)
     $rabbitmq_result_queue.subscribe do |delivery_info, properties, payload|
       Rails.logger.info "[Solution result consumer] #{$rabbitmq_result_queue.name} received a message: #{payload}"
+      resolve_solution_result MultiJson.load(payload)['solution'].symbolize_keys
     end
   rescue Bunny::ChannelAlreadyClosed
     Rails.logger.error "Queue is closed."
   end
 
+  def self.resolve_solution_result(payload)
+    Rails.logger.info "[Solution result payload] #{payload}"
+    solution = Solution.find payload[:id]
+    solution.solution_status = payload[:status]
+    solution.revision = payload[:revision]
+    solution.time_usage = payload[:time_usage]
+    solution.memory_usage = payload[:memory_usage]
+    solution.report = payload[:report] if payload[:report]
+
+    solution.save
+  end
 end

@@ -7,15 +7,28 @@ class Solution < ActiveRecord::Base
   #                        :memory_limit_exceeded, :presentation_error,
   #                        :runtime_error, :compile_error, :output_limit_exceeded]
 
+  default_scope { order('created_at DESC')}
+
   validates_presence_of :source
   validates_presence_of :problem_id
   validates_presence_of :user_id
   validates_presence_of :platform
 
-  after_save :increment_problem_submission_count
+  after_create :increment_problem_submission_count
+  after_save :increment_problem_accepted_count
 
   def increment_problem_submission_count
-    self.problem.submission_count += 1 if self.problem
+    if (problem = self.problem)
+      problem.submission_count += 1
+      problem.save
+    end
+  end
+
+  def increment_problem_accepted_count
+    if (solution_status == 'accept' && problem = self.problem)
+      problem.accepted_count += 1
+      problem.save
+    end
   end
 
   def ace_mode
