@@ -10,12 +10,11 @@ class SolutionsController < ApplicationController
 
   def create
     @solution = Solution.new(solution_params.merge({user: current_user}))
-    @solution.problem = Problem.find_(solution_params[:problem_id])
-    @problem = @solution.problem
+    @solution.problem = Problem.find(params[:problem_id].to_i) unless @solution.problem
 
     if @solution.save
       publish_to_judgers
-      redirect_to problem_path(@problem)
+      redirect_to problem_path(@solution.problem)
     else
       render 'new'
     end
@@ -39,7 +38,7 @@ class SolutionsController < ApplicationController
 
   def publish_to_judgers
     solution_json = BasicSolutionSerializer.new(@solution, root: 'solution').to_json
-    case @problem.judge_type.to_sym
+    case @solution.problem.judge_type.to_sym
     when :remote_proxy
       $rabbitmq_judger_proxy_queue.publish solution_json
     else
