@@ -9,8 +9,8 @@ end
 #
 # Table name: contest_problems
 #
-#  contest_id :integer
-#  problem_id :integer
+#  contest_id :integer          primary key
+#  problem_id :integer          primary key
 #  position   :integer          default("0"), not null
 #
 # Indexes
