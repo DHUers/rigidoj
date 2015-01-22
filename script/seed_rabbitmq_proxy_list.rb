@@ -2,6 +2,8 @@ require 'optparse'
 require 'yaml'
 require_relative '../lib/rigidoj'
 
+Rigidoj.after_fork
+
 solution_source_file = File.open(File.expand_path(File.dirname(__FILE__) + '/solution_source.yml'))
 solution_source = YAML.load(solution_source_file)
 
@@ -15,7 +17,7 @@ end
 opts.parse!
 
 def publish_to_proxy_queue(solution_json)
-  proxy_queue = Rigidoj::judger_proxy_queue
+  proxy_queue = $rabbitmq_judger_proxy_queue
   puts solution_json
   proxy_queue.publish solution_json
 end
