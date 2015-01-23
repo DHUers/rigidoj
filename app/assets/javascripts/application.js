@@ -40,7 +40,7 @@ Rigidoj.MessageBus = window.MessageBus;
 Rigidoj.MessageBus.callbackInterval = 5000;
 Rigidoj.MessageBus.start();
 
-$(function() {
+var ready = function() {
   var notificationBadge = $('#notification-badge'),
       notificationsList = $('#notifications'),
       notificationContainer = $('.notification-container', notificationsList),
@@ -68,4 +68,7 @@ $(function() {
       });
     });
   });
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

@@ -1,4 +1,4 @@
-$(document).on('page:change', function() {
+var ready = function() {
 
   $('#solution_platform').on('change', function() {
     var selectedValue = $(this).val().toLowerCase(),
@@ -12,4 +12,7 @@ $(document).on('page:change', function() {
     editorContainer.attr('data-mode', 'ace/mode/' + selectedValue);
   });
 
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

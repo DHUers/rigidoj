@@ -1,4 +1,4 @@
-$(document).on('page:change', function() {
+var ready = function() {
 
   var initalValue = $('#problem_judge_type').val();
 
@@ -55,4 +55,7 @@ $(document).on('page:change', function() {
   $('').closest('form').submit(function() {
     $('meta[name="csrf-token"]');
   });
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

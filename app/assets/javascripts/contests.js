@@ -1,6 +1,4 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-$(function() {
+var ready = function() {
   var engine = new Bloodhound({
     remote: {
       url: '/query?include_blurbs=true&search_for_id=true&type_filter=problem&term=%QUERY',
@@ -56,4 +54,7 @@ $(function() {
   problemLists.on('click', '.delete-problem', function() {
     $(this).parent().remove();
   });
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
