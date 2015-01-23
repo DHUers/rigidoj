@@ -85,11 +85,13 @@ html.turbolinks-progress-bar::before {
   padding: 0;
 }
 
-.spinner {
+.has-spinner .spinner {
+  display: none;
   font-size: 2.6rem;
   text-align: center;
 }
 
 .has-spinner.active .spinner {
+  display: block;
   cursor: progress;
 }

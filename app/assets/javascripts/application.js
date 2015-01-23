@@ -62,6 +62,7 @@ $(function() {
       }
 
       notificationNumber.removeClass('active');
+      notificationContainer.empty();
       $.each(data, function() {
         notificationContainer.prepend("<li role='presentation'>" + this.data + "</li>");
       });
