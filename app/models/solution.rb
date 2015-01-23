@@ -1,6 +1,7 @@
 class Solution < ActiveRecord::Base
-  belongs_to :user, inverse_of: :solutions
-  belongs_to :problem, inverse_of: :solutions
+  belongs_to :user
+  belongs_to :problem
+  belongs_to :contest
   # enum solution_status: [:draft, :waiting, :queueing, :network_error,
   #                        :judge_error, :other_error, :accept_answer,
   #                        :wrong_answer, :time_limit_exceeded,
@@ -37,6 +38,23 @@ class Solution < ActiveRecord::Base
       else self.platform
     end
   end
+
+  def publish_notification
+    text = "Solution result: #{self.solution_status}"
+    notification_params = {
+        notification_type: 'solution',
+        user: self.user,
+        data: text,
+        solution: self
+    }
+    notification_params[:problem] = self.problem if self.problem
+    notification_params[:contest] = self.contest if self.contest
+    puts notification_params
+    Notification.create!(notification_params)
+
+    MessageBus.publish '/notifications', 1
+  end
+
 end
 
 # == Schema Information

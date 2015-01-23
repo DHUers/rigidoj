@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get '/help', to: 'statics#help', as: :help
 
   get '/query', to: 'search#query'
+  get '/notifications', to: 'notifications#recent'
 
   root to: 'statics#home'
 end

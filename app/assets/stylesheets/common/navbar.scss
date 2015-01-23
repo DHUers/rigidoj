@@ -8,7 +8,7 @@
   font-weight: bold;
 }
 
-.notification-badge {
+.notification-badge-number {
   color: #aaa;
   font-weight: normal;
   background-color: #f7f7f7;
@@ -16,6 +16,12 @@
   border: 1px solid #cccccc;
   border-radius: 2px;
   padding: 2px 10px;
+}
+
+.notification-badge-number.active {
+  color: #fff;
+  background-color: #cc0819;
+  background: linear-gradient(#dd0033, #cc0819);
 }
 
 .nav.navbar-nav .login-btn {

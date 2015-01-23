@@ -13,6 +13,7 @@ module Rigidoj
 
   def self.after_fork
     start_rabbitmq
+    MessageBus.after_fork
   end
 
   def self.start_rabbitmq
@@ -40,12 +41,15 @@ module Rigidoj
   def self.resolve_solution_result(payload)
     Rails.logger.info "[Solution result payload] #{payload}"
     solution = Solution.find payload[:id]
-    solution.solution_status = payload[:status]
-    solution.revision = payload[:revision]
-    solution.time_usage = payload[:time_usage]
-    solution.memory_usage = payload[:memory_usage]
-    solution.report = payload[:report] if payload[:report]
+    solution_params = {
+        solution_status: payload[:status],
+        revision: payload[:revision],
+        time_usage: payload[:time_usage],
+        memory_usage: payload[:memory_usage]
+    }
+    solution_params[:report] = payload[:report] if payload[:report]
+    solution.update_attributes solution_params
 
-    solution.save
+    solution.publish_notification
   end
 end

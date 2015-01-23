@@ -26,6 +26,7 @@
 //= require ace/mode-java
 //= require select2
 //= require typeahead.bundle
+//= require message-bus
 //= require_self
 //= require_tree .
 
@@ -34,3 +35,36 @@ Rigidoj = {};
 hljs.initHighlightingOnLoad();
 Turbolinks.enableTransitionCache();
 Turbolinks.enableProgressBar();
+
+Rigidoj.MessageBus = window.MessageBus;
+Rigidoj.MessageBus.callbackInterval = 5000;
+Rigidoj.MessageBus.start();
+
+$(function() {
+  var notificationBadge = $('#notification-badge'),
+      notificationsList = $('#notifications'),
+      notificationContainer = $('.notification-container', notificationsList),
+      notificationNumber = $('.notification-badge-number', notificationBadge);
+
+  Rigidoj.MessageBus.subscribe("/notifications", function(data) {
+    var number = $('.notification-badge-number', notificationBadge);
+    number.text(parseInt(number.text()) + parseInt(data));
+    notificationNumber.addClass('active');
+  });
+
+  notificationBadge.click(function() {
+    notificationsList.addClass('active');
+
+    $.get('/notifications', function(data) {
+      notificationsList.removeClass('active');
+      if (data === undefined) {
+        return;
+      }
+
+      notificationNumber.removeClass('active');
+      $.each(data, function() {
+        notificationContainer.prepend("<li role='presentation'>" + this.data + "</li>");
+      });
+    });
+  });
+});

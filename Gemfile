@@ -27,6 +27,7 @@ gem 'sidekiq'
 gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
+gem 'message_bus'
 
 gem 'bunny'
 gem 'msgpack'

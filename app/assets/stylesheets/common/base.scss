@@ -85,5 +85,11 @@ html.turbolinks-progress-bar::before {
   padding: 0;
 }
 
-#problem-lists li {
+.spinner {
+  font-size: 2.6rem;
+  text-align: center;
+}
+
+.has-spinner.active .spinner {
+  cursor: progress;
 }

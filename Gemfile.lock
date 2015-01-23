@@ -99,6 +99,7 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
+    eventmachine (1.0.4)
     excon (0.43.0)
     execjs (2.2.2)
     fabrication (2.12.0)
@@ -228,6 +229,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    message_bus (1.0.5)
+      eventmachine
+      rack (>= 1.1.3)
+      redis
     mime-types (2.4.3)
     mini_magick (4.0.2)
     mini_portile (0.6.2)
@@ -419,6 +424,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   librarian
+  message_bus
   mini_magick
   msgpack
   nokogiri
