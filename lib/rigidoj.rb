@@ -13,6 +13,7 @@ module Rigidoj
 
   def self.after_fork
     start_rabbitmq
+    Rails.cache.reconnect
     MessageBus.after_fork
   end
 
