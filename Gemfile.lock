@@ -286,8 +286,22 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     redis (3.2.0)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
     redis-store (1.1.4)
       redis (>= 2.2)
     ref (1.0.5)
@@ -421,6 +435,7 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-html-sanitizer (~> 1.0)
   redis
+  redis-rails
   redis-store
   rmmseg-cpp
   rspec-rails
