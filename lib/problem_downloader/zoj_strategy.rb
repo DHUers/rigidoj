@@ -63,7 +63,7 @@ class ProblemDownloader::ZOJStrategy
     @title = html.css('.bigProblemTitle')[0].content
     @time_limit = /Time Limit: <\/font> (\d*) Seconds/i.match(raw)
     @memory_limit = /Memory Limit: <\/font> (\d*) KB/i.match(raw)
-    @raw_content << "## Remote Url\n\n" << "[ZOJ #{@id}: #{@title}](#{url})\n"
+    @raw_content << "## Remote Url\n" << "[ZOJ #{@id}: #{@title}](#{url})\n"
     html
   end
 end
