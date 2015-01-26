@@ -36,4 +36,28 @@ describe ProblemDownloader do
       expect(problem.raw).to eq parsed_markdown('hdu_1025')
     end
   end
+
+  describe 'ProblemDownloader::ZOJStrategy downloads problem' do
+    before do
+      fake('http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=0', external_oj_response('zoj_not_exists'))
+      fake('http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=3814', external_oj_response('zoj_normal'))
+    end
+
+    it 'create nil when the problem is not exists' do
+      problem = ProblemDownloader.download_and_create_problem('zoj', 0)
+      expect(problem).to be_nil
+    end
+
+    it 'downloads and creates valid problem' do
+      problem = ProblemDownloader.download_and_create_problem('zoj', 3814)
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+    end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.download_and_create_problem('zoj', 3814)
+      expect(problem.title).to eq 'Sawtooth Puzzle'
+      expect(problem.raw).to eq parsed_markdown('zoj_3814')
+    end
+  end
 end
