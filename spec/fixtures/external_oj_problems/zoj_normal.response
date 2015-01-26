@@ -1,0 +1,313 @@
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+        <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+        <meta content="ZOJ is an online judge system maintained by Zhejiang University ACM/ICPC Team. It allows people to solve algorithm problems online." name="description">
+        <meta name="keywords" content="programming, language, algorithm, contest, java, scheme, php, pascal, c, c++, python, perl, online, judge, problem, problemset, acm, zoj, zhejiang, university, zju">
+
+        <title>ZOJ :: Problems :: Show Problem</title>
+        <link rel="stylesheet" href="/onlinejudge/style/zoj.css" type="text/css">
+        <script language="javascript" src="/onlinejudge/js/zoj.js"></script>
+    </head>
+
+    <body id="page" >
+        <div id="container">
+            <div id="header">
+<img src="/onlinejudge/image/banner.jpg" width="770"/></div>
+            <div id="loginbar">
+                
+
+
+
+                <div class="welcome_msg">Welcome to ZOJ</div>
+                <div class="login_info">
+                    
+                        <a href="/onlinejudge/login.do">Login</a> 
+                        
+                        | <a href="/onlinejudge/register.do">Register</a>
+                                            	
+                    
+                    
+                </div>
+
+            </div>
+            <div id="minibar">
+                
+
+
+
+
+
+
+
+
+                <div id="menus">
+                <a  href="/onlinejudge/">Home</a>
+                
+                | <a  href="/onlinejudge/showContests.do">Contests</a>
+                
+                
+                | <a class="selected" href="/onlinejudge/showProblemsets.do">Problems</a>
+                
+                | <a  href="/forum/">Forum</a> 
+                | <a  href="/donation/">Donation</a> 
+                
+                
+                
+                
+                </div>
+
+
+            </div>
+            <table id="main">
+                <tr>
+                <td width="169" height="100%" style="vertical-align:top">
+                    <table id="leftnav" cellspacing="1" height="100%">
+                       
+
+
+
+
+                <tr><td class="nav_header">
+                    <img src="/onlinejudge/image/arrow_sub2.gif"><div><a href="/onlinejudge/showProblemsets.do">Problem Sets</a></div></img>
+                </td></tr>
+                
+                
+                    
+                
+                <tr><td class="item">
+                    <a href="/onlinejudge/problemsetInfo.do?contestId=1">Information</a>
+                </td></tr>
+                <tr><td class="item">
+                    <a href="/onlinejudge/showProblems.do?contestId=1">Select Problem</a>
+                </td></tr>
+                <!--
+                <tr><td class="item">
+                    <a href="/onlinejudge/searchProblem.do?contestId=1">Search Problem</a>
+                </td></tr>
+                -->
+                <tr><td class="item">
+                    <a href="/onlinejudge/showRuns.do?contestId=1">Runs</a>
+                </td></tr>
+                <tr><td class="item">
+                    <a href="/onlinejudge/showRankList.do?contestId=1&from=0&order=AC">Ranklist</a>
+                </td></tr>
+                <!--
+                <tr><td class="item">
+                    <a href="/onlinejudge/clarification.do?contestId=1">Clarification</a>
+                </td></tr>
+                -->
+                
+                   
+                
+                
+
+                <tr><td class="icpc_logo"><img src="/onlinejudge/image/cpc_acm.jpg"/></td></tr>
+
+                    </table>
+                </td>
+                <td id="content" style="vertical-align:top">
+                    
+
+
+
+
+
+
+
+
+
+        
+        
+        <div id="content_title">ZOJ Problem Set - 3814</div>
+        <div id="content_body">
+            <center><span class="bigProblemTitle">Sawtooth Puzzle</span></center>
+            <hr>
+            <center>
+                <font color="green">Time Limit: </font> 10 Seconds
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <font color="green">Memory Limit: </font> 65536 KB
+                
+            </center>
+            <hr>
+            <p>
+Recently, you found an interesting game called <em>Sawtooth Puzzle</em>. This is a single-player game played on a grid with 3 x 3 cells. Each cell contains a part of an image. Besides, each edge of a cell will be either smooth or saw-toothed. Two edge-adjacent cells are considered as <strong>meshed</strong> if their adjacent edges are both saw-toothed.
+</p>
+
+<p>
+The game contains zero or more steps. At each step, the player can choose one cell, rotate it by 90 degrees clockwise. At the beginning of rotation, any cell which is going to rotate will drive other cells to rotate together if they are meshed. Of course, the driven (passive) cell will rotate in the opposite direction against the driver (active) cell. The following image demonstrates the procedure of rotating the middle cell clockwise:
+</p>
+
+<div style="text-align: center;"><img src="showImage.do?name=sawtooth.jpg"></div>
+
+<p>
+Given the initial image and target image of the puzzle, please find out the minimum number of steps needed to solve it.
+</p>
+
+
+<h4>Input</h4>
+
+<p>There are multiple test cases. The first line of input contains an integer <var>T</var> indicating the number of test cases. For each test case:</p>
+
+<p>
+The input data consists of three parts. The first part represents the initial image of the puzzle. It contains 26 lines. Each line has 26 characters (excluding the line break '\n'). The image is composed of 3 x 3 cells. Each cell is a monochrome image of 8 x 8 pixels ('#' for black, '.' for white). These cells are separated by space characters of 1 pixel width.
+</p>
+
+<p>
+The second part represents the target image of the puzzle. It has the same format as which described above.
+</p>
+
+<p>
+The last part contains 9 lines. Each line has 4 integers indicating the edge type (0 for smooth, 1 for saw-toothed) of a cell. The cells are listed in the order of top-left, top-middle, top-right, middle-left, ... , till bottom-right. For each cell, the edge type are given in the order of left, top, right and bottom.
+</p>
+
+<p>
+There is an empty line between any two adjacent parts (including of different cases).
+</p>
+
+<h4>Output</h4>
+
+<p>
+For each test case, output the minimum number of steps needed to solve the puzzle. If there is no solution, output -1 instead.
+</p>
+
+<h4>Sample Input</h4>
+
+<pre>
+1
+......#. ........ ........
+......## ........ ........
+.......# #....... ........
+.......# ##...... ...##...
+.......# ###..... .###....
+.......# ####...# ####....
+.......# ######## ###.....
+.......# ######## ###.....
+                          
+........ ######## ###.....
+.......# ######## ##......
+.....### ######## ##......
+....#### ######## ###.....
+..###### ######## ####....
+######## ######## #####...
+...##### ######## ######..
+........ ######## #######.
+                          
+........ ........ ..######
+........ .....### ........
+........ ######## ........
+........ .####### ........
+........ ...##### ........
+........ .....### ........
+........ .......# ........
+........ ........ ........
+
+......#. ........ ........
+......## ........ ........
+.......# #....... ........
+.......# ##...... ...##...
+.......# ###..... .###....
+.......# ####...# ####....
+.......# ######## ###.....
+.......# ######## ###.....
+                          
+........ ######## ###.....
+.......# ######## ##......
+.....### ######## ##......
+....#### ######## ###.....
+..###### ######## ####....
+######## ######## #####...
+...##### ######## ######..
+........ ######## #######.
+                          
+........ .######. ..######
+........ .#####.. ........
+........ .#####.. ........
+........ ..###... ........
+........ ..###... ........
+........ ..##.... ........
+........ ..##.... ........
+........ ..#..... ........
+
+0 1 0 1
+0 0 1 1
+1 0 0 1
+0 0 1 1
+1 1 1 0
+1 0 1 1
+1 1 1 1
+0 0 1 0
+0 1 1 0
+</pre>
+
+<h4>Sample Output</h4>
+
+<pre>
+6
+</pre>
+
+<h4>Hint</h4>
+
+<p>
+Here is the detailed solution to the sample input: (1,2) (1,2) (1,2) (1,2) (1,3) (3,1).
+</p>
+
+<p>
+This problem comes from an interesting game. You can play it <a href="http://hoshisaga.s3-website-ap-northeast-1.amazonaws.com/hoshi10/index.html">here</a> (Level 2-2).
+</p>
+
+            <hr>
+            
+                Author: <strong>JIANG, Kai</strong><br>
+            
+            
+                Source: <strong>The 2014 ACM-ICPC Asia Mudanjiang Regional First Round</strong><br>
+            
+            
+            <center>
+                <a href="/onlinejudge/submit.do?problemId=5346"><font color="blue">Submit</font></a>
+                
+                &nbsp;&nbsp;
+                <a href="/onlinejudge/showProblemStatus.do?problemId=5346"><font color="blue">Status</font></a>
+                
+                
+            </center>
+        </div>
+        
+
+
+                </td>
+                </tr>
+            </table>
+            <div id="footer">
+                
+
+                <hr width=100%/>
+                <p>Copyright @ 2001-2015, Zhejiang University ACM/ICPC Team, All rights reserved.</p>
+
+            </div>
+        </div>
+    </body>
+</html>
+
+

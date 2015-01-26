@@ -1,0 +1,139 @@
+
+
+
+
+
+
+
+
+    
+    
+                        
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+        <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+        <meta content="ZOJ is an online judge system maintained by Zhejiang University ACM/ICPC Team. It allows people to solve algorithm problems online." name="description">
+        <meta name="keywords" content="programming, language, algorithm, contest, java, scheme, php, pascal, c, c++, python, perl, online, judge, problem, problemset, acm, zoj, zhejiang, university, zju">
+
+        <title>ZOJ :: Problem Sets :: Message</title>
+        <link rel="stylesheet" href="/onlinejudge/style/zoj.css" type="text/css">
+        <script language="javascript" src="/onlinejudge/js/zoj.js"></script>
+    </head>
+
+    <body id="page" >
+        <div id="container">
+            <div id="header">
+<img src="/onlinejudge/image/banner.jpg" width="770"/></div>
+            <div id="loginbar">
+                
+
+
+
+                <div class="welcome_msg">Welcome to ZOJ</div>
+                <div class="login_info">
+                    
+                        <a href="/onlinejudge/login.do">Login</a> 
+                        
+                        | <a href="/onlinejudge/register.do">Register</a>
+                                            	
+                    
+                    
+                </div>
+
+            </div>
+            <div id="minibar">
+                
+
+
+
+
+
+
+
+
+                <div id="menus">
+                <a  href="/onlinejudge/">Home</a>
+                
+                | <a  href="/onlinejudge/showContests.do">Contests</a>
+                
+                
+                | <a class="selected" href="/onlinejudge/showProblemsets.do">Problems</a>
+                
+                | <a  href="/forum/">Forum</a> 
+                | <a  href="/donation/">Donation</a> 
+                
+                </div>
+
+
+            </div>
+            <table id="main">
+                <tr>
+                <td width="169" height="100%" style="vertical-align:top">
+                    <table id="leftnav" cellspacing="1" height="100%">
+                       
+
+
+
+
+                <tr><td class="nav_header">
+                    <img src="/onlinejudge/image/arrow_sub2.gif"><div><a href="/onlinejudge/showProblemsets.do">Problem Sets</a></div></img>
+                </td></tr>
+                
+                <tr><td class="item">
+                        <a href="/onlinejudge/showProblemsets.do">Select Problem Set</a>
+                </td></tr>
+                
+                
+
+                <tr><td class="icpc_logo"><img src="/onlinejudge/image/cpc_acm.jpg"/></td></tr>
+
+                    </table>
+                </td>
+                <td id="content" style="vertical-align:top">
+                    
+
+
+
+
+        <div id="content_title">Message</div>
+        <div id="content_body">
+            
+            
+            <div class="message">
+                No such problem.
+            </div> 
+            
+            <div class="back">
+                <a href="/onlinejudge/showProblemsets.do">Back</a>
+            </div>
+                        
+        </div>
+
+
+
+                </td>
+                </tr>
+            </table>
+            <div id="footer">
+                
+
+                <hr width=100%/>
+                <p>Copyright @ 2001-2015, Zhejiang University ACM/ICPC Team, All rights reserved.</p>
+
+            </div>
+        </div>
+    </body>
+</html>
+
+
