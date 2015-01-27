@@ -18,7 +18,7 @@ class ProblemDownloader::POJStrategy
       id: context.problem_index
     }
     url = "http://poj.org/problem?#{params.to_query}"
-    html = Nokogiri::HTML.fragment(open(url).read.gsub('class="sio"', 'class="ptx"').gsub('<=', '&lt;=').gsub('>=', '&gt;='))
+    html = Nokogiri::HTML(open(url).read.gsub('class="sio"', 'class="ptx"').gsub('<=', '&lt;=').gsub('>=', '&gt;='))
     raw = html.inner_html.encode('utf-8')
 
     return false if raw.include?('Can not find problem') or raw.include?('Error Occurred')
