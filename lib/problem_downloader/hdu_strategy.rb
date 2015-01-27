@@ -45,7 +45,7 @@ class ProblemDownloader::HDUStrategy
     @title = html.css('h1')[0].content
     @time_limit = /Time Limit: (\d*)\/(\d*)/i.match(raw)
     @memory_limit = /Memory Limit: (\d*)\/(\d*)/i.match(raw)
-    @raw_content << "## Remote Url\n\n" << "[HDU #{@id}: #{@title}](#{url})\n"
+    @raw_content << "## Remote Url\n" << "[HDU #{@id}: #{@title}](#{url})\n"
     html
   end
 end
