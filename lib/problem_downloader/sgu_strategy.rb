@@ -59,6 +59,9 @@ class ProblemDownloader::SGUStrategy
 
       fragment = Nokogiri::HTML.fragment(/(?<!input)<\/pre>[\s]*<\/td>[\s]*<td width="400" valign="top" style="border-collapse:collapse; border: 1px black solid;">[\s]*<pre>([\s\S]*?)<\/pre>[\s]*<\/td>[\s]*<\/tr>[\s]*<\/table>/u.match(raw)[1])
       @raw_content << "## Sample Output\n" << fragment.text.strip.gsub(/^/, '    ').gsub(/\r\n|\r|\n/, "\n").gsub(/^    $/, "") << "\n\n"
+    
+      fragment = Nokogiri::HTML.fragment(/<b>Note<\/b><\/div>([\s\S]*?)<br><br><\/div><hr>/s.match(raw)[1])
+      @raw_content << "## Hint\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n\n" unless fragment.text.empty?
     else
       if raw.include?("<title>Saratov State University")
         # info.description = (Tools.regFind(html, "output:\\s*standard[\\s\\S]*?</div><br><br><br>([\\s\\S]*?)<div align = left><br><b>Input</b>"));
@@ -69,11 +72,8 @@ class ProblemDownloader::SGUStrategy
       end
     end
 
-    # if StringUtils.isEmpty(info.input) || StringUtils.isEmpty(info.output)
-    #   info.description = (html.replaceAll("(?i)[\\s\\S]*\\d{3,}\\s*KB\\s*</P>", "").replaceAll("(?i)</?(body|html)>", ""));
-    # end
-    #
-    # info.source = (Tools.regFind(html, "Resource:</td><td>([\\s\\S]*?)\n</td>"));
+    fragment = Nokogiri::HTML.fragment(/Resource:<\/td><td>([\s\S]*?)\n<\/td>/s.match(raw)[1])
+    @raw_content << "## Source\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n\n" unless fragment.text.empty?
 
     @title = /#{@id}[.] ([\s\S]*?)</.match(raw)[1].strip
     @time_limit = /Time limit( per test)?: ([\d\.]*)/i.match(raw)
