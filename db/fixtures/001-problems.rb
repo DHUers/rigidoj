@@ -8,14 +8,12 @@ Problem.seed do |p|
     |Give you two integers A and B, please output A+B.
     |
     |## Sample Input
-    |```
-    |1 2
-    |```
+    |
+    |    1 2
     |
     |## Sample Output
-    |```
-    |3
-    |```
+    |
+    |    3
   END
   p.input_file = 'a'
   p.output_file = 'b'
