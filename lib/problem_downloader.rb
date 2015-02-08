@@ -4,7 +4,8 @@ class ProblemDownloader
       ['poj', POJStrategy],
       ['uva', UVAStrategy],
       ['uva_live', UVALiveStrategy],
-      ['zoj', ZOJStrategy]
+      ['zoj', ZOJStrategy],
+      ['sgu', SGUStrategy]
   ]
   AVAILABLE_STRATEGIES_LIST = AVAILABLE_STRATEGIES.map {|s| [s.first, s.first]}
 

@@ -84,4 +84,28 @@ describe ProblemDownloader do
       expect(problem.raw).to eq parsed_markdown('poj_1095')
     end
   end
+
+  describe 'ProblemDownloader::SGUStrategy downloads problem' do
+    before do
+      fake('http://acm.sgu.ru/problem.php?problem=0', external_oj_response('sgu_not_exists'))
+      fake('http://acm.sgu.ru/problem.php?problem=493', external_oj_response('sgu_normal'))
+    end
+
+    it 'create nil when the problem is not exists' do
+      problem = ProblemDownloader.download_and_create_problem('sgu', 0)
+      expect(problem).to be_nil
+    end
+
+    it 'downloads and creates valid problem' do
+      problem = ProblemDownloader.download_and_create_problem('sgu', 493)
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+    end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.download_and_create_problem('sgu', 493)
+      expect(problem.title).to eq 'Illumination of Buildings'
+      expect(problem.raw).to eq parsed_markdown('sgu_493')
+    end
+  end
 end
