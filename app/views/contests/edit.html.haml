@@ -1,14 +1,14 @@
 - content_for :title, 'Editing ' + @contest.title
 
 .row
-  .col-md-9
+  .col-xs-9
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Contest', contests_path
       %li= link_to @contest.title, contests_path(@contest.id)
       %li.active Update the contest
 .row
-  .col-md-9
+  .col-xs-9
     = form_for @contest, html: {role: 'form', class: 'contest-form'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Update', class: 'btn btn-warning'

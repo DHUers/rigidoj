@@ -1,11 +1,11 @@
 - content_for :title, 'Contest list'
 
 .row
-  .col-md-2.col-md-offset-10
+  .col-xs-2.col-xs-offset-10
     = button_to 'New Contest', new_contest_path, class: 'btn btn-primary', |
       html: {type: 'button'}, method: :get
 .row
-  .col-md-10
+  .col-xs-10
     %ul.list-group.incoming-contests
       %h1 Incoming contests
       - @incoming_contests.each do |c|
@@ -13,7 +13,7 @@
           = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
-  .col-md-10
+  .col-xs-10
     %ul.list-group.incoming-contests
       %h1 Delayed contests
       - @delayed_contests.each do |c|
@@ -21,7 +21,7 @@
           = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
-  .col-md-10
+  .col-xs-10
     %ul.list-group.incoming-contests
       %h1 Finished contests
       - @finished_contests.each do |c|

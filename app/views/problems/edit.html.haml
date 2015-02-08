@@ -1,14 +1,14 @@
 - content_for :title, "Editing #{@problem.title}"
 
 .row
-  .col-md-9
+  .col-xs-9
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Problem', problems_path
       %li= link_to @problem.title, problems_path(@problem.id)
       %li.active Update problem
 .row
-  .col-md-9
+  .col-xs-9
     = form_for @problem, html: {role: 'form', class: 'problem-form'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Update', class: 'btn btn-warning'

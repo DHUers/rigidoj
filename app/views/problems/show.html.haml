@@ -1,16 +1,17 @@
 - content_for :title, @problem.title
 
 .row
-  .col-md-12
+  .col-xs-12
     .page-header
       %h1.problem-title
         = @problem.id
         = @problem.title
 .row
-  .col-md-9
+  .col-xs-9
     .problem-body
-      = raw @problem.baked
-  .col-md-3
+      :preserve
+        #{raw @problem.baked}
+  .col-xs-3
     %ul.actions.problem-actions
       %li= link_to 'Submit', new_problem_solution_path(@problem)
       %li= link_to 'Submitted records', problem_solutions_path(@problem)

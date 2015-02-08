@@ -1,8 +1,8 @@
 .row
-  .col-md-offset-1.col-md-10
+  .col-xs-offset-1.col-xs-10
     %h2 Create a post
 .row
-  .col-md-offset-1.col-md-10
+  .col-xs-offset-1.col-xs-10
     = form_for @post, html: {role: 'form'} do |f|
       = render partial: 'form', locals: { f: f }
       .checkbox

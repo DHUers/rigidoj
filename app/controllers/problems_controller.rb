@@ -19,7 +19,7 @@ class ProblemsController < ApplicationController
     authorize @problem
 
     if @problem.save
-      redirect_to @problem
+      redirect_to 'show'
     else
       flash[:danger] = 'Something wrong when creating problem.'
       render 'new'
@@ -28,6 +28,8 @@ class ProblemsController < ApplicationController
 
   def show
     load_resource
+
+    render 'show'
   end
 
   def excerpt
@@ -43,7 +45,7 @@ class ProblemsController < ApplicationController
     load_resource
 
     if @problem.update_attributes(problem_params)
-      render @problem
+      render 'show'
     else
       flash[:danger] = 'Something wrong when updating problem.'
       render 'edit'

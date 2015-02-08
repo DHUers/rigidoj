@@ -1,5 +1,5 @@
 .row
-  .col-md-3
+  .col-xs-3
     .udcard
       = link_to current_user ? settings_profile_path : @user.avatar.large.url do
         = image_tag @user.avatar.url, alt: 'People avatar'
@@ -18,7 +18,7 @@
         = link_to user_joined_contests_path(@user), class: 'udcard-stat' do
           %strong.udcard-stat-count= @user.user_stat.contests_joined
           %span.text-muted Contests joined
-  .col-md-9
+  .col-xs-9
     %ul.nav.nav-tabs
       %li.active{:role => "presentation"}
         %a{:href => "#"} Home

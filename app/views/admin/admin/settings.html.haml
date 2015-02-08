@@ -8,29 +8,29 @@
         %span.sr-only Close
       = msg
 .row
-  .col-md-2
+  .col-xs-2
     .list-group
       - SiteSetting.category_listings.each do |category|
         = link_to category, admin_settings_path(category),               |
           class: "list-group-item #{active_class_if_category(category)}" |
-  .col-md-10
+  .col-xs-10
     = form_for :settings,                             |
       html: {role: 'form', class: 'form-horizontal'}, |
       method: :put do |f|                             |
       - @settings.each do |s|
         .form-group
           = label_tag s[:setting], s[:setting], class: 'col-md-3 control-label'
-          .col-md-7
+          .col-xs-7
             = text_field_tag s[:setting],       |
               s[:value],                        |
               name: "settings[#{s[:setting]}]", |
               placeholder: s[:default],         |
               class: 'form-control'             |
             %p= s[:description]
-          .col-md-2
+          .col-xs-2
             - if s[:value] != s[:default]
               %button.btn.btn-default{:type => "button"}
                 Restore to default
       .form-group
-        .col-md-offset-3.col-md-9
+        .col-xs-offset-3.col-xs-9
           = f.submit class: 'btn btn-warning'
