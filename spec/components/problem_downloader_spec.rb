@@ -89,6 +89,7 @@ describe ProblemDownloader do
     before do
       fake('http://acm.sgu.ru/problem.php?problem=0', external_oj_response('sgu_not_exists'))
       fake('http://acm.sgu.ru/problem.php?problem=493', external_oj_response('sgu_normal'))
+      fake('http://acm.sgu.ru/problem.php?problem=264', external_oj_response('sgu_normal_1'))
     end
 
     it 'create nil when the problem is not exists' do
@@ -100,12 +101,18 @@ describe ProblemDownloader do
       problem = ProblemDownloader.download_and_create_problem('sgu', 493)
       expect(problem).not_to be_nil
       expect(problem.valid?).to be_truthy
+      problem = ProblemDownloader.download_and_create_problem('sgu', 264)
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
     end
 
     it 'should parsed accordingly' do
       problem = ProblemDownloader.download_and_create_problem('sgu', 493)
       expect(problem.title).to eq 'Illumination of Buildings'
       expect(problem.raw).to eq parsed_markdown('sgu_493')
+      problem = ProblemDownloader.download_and_create_problem('sgu', 264)
+      expect(problem.title).to eq 'Travel'
+      expect(problem.raw).to eq parsed_markdown('sgu_264')
     end
   end
 end

@@ -1,0 +1,59 @@
+                               <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Saratov State University :: Online Contester</title>
+<META content="text/html; charset=windows-1251" http-equiv=Content-Type>
+<META NAME="keywords" CONTENT="???">
+<META NAME="description" CONTENT="???">
+<meta name="google-site-verification" content="YvG5TvZLtlRLnK2EX22Dz815tDU7UKdDeXE_yJQp3cQ" />
+<meta name="verify-v1" content="MCzwwWrZt7qOC1A2HZusdjMbXjHR+zXtTCKpx2CRSEU=" />
+
+  <link rel="stylesheet" href="/templates.css" type="text/css">
+  <link rel="stylesheet" href="/js/ui.datepicker.css" type="text/css">
+  <script type="text/javascript" language="javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" language="javascript" src="/js/jquery.example.js"></script>
+  <script type="text/javascript" language="javascript" src="/js/ui.datepicker.js"></script>
+
+  <link rel="stylesheet" href="templates.css" type="text/css">
+  <link rel="stylesheet" href="js/ui.datepicker.css" type="text/css">
+  <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" language="javascript" src="js/jquery.example.js"></script>
+  <script type="text/javascript" language="javascript" src="js/ui.datepicker.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript"> 
+    /*Load jQuery if not already loaded*/ if(typeof jQuery == 'undefined'){ document.write("<script type=\"text/javascript\"   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\"></"+"script>"); var __noconflict = true; } 
+    var IE6UPDATE_OPTIONS = {
+        icons_path: "http://static.ie6update.com/hosted/ie6update/images/"
+    }
+</script>
+<script type="text/javascript" src="http://static.ie6update.com/hosted/ie6update/ie6update.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="style-1024.css" type="text/css">
+</head>      <body bgcolor=#F3F6F9 style = 'font-size : 9pt;' text=#000000 link=#336699 vlink=#336699 alink=#336699><div align="center">
+    <div align=center><h4>264. Travel
+</h4></div><div align=center>time limit per test: 1 
+ sec.<br>memory limit per test: 65536
+ KB</div><div align=center>input: standard<br>output: standard</div><br><br><br><div align = left>Travel agency decides to make a summer trip to Petrozavodsk for its best clients. N men and N women were selected to take part in this trip. There are N cars in the travel agency and in each car there are exactly two places for passengers, and one for driver. The head of the customer service of agency decided to place one man and one woman in each car, that's why they decided to ask customers to prepare their preference lists. 
+<br>The preference list for each person is a list of persons of opposite sex in order from best to worst. So, each man lists all women in the order of preference, and vice versa.
+<br>Suppose we've assigned woman and men in such a way that each man has got exactly one woman and each woman has got exactly one man. We'll call this situation a 'perfect assignment'. 
+<br>If in a perfect assignment there is a pair of man and woman not assigned to each other and they prefer each other to the current partners, this pair is called 'unstable'. Given men and women preference lists, you should create a perfect assignment without unstable pairs.
+</div><div align = left><br><b>Input</b></div><div align = left>First line of input file contains one number N (1 &lt;= N &lt;= 800). The following N lines contain men preference lists in the form: &lt;man&gt; &lt;woman1&gt; ... &lt;womanN&gt;. 
+<br>The following N lines contain woman preference lists in the form: &lt;woman&gt; &lt;man1&gt; ... &lt;manN&gt;. Names consist of lowercase and uppercase English letters with length no more than 10 characters. 
+<br>It's guaranteed that there are exactly N distinct man names and N distinct woman names in the input file.
+</div><div align = left><br><b>Output</b></div><div align = left>First line on output file should be 'YES' if requested assignment exists and 'NO' otherwise. If the answer is 'YES', you should output the requested assignment - N lines with pairs &lt;man&gt; &lt;woman&gt; in any order. If multiple solutions exist, you can choose any one of them.
+</div><div align = left><br><b>Sample test(s)</b></div><div align = left><br>Input</div><div align = left><font face='Courier New'></div><div align = left><pre></div><div align = left>3
+<br>Vasya Anna Elena Katya
+<br>Petya Elena Anna Katya
+<br>Egor Anna Elena Katya
+<br>Anna Petya Vasya Egor
+<br>Elena Vasya Petya Egor
+<br>Katya Vasya Petya Egor
+</div><div align = left></pre></div><div align = left></font></div><div align = left><br>Output</div><div align = left><font face='Courier New'></div><div align = left><pre></div><div align = left>YES
+<br>Vasya Anna
+<br>Petya Elena
+<br>Egor Katya
+</div><div align = left></pre></div><div align = left></font></div><div align = left><br><b>Note</b></div><div align = left>This problem has huge tests. Some read/write routines work very slow in several compilers (especially, C/C++: try to use getc() putc() functions to avoid IO troubles). 
+</div><div align = left><div align = right> <a href = 'submit.php?problem=264'>[submit]</a> </div></div><div align = left><div align = right> <a href = 'forum.php?contest=0&problem=264'>[forum]</a> </div></div><div align = left><hr></div><table align=left cellspacing=7><tr><td>Author:</td><td>Roman V. Alekseenkov
+</td></tr><tr><td>Resource:</td><td>Saratov SU Contest: Golden Fall 2004
+</td></tr><tr><td>Date:</td><td>October 2, 2004
+</td></tr></table><br><br><br><br><br><br><br><br><br><br><br><table width=100% class=tb cellpadding=0 cellspacing=0><tr><td><table width=100% cellspacing=1 ><tr><td bgcolor=#FFFFFF> <table width=100% cellpadding=0 cellspacing=0 border=0><tr style='background-color : #FFFFFF;'><td align=left>Server time: 2015-02-09 05:53:14</td><td align=right><a target=_top href='mailto:acm@sgu.ru'>Online Contester</a> Team &copy; 2002 - 2015. All rights reserved.</td></tr></table></td></tr></table></td></tr></table></div></body></html> 
