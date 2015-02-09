@@ -5,7 +5,12 @@ class ProblemDownloader
       ['uva', UVAStrategy],
       ['uva_live', UVALiveStrategy],
       ['zoj', ZOJStrategy],
-      ['sgu', SGUStrategy]
+      ['sgu', SGUStrategy],
+      ['spoj', SPOJStrategy],
+      ['codeforces', CodeforcesStrategy],
+      ['aizu', AIZUStrategy],
+      ['codeforces_gym', CodeforcesGymStrategy],
+      ['ural', URALStrategy]
   ]
   AVAILABLE_STRATEGIES_LIST = AVAILABLE_STRATEGIES.map {|s| [s.first, s.first]}
 
@@ -15,7 +20,7 @@ class ProblemDownloader
 
   def initialize(oj_name, problem_index, opts={})
     @oj_name = oj_name.downcase.to_s
-    @problem_index = problem_index.to_i
+    @problem_index = problem_index.to_s
     @downloader = nil
     @opts = opts || {}
 

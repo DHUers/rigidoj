@@ -1,0 +1,534 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+
+<title>SPOJ.com - Problem SEQPAR2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" id="metatag">
+<META NAME="Keywords" CONTENT="programming, language, algorithm, spoj, contest, contester, Java, C#, Pascal, C, C++, python, ruby, caml, ocaml, perl, haskell, lisp, prolog, fortran, assembler, asembler, functional, online, judge, problem, problemset, ACM">
+
+<link href="//www.spoj.com/gfx/favicon.png" rel="shortcut icon" type="image/x-icon">
+<link href="/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed">
+<link href="//www.spoj.com/themes/common.css" rel="stylesheet" type="text/css" id="theme">
+<link href="/style.css" rel="stylesheet" type="text/css" id="theme">
+<link href="//www.spoj.com/themes/tooltips.css" rel="stylesheet" type="text/css" id="theme">
+<script type='text/javascript' src='//www.spoj.com/gfx/jquery.js'></script>
+<script type="text/javascript" src="//www.spoj.com/gfx/jquery.timers.js"></script>
+<script type="text/javascript" src="//www.spoj.com/gfx/jquery.cookie.js"></script> 
+<!--
+<meta property="og:description" content="SPOJ (Sphere Online Judge) is an online judge system with over 100,000 registered users and over 10000 problems. The solution to problems can be submitted in over 40 languages including C, C++, Java, Python, C#, Go, Haskell, Ocaml, and F#. SPOJ has a rapidly growing problem set/tasks available for practice 24 hours/day, including many original tasks prepared by the community of expert problem setters associated with the project."/>
+<meta name="description" content="SPOJ (Sphere Online Judge) is an online judge system with over 100,000 registered users and over 10000 problems. The solution to problems can be submitted in over 40 languages including C, C++, Java, Python, C#, Go, Haskell, Ocaml, and F#. SPOJ has a rapidly growing problem set/tasks available for practice 24 hours/day, including many original tasks prepared by the community of expert problem setters associated with the project."/>
+-->
+<style type="text/css">
+<!--
+.maintable {width: 1055;} 
+-->
+</style>
+<script type="text/javascript" language="javascript">
+<!--
+function UnCryptMailto(s) {
+	var n=0;
+	var r="";
+	for(var i=0;i<s.length;i++) {		
+		n=s.charCodeAt(i); 
+		if (n>=8364) {n = 128;}
+		r += String.fromCharCode(n+(2));	
+	}
+	return r;
+}
+function linkTo_UnCryptMailto(s)	{
+	location.href=UnCryptMailto(s);
+}
+// -->
+</script>
+
+<script type="text/javascript">
+function recordOutboundLink(link, category, action) {
+  try {
+    var pageTracker=_gat._getTracker("UA-XXXXX-X");
+    pageTracker._trackEvent(category, action);
+    setTimeout('document.location = "' + link.href + '"', 100)
+  }catch(err){}
+}
+</script>
+
+    <script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shBrushCpp.js"></script>
+	<script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shBrushPhp.js"></script>
+    <script type="text/javascript" src="/gfx/SyntaxHighlighter/scripts/shBrushPython.js"></script>
+	<link type="text/css" rel="stylesheet" href="/gfx/SyntaxHighlighter/styles/shCore.css"/>
+	<link type="text/css" rel="stylesheet" href="/gfx/SyntaxHighlighter/styles/shThemeDefault.css"/>
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+	
+
+		<meta property="og:title" content="SPOJ.com - Problem SEQPAR2"/>
+    	<meta property="fb:app_id"      content="321676846207" />
+	<meta property="og:type" content="spoj-pl:problem"/>
+	<meta property="og:url" content="http://www.spoj.com/problems/SEQPAR2/"/>
+	<meta property="og:image" content="http://www.spoj.com/gfx/logo-cr.png"/>
+	<meta property="og:description" content="Given a sequence of N ordered pairs of positive integers (Ai, Bi), you have to 
+
+partition it into several contiguous parts. Let p be the number of these parts, whose boundaries are 
+
+(l1, r1), (l2, r2), ... ,(lp, 
+
+rp), which satisfy li = ri-1 + 1, li 
+
+&lt;= ri, l1 = 1, rp = n. The parts t..."/>
+<meta name="description" content="Given a sequence of N ordered pairs of positive integers (Ai, Bi), you have to 
+
+partition it into several contiguous parts. Let p be the number of these parts, whose boundaries are 
+
+(l1, r1), (l2, r2), ... ,(lp, 
+
+rp), which satisfy li = ri-1 + 1, li 
+
+&lt;= ri, l1 = 1, rp = n. The parts t..."/>
+		<meta property="og:site_name" content="spoj.com"/>
+
+</head>
+<body>
+<center>
+
+
+
+<table cellpadding="10" cellspacing="0" class="maintable" id="maintable">
+<tr>
+    <td colspan="2" class="header">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+		<td class="headerleft"/>
+		<td class="headercenter">
+<h1><img alt="Sphere Online Judge" title="Sphere Online Judge" src="/gfx/sphere-spoj-small.png" border=0 style="margin-top:-4px;margin-bottom:-4px"></h1>
+		</td>
+		<td class="headerright"/>
+	</tr>
+	</table>
+    </td>
+</tr>
+<tr><td class="menu" width="92" valign="top">
+
+	
+<div class="section">
+	
+<form name="login"  action="https://www.spoj.com/problems/SEQPAR2/" method="post" 
+onsubmit="if(0&&document.login.ssl.checked) document.login.action='https://www.spoj.com/problems/SEQPAR2/'" style="margin-bottom: 18px"> 
+User: <input name="login_user" type="text" style="width: 85px;" class="form"><BR>
+Password: <input name="password" type="password" style="width: 85px;" class="form"><BR>
+<div style="font-size: 10px; ">
+<script language="javascript" type="text/javascript">
+<!--
+    //document.write('<input type="checkbox" name="ssl" id="ssl" /><label for="ssl">secure</label><br/>');
+//-->
+</script>
+<div title="Keep me signed in for today">
+<input type="checkbox" name="autologin" value="1" id="autologin" /><label for="autologin">for today</label>
+</div>
+<!--Keep me signed in for today-->
+</div>
+<input name="submit" type="submit" value="Log In" class="button" style="width: 85px; margin-bottom: 10px;">
+
+</form>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	if( $.cookie('ssl') == '1' ){
+		$("#ssl").attr('checked', true);
+	}
+	$("#ssl").change(function(){
+		if($(this).is(':checked')){
+			$.cookie('ssl', '1');
+		} else {
+			$.cookie('ssl', '0');
+		}
+	});
+});
+</script>
+
+</div>
+<div class="menucmd"><a href="/register">register</a><br><a href="/tutorials">tutorials</a><br><br><a href="/status">status</a><br><a href="/submit">submit</a><br><a href="/problems/classical/">problems</a><br><a href="/search">search</a><br><a href="http://ideone.com">ideone.com</a><br><br><a href="/">news</a><br><a href="/contests">contests</a><br><a href="/ranks/">ranks</a><br><br><a href="/forum">forum</a><br><a href="/tools">tools</a><br><a href="/clusters">clusters</a><br><a href="/credits">credits</a><br><a href="http://spoj.com/embed/jobs">jobs</a><br><hr></div><a href="/problems/classical/"></a><br>
+
+
+	<div class="time">
+Server time:</div>
+<div class="time">
+2015-02-09
+<br>
+<b>09 : 48 : 05</b>
+</div>
+
+</td><td style="width: 748px; padding:0px;" valign="top" class="content0">
+        <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+                <td style="padding:0px;" colspan="2"><center>
+                                
+                </center></td>
+        </tr>
+        <tr>
+                <td class="content" width="99%" style="padding: 10px"><script type='text/javascript' src='/gfx/jquery.bgiframe.js'></script>
+<script type='text/javascript' src='/gfx/jquery.tooltip.js'></script>
+<script type='text/javascript' src='/gfx/jquery.cxhelp.js'></script>
+
+
+
+ <!-- wykorzystywane w pcontent.html (by wiele) -->
+
+<table class="problems" width="100%">
+<tr class="navigation">
+<td><a href="/submit/SEQPAR2/">Submit</a></td>
+<td><a href="/status/SEQPAR2/">All submissions</a></td>
+<td><a href="/ranks/SEQPAR2/">Best solutions</a></td>
+<td><a href="/problems/SEQPAR2.ps">PS</a></td>
+<td><a href="/problems/SEQPAR2.pdf">PDF</a></td>
+<td><a href="/problems/classical/">Back to list</a></td>
+</tr>
+</table>
+
+<div class="prob" style="position: relative">
+
+<!-- google_ad_section_start -->
+<!-- plik z pomoca kontekstowa (cxhelp_*) dziedziczony po pindex.html -->
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-4453360425583535"
+     data-ad-slot="1073332635"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br/><br/>
+
+<div style="position: absolute;">
+<div class="fb-like" data-href="http://www.spoj.com/problems/SEQPAR2/" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false"></div>
+</div>
+<div style="position: absolute; right: 0px">
+<!-- Place this tag where you want the +1 button to render -->
+<g:plusone size="tall"></g:plusone>
+<!-- Place this render call where appropriate -->
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+</div>
+
+<script type="text/javascript">
+<!--
+var AScgiloc = 'http://www.imathas.com/imathas/filter/graph/svgimg.php';
+var AMTcgiloc = "/files/gif/";
+-->
+</script>
+
+<table width="100%" style="margin-top:10px">
+<tr>
+	<td>
+		<h2>SPOJ Problem Set (classical)</h2>
+				<h1>1748. Sequence Partitioning II</h1>
+		<h2>Problem code: SEQPAR2</h2>
+	</td>
+	</tr>
+</table>
+
+<p align="justify">
+<p>Given a sequence of <i>N</i> ordered pairs of positive integers (<i>A<sub>i</sub></i>, <i>B<sub>i</sub></i>), you have to 
+
+partition it into several contiguous parts. Let <i>p</i> be the number of these parts, whose boundaries are 
+
+(<i>l</i><sub>1</sub>, <i>r</i><sub>1</sub>), (<i>l</i><sub>2</sub>, <i>r</i><sub>2</sub>), ... ,(<i>l<sub>p</sub></i>, 
+
+<i>r<sub>p</sub></i>), which satisfy <i>l<sub>i </sub></i>=<i> r<sub>i-</sub></i><sub>1 </sub>+ 1, <i>l<sub>i 
+
+</sub></i>&lt;=<i> r<sub>i</sub></i>, <i>l</i><sub>1<i> </i></sub>= 1, <i>r<sub>p </sub></i>= <i>n</i>. The parts themselves 
+
+also satisfy the following restrictions:</p><ol><li><p>For any two pairs (<i>A<sub>p</sub></i>, <i>B<sub>p</sub></i>), 
+
+(<i>A<sub>q</sub></i>,<i> B<sub>q</sub></i>), where (<i>A<sub>p</sub></i>,<i> B<sub>p</sub></i>) is belongs to the 
+
+<i>T<sub>p</sub></i>th part and (<i>A<sub>q</sub></i>, <i>B<sub>q</sub></i>) the <i>T<sub>q</sub></i>th part. If 
+
+<i>T<sub>p</sub> </i>&lt;<i> T<sub>q</sub></i>, then <i>B<sub>p </sub></i>><i> A<sub>q</sub></i>.</p></li><li><p>Let 
+
+<i>M<sub>i</sub></i> be the maximum <i>A</i>-component of elements in the <i>i</i>th part, say<p><i>M<sub>i</sub></i> = max
+
+{<i>A<sub>l<sub>i</sub></sub></i>, 
+
+<i>A<sub>l<sub>i+</sub></sub></i><sub><sub>1</sub></sub>, ..., <i>A<sub>r<sub>i</sub></sub></i>}, 1 &lt;= <i>i</i> &lt;= 
+
+<i>p</i><p>it is provided that</p><p><img src="../../content/crazyb0y:SEQPAR2_1.bmp"><br> 
+
+where Limit is a given integer.</p></li></ol><p>Let <i>S<sub>i</sub></i> be the sum of <i>B</i>-components of elements 
+
+in the <i>i</i>th part. <p>Now I want to minimize the value</p><p>max{<i>S<sub>i</sub></i>:1 &lt;= <i>i</i> &lt;= 
+
+p} <p>Could you tell me the minimum?
+
+<h3>Input</h3>
+<p>The input contains exactly one test case. The first line of input contains two positive integers N (N &lt;= 50000), Limit 
+
+(Limit &lt;= 2<sup>31</sup>-1). Then follow N lines each contains a positive integers pair (<i>A</i>, <i>B</i>). It's always 
+
+guaranteed that<p> max{<i>A</i><sub>1</sub>, <i>A</i><sub>2</sub>, ..., <i>A<sub>n</sub></i>} &lt;= Limit<br><img 
+
+src="../../content/crazyb0y:SEQPAR2_2.bmp">
+
+<h3>Output</h3>
+<p>Output the minimum target value.
+
+<h3>Example</h3>
+
+<pre>
+<b>Input:</b>
+4 6
+4 3
+3 5
+2 5
+2 4
+
+<b>Output:</b>
+9
+
+</pre>
+<h3>Explanation</h3>
+<p>An available assignment is the first two pairs are assigned into the first part and the last two pairs are assigned into 
+
+the second part. Then <i>B</i><sub>1</sub> > <i>A</i><sub>3</sub>, <i>B</i><sub>1</sub> > <i>A</i><sub>4</sub>, 
+
+<i>B</i><sub>2</sub> > <i>A</i><sub>3</sub>, <i>B</i><sub>2</sub> > <i>A</i><sub>4</sub>, max{<i>A</i><sub>1</sub>, 
+
+<i>A</i><sub>2</sub>}+max{<i>A</i><sub>3</sub>, <i>A</i><sub>4</sub>} &lt;= 6, and minimum max
+
+{<i>B</i><sub>1</sub>+<i>B</i><sub>2</sub>, <i>B</i><sub>3</sub>+<i>B</i><sub>4</sub>}=9.
+
+<hr>
+<table border=0 cellspacing=0 cellpadding=0 align=left style="margin-bottom:10px" class="probleminfo">
+<tr><td>Added by:</td><td><a href="/users/crazyb0y">Bin Jin</a></td></tr>
+<tr><td>Date:</td><td>2007-08-28</td></tr>
+<tr><td>Time limit:</td><td>0.109s-1.574s</td></tr>
+<tr><td>Source limit:</td><td>50000B</td></tr>
+<tr><td>Memory limit:</td><td>1536MB</td></tr>
+	<tr>
+		<td>Cluster:</td>
+		<td>
+							<a href="/clusters/" target="_blank">Cube (Intel Pentium G860 3GHz)</a>
+					
+		</td>
+	</tr>
+<tr><td>Languages:</td><td>All except: C++ 4.9 SCM chicken </td></tr>
+<tr><td>Resource:</td><td>POJ Monthly--2007.07.08</td></tr>	
+</table>
+<!-- google_ad_section_end -->
+
+<div id="ccontent">
+<!-- google_ad_section_start -->
+
+<hr style="clear:both;"/>
+
+<a id="comments"></a>
+<table id="comments_table" width="100%">
+	
+</table>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function getCookieVal (offset) {
+        var endstr = document.cookie.indexOf (";", offset);
+        if (endstr == -1) { 
+                endstr = document.cookie.length; 
+        }
+        return unescape(document.cookie.substring(offset, endstr));
+}
+
+function GetCookie (name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg) {
+      return getCookieVal (j);
+      }
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) break; 
+    }
+  return null;
+}
+
+function toggleComments() {
+        var a = document.getElementById('comments_table');
+        var d = a.style.display;
+        if( d == "" || d == "block" ){
+                d = "none";
+                document.getElementById('comments_sh').innerHTML = 'show';
+        } else {
+                d = "block";
+                document.getElementById('comments_sh').innerHTML = 'hide';
+        }
+        a.style.display = d;
+        document.cookie="comments_table="+d+"; path=/;";
+}
+
+if( GetCookie('comments_table') == 'none' ){
+        document.getElementById('comments_sh').innerHTML = 'show';
+        document.getElementById('comments_table').style.display = 'hide';
+}
+
+-->
+</script>
+
+
+<!-- google_ad_section_end -->
+</div>
+<table width="100%">
+        </table>
+
+</div>
+        </td>
+<tr>
+        <td style="padding:0px" colspan="2"><center>
+                
+</center></td>
+</tr>
+</table>
+</td>
+
+
+<td width="200" class="fun"><div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- spoj_all_300x600_right -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-4453360425583535"
+     data-ad-slot="7259467035"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div>
+<style>
+.fun{
+        vertical-align: top;
+}
+.fun > div.fixed{
+        top: 10px;
+        position: fixed;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	if ($('.fun>div').height() == 0){
+		_gaq.push(['_trackEvent', 'ads', 'adblock']);
+		$(".freelancer_728").show();
+	}
+});
+</script>
+</td>
+
+
+</tr>
+
+<tr>
+<td colspan="2" class="footer">
+<div class="a-footer"></div>
+<script language="javascript" type="text/javascript">
+<!--
+function swapSheet(sheet, caller) {
+    document.getElementById('theme').href=sheet;
+    document.cookie="css_0="+sheet+"; path=/;";
+    caller.href="#bottom";
+}
+
+function setWidth(w, caller) {
+    document.getElementById('maintable').style.width=w;
+    document.cookie="res="+w+"; path=/;";
+    caller.href="#bottom";
+}
+
+
+
+//-->
+
+</script>
+        <table width="100%">
+    <tr>
+	<td align="left" width=10% class="cfooter">
+	<a href="/info/">About SPOJ</a>
+	</td>
+	<td align="center" class="cfooter">
+	    width:
+	    <a href="/?rsl=855px"  onClick="setWidth('855px', this)">900</a>
+	    <a href="/?rsl=980px"  onClick="setWidth('980px', this)">1024</a>
+	    <a href="/?rsl=100%" onClick="setWidth('100%', this)">Full</a>
+	    &nbsp;&nbsp;
+	    theme:
+	    <a href="/?css=/themes/skin1.css" onClick="swapSheet('/themes/skin1.css', this)">olive</a>
+	    <a href="/?css=/themes/skin2.css" onClick="swapSheet('/themes/skin2.css', this)">banana</a>
+	    <a href="/?css=/themes/skin3.css" onClick="swapSheet('/themes/skin3.css', this)">plum</a>
+	    <a href="/?css=/themes/hspl.css" onClick="swapSheet('/themes/hspl.css', this)">hspl</a>
+	</td>
+		<td align="center" class="cfooter">
+		 <span title="The discussion channel of the Sphere Online Judge community.">
+		 <a href="irc://irc.freenode.net/spoj"><b>#spoj</b> at freenode</a>
+		 </span>
+	</td>
+		<td width=10% class="cfooter" style="text-align:right">
+		<a href="/rss/" ><img src="/gfx/rss10x10.gif" border=0>&nbsp;RSS</a>&nbsp;
+	</div>
+	</td>
+    </tr>
+    </table>
+    </tr></table>
+</center>
+<div class="a-header"></div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=321676846207";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--<div id="fb-root"></div>
+<script src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>-->
+
+
+<div style="font-size:10px; margin-top:4px; color: rgb(85,80,95); text-align: center">
+	&copy; Spoj.com. All Rights Reserved. Spoj uses <a href="http://sphere-engine.com" style="color:black">Sphere Engine</a>&trade; &copy; by <a href="http://sphere-research.com" style="color:black">Sphere Research Labs</a>.
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10507872-1']);
+    _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                      })();
+                      </script>
+                      
+
+
+<script type="text/javascript">
+(function() {
+	var wrc = document.createElement('script'); wrc.type = 'text/javascript'; wrc.async = true; window.rc_utm_source='spoj';
+	wrc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'recruitcoders.com/w4loader.js';
+	var s = document.getElementsByTagName('body')[0]; s.appendChild(wrc);
+})();
+</script>
+
+</body>
+</html>

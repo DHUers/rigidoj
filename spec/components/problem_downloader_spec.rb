@@ -122,4 +122,28 @@ describe ProblemDownloader do
       expect(problem.raw).to eq parsed_markdown('sgu_143')
     end
   end
+
+  describe 'ProblemDownloader::SPOJStrategy downloads problem' do
+    before do
+      fake('http://www.spoj.com/problems/0', external_oj_response('spoj_not_exists'), 404)
+      fake('http://www.spoj.com/problems/SEQPAR2', external_oj_response('spoj_normal'))
+    end
+
+    it 'create nil when the problem is not exists' do
+      problem = ProblemDownloader.download_and_create_problem('spoj', '0')
+      expect(problem).to be_nil
+    end
+
+    it 'downloads and creates valid problem' do
+      problem = ProblemDownloader.download_and_create_problem('spoj', 'SEQPAR2')
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+    end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.download_and_create_problem('spoj', 'SEQPAR2')
+      expect(problem.title).to eq 'Sequence Partitioning II'
+      expect(problem.raw).to eq parsed_markdown('spoj_SEQPAR2')
+    end
+  end
 end
