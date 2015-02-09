@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ProblemDownloader do
-  let(:available_judge_strategies) { %w(hdu poj uva uva_live zoj) }
+  let(:available_judge_strategies) { %w(hdu poj uva uva_live zoj sgu) }
   it 'initialze' do
     available_judge_strategies.each do |name|
       expect { ProblemDownloader.new(name, 0) }.not_to raise_error
@@ -90,6 +90,7 @@ describe ProblemDownloader do
       fake('http://acm.sgu.ru/problem.php?problem=0', external_oj_response('sgu_not_exists'))
       fake('http://acm.sgu.ru/problem.php?problem=493', external_oj_response('sgu_normal'))
       fake('http://acm.sgu.ru/problem.php?problem=264', external_oj_response('sgu_normal_1'))
+      fake('http://acm.sgu.ru/problem.php?problem=143', external_oj_response('sgu_normal_2'))
     end
 
     it 'create nil when the problem is not exists' do
@@ -104,6 +105,9 @@ describe ProblemDownloader do
       problem = ProblemDownloader.download_and_create_problem('sgu', 264)
       expect(problem).not_to be_nil
       expect(problem.valid?).to be_truthy
+      problem = ProblemDownloader.download_and_create_problem('sgu', 143)
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
     end
 
     it 'should parsed accordingly' do
@@ -113,6 +117,9 @@ describe ProblemDownloader do
       problem = ProblemDownloader.download_and_create_problem('sgu', 264)
       expect(problem.title).to eq 'Travel'
       expect(problem.raw).to eq parsed_markdown('sgu_264')
+      problem = ProblemDownloader.download_and_create_problem('sgu', 143)
+      expect(problem.title).to eq 'Long Live the Queen'
+      expect(problem.raw).to eq parsed_markdown('sgu_143')
     end
   end
 end

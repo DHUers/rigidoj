@@ -27,6 +27,7 @@ class ProblemDownloader::SGUStrategy
     @raw_content = ''
 
     if raw.include?("<title> SSU Online Contester")
+      # type #1 (SGU 277 ~ 553)
       fragment = Nokogiri::HTML.fragment(/output: standard<\/div>[\s]*<br>([\s\S]*?)<br><br><div align="left" style="margin-top:1em;"><b>Input<\/b>/u.match(raw)[1])
       fragment.css('br').each { |br| br.replace("\n") }
       @raw_content << "## Description\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n"
@@ -62,11 +63,9 @@ class ProblemDownloader::SGUStrategy
 
       fragment = Nokogiri::HTML.fragment(/<b>Note<\/b><\/div>([\s\S]*?)<br><br><\/div><hr>/u.match(raw))
       @raw_content << "## Note\n" << fragment[1].text.strip.gsub(/\s+$/, "\n") << "\n\n" unless fragment[1] == nil
-
     else
-
       if raw.include?("<title>Saratov State University")
-        puts raw
+        # type #2 (SGU 146 ~ 276)
         fragment = Nokogiri::HTML.fragment(/output: standard<\/div>[\s]*<br><br><br><div align="left">([\s\S]*?)<\/div>[\s]*<div align="left">[\s]*<br><b>Input<\/b>/u.match(raw)[1])
         fragment.css('br').each { |br| br.replace("\n") }
         @raw_content << "## Description\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n"
@@ -111,9 +110,40 @@ class ProblemDownloader::SGUStrategy
 
         fragment = Nokogiri::HTML.fragment(/Date:<\/td>[\s]*<td>([\s\S]*?)\n<\/td>/u.match(raw)[1])
         @raw_content << "## Date\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n\n" unless fragment == nil
-
       else
+        # type #3 (SGU 100 ~ 145)
+        fragment = Nokogiri::HTML.fragment(/<p align="JUSTIFY"><\/p>[\s]*<p align="JUSTIFY">([\s\S]*?)<\/p>[\s]*<p align="JUSTIFY"><\/p>[\s]*<b><\/b><p align="JUSTIFY">Input<\/p>/u.match(raw)[1])
+        fragment.css('br').each { |br| br.replace("\n") }
+        @raw_content << "## Description\n" << fragment.text.strip.gsub("\r\n", ' ') << "\n"
+        fragment.search('img').each do |img|
+          img_html = img.to_html
+          @raw_content << img_html.gsub(/src="/, 'src="http://acm.sgu.ru/').gsub(/ style="[\s\S]*?"/, '') << "\n"
+        end
+        @raw_content << "\n"
 
+        fragment = Nokogiri::HTML.fragment(/<p align="JUSTIFY">Input<\/p>[\s]*<p align="JUSTIFY">([\s\S]*?)<\/p>[\s]*<p align="JUSTIFY"><\/p>[\s]*<b><\/b><p align="JUSTIFY">Output<\/p>/u.match(raw)[1])
+        fragment.css('br').each { |br| br.replace("\n") }
+        @raw_content << "## Input\n" << fragment.text.strip.gsub("\r\n", ' ') << "\n"
+        fragment.search('img').each do |img|
+          img_html = img.to_html
+          @raw_content << img_html.gsub(/src="/, 'src="http://acm.sgu.ru/').gsub(/ style="[\s\S]*?"/, '') << "\n"
+        end
+        @raw_content << "\n"
+
+        fragment = Nokogiri::HTML.fragment(/<p align="JUSTIFY">Output<\/p>[\s]*<p align="JUSTIFY">([\s\S]*?)<\/p>[\s]*<p align="JUSTIFY"><\/p>[\s]*<p align="JUSTIFY">Sample Input<\/p>/u.match(raw)[1])
+        fragment.css('br').each { |br| br.replace("\n") }
+        @raw_content << "## Output\n" << fragment.text.strip.gsub("\r\n", ' ') << "\n"
+        fragment.search('img').each do |img|
+          img_html = img.to_html
+          @raw_content << img_html.gsub(/src="/, 'src="http://acm.sgu.ru/').gsub(/ style="[\s\S]*?"/, '') << "\n"
+        end
+        @raw_content << "\n"
+
+        fragment = Nokogiri::HTML.fragment(/<p align="JUSTIFY">Sample Input<\/p>[\s]*<font face="Courier New">[\s]*<pre>([\s\S]*?)<\/pre>[\s]*<p align="JUSTIFY"><\/p>[\s]*<\/font>[\s]*<p align="JUSTIFY">Sample Output<\/p>/u.match(raw)[1])
+        @raw_content << "## Sample Input\n" << fragment.text.strip.gsub(/^/, '    ').gsub(/\r\n|\r|\n/, "\n").gsub(/^    $/, "") << "\n\n"
+
+        fragment = Nokogiri::HTML.fragment(/<p align="JUSTIFY">Sample Output<\/p>[\s]*<font face="Courier New">[\s]*<pre>([\s\S]*?)<\/pre>[\s]*<\/font>/u.match(raw)[1])
+        @raw_content << "## Sample Output\n" << fragment.text.strip.gsub(/^/, '    ').gsub(/\r\n|\r|\n/, "\n").gsub(/^    $/, "") << "\n\n"
       end
     end
 
