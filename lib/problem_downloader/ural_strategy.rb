@@ -29,7 +29,7 @@ class ProblemDownloader::UralStrategy
 
     content = html.css('#problem_text').inner_html.encode('utf-8')
                   .gsub('</div></div>', "\n\n")
-                  .gsub('<br>', "\n\n").gsub("\r\n", ' ')
+                  .gsub('<br>', "\n\n").gsub(/[\s]*\r\n/, ' ')
                   .gsub('<h3 class="problem_subtitle">', '## ')
                   .gsub('<b>Problem Author: </b>', "## Author\n")
                   .gsub('<b>Problem Source: </b>', "## Source\n")
@@ -51,7 +51,7 @@ class ProblemDownloader::UralStrategy
 
     fragment = Nokogiri::HTML.fragment(content)
     @raw_content << "## Description\n" << fragment.text.strip.gsub(/\s+$/, "\n") << "\n\n"
-    @raw_content = @raw_content.gsub('## Samples', image << '## Samples' << sample)
+    @raw_content = @raw_content.gsub(/## Sample[s]?/, image << (@raw_content.include?('## Samples') ? '## Samples' : '## Sample') << sample)
 
     @title = /problem_title">\d{4}. ([\s\S]*?)<\/h2>/.match(raw)[1].strip
     @time_limit = /Time Limit: ([\d\.]*?) second/i.match(raw)

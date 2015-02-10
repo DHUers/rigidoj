@@ -151,6 +151,7 @@ describe ProblemDownloader do
     before do
       fake('http://acm.timus.ru/print.aspx?space=1&num=0', external_oj_response('ural_not_exists'))
       fake('http://acm.timus.ru/print.aspx?space=1&num=2032', external_oj_response('ural_normal'))
+      fake('http://acm.timus.ru/print.aspx?space=1&num=1050', external_oj_response('ural_normal_1'))
     end
 
     it 'create nil when the problem is not exists' do
@@ -162,12 +163,18 @@ describe ProblemDownloader do
       problem = ProblemDownloader.download_and_create_problem('ural', 2032)
       expect(problem).not_to be_nil
       expect(problem.valid?).to be_truthy
+      problem = ProblemDownloader.download_and_create_problem('ural', 1050)
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
     end
 
     it 'should parsed accordingly' do
       problem = ProblemDownloader.download_and_create_problem('ural', 2032)
       expect(problem.title).to eq 'Conspiracy Theory and Rebranding'
       expect(problem.raw).to eq parsed_markdown('ural_2032')
+      problem = ProblemDownloader.download_and_create_problem('ural', 1050)
+      expect(problem.title).to eq 'Preparing an Article'
+      expect(problem.raw).to eq parsed_markdown('ural_1050')
     end
   end
 end
