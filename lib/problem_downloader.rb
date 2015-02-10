@@ -10,7 +10,7 @@ class ProblemDownloader
       ['codeforces', CodeforcesStrategy],
       ['aizu', AIZUStrategy],
       ['codeforces_gym', CodeforcesGymStrategy],
-      ['ural', URALStrategy]
+      ['ural', UralStrategy]
   ]
   AVAILABLE_STRATEGIES_LIST = AVAILABLE_STRATEGIES.map {|s| [s.first, s.first]}
 

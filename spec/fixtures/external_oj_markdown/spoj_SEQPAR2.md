@@ -40,7 +40,7 @@ Output the minimum target value.
     9
 
 ## Note
-- Explanation
+### Explanation
 An available assignment is the first two pairs are assigned into the first part and the last two pairs are assigned into the second part. Then B1 > A3, B1 > A4, B2 > A3, B2 > A4, max{A1, A2}+max{A3, A4} <= 6, and minimum max{B1+B2, B3+B4}=9.
 
 ## Added by
