@@ -38,10 +38,11 @@ class ProblemDownloader::UralStrategy
     sample = html.css('.sample').inner_html.encode('utf-8')
                  .gsub("<tr>\n<th width=\"350\">input</th>", '')
                  .gsub('<th width="350">output</th>', '')
-                 .gsub("<tr>\n<td><pre class=\"intable\">", "* Input\n")
-                 .gsub("</td>\n<td><pre class=\"intable\">", "* Output\n")
+                 .gsub("<tr>\n<td><pre class=\"intable\">", "### Input\n")
+                 .gsub("</td>\n<td><pre class=\"intable\">", "### Output\n")
                  .gsub(/<\/pre>|<\/tr>/, "\n").gsub('</td>', '')
-                 .gsub(/^/, '    ').gsub(/\r\n|\r|\n/, "\n").gsub(/^    $/, "").gsub(/[\n]{3}/, "\n").gsub(/\n\n\z/, '')
+                 .gsub(/^/, '    ').gsub(/\r\n|\r|\n/, "\n").gsub(/^    $/, "")
+                 .gsub(/[\n]{3}/, "\n").gsub(/\n\n\z/, '').gsub('    ###', '###')
 
     image = ''
     html.search('img').each do |img|
