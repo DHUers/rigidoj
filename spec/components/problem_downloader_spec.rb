@@ -177,4 +177,35 @@ describe ProblemDownloader do
       expect(problem.raw).to eq parsed_markdown('ural_1050')
     end
   end
+
+  describe 'ProblemDownloader::AIZUStrategy downloads problem' do
+    before do
+      fake('http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0', external_oj_response('aizu_not_exists'), 500)
+      fake('http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1303', external_oj_response('aizu_normal'))
+      fake('http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2303', external_oj_response('aizu_normal_1'))
+    end
+
+    it 'create nil when the problem is not exists' do
+      problem = ProblemDownloader.download_and_create_problem('aizu', '0')
+      expect(problem).to be_nil
+    end
+
+    it 'downloads and creates valid problem' do
+      problem = ProblemDownloader.download_and_create_problem('aizu', '1303')
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+      problem = ProblemDownloader.download_and_create_problem('aizu', '2303')
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+    end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.download_and_create_problem('aizu', '1303')
+      expect(problem.title).to eq 'Hobby on Rails'
+      expect(problem.raw).to eq parsed_markdown('aizu_1303')
+      problem = ProblemDownloader.download_and_create_problem('aizu', '2303')
+      expect(problem.title).to eq 'Marathon Match'
+      expect(problem.raw).to eq parsed_markdown('aizu_2303')
+    end
+  end
 end
