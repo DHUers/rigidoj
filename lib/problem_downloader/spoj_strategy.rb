@@ -27,7 +27,7 @@ class ProblemDownloader::SPOJStrategy
     @id = context.problem_index
     @raw_content = ''
 
-    fragment = Nokogiri::HTML.fragment(/<p align="justify">[\s]*<\/p>[\s]*<p>([\s\S]*?)<\/p>[\s]*<h3>Input<\/h3>/u.match(raw)[1].gsub("</p>", "\n"))
+    fragment = Nokogiri::HTML.fragment(/<\/table>[\s]*<p align="justify">([\s\S]*?)<\/p>[\s]*<h3>Input<\/h3>/u.match(raw)[1].gsub("</p>", "\n"))
     @raw_content << "## Description\n" << fragment.text.strip.gsub("\r\n", '').gsub(/\s+$/, "\n") << "\n"
     fragment.search('img').each do |img|
       img_html = img.to_html
