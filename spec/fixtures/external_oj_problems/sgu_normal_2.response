@@ -1,0 +1,81 @@
+                               <HTML><HEAD><TITLE>
+143. Long Live the Queen
+</TITLE><META http-equiv=Content-Type content="text/html; charset=windows-1251"><META HTTP-EQUIV="Expires" content="Дата"><META HTTP-EQUIV="Cache-Control" content="no-cache"><META HTTP-EQUIV="pragma" content="no-cache"><META NAME="keywords" CONTENT="ACM, programming contest, programming, contest, informatics, ioi, saratov, ICPC, программирование, информатика, алгоритм, саратов, контест"><META NAME="description" CONTENT="That site consists of some amount of programming problems. Online Contester system check your solution right now. You can participate in programming contests. Train your programming skills."><link rel="stylesheet" href="style.css" type="text/css"><STYLE type=text/css>TD{font-size:9pt;}</STYLE></HEAD>
+<BODY>
+<table width=95%><tr><td>
+<H3><B><P ALIGN="CENTER">
+143. Long Live the Queen 
+</P></H3></B>
+<P ALIGN="CENTER">
+time limit per test: 0.25 
+ sec. <BR> memory limit per test: 4096
+ KB
+</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">
+The Queen of Byteland
+is very loved by her people. In order to show her their love, the Bytelanders
+have decided to conquer a new country which will be named according to
+the queen's name. This new country contains <b>N</b> towns. The towns are
+connected by bidirectional roads and there is exactly <b>ONE</b> path between
+any two towns, walking on the country's roads. For each town, the profit
+it brings to the owner is known. Although the Bytelanders love their queen
+very much, they don't want to conquer all the <b>N</b> towns for her. They
+will be satisfied with a non-empty subset of these towns, with the following
+<b>2</b>
+properties: there exists a path from every town in the subset to every
+other town in the subset walking only through towns in the subset and the
+profit of the subset is maximum. The profit of a subset of the
+<b>N</b>
+towns is equal to the sum of the profits of the towns which belong to the
+subset. Your task is to find the maximum profit the Bytelanders may get.
+</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Input</P></B>
+<P ALIGN="JUSTIFY">
+The first line of
+input will contain the number of towns <b>N (1&lt;=N&lt;=16 000)</b>. The
+second line will contain <b>N</b> integers: the profits for each town,
+from <b>1</b> to <b>N</b>. Each profit is an integer number between <b>-1000</b>
+and <b>1000</b>. The next <b>N-1</b> lines describe the roads: each line
+contains <b>2</b> integer numbers <b>a</b> and <b>b</b>, separated by blanks,
+denoting two different towns between which there exists a road.
+</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Output</P></B>
+<P ALIGN="JUSTIFY">
+The output should
+contain one integer number: the maximum profit the Bytelanders may get.
+</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Sample Input</P>
+<FONT FACE="Courier New">
+<PRE>
+5
+-1 1 3 1 -1
+4 1
+1 3
+1 2
+4 5
+</PRE>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+
+<P ALIGN="JUSTIFY">Sample Output</P>
+<FONT FACE="Courier New">
+<PRE>
+4
+</PRE>
+</FONT>
+</td></tr>
+<tr><td>
+<hr>
+<table align=left>
+<tr><td>Author</td><td>: Mugurel Ionut Andreica</td></tr>
+<tr><td>Resource</td><td>: SSU::Online Contester Fall Contest #2</td></tr>
+<tr><td>Date</td><td>: Fall 2002</td></tr>
+</td></tr>
+</table>
+</BODY>
+</HTML>

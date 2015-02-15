@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- need for problem description -->
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=SHIFT-JIS" /> <!-- for only description.jsp-->
+
+<title>Hobby on Rails | Aizu Online Judge</title>
+
+
+<link rel="stylesheet" href="css/frame.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/sp.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/login.css" type="text/css" media="all" />
+<link rel="shortcut icon" href="favicon.ico"/>
+<script src="http://www.google.com/jsapi"></script>
+<script>
+google.load("chrome-frame", "1.0.2");
+google.load("jquery", "1.5.1");
+google.load("jqueryui", "1.8.10");
+google.load("webfont", "1.0.19");
+google.setOnLoadCallback(function(){WebFont.load({google: {families: ['PT Sans Narrow','Droid Sans','Droid Serif','Cousine']}});});</script>
+<script language="JavaScript" type="text/javascript" src="js/jquery.browser.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/jquery.cookie.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/script.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/login.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/varmath.js" charset="UTF-8"></script>
+<!-- icon -->
+<!-- <link rel="shortcut icon" href="http://" />???-->
+
+<link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.6.custom.css" type="text/css" />
+<link rel="stylesheet" href="css/rose.css" type="text/css" />
+<link rel="stylesheet" href="css/description.css" type="text/css" />
+<script language="JavaScript" type="text/javascript" src="js/analytics.js"></script>
+
+</head>
+<body id="niceBody" class="goodStyle">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+    $('#tree #treeProblem .trigger2').each(function(i) {
+        $(this).hover(
+            function(){
+                var menuPos = $(this).position();
+                var w = 168 + $(this).width();
+                var tl = menuPos.top + 40;
+                var targetSubTree = i+1;
+                $('#nav #subtree').attr('data-target', 0).css({'margin': '' + tl + 'px 0px 0px ' + w + 'px'}).show();
+                $('#nav #subtree .dat').hide();
+                $('#nav #subtree .dat:nth-child('+targetSubTree+')').show();
+                $(this).addClass('active');
+            },
+            function(){
+                $(this).removeClass('active');
+                $('#nav #subtree').hide();
+            }
+        );
+    });
+    $('#nav #subtree').hover(
+            function() {
+                //var targetTrigger = 2 * $('#nav #tree').attr('data-target') + 1; // 2n+1
+                $(this).show();
+                $('#nav #tree').show();
+                //$('#nav #menu a:nth-child('+targetTrigger+')').addClass('active');
+            },
+            function(){
+                $(this).hide();
+                //$('#nav #menu .trigger').removeClass('active');
+            }
+    );
+
+});
+</script>
+
+	<div id="logo"><a href="index.jsp" id="home">AIZU ONLINE JUDGE</a></div>
+	<div id="nav">
+		<div class="wrapper">
+			<div id="menu">
+				<a href="javascript:void(0)" class="link" id="menuPagetop">PAGETOP</a>
+				<div class="split">&nbsp;</div>
+				<a href="#" class="link trigger" id="menuProblem">PROBLEM</a>
+				<div class="split">&nbsp;</div>
+				<a href="ranking.jsp" class="link trigger" id="menuRank">RANKING</a>
+				<div class="split">&nbsp;</div>
+				<a href="status.jsp" class="link trigger" id="menuStatus">STATUS</a>
+				<div class="split">&nbsp;</div>
+				<a href="contest.jsp" class="link trigger" id="menuContest">CONTEST</a>
+				<div class="split">&nbsp;</div>
+				<a href="course.jsp#all" class="link trigger" id="menuCourse">COURSE</a>
+				<div class="split">&nbsp;</div>
+
+
+				<span class="spacer1">&nbsp;</span>
+			</div>
+			<div id="tree" data-target="0">
+				<div class="dat" id="treeProblem">
+					<a class="link trigger2" href="#"><span class="label">Introduction</span><span class="caption"><span class="padding12">:</span>Lesson and Library</span></a>
+					<!--<a href="finder.jsp?volumeNo=100"><span class="label">Volume 100</span><span class="caption"><span class="padding12">:</span>Problem set from courses.</span></a>-->
+					<a href="finder.jsp?volumeNo=0"><span class="label">Volume 0</span><span class="caption"><span class="padding12">:</span>All-Japan High School Programming Contest.</span></a>
+					<a href="finder.jsp?volumeNo=1"><span class="label">Volume 1</span><span class="caption"><span class="padding12">:</span>All-Japan High School Programming Contest.</span></a>
+					<a href="finder.jsp?volumeNo=2"><span class="label">Volume 2</span><span class="caption"><span class="padding12">:</span>All-Japan High School Programming Contest.</span></a>
+					<a href="finder.jsp?volumeNo=3"><span class="label">Volume 3</span><span class="caption"><span class="padding12">:</span>All-Japan High School Programming Contest.</span></a>
+	
+
+					<a href="finder.jsp?volumeNo=5"><span class="label">Volume 5</span><span class="caption"><span class="padding12">:</span>Japanese Olympiad in Informatics.</span></a>
+					<a href="finder.jsp?volumeNo=6"><span class="label">Volume 6</span><span class="caption"><span class="padding12">:</span>Japanese Olympiad in Informatics.</span></a>
+					<a href="finder.jsp?volumeNo=10"><span class="label">Volume 10</span><span class="caption"><span class="padding12">:</span>University of Aizu Programming Contest.</span></a>
+					<a href="finder.jsp?volumeNo=11"><span class="label">Volume 11</span><span class="caption"><span class="padding12">:</span>ACM-ICPC Japan Domestic Contest.</span></a>
+					<a href="finder.jsp?volumeNo=12"><span class="label">Volume 12</span><span class="caption"><span class="padding12">:</span>ACM-ICPC Asia Regional in Japan.</span></a>
+					<a href="finder.jsp?volumeNo=13"><span class="label">Volume 13</span><span class="caption"><span class="padding12">:</span>ACM-ICPC Asia Regional in Japan.</span></a>
+					<a href="finder.jsp?volumeNo=15"><span class="label">Volume 15</span><span class="caption"><span class="padding12">:</span>University of Aizu Programming Contest.</span></a>
+					<a href="finder.jsp?volumeNo=20"><span class="label">Volume 20</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=21"><span class="label">Volume 21</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=22"><span class="label">Volume 22</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=23"><span class="label">Volume 23</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=24"><span class="label">Volume 24</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=25"><span class="label">Volume 25</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+					<a href="finder.jsp?volumeNo=26"><span class="label">Volume 26</span><span class="caption"><span class="padding12">:</span>ACM-ICPC JAG, Programming Contests.</span></a>
+
+				</div>
+				<div class="dat" id="treePank">
+					<a href="ranking.jsp?criteria=0">Order by Solved</a>
+					<a href="ranking.jsp?criteria=1">Order by Rating</a>
+					<a href="ranking.jsp?criteria=2">Order by Diff</a>
+				</div>
+				<div class="dat" id="treeStatus">
+					<a href="status.jsp">Last 200 Sub.</a>
+					<!--<a href="#">User Detail</a>-->
+				</div>
+				<div class="dat" id="treeContest">
+					<a href="contest.jsp">Contest</a>
+					<!--<a href="#">User Detail</a>-->
+				</div>
+				<div class="dat" id="treeCourse">
+					<a href="course.jsp#all">All</a>
+					<a href="course.jsp#lesson">Lesson</a>
+					<a href="course.jsp#library">Library</a>
+				</div>
+			</div>
+			<div id="subtree" data-target="0">
+				<div class="dat">
+				  <a href="finder.jsp?course=ITP1">Introduction to Programming</a>
+				  <a href="finder.jsp?course=ALDS1">Introduction to Algorithms and Data Structures</a>
+				  <a href="finder.jsp?course=DSL">Library of Data Structures</a>
+				  <a href="finder.jsp?course=GRL">Library of Graph Algorithms</a>
+				  <a href="finder.jsp?course=CGL">Library of Computational Geometry</a>
+				  <a href="finder.jsp?course=DPL">Library of Dynamic Programming</a>
+				  <a href="finder.jsp?course=NTL">Library of Number Theory</a>
+			          <a href="finder.jsp?volumeNo=100"><span class="label">Volume 100</span><span class="caption"><span class="padding12">:</span>Problem set from courses.</span></a>
+				</div>
+			</div>
+			<div id="user">
+			  
+			  <a href="javascript:void(0);" class="signup" id="login"><span class="line">Login</span></a>
+			  <div id="loginBox" class="userBox">     
+			    <!--<form id="loginForm" class="userForm" method="post" action="index.jsp">-->
+			    <form id="loginForm" class="userForm" method="post" action="">
+			      <fieldset id="body">
+				<fieldset>
+				  <label for="loginUserID">User ID</label>
+				  <input type="text" name="loginUserID" id="loginUserID" />
+				</fieldset>
+				<fieldset>
+				  <label for="loginPassword">Password</label>
+				  <input type="password" name="loginPassword" id="loginPassword" />
+				</fieldset>
+				<input type="submit" name="submit" id="logininput" value="Sign in" />
+				
+				<!--<label for="checkbox"><input type="checkbox" id="checkbox" />Remember me</label>-->
+			      </fieldset>
+			      <!--<span><a href="#">Forgot your password?</a></span>-->
+			    </form>
+			  </div>
+			  <a href="javascript:void(0);" class="signup" id="register"><span class="line">Register/Setting</span></a>
+			  <div id="registerBox" class="userBox">     
+			    <form id="registerForm" class="userForm" method="post" action="index.jsp">
+			      <fieldset id="body">
+			      <a href="register.jsp">Register/Setting</a>
+				<span class="spacer1">&nbsp;</span>
+			      <a href="update.jsp">Update Info.</a>
+				<span class="spacer1">&nbsp;</span>
+			      <a href="psupdate.jsp">Update Pass.</a>
+			      </fieldset>
+			    </form>
+			  </div>
+		
+
+			  
+			</div>
+		</div>
+	</div>
+	<div id="header">
+		<div class="wrapper">
+			<div id="lang">
+				<a href="index.jsp?lang=ja" id="langJp">Japanese</a>
+				<span class="padding6 small0">&nbsp;</span>
+				<a href="index.jsp?lang=en" id="langEn" class="active">English</a>
+			</div>
+			<div id="pwd">
+			  
+				<a href="introduction.jsp" id="help">For beginners&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				<a href="index.jsp" class="now">HOME</a><span class="padding6">-</span>
+			</div>
+		</div>
+	</div>
+
+
+
+<script type="text/javascript">
+$(function(){
+    $('#dialog').dialog({
+        width:740,
+        autoOpen: false,
+        title:'Submission Form',
+
+        buttons: {
+            'Submit': function(){
+                var len = $('#source').val().length;
+                if ( len > 30000 ){
+                    alert('The source code is too long.');
+                } else {
+                    $('#sform').submit();
+                }
+            },
+            'Reset': function(){
+                $('#source').val('');
+            },
+            'Cancel': function() { 
+                $(this).dialog("close"); 
+            }
+       }
+    });
+    // Dialog Link
+    $('#problemSubmit').click(function(){
+        $('#dialog').dialog('open');
+        return false;
+    });
+});
+</script>
+
+<div id="dialog" style="display : none; overflow:hidden">
+<FORM id="sform"  ACTION="/onlinejudge/servlet/Submit" METHOD="POST">
+<fieldset class="form">
+<TABLE class="form" width="740" border="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD width="100"><label>User ID:</label></TD>
+		<TD><INPUT TYPE="TEXT" NAME="userID" VALUE=""></TD>
+	</TR>
+	<TR>
+		<TD width="100"><label>Password:</label></TD>
+		<TD><INPUT TYPE="PASSWORD" NAME="password" VALUE=""></TD>
+	</TR>
+	<TR>
+	        <TD width="100"><label>Problem NO:</label></TD>
+		<TD><INPUT TYPE="TEXT" NAME="problemNO" VALUE="1303"></TD>
+	</TR>
+	<TR>
+	        <TD width="100"><label>Language:</label></TD>
+		<TD>
+		<SELECT NAME="language">
+		  
+
+                  
+                      <OPTION VALUE="C">C
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="C++" selected="selected">C++
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="JAVA">JAVA
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="C++11">C++11
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="C#">C#
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="D">D
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="Ruby">Ruby
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="Python">Python
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="Python3">Python3
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="PHP">PHP
+                  
+
+		  
+
+                  
+                      <OPTION VALUE="JavaScript">JavaScript
+                  
+
+		  
+		</SELECT>
+<font color="#aaa">&nbsp; *&nbsp;It depends on the problem</font>
+		</TD>
+		</tr>
+	<TR>
+	        <TD width="100"><label>Source Code:</label></TD>
+		<TD><TEXTAREA id="source" NAME="sourceCode" ROWS="16" COLS="62"></TEXTAREA></TD>
+	</TR>
+</TABLE>
+</fieldset>
+</FORM>
+</div>
+
+
+
+
+<div id="contents">
+	<div id="pageinfo">
+		<div class="wrapper">
+			<div class="subinfo">
+                              
+				<!--<a href="problem_tags.jsp?pid=1303" id="problemTag" class="icon" title="Tag">Tag</a>-->
+				<a href="annotation.jsp?pid=1303" id="problemTag" class="icon" title="Tag">Tag</a>
+				<a href="board.jsp?pid=1303" id="problemDiscussion" class="icon" title="Discussion">Discussion</a>
+				<a href="solution.jsp?pid=1303" id="problemSolution" class="icon" title="Solution">Solution</a>
+				<a href="problem_statistics.jsp?id=1303" id="problemStatistics" class="icon" title="Statistics">Statistics</a>
+				<a href="#" id="problemSubmit" class="icon" title="Submit">Submit</a>
+                              
+
+				<div class="spacer8">&nbsp;</div>
+				
+				<div class="dat"><a href="http://www.waseda.jp/assoc-icpc2009/en/">ICPC Asia 2009</a></div>
+				
+
+				
+
+			</div>
+                        
+			<h1 class="title">Hobby on Rails</h1>
+                        
+			<span class="text-red3">Time Limit : 8 sec, Memory Limit : 65536 KB</span>
+
+
+		</div>
+	</div>
+	<div id="page">
+	  <div class="wrapper">
+	    <div class="description">
+	        
+		
+  
+                <!--<script src="./IMAGE/varmath.js" charset="UTF-8"></script>-->
+
+	        <H1><font color="#000">Problem I:</font> Hobby on Rails</H1>
+
+<p>
+ICPC (International Connecting Points Company) starts to sell a new railway toy. It consists
+of a toy tramcar and many rail units on square frames of the same size. There are four types
+of rail units, namely, straight (S), curve (C), left-switch (L) and right-switch (R) as shown in
+Figure 9. A switch has three ends, namely, branch/merge-end (B/M-end), straight-end (S-end)
+and curve-end (C-end).
+</p>
+
+<center>
+<img src="IMAGE1/hobby1.gif">
+</center>
+
+<p>
+A switch is either in "through" or "branching" state. When the tramcar comes from B/M-end,
+and if the switch is in the through-state, the tramcar goes through to S-end and the state changes
+to branching; if the switch is in the branching-state, it branches toward C-end and the state
+changes to through. When the tramcar comes from S-end or C-end, it goes out from B/M-end
+regardless of the state. The state does not change in this case.
+</p>
+
+<p>
+Kids are given rail units of various types that fill a rectangle area of <i>w</i> &times; <i>h</i>, as shown in Fig-
+ure 10(a). Rail units meeting at an edge of adjacent two frames are automatically connected.
+Each rail unit may be independently rotated around the center of its frame by multiples of 90
+degrees in order to change the connection of rail units, but its position cannot be changed.
+</p>
+<p>
+Kids should make "valid" layouts by rotating each rail unit, such as getting Figure 10(b) from
+Figure 10(a). A layout is valid when all rails at three ends of every switch are directly or
+indirectly connected to an end of another switch or itself. A layout in Figure 10(c) is invalid as
+well as Figure 10(a). Invalid layouts are frowned upon.
+</p>
+
+<p>
+When a tramcar runs in a valid layout, it will eventually begin to repeat the same route forever.
+That is, we will eventually find the tramcar periodically comes to the same running condition,
+which is a triple of the tramcar position in the rectangle area, its direction, and the set of the
+states of all the switches.
+</p>
+
+
+<center>
+<img src="IMAGE1/hobby2.gif">
+</center>
+
+
+<p>
+A periodical route is a sequence of rail units on which the tramcar starts from a rail unit with
+a running condition and returns to the same rail unit with the same running condition for the first time. A periodical route through a switch or switches is called the "fun route", since kids
+like the rattling sound the tramcar makes when it passes through a switch. The tramcar takes
+the same unit time to go through a rail unit, not depending on the types of the unit or the
+tramcar directions. After the tramcar starts on a rail unit on a “fun route”, it will come back to
+the same unit with the same running condition, sooner or later. The fun time <i>T</i> of a fun route
+is the number of time units that the tramcar takes for going around the route.
+</p>
+
+<p>
+Of course, kids better enjoy layouts with longer fun time. Given a variety of rail units placed
+on a rectangular area, your job is to rotate the given rail units appropriately and to find the fun
+route with the longest fun time in the valid layouts.
+</p>
+
+<p>
+For example, there is a fun route in Figure 10(b). Its fun time is 24. Let the toy tramcar start
+from B/M-end at (1, 2) toward (1, 3) and the states of all the switches are the through-states. It
+goes through (1, 3), (1, 4), (1, 5), (2, 5), (2, 4), (1, 4), (1, 3), (1, 2), (1, 1), (2, 1), (2, 2) and (1, 2).
+Here, the tramcar goes through (1, 2) with the same position and the same direction, but with
+the different states of the switches. Then the tramcar goes through (1, 3), (1, 4), (2, 4), (2, 5),
+(1, 5), (1, 4), (1, 3), (1, 2), (2, 2), (2, 1), (1, 1) and (1, 2). Here, the tramcar goes through (1, 2)
+again, but with the same switch states as the initial ones. Counting the rail units the tramcar
+visited, the tramcar should have run 24 units of time after its start, and thus the fun time is 24.
+</p>
+
+<p>
+There may be many valid layouts with the given rail units. For example, a valid layout containing
+a fun route with the fun time 120 is shown in Figure 11(a). Another valid layout containing a
+fun route with the fun time 148 derived from that in Figure 11(a) is shown in Figure 11(b). The
+four rail units whose rotations are changed from Figure 11(a) are indicated by the thick lines.
+</p>
+
+<p>
+A valid layout depicted in Figure 12(a) contains two fun routes, where one consists of the rail
+units (1, 1), (2, 1), (3, 1), (4, 1), (4, 2), (3, 2), (2, 2), (1, 2) with <i>T</i> = 8, and the other consists of
+all the remaining rail units with <i>T</i> = 18.
+</p>
+
+<center>
+<img src="IMAGE1/hobby3.gif">
+</center>
+
+<p>
+Another valid layout depicted in Figure 12(b) has two fun routes whose fun times are <i>T</i> = 12
+and <i>T</i> = 20. The layout in Figure 12(a) is different from that in Figure 12(b) at the eight rail
+units rotated by multiples of 90 degrees. There are other valid layouts with some rotations of
+rail units but there is no fun route with the fun time longer than 20, so that the longest fun
+time for this example (Figure 12) is 20.
+</p>
+
+<center>
+<img src="IMAGE1/hobby4.gif">
+</center>
+
+<p>
+
+Note that there may be simple cyclic routes that do not go through any switches in a valid
+layout, which are not counted as the fun routes. In Figure 13, there are two fun routes and one
+simple cyclic route. Their fun times are 12 and 14, respectively. The required time for going
+around the simple cyclic route is 20 that is greater than fun times of the fun routes. However,
+the longest fun time is still 14.
+</p>
+
+<center>
+<img src="IMAGE1/hobby5.gif">
+</center>
+
+
+
+<H2>Input</H2>
+
+<p>
+The input consists of multiple datasets, followed by a line containing two zeros separated by a
+space. Each dataset has the following format.
+</p>
+
+<p>
+<i>w h</i><br>
+<i>a</i><sub>11</sub> ... <i>a</i><sub>1<i>w</i></sub><br>
+...<br>
+<i>a</i><sub><i>h</i>1</sub> ... <i>a</i><sub><i>hw</i></sub><br>
+</p>
+
+<p>
+<i>w</i> is the number of the rail units in a row, and <i>h</i> is the number of those in a column. <i>a<sub>ij</sub></i>
+(1 &le; <i>i</i> &le; <i>h</i>, 1 &le; <i>j</i> &le; <i>w</i>) is one of uppercase letters '<span>S</span>', '<span>C</span>', '<span>L</span>' and '<span>R</span>', which indicate the types
+of the rail unit at (<i>i</i>, <i>j</i>) position, i.e., straight, curve, left-switch and right-switch, respectively.
+Items in a line are separated by a space. You can assume that 2 &le; <i>w</i> &le; 6, 2 &le; <i>h</i> &le; 6 and the
+sum of the numbers of left-switches and right-switches is greater than or equal to 2 and less
+than or equal to 6.
+</p>
+
+<H2>Output</H2>
+
+<p>
+For each dataset, an integer should be printed that indicates the longest fun time of all the fun
+routes in all the valid layouts with the given rail units. When there is no valid layout according
+to the given rail units, a zero should be printed.
+
+</p>
+
+<H2>Sample Input</H2>
+<pre>
+5 2
+C L S R C
+C C S C C
+6 4
+C C C C C C
+S L R R C S
+S S S L C S
+C C C C C C
+6 6
+C L S S S C
+C C C S S C
+C C C S S C
+C L C S S C
+C C L S S C
+C S L S S C
+6 6
+C S S S S C
+S C S L C S
+S C S R C S
+S C L S C S
+S C R S C S
+C S S S S C
+4 4
+S C C S
+S C L S
+S L C S
+C C C C
+6 4
+C R S S L C
+C R L R L C
+C S C C S C
+C S S S S C
+0 0
+</pre>
+
+<H2>Output for the Sample Input</H2>
+<pre>
+24
+20
+148
+14
+0
+178
+</pre>
+
+
+                <hr>
+
+		  <div class="dat" style="font-size:10pt">
+                   Source: ACM International Collegiate Programming Contest
+
+		   , Asia Regional Tokyo, Tokyo, Japan, 2009-11-08
+
+		   
+		   
+
+		   
+
+                   
+                   <br /> <a href="http://www.waseda.jp/assoc-icpc2009/en/">http://www.waseda.jp/assoc-icpc2009/en/</a>
+                   
+                   
+
+		</div>
+		<div class="spacer60">&nbsp;</div>
+	    </div>
+	  </div>
+	</div>
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+ $('#pwd').append('<a href="finder.jsp?volumeNo=13" class="now">Volume13</a><span class="padding6">-</span>1303</a>');
+ 
+});
+</script>
+
+</div>
+</body>
+</html>

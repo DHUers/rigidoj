@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=utf-8"><META NAME="viewport" CONTENT="width=768"><META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge"><TITLE>1050. Preparing an Article @ Timus Online Judge</TITLE><LINK REL="alternate" HREFLANG="x-default" HREF="/print.aspx?space=1&amp;num=1050"><LINK REL="alternate" HREFLANG="en-us" HREF="/print.aspx?space=1&amp;num=1050&amp;locale=en"><LINK REL="alternate" HREFLANG="ru-ru" HREF="/print.aspx?space=1&amp;num=1050&amp;locale=ru"><LINK REL="stylesheet" TYPE="text/css" HREF="/style46.css"><LINK REL="shortcut icon" TYPE="image/x-icon" HREF="/favicon.ico"></HEAD><BODY ALINK="#1A5CC8" VLINK="#1A5CC8" LINK="#1A5CC8"><DIV CLASS="prnver"><H2 class="problem_title">1050. Preparing an Article</H2><DIV class="problem_limits">Time limit: 1.0 second<BR>Memory limit: 64 MB<BR></DIV><DIV ID="problem_text"><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">TeX is the leading typesetting system for mathematics, science, and 
+engineering and has been adopted as standard by the American Mathematical 
+Society. LaTeX was developed later by Leslie Lamport. It is based on TeX and 
+provides a set of higher level commands for production of complex documents. In 
+TeX or LaTeX, any text editor program may be used to enter and modify the input 
+text.</DIV></DIV><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">The source text contains the actual text as well as formatting commands 
+beginning with \. Commands are delimited by any non-alphabetic character. 
+One example of beautification by TeX is that it uses `` (two 
+left-single-quotes) and '' (two right-single-quotes) to delimit 
+quotations, rather than the mundane " (one double quote) which is provided by 
+most keyboards. Keyboards typically do not have an oriented double-quote, 
+but they do have a left-single-quote (`) and right-single-quote ('). 
+TeX lets the user type two left-single-quotes (``) to create a 
+left-double-quote and two right-single-quotes ('') to 
+create a right-double-quote.</DIV></DIV><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">Now, you have a text only file containing 
+at most 250 lines at most 80 symbols each, as source or input, and you want to 
+use TeX to beautify it. Rather than doing everything by hand, as the first step 
+of automation you want to convert the quotes into the TeX format by using a 
+program. This program will convert the text with double-quotes (") into an 
+identical text except that double quotes have been replaced by the 
+two-character sequences required by TeX for delimiting quotations with 
+oriented double-quotes. The double-quote (") characters should be 
+replaced appropriately by proper double single quotes depending on whether it is 
+an opening or closing quotation mark. Question of nested quotations does not 
+arise. The first " must be replaced by ``, the next by '', the next by 
+``, the next by '', and so on. An opening 
+double quote must have its closing quote in the same paragraph. If a match is 
+not found in the same paragraph for an opening quote, this quote has to be 
+deleted. Paragraph ends in the source text are marked either by at least one 
+blank line, or a \par command or both. Your program must also be careful about 
+the \" command which is used to produce umlaut or dieresis (\"e 
+leads to &euml;). These are to be left untouched.</DIV></DIV><H3 CLASS="problem_subtitle">Input</H3><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">Input will consist of several lines of text containing a number of double 
+quotes ("), as well as some TeX commands. End of input will be marked by an 
+\endinput command.</DIV></DIV><H3 CLASS="problem_subtitle">Output</H3><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">Output will be an exact replica of the input, except the double quotes are to 
+be modified according to the rules described above.</DIV></DIV><H3 CLASS="problem_subtitle">Sample</H3><TABLE CLASS="sample"><TR><TH WIDTH="350">input</TH><TH WIDTH="350">output</TH></TR><TR><TD><PRE CLASS="intable">There is no "q in this sentence. \par 
+"Talk child," said the unicorn. 
+
+She s\"aid, "\thinspace `Enough!', he said." 
+\endinput 
+</PRE></TD><TD><PRE CLASS="intable">There is no q in this sentence. \par 
+``Talk child,'' said the unicorn. 
+
+She s\"aid, ``\thinspace `Enough!', he said.'' 
+\endinput 
+</PRE></TD></TR></TABLE><H3 CLASS="problem_subtitle">Notes</H3><DIV CLASS="problem_par"><DIV CLASS="problem_par_normal">Double-quote (") has ASCII code 34,<BR>
+left-single-quote (`) has ASCII code 96,<BR>
+right-single-quote (') has ASCII code 39.</DIV></DIV><DIV CLASS="problem_source"><B>Problem Author: </B>Alexander Halperin<BR><B>Problem Source: </B>Ural State University collegiate programming contest (25.03.2000)<BR></DIV></DIV></DIV><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter20918869 = new Ya.Metrika({id:20918869, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/20918869" style="position:absolute; left:-9999px;" alt=""></div></noscript></BODY></HTML>
