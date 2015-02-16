@@ -1,0 +1,419 @@
+<!-- Page: ProblemViewPage.ftl --><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="X-Csrf-Token" content="d5d6c08a8784607c757ba3dc3a83aaee"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="profileName" content="c3">
+    <meta name="google-site-verification" content="OTd2dN5x4nS4OPknPI9JFg36fKxjqY0i1PSfFPv_J90"/>
+    <meta property="fb:admins" content="100001352546622" />
+    <meta property="og:image" content="http://st.codeforces.com/images/codeforces-telegram-square.png"/>
+    <meta property="og:title" content="Problem - D - Codeforces"/>
+    <meta property="og:site_name" content="Codeforces"/>
+    
+    <meta name="cc" content="n9727k7si1qa"/>
+    
+    <meta name="verify-reformal" content="f56f99fd7e087fb6ccb48ef2" />
+    <title>Problem - D - Codeforces</title>
+        <meta name="description" content="Codeforces. Programming competitions and contests, programming community" />
+        <meta name="keywords" content="programming algorithm contest competition informatics olympiads c++ java graphs vkcup" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="stylesheet" href="http://st.codeforces.com/css/font-awesome.min.css" type="text/css" charset="utf-8" />
+
+        <link href='//fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+
+    <link rel="shortcut icon" type="image/png" href="http://st.codeforces.com/favicon.png">
+
+    <!--CombineResourcesFilter-->
+    <link rel="stylesheet" href="http://st.codeforces.com/css/prettify.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/clear.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/style.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/ttypography.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/problem-statement.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/second-level-menu.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/roundbox.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/datatable.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/table-form.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/topic.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/jquery.jgrowl.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/facebox.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/jquery.wysiwyg.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/jquery.autocomplete.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/codeforces.datepick.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/colorbox.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/css/jquery.drafts.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="http://st.codeforces.com/css/community.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="http://st.codeforces.com/css/status.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="http://st.codeforces.com/css/sidebar-menu.css" type="text/css" charset="utf-8" />
+
+    <script type="text/javascript" src="http://st.codeforces.com/js/prettify/prettify.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/sockjs-0.2.1.min.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/vertxbus-1.2.min.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.lavalamp.min.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.jgrowl.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/facebox.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/controls/wysiwyg.colorpicker.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/controls/wysiwyg.table.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/controls/wysiwyg.image.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/controls/wysiwyg.link.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.datepick.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.ie6blocker.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.ba-bbq.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/jquery.drafts.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/js/codeforces.js"></script>
+    <!--/CombineResourcesFilter-->
+
+    <link rel="stylesheet" href="http://st.codeforces.com/markitup/skins/markitup/style.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="http://st.codeforces.com/markitup/sets/markdown/style.css" type="text/css" charset="utf-8" />
+
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+    
+    <script type="text/javascript" src="http://st.codeforces.com/markitup/jquery.markitup.js"></script>
+    <script type="text/javascript" src="http://st.codeforces.com/markitup/sets/markdown/set.js"></script>
+
+    <!--[if IE]>
+    <style>
+        #sidebar {
+            padding-left: 1em;
+            margin: 1em 1em 1em 0;
+        }
+    </style>
+    <![endif]-->
+
+
+</head>
+<body><span style='display:none;' class='csrf-token' data-csrf='d5d6c08a8784607c757ba3dc3a83aaee'>&nbsp;</span>
+<div class="button-up" style="display: none; opacity: 0.7; width: 50px; height:100%; position: fixed; left: 0; top: 0; cursor: pointer; text-align: center; line-height: 35px; color: #d3dbe4; font-weight: bold; font-size: 30px;"><i class="icon-circle-arrow-up"></i></div>
+
+<!-- Codeforces JavaScripts. -->
+<script type="text/javascript">
+    if (window.parent.frames.length > 0) {
+        window.stop();
+    }
+</script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+    (function () {
+        jQuery.expr[':'].containsCI = function(elem, index, match) {
+            return (elem.textContent || elem.innerText || jQuery(elem).text() || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0;
+        }
+    }(jQuery));
+
+    $.ajaxPrefilter(function(options, originalOptions, xhr) {
+        var csrf = Codeforces.getCsrfToken();
+
+        if (csrf) {
+            var data = originalOptions.data;
+            if (originalOptions.data !== undefined) {
+                if (Object.prototype.toString.call(originalOptions.data) === '[object String]') {
+                    data = $.deparam(originalOptions.data);
+                }
+            } else {
+                data = {};
+            }
+            options.data = $.param($.extend(data, { csrf_token: csrf }));
+        }
+    });
+
+    window.getCodeforcesServerTime = function(callback) {
+        $.post("/data/time", {}, callback, "json");
+    }
+
+    window.updateTypography = function () {
+        $("div.ttypography code").addClass("tt");
+        $("div.ttypography pre>code").addClass("prettyprint").removeClass("tt");
+        $("div.ttypography table").addClass("bordertable");
+        prettyPrint();
+    }
+
+    $.ajaxSetup({ scriptCharset: "utf-8" ,contentType: "application/x-www-form-urlencoded; charset=UTF-8", headers: {
+        'X-Csrf-Token': Codeforces.getCsrfToken()
+    }});
+
+    window.updateTypography();
+
+    Codeforces.signForms();
+
+    $(".second-level-menu-list").lavaLamp({
+        fx: "backout",
+        speed: 1000
+    });
+
+
+    Codeforces.countdown();
+    $("a[rel='photobox']").colorbox();
+
+
+        });
+    </script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-743380-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = (document.location.protocol == 'https:' ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<div id="body">
+        <!-- Frame: Header.ftl -->
+<div id="header" style="position:relative;">
+    <div style="float:left;">
+            <a href="/"><img src="http://st.codeforces.com/images/codeforces-logo-with-telegram.png"/></a>
+    </div>
+    <div class="lang-chooser">
+        <div style="text-align: right;">
+            <a href="?locale=en"><img src="http://st.codeforces.com/images/flags/24/gb.png" title="In English" alt="In English"/></a>
+            <a href="?locale=ru"><img src="http://st.codeforces.com/images/flags/24/ru.png" title="По-русски" alt="По-русски"/></a>
+        </div>
+        <div>
+                <a href="/enter">Enter</a>
+                 | 
+                <a href="/register">Register</a>
+                
+        </div>
+    </div>
+    <div style="font-size:0.8em;margin-top:0.25em;position:absolute;right:0;top:4.25em;">
+    </div>
+    <br style="clear: both;"/>
+</div>
+<!-- /Frame: Header.ftl -->
+        <!-- Frame: MainMenuFrame.ftl -->
+    <div class="roundbox menu-box" style="">
+            <div class="roundbox-lt">&nbsp;</div>
+            <div class="roundbox-rt">&nbsp;</div>
+            <div class="roundbox-lb">&nbsp;</div>
+            <div class="roundbox-rb">&nbsp;</div>
+<div class="menu-list-container">
+    <ul class="menu-list main-menu-list">
+                <li class=""><a href="/">Home</a></li>
+                <li class=""><a href="/contests">Contests</a></li>
+                <li class="current"><a href="/gyms">Gym</a></li>
+                <li class=""><a href="/problemset">Problemset</a></li>
+                <li class=""><a href="/groups">Groups</a></li>
+                <li class=""><a href="/ratings">Rating</a></li>
+                <li class=""><a href="/api/help">API</a></li>
+                <li class=""><a href="/help">Help</a></li>
+                <li class=""><a href="/rockethon2015">Rockethon 2015 <img class="icon" src="http://stat.codeforces.ru/images/icons/cup.png"/></a></li>
+    </ul>
+    <form method="post" action="/search"><input type='hidden' name='csrf_token' value='d5d6c08a8784607c757ba3dc3a83aaee'/>
+        <input class="search" name="query" data-isPlaceholder="true" value="Search by tag"/>
+    </form>
+    <br style="clear: both;"/>
+</div>
+    </div>
+<!-- /Frame: MainMenuFrame.ftl -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input.search").focus(function () {
+                if ($(this).attr("data-isPlaceholder") === "true") {
+                    $(this).val("");
+                    $(this).removeAttr("data-isPlaceholder");
+                }
+            });
+        });
+    </script>
+        <br style="height: 3em; clear: both;"/>
+        <div style="position: relative;">
+                    <div id="sidebar"><!-- Frame: ComplexFrame.ftl -->
+<!-- Frame: ComplexFrame.ftl --><!-- Frame: ContestStateSidebarFrame.ftl -->
+    <div class="roundbox sidebox" style="">
+            <div class="roundbox-lt">&nbsp;</div>
+            <div class="roundbox-rt">&nbsp;</div>
+        <table class="rtable ">
+            <tbody>
+                <tr>
+                            <th class="left" style="width:100%;"><a style="color: black" href="/gym/100571">Hello 2015 (Div.2)</a></th>
+                </tr>
+                    <tr>
+                                <td class="left bottom" colspan="1"><span class="contest-state-phase">Finished</span></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+<!-- /Frame: ContestStateSidebarFrame.ftl -->
+
+<!-- Frame: RegisterForPracticeSidebarFrame.ftl -->
+    <div class="roundbox sidebox" style="">
+            <div class="roundbox-lt">&nbsp;</div>
+            <div class="roundbox-rt">&nbsp;</div>
+        <div class="caption titled">&rarr; Practice?
+            <div class="top-links">
+            </div>
+        </div>
+<div>
+    <div style="margin:1em;font-size:0.8em;">
+        Want to solve the contest problems after the official contest ends? Just register for practice and you will be able to submit solutions.
+    </div>
+
+    <div style="text-align:center;margin:1em;">
+    <form action="" method="post"><input type='hidden' name='csrf_token' value='d5d6c08a8784607c757ba3dc3a83aaee'/>
+        <input type="hidden" name="action" value="registerForPractice"/>
+        <input type="submit" name="submit" value="Register for practice" style="padding:0 0.5em;">
+    </form>
+    </div>    
+</div>
+    </div>
+<!-- /Frame: RegisterForPracticeSidebarFrame.ftl --><!-- Frame: ContestResourcesSidebarFrame.ftl -->
+<style type="text/css">
+#new-resource-form tr td {
+padding-top: 0.5em;
+}
+#new-resource-form input:not([type="submit"]) {
+font-size: 0.8em;
+}
+#new-resource-form select {
+font-size: 0.8em;
+}
+</style>
+<div class="roundbox sidebox sidebar-menu" style="">
+<div class="roundbox-lt">&nbsp;</div>
+<div class="roundbox-rt">&nbsp;</div>
+<div class="caption titled">&rarr; Contest materials
+<div class="top-links">
+</div>
+</div>
+<ul>
+<li>
+<span>
+<a href="/blog/entry/15473" title="Announcement" target="_blank">Announcement</a>
+</span>
+<span style="float: right;">
+<img class="delete-resource-link" resourceId="3043" resourceName="Announcement"
+resourceManual="true" src="http://st.codeforces.com/images/icons/close-10x10.png"
+style="position: relative;bottom: -1px;left: 1px;cursor: pointer;"/>
+</span>
+<div style="clear: both;"></div>
+</li>
+<li>
+<span>
+<a href="/gym/100571/attachments/download/3037/statements.pdf" title="statements.pdf" target="_blank">Statements</a>
+</span>
+<span style="float: right;">
+<img class="delete-resource-link" resourceId="3037" resourceName="statements.pdf"
+resourceManual="false" src="http://st.codeforces.com/images/icons/close-10x10.png"
+style="position: relative;bottom: -1px;left: 1px;cursor: pointer;opacity: 0.4;"/>
+</span>
+<div style="clear: both;"></div>
+</li>
+<li>
+<span>
+<a href="/blog/entry/15722" title="Hello 2015 Editorial" target="_blank">Tutorial</a>
+</span>
+<span style="float: right;">
+<img class="delete-resource-link" resourceId="3041" resourceName="Hello 2015 Editorial"
+resourceManual="true" src="http://st.codeforces.com/images/icons/close-10x10.png"
+style="position: relative;bottom: -1px;left: 1px;cursor: pointer;"/>
+</span>
+<div style="clear: both;"></div>
+</li>
+</ul>
+</div><!-- /Frame: ContestResourcesSidebarFrame.ftl --><!-- /Frame: ComplexFrame.ftl --><!-- /Frame: ComplexFrame.ftl --></div>
+                    <div id="content" class="content-with-sidebar">
+                <div class="second-level-menu"><!-- Frame: SecondLevelMenuFrame.ftl -->
+<ul class="second-level-menu-list">
+        <li><a
+                                        href="/gym/100571">Problems</a></li>
+        <li><a
+                                        href="/gym/100571/submit">Submit Code</a></li>
+        <li><a
+                                        href="/gym/100571/my">My Submissions</a></li>
+        <li><a
+                                        href="/gym/100571/status">Status</a></li>
+        <li><a
+                                        href="/gym/100571/standings">Standings</a></li>
+        <li><a
+                                        href="/gym/100571/customtest">Custom Invocation</a></li>
+</ul>
+<!-- /Frame: SecondLevelMenuFrame.ftl --></div>
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="D">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">D. ShortestPath Query</div><div class="time-limit"><div class="property-title">time limit per test</div>1 second</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>De Prezer loves <span class="tex-span"><i>troyic</i></span> paths.Consider we have a graph with <span class="tex-span"><i>n</i></span> vertices and <span class="tex-span"><i>m</i></span> edges.Edges are directed in one way.And there is at most one edge from any vertex to any other vertex.If there is an edge from <span class="tex-span"><i>v</i></span> to <span class="tex-span"><i>u</i></span>, then <span class="tex-span"><i>c</i>(<i>v</i>, <i>u</i>)</span> is its color and <span class="tex-span"><i>w</i>(<i>v</i>, <i>u</i>)</span> is its length.Otherwise,<span class="tex-span"><i>c</i>(<i>v</i>, <i>u</i>) = <i>w</i>(<i>v</i>, <i>u</i>) =  - 1</span>.</p><p>A sequence <span class="tex-span"><i>p</i><sub class="lower-index">1</sub>, <i>p</i><sub class="lower-index">2</sub>, ..., <i>p</i><sub class="lower-index"><i>k</i></sub></span> is a troyic path is and only if for each <span class="tex-span">1 ≤ <i>i</i> ≤ <i>k</i></span>, <span class="tex-span">1 ≤ <i>p</i><sub class="lower-index"><i>i</i></sub> ≤ <i>n</i></span> and if <span class="tex-span"><i>i</i> &lt; <i>k</i></span>, then <span class="tex-span"><i>c</i>(<i>p</i><sub class="lower-index"><i>i</i></sub>, <i>p</i><sub class="lower-index"><i>i</i> + 1</sub>) &gt;  - 1</span> and if <span class="tex-span"><i>i</i> + 1 &lt; <i>k</i></span>, then <span class="tex-span"><i>c</i>(<i>p</i><sub class="lower-index"><i>i</i></sub>, <i>p</i><sub class="lower-index"><i>i</i> + 1</sub>) ≠ <i>c</i>(<i>p</i><sub class="lower-index"><i>i</i> + 1</sub>, <i>p</i><sub class="lower-index"><i>i</i> + 2</sub>)</span> .</p><p>The length of such troyic path is <img align="middle" class="tex-formula" src="http://espresso.codeforces.com/468e8ffd31b600dea2fab4f175f49ee632224819.png" /> and it's called a <span class="tex-span"><i>p</i><sub class="lower-index">1</sub> - <i>p</i><sub class="lower-index"><i>k</i></sub></span> path.</p><p>In such graph, length of the shortest path from vertex <span class="tex-span"><i>v</i></span> to <span class="tex-span"><i>u</i></span> is the minimum length of all <span class="tex-span"><i>v</i> - <i>u</i></span> paths.(The length of the shortest path from any vertex to itself equals <span class="tex-span">0</span>)</p><p>De Prezer gives you a graph like above and a vertex <span class="tex-span"><i>s</i></span>.</p><p>De Prezer also loves query. So he gives you <span class="tex-span"><i>q</i></span> queries and in each query, gives you number <span class="tex-span"><i>t</i></span> and you should print the length of the shortest path from <span class="tex-span"><i>s</i></span> to <span class="tex-span"><i>t</i></span> (or <span class="tex-span"> - 1</span> if there is no troyic path from <span class="tex-span"><i>s</i></span> to <span class="tex-span"><i>t</i></span>)</p></div><div class="input-specification"><div class="section-title">Input</div><p>The first line of input contains three integers <span class="tex-span"><i>n</i></span> and <span class="tex-span"><i>m</i></span> and <span class="tex-span"><i>C</i></span>, the number of vertices, the numbers of edges and the number of valid colors.</p><p>The next <span class="tex-span"><i>m</i></span> lines, each line contains 4 integers <span class="tex-span"><i>v</i>, <i>u</i>, <i>w</i>(<i>v</i>, <i>u</i>), <i>c</i>(<i>v</i>, <i>u</i>)</span> (<span class="tex-span">1 ≤ <i>v</i>, <i>u</i> ≤ <i>n</i></span> and <span class="tex-span"><i>v</i> ≠ <i>u</i></span> and <span class="tex-span">1 ≤ <i>w</i>(<i>v</i>, <i>u</i>) ≤ 10<sup class="upper-index">9</sup></span> and <span class="tex-span">1 ≤ <i>c</i>(<i>v</i>, <i>u</i>) ≤ <i>C</i></span>).</p><p>The line after that contains integer <span class="tex-span"><i>s</i></span> and <span class="tex-span"><i>q</i></span>.</p><p>The next <span class="tex-span"><i>q</i></span> lines, each line contains information of one query, number <span class="tex-span"><i>t</i></span>.</p><p><span class="tex-span">1 ≤ <i>n</i>, <i>m</i>, <i>C</i>, <i>q</i> ≤ 10<sup class="upper-index">5</sup></span></p><p><span class="tex-span"><i>m</i> ≤ <i>n</i>(<i>n</i> - 1)</span></p><p><span class="tex-span">1 ≤ <i>s</i>, <i>t</i> ≤ <i>n</i></span></p></div><div class="output-specification"><div class="section-title">Output</div><p>For each query, print the answer.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>5 4 1000<br />1 2 10 1<br />2 3 10 2<br />3 4 10 2<br />4 5 10 1<br />1 5<br />1<br />2<br />3<br />4<br />5<br /></pre></div><div class="output"><div class="title">Output</div><pre>0<br />10<br />20<br />-1<br />-1<br /></pre></div><div class="input"><div class="title">Input</div><pre>5 5 2<br />1 2 10 1<br />2 3 10 2<br />3 4 10 1<br />4 5 10 2<br />1 5 39 1<br />1 5<br />1<br />2<br />3<br />4<br />5<br /></pre></div><div class="output"><div class="title">Output</div><pre>0<br />10<br />20<br />30<br />39<br /></pre></div></div></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->            </div>
+        </div>
+<!-- Frame: Footer.ftl -->
+<br style="clear: both;"/>
+<div id="footer">
+    <div><a href="http://codeforces.com/">Codeforces</a> (c) Copyright 2010-2015 Mike Mirzayanov</div>
+    <div>The only programming contests Web 2.0 platform</div>
+    <div>Server time: 2015-02-16 07:23:59 (c3).</div>
+</div>
+<!-- /Frame: Footer.ftl -->    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($(window).width() < 1600) {
+                $('.button-up').css('width', '30px').css('line-height', '30px').css('font-size', '20px');
+            }
+
+            if ($(window).width() >= 1200) {
+                $ (window).scroll (function () {
+                    if ($ (this).scrollTop () > 100) {
+                        $ ('.button-up').fadeIn();
+                    } else {
+                        $ ('.button-up').fadeOut();
+                    }
+                });
+
+                $('.button-up').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 500);
+                    return false;
+                });
+
+                $('.button-up').hover(function () {
+                    $(this).animate({
+                        'opacity':'1',
+                    }).css({'background-color':'#e7ebf0','color':'#6a86a4'});
+                }, function () {
+                    $(this).animate({
+                        'opacity':'0.7'
+                    }).css({'background':'none','color':'#d3dbe4'});;
+                });
+            }
+            Codeforces.focusOnError();
+        });
+    </script>
+</div>
+</body>
+</html>
+<!-- /Page: ProblemViewPage.ftl -->
