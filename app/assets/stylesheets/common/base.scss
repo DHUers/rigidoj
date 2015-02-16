@@ -95,3 +95,35 @@ html.turbolinks-progress-bar::before {
   display: block;
   cursor: progress;
 }
+
+.timeframe-group {
+  display: inline-block;
+  padding-right: 2em;
+}
+.timeframe-group time {
+  display: block;
+}
+
+.contest-item {
+  padding: 0;
+  cursor: pointer;
+}
+
+.contest-content {
+  position: relative;
+  padding: 1em;
+}
+.contest-content h2 {
+  margin: 0;
+}
+.contest-content .stats {
+  position: absolute;
+  bottom: 1em;
+  right: 0;
+}
+.contest-content .stats div {
+  padding-top: 1em;
+}
+.contest-content .stats .contest-stat-count {
+  display: block;
+}

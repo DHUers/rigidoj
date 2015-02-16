@@ -6,25 +6,25 @@
       html: {type: 'button'}, method: :get
 .row
   .col-xs-10
-    %ul.list-group.incoming-contests
+    %ul.list-group.contest-list.incoming-contests
       %h1 Incoming contests
       - @incoming_contests.each do |c|
-        %li.list-group-item
+        %li.list-group-item.contest-item
           = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
   .col-xs-10
-    %ul.list-group.incoming-contests
+    %ul.list-group.contest-list.delayed-contests
       %h1 Delayed contests
       - @delayed_contests.each do |c|
-        %li.list-group-item
+        %li.list-group-item.contest-item
           = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
   .col-xs-10
-    %ul.list-group.incoming-contests
+    %ul.list-group.contest-list.finished-contests
       %h1 Finished contests
       - @finished_contests.each do |c|
-        %li.list-group-item
+        %li.list-group-item.contest-item
           = render partial: 'contests/contest', locals: {:@contest => c}
 
