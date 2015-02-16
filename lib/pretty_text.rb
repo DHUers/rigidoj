@@ -20,14 +20,12 @@ module PrettyText
 
     ctx['helpers'] = Helpers.new
 
-    ctx_load(ctx, %w(vendor/assets/javascripts/Markdown.Converter.js))
-
     ctx.eval("var window = {}; window.devicePixelRatio = 2;") # hack to make code think stuff is retina
     ctx.eval("Rigidoj = {};")
 
     decorate_context(ctx)
 
-    ctx_load(ctx, %w(vendor/assets/javascripts/Markdown.Converter.js
+    ctx_load(ctx, %w(vendor/assets/javascripts/remarkable.js
                      app/assets/javascripts/lib/markdown.js))
 
     ctx

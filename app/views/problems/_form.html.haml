@@ -13,66 +13,66 @@
     attribute: f.text_area(:raw) }               |
 .form-group.jugder-configuration
   .row
-    .col-md-4
+    .col-xs-4
       %label Jugder configuration
   .row.limit-group
-    .col-md-1.platform
+    .col-xs-1.platform
       %span Default
-    .col-md-3.time-limit-group
+    .col-xs-3.time-limit-group
       .input-group
         = f.text_field :default_time_limit, class: 'form-control', placeholder: 'Time limit'
         %span.input-group-addon ms
-    .col-md-3.memory-limit-group
+    .col-xs-3.memory-limit-group
       .input-group
         = f.text_field :default_memory_limit, class: 'form-control', placeholder: 'Memory limit'
         %span.input-group-addon KB
   = f.hidden_field :additional_limits
   - @problem.additional_limits.each do |limit|
     .row.additional-limit-group
-      .col-md-1.platform
+      .col-xs-1.platform
         %span(contenteditable="true")= limit['platform'] || ''.capitalize
-      .col-md-3.time-limit-group
+      .col-xs-3.time-limit-group
         .input-group
           = text_field_tag "[#{limit['platform']}][time]", limit['timeLimit'], class: 'form-control', placeholder: 'Time limit'
           %span.input-group-addon ms
-      .col-md-3.memory-limit-group
+      .col-xs-3.memory-limit-group
         .input-group
           = text_field_tag "additional_limits[#{limit['name']}][memory]", limit['memoryLimit'], class: 'form-control', placeholder: 'Memory limit'
           %span.input-group-addon KB
-      .col-md-1
+      .col-xs-1
         %button.btn.btn-default{:type => "button"} -
 .row
-  .col-md-1
+  .col-xs-1
     %button#add-new-judger-configuration.btn.btn-default{type: 'button'} +
 .form-group
   .row
-    .col-md-4
+    .col-xs-4
       = f.label :judge_type
       = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparasion'], ['Remote proxy', 'remote_proxy']], @problem.judge_type || 'full_text'), {}, class: 'form-control'
 .form-group.judge-source-group{data: {type: 'full_text'}}
   .row
-    .col-md-6
+    .col-xs-6
       = f.label :input_file
       = f.file_field :input_file
-    .col-md-6
+    .col-xs-6
       = f.label :output_file
       = f.file_field :output_file
 .form-group.judge-source-group{data: {type: 'program_comparasion'}}
   .row
-    .col-md-6
+    .col-xs-6
       = f.label :judger_program
       = f.file_field :judger_program
-    .col-md-6
+    .col-xs-6
       = f.label :judger_program_platform
       = f.text_field :judger_program_platform, class: 'form-control'
 .form-group.judge-source-group{data: {type: 'remote_proxy'}}
   .row
-    .col-md-5
+    .col-xs-5
       = f.label :remote_proxy_vendor
       = f.text_field :remote_proxy_vendor, class: 'form-control'
 .form-group
   .row
-    .col-md-4
+    .col-xs-4
       .checkbox
         %label
           = f.check_box :public, value: 'yes'

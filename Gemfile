@@ -36,7 +36,7 @@ gem 'redis-store'
 gem 'redis-rails'
 gem 'redis', require: ['redis', 'redis/connection/hiredis']
 
-gem 'seed-fu', git: 'https://github.com/SamSaffron/seed-fu.git', branch: 'discourse'
+gem 'seed-fu'
 
 gem 'active_model_serializers'
 gem 'bcrypt'

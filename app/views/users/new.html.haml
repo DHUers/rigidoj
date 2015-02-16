@@ -1,11 +1,11 @@
 = content_for :title, 'Sign up'
 
 .row
-  .col-md-offset-1.col-md-10
+  .col-xs-offset-1.col-xs-10
     %h1 Join RigidOJ
     %p Conquer the problems and win the contests.
 .row
-  .col-md-offset-1.col-md-7
+  .col-xs-offset-1.col-xs-7
     = render 'shared/error_messages', record: @user
     = form_for @user, html: {role: 'form'} do |f|
       %h2 Create your personal account
@@ -30,7 +30,7 @@
         \#{link_to 'Terms of Service'} and the
         \#{link_to 'Privacy Policy'}.
       = button_tag 'Create an account', class: 'btn btn-success pull-right'
-  .col-md-4
+  .col-xs-4
     .panel.panel-default
       .panel-heading
         %h2 Enjoy RidigOJ

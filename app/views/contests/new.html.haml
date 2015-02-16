@@ -1,12 +1,12 @@
 - content_for :title, 'Create new contest'
 .row
-  .col-md-9
+  .col-xs-9
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Contest', contests_path
       %li.active Create new contest
 .row
-  .col-md-9
+  .col-xs-9
     = form_for @contest do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Create', class: 'btn btn-success'
