@@ -32,6 +32,7 @@ For each query, print the answer.
 ## Sample test(s)
 
 ### Input
+```
 5 4 1000
 1 2 10 1
 2 3 10 2
@@ -43,15 +44,19 @@ For each query, print the answer.
 3
 4
 5
+```
 
 ### Output
+```
 0
 10
 20
 -1
 -1
+```
 
 ### Input
+```
 5 5 2
 1 2 10 1
 2 3 10 2
@@ -64,13 +69,16 @@ For each query, print the answer.
 3
 4
 5
+```
 
 ### Output
+```
 0
 10
 20
 30
 39
+```
 
 ## Remote Url
 [Codeforces::Gym 100571D: ShortestPath Query](http://codeforces.com/gym/100571/problem/D)

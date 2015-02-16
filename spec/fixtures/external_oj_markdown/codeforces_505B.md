@@ -22,6 +22,7 @@ For each query, print the answer in a separate line.
 ## Sample test(s)
 
 ### Input
+```
 4 5
 1 2 1
 1 2 2
@@ -32,13 +33,17 @@ For each query, print the answer in a separate line.
 1 2
 3 4
 1 4
+```
 
 ### Output
+```
 2
 1
 0
+```
 
 ### Input
+```
 5 7
 1 5 1
 2 5 1
@@ -53,13 +58,16 @@ For each query, print the answer in a separate line.
 2 5
 1 5
 1 4
+```
 
 ### Output
+```
 1
 1
 1
 1
 2
+```
 
 ## Note
 Let's consider the first sample.

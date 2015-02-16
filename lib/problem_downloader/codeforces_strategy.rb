@@ -30,6 +30,7 @@ class ProblemDownloader::CodeforcesStrategy
                   .gsub('</p>', "\n\n").gsub('<br>', "\n").gsub('<li>', "\n*")
                   .gsub('<div class="section-title">', '## ')
                   .gsub('<div class="title">', '### ')
+                  .gsub('<pre>', "```\n").gsub('</pre>', '```')
 
     image = ''
     html.search('img.tex-graphics').each do |img|
