@@ -232,4 +232,28 @@ describe ProblemDownloader do
       expect(problem.raw).to eq parsed_markdown('codeforces_505B')
     end
   end
+
+  describe 'ProblemDownloader::CodeforcesGymStrategy downloads problem' do
+    before do
+      fake('http://codeforces.com/gym/0/problem/A', external_oj_response('codeforces_gym_not_exists'))
+      fake('http://codeforces.com/gym/100571/problem/D', external_oj_response('codeforces_gym_normal'))
+    end
+
+    it 'create nil when the problem is not exists' do
+      problem = ProblemDownloader.download_and_create_problem('codeforces_gym', '0A')
+      expect(problem).to be_nil
+    end
+
+    it 'downloads and creates valid problem' do
+      problem = ProblemDownloader.download_and_create_problem('codeforces_gym', '100571D')
+      expect(problem).not_to be_nil
+      expect(problem.valid?).to be_truthy
+    end
+
+    it 'should parsed accordingly' do
+      problem = ProblemDownloader.download_and_create_problem('codeforces_gym', '100571D')
+      expect(problem.title).to eq "ShortestPath Query"
+      expect(problem.raw).to eq parsed_markdown('codeforces_gym_100571D')
+    end
+  end
 end
