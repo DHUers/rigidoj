@@ -1,6 +1,8 @@
 class ContestsController < ApplicationController
   def new
     @contest = Contest.new
+
+    render 'new'
   end
 
   def create
@@ -10,7 +12,7 @@ class ContestsController < ApplicationController
     new_problems_list.each {|p| @contest.problems << Problem.find(p)}
 
     if @contest.save
-      redirect_to @contest
+      redirect_to 'show'
     end
   end
 
@@ -18,14 +20,20 @@ class ContestsController < ApplicationController
     @incoming_contests = Contest.incoming
     @delayed_contests = Contest.delayed
     @finished_contests = Contest.finished
+
+    render 'index'
   end
 
   def show
     @contest = Contest.find(params[:id])
+
+    render 'show'
   end
 
   def edit
     @contest = Contest.find(params[:id])
+
+    render 'edit'
   end
 
   def update

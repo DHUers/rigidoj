@@ -1,11 +1,35 @@
-= link_to contest_path(@contest) do
-  .contest-content
-    %h2= @contest.title
+.row.contest-content
+  .col-xs-10.metadata
+    %h2= link_to @contest.title, contest_path(@contest)
     = raw @contest.description_baked
-    .contest-stats
-      .stat-problem-count
-        %strong.contest-stat-count= @contest.problems.count
-        %span.text-muted Problems
-      .stat-people-joined
-        %strong.contest-stat-count
-        %span.text-muted People joined
+    .progress
+      - progress = @contest.progress
+      .progress-bar{role: 'progressbar',
+          aria: {valuemin: 0, valuemax: 100, valuenow: progress},
+          style: "width: #{progress <= 60 ? progress : 60}%",
+          class: progress <= 60 ? 'active progress-bar-striped' : nil}
+      - if progress > 60
+        .progress-bar.progress-bar-warning{role: 'progressbar',
+            style: "width: #{progress <= 85 ? progress - 60 : 25}%",
+            class: progress <= 85 ? 'active progress-bar-striped' : nil}
+      - if progress > 85
+        .progress-bar.progress-bar-danger{role: 'progressbar',
+            style: "width: #{progress - 85}%",
+            class: Time.now <= @contest.end_time ? 'active progress-bar-striped' : nil}
+    .timeframe
+      .timeframe-group
+        %label{for: "#{@contest.id}-start"}= 'start at'
+        %time{id: "#{@contest.id}-start", datetime: @contest.started_at}= @contest.started_at.to_formatted_s(:short)
+      .timeframe-group
+        %label{for: "#{@contest.id}-end"}= 'end at'
+        %time{id: "#{@contest.id}-end", datetime: @contest.end_at}= @contest.end_at.to_formatted_s(:short)
+      .timeframe-group
+        %label{for: "#{@contest.id}-delayed"}= 'delayed till'
+        %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
+  .col-xs-2.stats
+    .stat-problem-count
+      %span.text-muted Problems
+      %strong.contest-stat-count= @contest.problems.count
+    .stat-people-joined
+      %span.text-muted People joined
+      %strong.contest-stat-count= '0'
