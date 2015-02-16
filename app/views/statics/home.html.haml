@@ -16,5 +16,9 @@
     .panel.panel-default
       .panel-heading Contests
       .panel-body
-        There is no contest.
+        - unless (l = Contest.latest).blank?
+          - l.each do |c|
+            = render partial: 'contests/contest', locals: {:@contest => c}
+        - else
+          There is no contest.
   .col-xs-4

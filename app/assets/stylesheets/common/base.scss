@@ -127,3 +127,10 @@ html.turbolinks-progress-bar::before {
 .contest-content .stats .contest-stat-count {
   display: block;
 }
+
+.admin-wrench {
+  position: fixed;
+  top: 5em;
+  right: 2em;
+  z-index: 1000;
+}

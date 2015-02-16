@@ -1,5 +1,15 @@
 - content_for :title, @problem.title
 
+- if current_user && current_user.staff?
+  #problem-admin.admin-wrench.btn-group
+    %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+        data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+      %i.fa.fa-wrench
+    %ul.dropdown-menu.pull-right{role: 'menu'}
+      %li
+        %a{href: edit_problem_path(@problem)}
+          Edit problem
+
 .row
   .col-xs-12
     .page-header
@@ -15,7 +25,3 @@
     %ul.actions.problem-actions
       %li= link_to 'Submit', new_problem_solution_path(@problem)
       %li= link_to 'Submitted records', problem_solutions_path(@problem)
-    - if current_user && current_user.staff?
-      .divider
-      %ul.actions.problem-admin-actions
-        %li= link_to 'Edit', edit_problem_path(@problem)

@@ -1,9 +1,13 @@
 - content_for :title, 'Contest list'
 
-.row
-  .col-xs-2.col-xs-offset-10
-    = button_to 'New Contest', new_contest_path, class: 'btn btn-primary', |
-      html: {type: 'button'}, method: :get
+#contest-index-admin.admin-wrench.btn-group
+  %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+      data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+    %i.fa.fa-wrench
+  %ul.dropdown-menu.pull-right{role: 'menu'}
+    %li
+      %a{href: new_contest_path}
+        New Contest
 .row
   .col-xs-10
     %ul.list-group.contest-list.incoming-contests

@@ -13,6 +13,13 @@ class Contest < ActiveRecord::Base
 
   before_save :cook
 
+  def self.latest(limit = 3)
+    latest = incoming.limit(limit)
+    latest << delayed.limit(limit - latest.count).flatten if latest.count <= limit
+    latest << finished.limit(limit - latest.count).flatten if latest.count <= limit
+    latest.flatten
+  end
+
   def cook
     self.description_baked = PrettyText::cook(self.description_raw)
   end

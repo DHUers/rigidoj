@@ -1,25 +1,31 @@
 - content_for :title, 'Problem list'
 
-.row
-  .col-xs-2.col-xs-offset-10
-    = button_to 'New problem', new_problem_path, class: 'btn btn-primary', |
-      html: {type: 'button'}, method: :get                                 |
+- if current_user && current_user.staff?
+  #problem-index-admin.admin-wrench.btn-group
+    %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+        data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+      %i.fa.fa-wrench
+    %ul.dropdown-menu.pull-right{role: 'menu'}
+      %li
+        %a{href: new_problem_path}
+          New problem
 .row
   .col-xs-8
-    .table-responsive
-      %table#problem-listings.table.table-condensed.table-hover
-        %thead
-          %th
-          %th ID
-          %th Title
-          %th Submitted
-          %th AC%
-        %tbody
-          - @problems.each do |p|
-            %tr.row-clickable
-              %td
-              %td= link_to p.id, problem_path(p)
-              %td= link_to p.title, problem_path(p)
-              %td= "#{p.accepted_count} / #{p.submission_count}"
-              %td= "#{p.accepted_rate}"
-      = paginate @problems, window: 3
+    .panel.panel-default
+      .panel-heading
+        Problems
+      .table-responsive
+        %table#problem-listings.table.table-bordered.table-hover
+          %thead
+            %th ID
+            %th Title
+            %th Submitted
+            %th AC%
+          %tbody
+            - @problems.each do |p|
+              %tr.row-clickable
+                %td= p.id
+                %td= link_to p.title, problem_path(p)
+                %td= p.submission_count > 0 ? "#{p.accepted_count} / #{p.submission_count}" : '-'
+                %td= "#{p.accepted_rate}"
+    = paginate @problems, window: 3
