@@ -1,11 +1,11 @@
 - content_for :title, 'Solutions'
 
 .row
-  .col-md-2.col-md-offset-10
+  .col-xs-2.col-xs-offset-10
     = button_to 'Submit', new_solution_path, class: 'btn btn-primary', |
       html: {type: 'button'}, method: :get
 .row
-  .col-md-12
+  .col-xs-12
     .table-responsive
       %table#solution-listings.table.table-condensed.table-hover
         %thead

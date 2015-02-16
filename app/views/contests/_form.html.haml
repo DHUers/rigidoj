@@ -14,7 +14,7 @@
   %h3 Problem listing
   .problems
   .row
-    .col-md-12
+    .col-xs-12
       = hidden_field_tag :problems, nil, id: 'hidden-problem-list'
       %ul#problem-lists
         - @contest.problems.each do |p|
@@ -23,17 +23,17 @@
 .form-group
   %h3 Time settings
   .row
-    .col-md-2
+    .col-xs-2
       %label Started at
-    .col-md-10
+    .col-xs-10
       = f.datetime_select :started_at
   .row
-    .col-md-2
+    .col-xs-2
       %label End at
-    .col-md-10
+    .col-xs-10
       = f.datetime_select :end_at
   .row
-    .col-md-2
+    .col-xs-2
       %label Delayed till
-    .col-md-10
+    .col-xs-10
       = f.datetime_select :delayed_till

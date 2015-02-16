@@ -1,11 +1,11 @@
 - content_for :title, 'Problem list'
 
 .row
-  .col-md-2.col-md-offset-10
+  .col-xs-2.col-xs-offset-10
     = button_to 'New problem', new_problem_path, class: 'btn btn-primary', |
       html: {type: 'button'}, method: :get                                 |
 .row
-  .col-md-8
+  .col-xs-8
     .table-responsive
       %table#problem-listings.table.table-condensed.table-hover
         %thead

@@ -1,9 +1,9 @@
 .form-group
   .row
-    .col-md-8
+    .col-xs-8
       = f.label :problem_id
       = f.text_field :problem_id, class: 'form-control', disabled: params[:problem_id] ? true : false
-    .col-md-4
+    .col-xs-4
       = f.label :platform
       = f.select :platform, platform_select_options, {}, class: 'form-control'
 .form-group.problem-excerpt

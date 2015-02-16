@@ -1,17 +1,17 @@
 - content_for :title, 'Create new problem'
 .row
-  .col-md-9
+  .col-xs-9
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Problem', problems_path
       %li.active Create new problem
-  .col-md-3
+  .col-xs-3
     .btn-group-vertical{role: 'group'}
       %button{type: 'button', class: 'btn btn-default', data: {toggle: 'modal', target: '#import-problem'}}
         Import new problem
 
 .row
-  .col-md-9
+  .col-xs-9
     = form_for @problem, html: {role: 'form', class: 'create-problem problem-form'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Create', class: 'btn btn-success'
@@ -30,14 +30,14 @@
         .modal-body
           .form-horizontal
             .form-group
-              %label.control-label.col-md-3{for: 'import-problem-from-vendor'}
+              %label.control-label.col-xs-3{for: 'import-problem-from-vendor'}
                 Vendor
-              .col-md-8
+              .col-xs-8
                 = select_tag :vendor, options_for_select(ProblemDownloader::AVAILABLE_STRATEGIES_LIST), id: 'import-problem-from-vendor', class: 'form-control'
             .form-group
-              %label.control-label.col-md-3{for: 'import-problem-from-vendor-index'}
+              %label.control-label.col-xs-3{for: 'import-problem-from-vendor-index'}
                 Problem ID
-              .col-md-8
+              .col-xs-8
                 = text_field_tag :id, '', id: 'import-problem-from-vendor-index', class: 'form-control'
         .modal-footer
           %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}

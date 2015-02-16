@@ -1,4 +1,0 @@
-browsers:
-  - "last 1 version"
-  - "> 0.2%"
-  - "IE >= 8"

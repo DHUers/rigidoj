@@ -27,11 +27,14 @@ Rigidoj.Markdown = {
    **/
   markdownConverter: function(opts) {
     if (!opts) opts = {};
+    var md = new window.Remarkable('commonmark', {
+      quotes: '“”‘’'
+    });
 
     return {
       makeHtml: function(text) {
-        var converter = new Markdown.Converter();
-        text = converter.makeHtml(text);
+        text = md.render(text);
+
         return !text ? "" : text;
       }
     };

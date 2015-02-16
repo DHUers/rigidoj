@@ -17,8 +17,10 @@ sudo: true
 
 cache: bundler
 
+addons:
+  postgresql: "9.4"
+
 before_script:
-  - psql -c "CREATE ROLE travis WITH CREATEDB SUPERUSER LOGIN PASSWORD '';" -U postgres
   - psql -c 'CREATE DATABASE rigidoj_test;' -U postgres
   - bundle exec rake db:migrate db:seed_fu
 
