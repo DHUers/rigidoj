@@ -11,6 +11,7 @@ class Contest < ActiveRecord::Base
   scope :delayed, -> { where(contest_status: 'delayed') }
   scope :finished, -> { where(contest_status: 'finished') }
 
+  before_create :create_slug
   before_save :cook
 
   def self.latest(limit = 3)
@@ -25,12 +26,16 @@ class Contest < ActiveRecord::Base
   end
 
   def progress
-    progress = (Time.now - started_at).to_f / (end_at - started_at) * 100
+    progress = (Time.now - started_at).to_f / (end_time - started_at) * 100
     progress >= 100 ? 100 : progress
   end
 
   def end_time
     delayed_till
+  end
+
+  def create_slug
+    self.slug = Slug.for(title, 'contest')
   end
 end
 

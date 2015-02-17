@@ -1,4 +1,5 @@
 require 'pretty_text'
+require 'slug'
 
 class Problem < ActiveRecord::Base
   include Searchable
@@ -20,6 +21,7 @@ class Problem < ActiveRecord::Base
   validates :raw, presence: true
 
   before_save :cook
+  before_create :create_slug
 
   VALID_DESCRIPTION_CLASS_NAMES = %w(description
                                      input
@@ -86,6 +88,10 @@ class Problem < ActiveRecord::Base
     cooked = HtmlScrubber.scrub(processed).squish
     blurb = TextHelper.truncate(cooked, length: 200)
     Sanitize.clean(blurb)
+  end
+
+  def create_slug
+    self.slug = Slug.for(title, 'problem')
   end
 end
 

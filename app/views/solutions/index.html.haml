@@ -27,7 +27,7 @@
                 %tr
                   %td= s.updated_at
                   %td= s.solution_status
-                  %td= link_to s.problem_id, problem_path(s.problem_id)
+                  %td= link_to s.problem.id, show_problem_path(s.problem.slug, s.problem.id)
                   %td= s.time_usage == 0 ? '-' : s.time_usage
                   %td= s.source_length == 0 ? '-' : s.source_length
                   %td= s.platform

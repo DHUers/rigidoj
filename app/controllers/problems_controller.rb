@@ -1,6 +1,8 @@
 class ProblemsController < ApplicationController
   def index
     @problems = policy_scope(Problem.published).order(:id).page(params[:page]).per(20)
+
+    render :index
   end
 
   def new
@@ -27,7 +29,7 @@ class ProblemsController < ApplicationController
     authorize @problem
 
     if @problem.save
-      redirect_to problem_path(@problem)
+      redirect_to show_problem_path(@problem.slug, @problem.id)
     else
       flash[:danger] = 'Something wrong when creating problem.'
       render :new

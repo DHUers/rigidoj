@@ -14,7 +14,7 @@ class SolutionsController < ApplicationController
 
     if @solution.save
       publish_to_judgers
-      redirect_to problem_path(@solution.problem)
+      redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)
     else
       render 'new'
     end

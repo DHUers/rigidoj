@@ -6,12 +6,14 @@ Rails.application.routes.draw do
     get '/joined_contests', to: 'users#joined_contests', as: :joined_contests
   end
 
-  resources :contests
+  resources :contests, except: :show
+  get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest
   resources :posts
   resources :solutions
-  resources :problems do
+  resources :problems, except: :show do
     resources :solutions
   end
+  get '/p/:slug/:id', to: 'problems#show', constraints: {id: /\d+/}, as: :show_problem
   post '/problems/import', to: 'problems#import'
   get '/problems/:id/excerpt', to: 'problems#excerpt'
 

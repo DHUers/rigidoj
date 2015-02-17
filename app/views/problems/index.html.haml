@@ -29,7 +29,7 @@
             - @problems.each do |p|
               %tr
                 %td= p.id
-                %td= link_to p.title, problem_path(p)
-                %td= p.submission_count > 0 ? "#{p.accepted_count} / #{p.submission_count}" : '-'
-                %td= "#{p.accepted_rate}"
+                %td= link_to p.title, show_problem_path(p.slug, p.id)
+                %td= p.submission_count > 0 ? p.submission_count : '-'
+                %td= p.accepted_rate
     = paginate @problems, window: 3
