@@ -3,8 +3,8 @@ var ready = function() {
   var initalValue = $('#problem_judge_type').val();
 
   // select different group based on judge type
-  $('.judge-source-group').each(function(_, v) {
-    if ($(v).data('type') === initalValue) {
+  $('.judge-vendor-group').each(function(_, v) {
+    if ($(v).data('type').split(' ').indexOf(initalValue) !== -1) {
       $(this).removeClass('hidden');
     } else {
       $(this).addClass('hidden');
@@ -12,8 +12,8 @@ var ready = function() {
   });
   $('#problem_judge_type').on('change', function() {
     var selectedValue = $(this).val();
-    $('.judge-source-group').each(function(_, v) {
-      if ($(v).data('type') === selectedValue) {
+    $('.judge-vendor-group').each(function(_, v) {
+      if ($(v).data('type').split(' ').indexOf(selectedValue) !== -1) {
         $(this).removeClass('hidden');
       } else {
         $(this).addClass('hidden');
