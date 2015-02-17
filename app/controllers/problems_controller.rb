@@ -9,7 +9,12 @@ class ProblemsController < ApplicationController
     vendor = params[:vendor]
     id = params[:id]
     puts vendor, id
-    @problem = vendor && id ? ProblemDownloader.download_and_create_problem(vendor, id) : nil
+    @problem = begin
+      vendor && id ? ProblemDownloader.download_and_create_problem(vendor, id) : nil
+    rescue
+      flash[:danger] = 'Problem downloader encounters a error, report this would be very helpful.'
+      nil
+    end
     @problem ||= Problem.new
     authorize @problem
 
