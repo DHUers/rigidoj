@@ -52,9 +52,6 @@ var ready = function() {
     $(this).closest('.additional-limit-group').remove();
   });
 
-  $('').closest('form').submit(function() {
-    $('meta[name="csrf-token"]');
-  });
 };
 
 $(document).ready(ready);

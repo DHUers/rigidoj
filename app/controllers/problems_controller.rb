@@ -4,14 +4,22 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @problem = Problem.new
+    vendor = params[:vendor]
+    id = params[:id]
+    puts vendor, id
+    @problem = vendor && id ? ProblemDownloader.download_and_create_problem(vendor, id) : nil
+    @problem ||= Problem.new
     authorize @problem
+
+    render :new
   end
 
   def import
-    @problem = ProblemDownloader.download_and_create_problem(params[:vendor].to_s, params[:id])
-    authorize @problem
-    render 'new'
+    if params[:vendor].to_s && params[:id].to_s
+      render nothing: true, location: new_problem_path(vendor: params[:vendor], id: params[:id]), status: 303
+    else
+      render nothing: true, status: 404
+    end
   end
 
   def create
@@ -19,17 +27,17 @@ class ProblemsController < ApplicationController
     authorize @problem
 
     if @problem.save
-      redirect_to 'show'
+      redirect_to problem_path(@problem)
     else
       flash[:danger] = 'Something wrong when creating problem.'
-      render 'new'
+      render :new
     end
   end
 
   def show
     load_resource
 
-    render 'show'
+    render :show
   end
 
   def excerpt

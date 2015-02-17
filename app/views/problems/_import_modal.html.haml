@@ -1,0 +1,27 @@
+#import-problem.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
+  .modal-dialog
+    .modal-content
+      = form_for :import, {url: '/problems/import', accept: {charset: 'UTF-8'}, method: :post} do |f|
+        .modal-header
+          %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
+            %span{aria: {hidden: 'true'}}
+              &times;
+          %h4#import-problem-label.modal-title
+            Import new problem
+        .modal-body
+          .form-horizontal
+            .form-group
+              %label.control-label.col-xs-3{for: 'import-problem-from-vendor'}
+                Vendor
+              .col-xs-8
+                = select_tag :vendor, options_for_select(ProblemDownloader::AVAILABLE_STRATEGIES_LIST), id: 'import-problem-from-vendor', class: 'form-control'
+            .form-group
+              %label.control-label.col-xs-3{for: 'import-problem-from-vendor-index'}
+                Problem ID
+              .col-xs-8
+                = text_field_tag :id, '', id: 'import-problem-from-vendor-index', class: 'form-control'
+        .modal-footer
+          %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}
+            Close
+          %button{type: 'submit', class: 'btn btn-primary'}
+            Import

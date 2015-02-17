@@ -17,11 +17,16 @@
         = @problem.id
         = @problem.title
 .row
-  .col-xs-9
-    .problem-body
-      :preserve
-        #{raw @problem.baked}
+  .col-xs-9.problem-body
+    :preserve
+      #{raw @problem.baked}
   .col-xs-3
-    %ul.actions.problem-actions
-      %li= link_to 'Submit', new_problem_solution_path(@problem)
-      %li= link_to 'Submitted records', problem_solutions_path(@problem)
+    %ul.action-list.problem-actions.sticky
+      %li
+        %a{href: new_problem_solution_path(@problem)}
+          %i.fa.fa-plus-circle
+          Submit
+      %li
+        %a{href: problem_solutions_path(@problem)}
+          %i.fa.fa-history
+          Submitted records

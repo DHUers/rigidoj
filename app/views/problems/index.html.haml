@@ -9,6 +9,10 @@
       %li
         %a{href: new_problem_path}
           New problem
+      %li
+        %a{href: '#', data: {toggle: 'modal', target: '#import-problem'}}
+          Import new problem
+  = render partial: 'problems/import_modal'
 .row
   .col-xs-8
     .panel.panel-default
@@ -21,9 +25,9 @@
             %th Title
             %th Submitted
             %th AC%
-          %tbody
+          %tbody.row-clickable{data: {element: 'tr'}}
             - @problems.each do |p|
-              %tr.row-clickable
+              %tr
                 %td= p.id
                 %td= link_to p.title, problem_path(p)
                 %td= p.submission_count > 0 ? "#{p.accepted_count} / #{p.submission_count}" : '-'

@@ -2,6 +2,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
 .profiler-results {
   top: $navbar-height + 1 !important;
 }
@@ -94,43 +98,4 @@ html.turbolinks-progress-bar::before {
 .has-spinner.active .spinner {
   display: block;
   cursor: progress;
-}
-
-.timeframe-group {
-  display: inline-block;
-  padding-right: 2em;
-}
-.timeframe-group time {
-  display: block;
-}
-
-.contest-item {
-  padding: 0;
-  cursor: pointer;
-}
-
-.contest-content {
-  position: relative;
-  padding: 1em;
-}
-.contest-content h2 {
-  margin: 0;
-}
-.contest-content .stats {
-  position: absolute;
-  bottom: 1em;
-  right: 0;
-}
-.contest-content .stats div {
-  padding-top: 1em;
-}
-.contest-content .stats .contest-stat-count {
-  display: block;
-}
-
-.admin-wrench {
-  position: fixed;
-  top: 5em;
-  right: 2em;
-  z-index: 1000;
 }

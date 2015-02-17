@@ -27,6 +27,8 @@
 //= require select2
 //= require typeahead.bundle
 //= require message-bus
+//= require jquery.waypoints
+//= require sticky
 //= require_self
 //= require_tree .
 
@@ -66,6 +68,20 @@ var ready = function() {
       $.each(data, function() {
         notificationContainer.prepend("<li role='presentation'>" + this.data + "</li>");
       });
+    });
+  });
+
+  if ($('.sticky').length != 0) {
+    var sticky = new Waypoint.Sticky({
+      element: $('.sticky'),
+      offset: 70
+    });
+  }
+
+  $('.row-clickable').each(function() {
+    var element = $(this).data('element');
+    $(this).on('click', element, function() {
+      window.location.href = $(this).find('a').attr('href');
     });
   });
 };

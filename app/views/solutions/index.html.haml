@@ -22,9 +22,9 @@
               %th Source length
               %th Platform
               %th Author
-            %tbody
+            %tbody.row-clickable
               - @solutions.each do |s|
-                %tr.row-clickable
+                %tr
                   %td= s.updated_at
                   %td= s.solution_status
                   %td= link_to s.problem_id, problem_path(s.problem_id)
