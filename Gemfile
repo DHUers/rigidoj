@@ -42,7 +42,6 @@ gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'sanitize'
 gem 'fast_xor'
-gem 'fog', require: false
 gem 'rmmseg-cpp', require: false
 gem 'composite_primary_keys', '~> 8.0.0'
 gem 'whenever', require: false

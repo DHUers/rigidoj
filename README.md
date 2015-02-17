@@ -1,11 +1,12 @@
-[![Build Status](https://travis-ci.org/fantasticfears/rigidoj.svg)](https://travis-ci.org/fantasticfears/rigidoj)
-[![Code Climate](https://codeclimate.com/github/fantasticfears/rigidoj/badges/gpa.svg)](https://codeclimate.com/github/fantasticfears/rigidoj)
-[![Test Coverage](https://codeclimate.com/github/fantasticfears/rigidoj/badges/coverage.svg)](https://codeclimate.com/github/fantasticfears/rigidoj)
+[![Build Status](https://travis-ci.org/DHUers/rigidoj.svg?branch=master)](https://travis-ci.org/DHUers/rigidoj)
+[![Code Climate](https://codeclimate.com/github/DHUers/rigidoj/badges/gpa.svg)](https://codeclimate.com/github/DHUers/rigidoj)
+[![Test Coverage](https://codeclimate.com/github/DHUers/rigidoj/badges/coverage.svg)](https://codeclimate.com/github/DHUers/rigidoj)
 
 # RigidOJ
-RigidOJ is an online judge system for ACM & its tranining programing contests.
+RigidOJ is an online judge system for ACM & its training process.
 
 ## Features
+
 - Import problems from popular ACM sites.
 - Manage all problems, hold contests.
 - Markdown support.
@@ -22,4 +23,4 @@ Browser:
 Visit the [GitHub Issues][1].
 
 
-[1]: https://github.com/fantasticfears/rigidoj/issues
+[1]: https://github.com/DHUers/rigidoj/issues

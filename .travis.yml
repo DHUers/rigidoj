@@ -18,31 +18,31 @@ sudo: true
 cache: bundler
 
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
+  - sudo apt-get install postgresql-client-common postgresql-9.4 postgresql-contrib-9.4
+  - echo "local all all trust" | sudo tee /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo service postgresql restart
 
 before_script:
   - psql -c 'CREATE DATABASE rigidoj_test;' -U postgres
-  - bundle exec rake db:migrate db:seed_fu
-
-before_install:
- - sudo apt-get update
- - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
- - sudo apt-get install postgresql-client-common postgresql-9.4 postgresql-contrib-9.4
- - echo "local all all trust" | sudo tee /etc/postgresql/9.4/main/pg_hba.conf
- - sudo service postgresql restart
+  - bundle exec rake db:migrate
 
 bundler_args: --without development --deployment --retry=3 --jobs=3
 
 addons:
-  # TODO: go back to addons when travis supports pg 9.4
-  # https://github.com/travis-ci/travis-ci/issues/2983
-  # postgresql: 9.4
   code_climate:
-    repo_token: e756927d490a667f8c9bd8aafc5311598fd29e190b0ca8adde47b9006b5d0842
+    repo_token: c6032340721cc1a1568373afb2267d4d48c0add3b12d2ba8d1d77dd7fd2644a8
 
 script: 'bundle exec rspec'
+
+services:
+  - redis-server
 
 notifications:
   slack:
     rooms:
-      - algalon:WMv6lsjFAFOWoKTSevTWsbu4#rigidoj
+      - algalon:KcGC0IdVDQYXCwAnucMUqEG7#rigidoj
