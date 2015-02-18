@@ -4,7 +4,7 @@
     = raw @contest.description_baked
     .timeframe
       - progress = @contest.progress
-      - if progress > 0
+      - if progress > 0 && progress < 100
         .progress
           .progress-bar{role: 'progressbar',
               aria: {valuemin: 0, valuemax: 100, valuenow: progress},
