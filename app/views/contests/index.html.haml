@@ -8,27 +8,46 @@
     %li
       %a{href: new_contest_path}
         New Contest
-.row
-  .col-xs-10
-    %ul.list-group.contest-list.incoming-contests
-      %h1 Incoming contests
-      - @incoming_contests.each do |c|
-        %li.list-group-item.contest-item
-          = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
   .col-xs-10
-    %ul.list-group.contest-list.delayed-contests
-      %h1 Delayed contests
-      - @delayed_contests.each do |c|
-        %li.list-group-item.contest-item
-          = render partial: 'contests/contest', locals: {:@contest => c}
+    .panel{class: @incoming_contests.blank? ? 'panel-default' : ' panel-info'}
+      .panel-heading
+        %h4
+          Incoming contests
+      - if @incoming_contests.blank?
+        .panel-body
+          No incoming contests.
+      - else
+        %ul.list-group.contest-list.incoming-contests.row-clickable{data: {element: 'li'}}
+          - @incoming_contests.each do |c|
+            %li.list-group-item.contest-item
+              = render partial: 'contests/contest', locals: {:@contest => c}
+
+- unless @delayed_contests.blank?
+  .row
+    .col-xs-10
+      .panel.panel-warning
+        .panel-heading
+          %h4
+            Delayed contests
+        %ul.list-group.contest-list.delayed-contests.row-clickable{data: {element: 'li'}}
+          - @delayed_contests.each do |c|
+            %li.list-group-item.contest-item
+              = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
   .col-xs-10
-    %ul.list-group.contest-list.finished-contests
-      %h1 Finished contests
-      - @finished_contests.each do |c|
-        %li.list-group-item.contest-item
-          = render partial: 'contests/contest', locals: {:@contest => c}
+    .panel.panel-default
+      .panel-heading
+        %h4
+          Finished contests
+      - if @finished_contests.blank?
+        .panel-body
+          No finished contests.
+      - else
+        %ul.list-group.contest-list.finished-contests.row-clickable{data: {element: 'li'}}
+          - @finished_contests.each do |c|
+            %li.list-group-item.contest-item
+              = render partial: 'contests/contest', locals: {:@contest => c}
 

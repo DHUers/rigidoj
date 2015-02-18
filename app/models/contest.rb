@@ -8,9 +8,9 @@ class Contest < ActiveRecord::Base
 
   enum contest_status: [:incoming, :delayed, :finished]
 
-  scope :incoming, -> { where(contest_status: 'incoming') }
-  scope :delayed, -> { where(contest_status: 'delayed') }
-  scope :finished, -> { where(contest_status: 'finished') }
+  scope :incoming, -> { where(contest_status: Contest.contest_statuses['incoming']) }
+  scope :delayed, -> { where(contest_status: Contest.contest_statuses['delayed']) }
+  scope :finished, -> { where(contest_status: Contest.contest_statuses['finished']) }
 
   before_create :create_slug
   before_save :cook
@@ -77,4 +77,5 @@ end
 #  end_at            :datetime         not null
 #  delayed_till      :datetime
 #  contest_type      :integer          default("0"), not null
+#  slug              :string
 #

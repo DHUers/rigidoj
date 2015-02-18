@@ -100,3 +100,10 @@ html.turbolinks-progress-bar::before {
   display: block;
   cursor: progress;
 }
+
+.table-hover:hover a, .list-group:hover a {
+  text-decoration: none;
+}
+.panel-heading h4.pull-left {
+  padding-top: 0.5em;
+}

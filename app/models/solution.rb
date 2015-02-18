@@ -76,5 +76,4 @@ end
 #  report          :text             default("")
 #  solution_status :string           default(""), not null
 #  source_length   :integer          default("0")
-#  slug            :string
 #

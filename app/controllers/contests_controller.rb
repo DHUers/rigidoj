@@ -9,10 +9,12 @@ class ContestsController < ApplicationController
     @contest = Contest.new(contest_params)
     new_problems_list = MultiJson.load(params[:problems]).uniq.map {|s| s.to_i}
                             .delete_if {|p| p <= 0 || p > Problem.count}
-    new_problems_list.each {|p| @contest.problems << Problem.find(p)}
 
     if @contest.save
-      redirect_to 'show'
+      new_problems_list.each {|p| @contest.problems << Problem.find(p)}
+      redirect_to show_contest_path(@contest.slug, @contest.id)
+    else
+      render 'new'
     end
   end
 
@@ -26,8 +28,6 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
-
-    render 'show'
   end
 
   def edit
