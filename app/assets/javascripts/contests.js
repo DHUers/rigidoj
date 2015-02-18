@@ -54,6 +54,27 @@ var ready = function() {
   problemLists.on('click', '.delete-problem', function() {
     $(this).parent().remove();
   });
+
+  $('.datetimepicker').each(function() {
+    $(this).datetimepicker({
+      format: 'YYYY-MM-DD HH:mm'
+      });
+  });
+  var startAtDateTimePicker = $('#started-at-datetimepicker'),
+      endAtDateTimePicker = $('#end-at-datetimepicker'),
+      delayedTillDateTimePicker = $('#delayed-till-datetimepicker');
+  startAtDateTimePicker.on('dp.change', function(e) {
+    endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
+    delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
+  });
+  endAtDateTimePicker.on('dp.change', function(e) {
+    startAtDateTimePicker.data('DateTimePicker').maxDate(e.date);
+    delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
+  });
+  delayedTillDateTimePicker.on('dp.change', function(e) {
+    startAtDateTimePicker.data('DateTimePicker').minDate(e.date);
+    endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
+  });
 };
 
 $(document).ready(ready);

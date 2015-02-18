@@ -1,4 +1,5 @@
 require_dependency 'pretty_text'
+require 'date'
 
 class Contest < ActiveRecord::Base
   belongs_to :user
@@ -36,6 +37,27 @@ class Contest < ActiveRecord::Base
 
   def create_slug
     self.slug = Slug.for(title, 'contest')
+  end
+
+  def started_at=(started_at)
+    write_attribute :started_at, DateTime.parse(started_at)
+    self.started_at
+  rescue ArgumentError
+    errors.add(:started_at, 'is invalid')
+  end
+
+  def end_at=(end_at)
+    write_attribute :end_at, DateTime.parse(end_at)
+    self.end_at
+  rescue ArgumentError
+    errors.add(:end_at, 'is invalid')
+  end
+
+  def delayed_till=(delayed_till)
+    write_attribute :delayed_till, DateTime.parse(delayed_till)
+    self.delayed_till
+  rescue ArgumentError
+    errors.add(:delayed_till, 'is invalid')
   end
 end
 

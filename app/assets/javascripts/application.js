@@ -29,6 +29,8 @@
 //= require message-bus
 //= require jquery.waypoints
 //= require sticky
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_self
 //= require_tree .
 

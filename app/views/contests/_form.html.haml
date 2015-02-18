@@ -24,16 +24,28 @@
   %h3 Time settings
   .row
     .col-xs-2
-      %label Started at
+      %label{for: 'started-at-datetimepicker'}
+        Started at
     .col-xs-10
-      = f.datetime_select :started_at
+      #started-at-datetimepicker.input-group.datetimepicker
+        = f.text_field :started_at, class: 'form-control'
+        %span.input-group-addon
+          %i.fa.fa-calendar
   .row
     .col-xs-2
-      %label End at
+      %label{for: 'end-at-datetimepicker'}
+        End at
     .col-xs-10
-      = f.datetime_select :end_at
+      #end-at-datetimepicker.input-group.datetimepicker
+        = f.text_field :end_at, class: 'form-control'
+        %span.input-group-addon
+          %i.fa.fa-calendar
   .row
     .col-xs-2
-      %label Delayed till
+      %label{for: 'delayed-till-datetimepicker'}
+        Delayed till
     .col-xs-10
-      = f.datetime_select :delayed_till
+      #delayed-till-datetimepicker.input-group.datetimepicker
+        = f.text_field :delayed_till, class: 'form-control'
+        %span.input-group-addon
+          %i.fa.fa-calendar

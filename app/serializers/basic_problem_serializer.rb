@@ -19,7 +19,7 @@ class BasicProblemSerializer < ActiveModel::Serializer
       }
     when :program_comparison
       {
-        judger_program_url: object.judger_program_url,
+        judger_program_url: object.judger_program.read,
         judger_program_platform: object.judger_program_platform,
         input_file_url: object.input_file_url,
         output_file_url: object.output_file_url
