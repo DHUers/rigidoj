@@ -19,18 +19,15 @@
 .row
   .col-xs-9.problem-body
     .meta
-      .judge-limits
+      %ul.list-inline.judge-limits
         - @problem.judge_limits.each do |platform, limit|
-          .row.judge-limit-group
-            .col-xs-2
-              = platform
-            .col-xs-10
-              %span.time-limit= limit[:time]
-              %span.memory-limit= limit[:memory]
+          %li.time-limit
+            = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
+          %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
     :preserve
       #{raw @problem.baked}
   .col-xs-3
-    %ul.action-list.problem-actions.sticky
+    %ul.action-list.problem-actions.sticky.list-unstyled
       %li
         %a{href: new_problem_solution_path(@problem)}
           %i.fa.fa-plus-circle
