@@ -1,33 +1,20 @@
 class BasicProblemSerializer < ActiveModel::Serializer
   attributes :id, :judge_type, :judge_data
 
-  def limits
-    limits = {default: {
-        time: object.default_time_limit,
-        memory: object.default_memory_limit}}
-    object.additional_limits.each do |l|
-      limits.store(l['platform'], {'time' => l['time'], 'memory' => l['memory']})
-    end
-  end
-
   def judge_data
-    case object.judge_type.to_sym
-    when :full_text
-      {
-        input_file_url: object.input_file_url,
-        output_file_url: object.output_file_url
-      }
-    when :program_comparison
-      {
-        judger_program_url: object.judger_program.read,
-        judger_program_platform: object.judger_program_platform,
-        input_file_url: object.input_file_url,
-        output_file_url: object.output_file_url
-      }
-    when :remote_proxy
-      {
-        vendor: object.remote_proxy_vendor
-      }
+    problem_judge_type = object.judge_type.to_sym
+    data = if problem_judge_type == :remote_proxy
+             {vendor: object.remote_proxy_vendor}
+           else
+             {input_file_url: object.input_file_url,
+              output_file_url: object.output_file_url,
+              judge_limits: object.judge_limits,
+              per_case_limit: object.per_case_limit}
+           end
+    if (problem_judge_type == :program_comparison)
+      data.merge!({judger_program_url: object.judger_program.read,
+                   judger_program_platform: object.judger_program_platform})
     end
+    data
   end
 end

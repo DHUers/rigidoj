@@ -18,6 +18,15 @@
         = @problem.title
 .row
   .col-xs-9.problem-body
+    .meta
+      .judge-limits
+        - @problem.judge_limits.each do |platform, limit|
+          .row.judge-limit-group
+            .col-xs-2
+              = platform
+            .col-xs-10
+              %span.time-limit= limit[:time]
+              %span.memory-limit= limit[:memory]
     :preserve
       #{raw @problem.baked}
   .col-xs-3

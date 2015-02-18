@@ -93,6 +93,16 @@ class Problem < ActiveRecord::Base
   def create_slug
     self.slug = Slug.for(title, 'problem')
   end
+
+  def judge_limits
+    limits = {default: {
+        time: default_time_limit,
+        memory: default_memory_limit}}
+    additional_limits.each do |l|
+      limits.store(l['platform'], {time: l['timeLimit'], memory: l['memoryLimit']})
+    end
+    limits
+  end
 end
 
 # == Schema Information
@@ -122,4 +132,5 @@ end
 #  judger_program_uuid     :string
 #  submission_count        :integer          default("0"), not null
 #  accepted_count          :integer          default("0"), not null
+#  per_case_limit          :boolean          default("false"), not null
 #
