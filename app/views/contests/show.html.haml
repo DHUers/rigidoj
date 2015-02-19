@@ -10,14 +10,29 @@
         %a{href: edit_contest_path(@contest)}
           Edit contest
 .row
-  .col-xs-12
-    .page-header
-      %h1.contest-title= @contest.title
-.row
   .col-xs-9
-    .contest-content
-      = raw @contest.description_baked
-    .contest-problem-list
-      - @contest.problems.each do |p|
-        .well
-          = render partial: 'problems/problem', locals: {:@problem => p, removable: false}
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          %h1.contest-title= @contest.title
+      .panel-body
+        .contest-content
+          = raw @contest.description_baked
+      %ul.list-group.contest-problem-list
+        - @contest.problems.each do |p|
+          %li.list-group-item
+            = render partial: 'problems/contest_problem', locals: {:@problem => p, removable: false}
+  .col-xs-3
+    %ul.action-list.contest-actions.sticky.list-unstyled
+      %li
+        %a{href: contest_ranklist_path(@contest.slug, @contest.id)}
+          %i.fa.fa-list
+          Ranklist
+      %li
+        %a{href: new_problem_solution_path(@problem)}
+          %i.fa.fa-plus-circle
+          Submit
+      %li
+        %a{href: problem_solutions_path(@problem)}
+          %i.fa.fa-history
+          Submitted records

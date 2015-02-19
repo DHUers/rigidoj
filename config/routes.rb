@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :contests, except: :show
   get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest
+  get '/c/:slug/:id/ranklist', to: 'contests#ranklist', constraints: {id: /\d+/}, as: :contest_ranklist
   resources :posts
   resources :solutions
   resources :problems, except: :show do

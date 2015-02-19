@@ -10,24 +10,23 @@
         %a{href: edit_problem_path(@problem)}
           Edit problem
 
-.row
-  .col-xs-12
-    .page-header
+.panel.panel-default
+  .panel-heading
+    .panel-title
       %h1.problem-title
         = @problem.id
         = @problem.title
-.row
-  .col-xs-9.problem-body
     .meta
       %ul.list-inline.judge-limits
         - @problem.judge_limits.each do |platform, limit|
           %li.time-limit
             = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
           %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
-    :preserve
-      #{raw @problem.baked}
-  .col-xs-3
-    %ul.action-list.problem-actions.sticky.list-unstyled
+  .panel-body
+    .col-xs-9.problem-body
+      :preserve
+        #{raw @problem.baked}
+    %ul.col-xs-3.action-list.problem-actions.sticky.list-unstyled
       %li
         %a{href: new_problem_solution_path(@problem)}
           %i.fa.fa-plus-circle
