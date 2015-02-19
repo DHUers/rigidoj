@@ -48,8 +48,8 @@
   .row
     .col-xs-4
       = f.label :judge_type
-      = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparasion'], ['Remote proxy', 'remote_proxy']], @problem.judge_type || 'full_text'), {}, class: 'form-control'
-.form-group.judge-vendor-group{data: {type: 'full_text program_comparasion'}}
+      = f.select :judge_type, options_for_select([['Full text', 'full_text'], ['Program comparasion', 'program_comparison'], ['Remote proxy', 'remote_proxy']], @problem.judge_type || 'full_text'), {}, class: 'form-control'
+.form-group.judge-vendor-group{data: {type: 'full_text program_comparison'}}
   .row
     .col-xs-6
       = f.label :input_file
@@ -57,7 +57,7 @@
     .col-xs-6
       = f.label :output_file
       = f.file_field :output_file
-.form-group.judge-vendor-group{data: {type: 'program_comparasion'}}
+.form-group.judge-vendor-group{data: {type: 'program_comparison'}}
   .row
     .col-xs-6
       = f.label :judger_program
