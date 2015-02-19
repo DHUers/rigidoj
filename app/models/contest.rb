@@ -6,11 +6,16 @@ class Contest < ActiveRecord::Base
   has_many :contest_problems
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
 
+  enum contest_type: [:normal, :delayable]
   enum contest_status: [:incoming, :delayed, :finished]
 
   scope :incoming, -> { where(contest_status: Contest.contest_statuses['incoming']) }
   scope :delayed, -> { where(contest_status: Contest.contest_statuses['delayed']) }
   scope :finished, -> { where(contest_status: Contest.contest_statuses['finished']) }
+
+  validates_presence_of :title
+  validates_presence_of :description_raw
+  validates_with ::ContestTypeValidator
 
   before_create :create_slug
   before_save :cook

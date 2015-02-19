@@ -8,7 +8,7 @@ class Solution < ActiveRecord::Base
   #                        :memory_limit_exceeded, :presentation_error,
   #                        :runtime_error, :compile_error, :output_limit_exceeded]
 
-  default_scope { order('created_at DESC')}
+  default_scope {order('created_at DESC')}
 
   validates_presence_of :source
   validates_presence_of :problem_id

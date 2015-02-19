@@ -36,7 +36,7 @@ class Problem < ActiveRecord::Base
   end
 
   def cook
-    self.baked = PrettyText::cook(self.raw)#add_description_class
+      self.baked = add_description_class(PrettyText::cook(self.raw))
   end
 
   # Separate elements by header tag for better styling

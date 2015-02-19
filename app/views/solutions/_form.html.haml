@@ -1,8 +1,10 @@
+= render 'shared/error_messages', record: @solution
 .form-group
   .row
     .col-xs-8
       = f.label :problem_id
-      = f.text_field :problem_id, class: 'form-control', disabled: params[:problem_id] ? true : false
+      = f.text_field :problem_id, class: 'form-control',
+          disabled: params[:problem_id] ? true : false, min: 1, step: 1, type: 'number'
     .col-xs-4
       = f.label :platform
       = f.select :platform, platform_select_options, {}, class: 'form-control'
