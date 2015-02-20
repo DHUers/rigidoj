@@ -6,10 +6,10 @@
 
 # Ignore bundler config.
 /.bundle
-.idea
-public/uploads
-public/secure_uploads
-db/structure.sql
+/.idea
+/public/uploads
+/public/secure_uploads
+/db/structure.sql
 
 # Ignore all logfiles and tempfiles.
 /log/*.log

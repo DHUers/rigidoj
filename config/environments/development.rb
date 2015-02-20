@@ -51,4 +51,7 @@ Rails.application.configure do
   config.assets.cache_store = :memory_store
   config.cache_store = :null_store
   config.action_controller.perform_caching = true
+
+  config.serve_static_files = true
+  config.assets.paths << Rails.root.join('public', 'secure_uploads')
 end
