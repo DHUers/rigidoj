@@ -18,10 +18,9 @@
       .panel-body
         .contest-content
           = raw @contest.description_baked
-      %ul.list-group.contest-problem-list
-        - @contest.problems.each do |p|
-          %li.list-group-item
-            = render partial: 'problems/contest_problem', locals: {:@problem => p, removable: false}
+    .contest-problem-list
+      - @contest.problems.each do |p|
+        = render partial: 'problems/contest_problem', locals: {:@problem => p, removable: false}
   .col-xs-3
     %ul.action-list.contest-actions.sticky.list-unstyled
       %li
