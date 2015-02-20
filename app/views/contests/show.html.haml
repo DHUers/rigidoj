@@ -11,7 +11,7 @@
           Edit contest
 .row
   .col-xs-9
-    .panel.panel-default
+    .panel{class: @contest.progress >= 0 && @contest.progress <= 100 ? 'panel-success' : 'panel-info'}
       .panel-heading
         .panel-title
           %h1.contest-title
