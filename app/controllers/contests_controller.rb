@@ -30,7 +30,7 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
   end
 
-  def ranklist
+  def ranking
     @contest = Contest.find(params[:id])
   end
 
