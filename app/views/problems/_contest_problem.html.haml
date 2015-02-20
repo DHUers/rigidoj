@@ -2,8 +2,9 @@
   .panel-heading
     .panel-title
       %h1.problem-title
-        = @problem.id
-        = @problem.title
+        %a.anchor{href: "##{@problem.slug}", id: @problem.slug}
+          = @problem.id
+          = @problem.title
     .meta
       %ul.list-inline.judge-limits
         - @problem.judge_limits.each do |platform, limit|

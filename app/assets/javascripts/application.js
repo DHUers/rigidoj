@@ -87,6 +87,13 @@ var ready = function() {
       window.location.href = $(this).find('a').attr('href');
     });
   });
+
+  $('time.realtime').each(function() {
+    var ele = $(this);
+    setInterval(function() {
+      ele.text(moment().format('hh:mm:ss'));
+    }, 1000);
+  });
 };
 
 $(document).ready(ready);

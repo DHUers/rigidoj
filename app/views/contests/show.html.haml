@@ -14,24 +14,61 @@
     .panel.panel-default
       .panel-heading
         .panel-title
-          %h1.contest-title= @contest.title
+          %h1.contest-title
+            %a.anchor{href: "#contest-heading", id: 'contest-heading-anchor'}= @contest.title
       .panel-body
         .contest-content
           = raw @contest.description_baked
+        .timeframe
+          - progress = @contest.progress
+          - if progress > 0 && progress < 100
+            .progress
+              .progress-bar{role: 'progressbar',
+                  aria: {valuemin: 0, valuemax: 100, valuenow: progress},
+                  style: "width: #{progress <= 60 ? progress : 60}%",
+                  class: progress <= 60 ? 'active progress-bar-striped' : nil}
+              - if progress > 60
+                .progress-bar.progress-bar-warning{role: 'progressbar',
+                    style: "width: #{progress <= 85 ? progress - 60 : 25}%",
+                    class: progress <= 85 ? 'active progress-bar-striped' : nil}
+              - if progress > 85
+                .progress-bar.progress-bar-danger{role: 'progressbar',
+                    style: "width: #{progress - 85}%",
+                    class: Time.now <= @contest.end_time ? 'active progress-bar-striped' : nil}
+          .timeframe-group
+            %label{for: "#{@contest.id}-start"}= 'start at'
+            %time{id: "#{@contest.id}-start", datetime: @contest.started_at}= @contest.started_at.to_formatted_s(:short)
+          .timeframe-group
+            %label{for: "#{@contest.id}-end"}= 'end at'
+            %time{id: "#{@contest.id}-end", datetime: @contest.end_at}= @contest.end_at.to_formatted_s(:short)
+          .timeframe-group
+            %label{for: "#{@contest.id}-delayed"}= 'delayed till'
+            %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
     .contest-problem-list
       - @contest.problems.each do |p|
-        = render partial: 'problems/contest_problem', locals: {:@problem => p, removable: false}
+        = render partial: 'problems/contest_problem', locals: {:@problem => p}
   .col-xs-3
-    %ul.action-list.contest-actions.sticky.list-unstyled
+    %ul#toc.action-list.contest-actions.sticky.list-unstyled
       %li
-        %a{href: contest_ranklist_path(@contest.slug, @contest.id)}
-          %i.fa.fa-list
-          Ranklist
-      %li
-        %a{href: new_problem_solution_path(@problem)}
+        %a
           %i.fa.fa-plus-circle
           Submit
       %li
-        %a{href: problem_solutions_path(@problem)}
+        %a{href: contest_solutions_path(@contest.slug, @contest.id)}
           %i.fa.fa-history
           Submitted records
+      %li
+        %a{href: contest_ranking_path(@contest.slug, @contest.id)}
+          %i.fa.fa-list
+          Ranking
+      .divider
+      %li
+        %a{href: "#contest-heading"}= 'Contest'
+      - @contest.problems.each_with_index do |p,i|
+        %li
+          %a{href: "##{p.slug}"}
+            %b= "#{('A'.ord+i).chr}:"
+            = p.title
+      .divider
+      %li
+        %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
