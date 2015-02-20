@@ -62,19 +62,43 @@ var ready = function() {
   });
   var startAtDateTimePicker = $('#started-at-datetimepicker'),
       endAtDateTimePicker = $('#end-at-datetimepicker'),
-      delayedTillDateTimePicker = $('#delayed-till-datetimepicker');
+      delayedTillDateTimePicker = $('#delayed-till-datetimepicker'),
+      frozenRanklistFromDateTimePicker = $('#frozen-ranklist-from-datetimepicker');
   startAtDateTimePicker.on('dp.change', function(e) {
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
     delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
+    frozenRanklistFromDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
   endAtDateTimePicker.on('dp.change', function(e) {
     startAtDateTimePicker.data('DateTimePicker').maxDate(e.date);
     delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
+    frozenRanklistFromDateTimePicker.data('DateTimePicker').maxDate(e.date);
   });
   delayedTillDateTimePicker.on('dp.change', function(e) {
     startAtDateTimePicker.data('DateTimePicker').minDate(e.date);
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
+
+  var initalValue = $('#contest_contest_status').val();
+  // select different group based on judge type
+  $('.time-setting').each(function(_, v) {
+    if ($(v).data('type').split(' ').indexOf(initalValue) !== -1) {
+      $(this).removeClass('hidden');
+    } else {
+      $(this).addClass('hidden');
+    }
+  });
+  $('#contest_contest_status').on('change', function() {
+    var selectedValue = $(this).val();
+    $('.time-setting').each(function(_, v) {
+      if ($(v).data('type').split(' ').indexOf(selectedValue) !== -1) {
+        $(this).removeClass('hidden');
+      } else {
+        $(this).addClass('hidden');
+      }
+    });
+  });
+
 };
 
 $(document).ready(ready);

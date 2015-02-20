@@ -15,6 +15,9 @@ class Contest < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :description_raw
+  validates_presence_of :contest_status
+  validates_presence_of :started_at
+  validates_presence_of :end_at
   validates_with ::ContestTypeValidator
 
   before_create :create_slug
@@ -70,17 +73,18 @@ end
 #
 # Table name: contests
 #
-#  id                :integer          not null, primary key
-#  title             :string           not null
-#  description_raw   :text             default("")
-#  user_id           :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  description_baked :text             default("")
-#  contest_status    :integer          default("0"), not null
-#  started_at        :datetime         not null
-#  end_at            :datetime         not null
-#  delayed_till      :datetime
-#  contest_type      :integer          default("0"), not null
-#  slug              :string
+#  id                   :integer          not null, primary key
+#  title                :string           not null
+#  description_raw      :text             default("")
+#  user_id              :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  description_baked    :text             default("")
+#  contest_status       :integer          default("0"), not null
+#  started_at           :datetime         not null
+#  end_at               :datetime         not null
+#  delayed_till         :datetime
+#  contest_type         :integer          default("0"), not null
+#  slug                 :string
+#  frozen_ranklist_from :datetime
 #
