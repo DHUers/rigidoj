@@ -26,12 +26,13 @@
     .col-xs-9.problem-body
       :preserve
         #{raw @problem.baked}
-    %ul.col-xs-3.action-list.problem-actions.sticky.list-unstyled
-      %li
-        %a{href: new_problem_solution_path(@problem)}
-          %i.fa.fa-plus-circle
-          Submit
-      %li
-        %a{href: problem_solutions_path(@problem)}
-          %i.fa.fa-history
-          Submitted records
+    .col-xs-3
+      %ul.action-list.problem-actions.sticky.list-unstyled
+        %li
+          %a{href: new_problem_solution_path(@problem)}
+            %i.fa.fa-plus-circle
+            Submit
+        %li
+          %a{href: problem_solutions_path(@problem)}
+            %i.fa.fa-history
+            Submitted records
