@@ -31,6 +31,7 @@
 //= require sticky
 //= require moment
 //= require bootstrap-datetimepicker
+//= require select2
 //= require_self
 //= require_tree .
 

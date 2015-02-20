@@ -2,5 +2,6 @@
  *= require common
  *= require jquery-ui
  *= require highlightjs/default
+ *= require select2
  *= require_self
  */
