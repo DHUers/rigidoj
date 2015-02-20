@@ -2,11 +2,10 @@ class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  # enum solution_status: [:draft, :waiting, :queueing, :network_error,
-  #                        :judge_error, :other_error, :accept_answer,
-  #                        :wrong_answer, :time_limit_exceeded,
-  #                        :memory_limit_exceeded, :presentation_error,
-  #                        :runtime_error, :compile_error, :output_limit_exceeded]
+  enum solution_status: [:draft, :judging, :network_error, :judge_error,
+                         :accept_answer, :wrong_answer, :time_limit_exceeded,
+                         :memory_limit_exceeded, :presentation_error,
+                         :runtime_error, :compile_error, :output_limit_exceeded]
 
   default_scope {order('created_at DESC')}
 

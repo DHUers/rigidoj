@@ -1,28 +1,58 @@
 .row
   .col-xs-3
-    .udcard
-      = link_to current_user ? settings_profile_path : @user.avatar.large.url do
-        = image_tag @user.avatar.url, alt: 'People avatar'
-      %h1.udcard-names
-        %span.udcard-fullname= @user.name
-        %span.udcard-username= @user.username
-      %ul.udcard-details
-        - if current_user.staff? or @user.show_email
-          %li.udcard-detail
-            %i.fa.fa-envelope-o
-            %a.email{:href => "mailto:#{@user.email}"}= @user.email
-      .udcard-stats
-        = link_to user_solved_problems_path(@user), class: 'udcard-stat' do
-          %strong.udcard-stat-count= @user.user_stat.problems_solved
-          %span.text-muted Problems solved
-        = link_to user_joined_contests_path(@user), class: 'udcard-stat' do
-          %strong.udcard-stat-count= @user.user_stat.contests_joined
-          %span.text-muted Contests joined
+    = render partial: 'users/ucard', locals: {:@user => @user}
   .col-xs-9
     %ul.nav.nav-tabs
-      %li.active{:role => "presentation"}
-        %a{:href => "#"} Home
-      %li{:role => "presentation"}
-        %a{:href => "#"} Profile
-      %li{:role => "presentation"}
-        %a{:href => "#"} Messages
+      %li{role: 'presentation', class: request.path == user_path(@user) ? 'active' : nil}
+        %a{href: user_path} Problems
+      %li{role: 'presentation', class: request.path.downcase == "/users/#{@user.username_lower}/groups" ? 'active' : nil}
+        %a{href: "/users/#{@user.username_lower}/groups"} Groups
+      %li{role: 'presentation', class: request.path.downcase == "/users/#{@user.username_lower}/bookmarks" ? 'active' : nil}
+        %a{href: "/users/#{@user.username_lower}/bookmarks"} Bookmarks
+    .panel.panel-default
+      .panel-heading
+        = case request.path.downcase
+          - when "/users/#{@user.username_lower}" then 'Problem list'
+          - when "/users/#{@user.username_lower}/groups" then 'Groups'
+          - when "/users/#{@user.username_lower}/bookmarks" then 'Bookmarks'
+          - else nil
+      - case request.path.downcase
+        - when "/users/#{@user.username_lower}"
+          %table.table.table-bordered.table-hover.table-condensed
+            %thead
+              %tr
+                %th
+                  %i.fa.fa-check
+                %th
+                  Problem ID
+                %th
+                  Problem title
+            %tbody
+              %tr
+                %td
+                  %i.fa.fa-check
+                %td
+                  Dummy
+                %td
+                  Dummy
+        - when "/users/#{@user.username}/groups"
+          %table.table.table-bordered.table-hover.table-condensed
+            %thead
+              %tr
+                %th
+                  Group name
+                %th
+                  Members
+            %tbody
+              %tr
+                %td
+                  Dummy
+                %td
+                  Dummy
+        - when "/users/#{@user.username}/bookmarks"
+          %ul.list-group
+            %li.list-group-item
+              Dummy
+            %li.list-group-item
+              Dummy
+        - else nil

@@ -1,0 +1,18 @@
+.udcard
+  = link_to current_user ? settings_profile_path : @user.avatar.large.url do
+    = image_tag @user.avatar.url, alt: 'People avatar'
+  %h1.udcard-names
+    %span.udcard-fullname= @user.name
+    %span.udcard-username= @user.username
+  %ul.udcard-details
+    - if current_user.staff? or @user.show_email
+      %li.udcard-detail
+        %i.fa.fa-envelope-o
+        %a.email{:href => "mailto:#{@user.email}"}= @user.email
+  .udcard-stats
+    = link_to user_solved_problems_path(@user), class: 'udcard-stat' do
+      %strong.udcard-stat-count= @user.user_stat.problems_solved
+      %span.text-muted Problems solved
+    = link_to user_joined_contests_path(@user), class: 'udcard-stat' do
+      %strong.udcard-stat-count= @user.user_stat.contests_joined
+      %span.text-muted Contests joined

@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   resources :users, param: :username do
-    resources :favroites
     resources :notes
     get '/solved_problems', to: 'users#solved_problems', as: :solved_problems
     get '/joined_contests', to: 'users#joined_contests', as: :joined_contests
   end
+  get '/users/:username/bookmarks', to: 'bookmarks#person'
+  get '/users/:username/groups', to: 'groups#person'
 
   resources :contests, except: :show
   get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest

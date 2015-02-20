@@ -22,7 +22,7 @@
               %th Source length
               %th Platform
               %th Author
-            %tbody.row-clickable
+            %tbody
               - @solutions.each do |s|
                 %tr
                   %td= s.updated_at
@@ -31,7 +31,7 @@
                   %td= s.time_usage == 0 ? '-' : s.time_usage
                   %td= s.source_length == 0 ? '-' : s.source_length
                   %td= s.platform
-                  %td= link_to s.user.name, s.user
+                  %td= link_to s.user.username, s.user
       - else
         .panel-body
           There is no submission at this time.

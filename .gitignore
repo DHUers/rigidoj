@@ -8,6 +8,7 @@
 /.bundle
 .idea
 public/uploads
+public/secure_uploads
 db/structure.sql
 
 # Ignore all logfiles and tempfiles.
