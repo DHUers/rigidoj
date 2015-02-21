@@ -112,3 +112,15 @@ html.turbolinks-progress-bar::before {
   margin-top: -7rem;
   padding-top: 7rem;
 }
+
+.modal-full-screen {
+  width: 80%;
+  height: 80%;
+}
+.modal-full-screen .modal-body {
+  max-height: 500px;
+  overflow: auto;
+}
+.select2.select2-container {
+  width: 100% !important;
+}

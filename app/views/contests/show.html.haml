@@ -45,12 +45,12 @@
             %label{for: "#{@contest.id}-delayed"}= 'delayed till'
             %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
     .contest-problem-list
-      - @contest.problems.each do |p|
-        = render partial: 'problems/contest_problem', locals: {:@problem => p}
+      - @contest.problems.each_with_index do |p,i|
+        = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
   .col-xs-3
     %ul#toc.action-list.contest-actions.sticky.list-unstyled
       %li
-        %a
+        %a{data: {toggle: 'modal', target: '#submit-solution'}}
           %i.fa.fa-plus-circle
           Submit
       %li
@@ -67,8 +67,43 @@
       - @contest.problems.each_with_index do |p,i|
         %li
           %a{href: "##{p.slug}"}
-            %b= "#{('A'.ord+i).chr}:"
+            %b= "#{alphabet_offset(i)}:"
             = p.title
       .divider
       %li
         %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
+
+#submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
+  .modal-dialog.modal-full-screen
+    .modal-content
+      = form_for :solution, {url: contest_solutions_path(@contest.slug, @contest.id), accept: {charset: 'UTF-8'}, method: :post} do |f|
+        .modal-header
+          %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
+            %span{aria: {hidden: 'true'}}
+              &times;
+          %h4#import-problem-label.modal-title
+            Submit new solution
+        .modal-body
+          .form-horizontal
+            .form-group
+              .col-xs-9
+                = f.label :problem_id
+                = f.select :problem_id, contest_problem_select_options(@contest.problems), {}, class: 'form-control'
+              .col-xs-3
+                = f.label :platform
+                = f.select :platform, platform_select_options, {}, class: 'form-control'
+            .form-group
+              .col-xs-12
+                = render partial: 'components/source_editor',  |
+                  locals: {                                    |
+                  preview_url: '',                             |
+                  ace_mode: 'c',                               |
+                  indent_width: %w(2 4 8),                     |
+                  tab_label: 'Source code',                    |
+                  preview_label: 'Preview',
+                  attribute: f.text_area(:source) }
+        .modal-footer
+          %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}
+            Close
+          %button{type: 'submit', class: 'btn btn-primary'}
+            Submit

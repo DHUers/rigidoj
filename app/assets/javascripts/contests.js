@@ -99,6 +99,18 @@ var ready = function() {
     });
   });
 
+  var problemsDescription = $('.contest-problem-list .panel .panel-body .description'),
+      formatState = function(state) {
+    if (!state.id) { return state.text; }
+    var $state = $(
+       '<div><h4>' + state.text + '</h4><span>' +
+       $().createExcerpts(problemsDescription.find('p'), 280, '...') + '</span></div>'
+    );
+    return $state;
+  }
+  $('#solution_problem_id').select2({
+    templateResult: formatState
+  });
 };
 
 $(document).ready(ready);

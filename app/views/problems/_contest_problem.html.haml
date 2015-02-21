@@ -1,9 +1,9 @@
-.panel.panel-default
+.panel.panel-default{data: {blurb: @problem.description_blurb}}
   .panel-heading
     .panel-title
       %h1.problem-title
         %a.anchor{href: "##{@problem.slug}", id: @problem.slug}
-          = @problem.id
+          %b= "#{alphabet_offset(index)}:"
           = @problem.title
     .meta
       %ul.list-inline.judge-limits

@@ -57,7 +57,7 @@ class ContestsController < ApplicationController
       end
       @contest.save
 
-      render 'show'
+      redirect_to show_contest_path(@contest.slug, @contest.id)
     else
       render 'edit'
     end
