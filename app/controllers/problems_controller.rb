@@ -60,7 +60,7 @@ class ProblemsController < ApplicationController
     load_resource
 
     if @problem.update_attributes(problem_params)
-      render 'show'
+      redirect_to show_problem_path(@problem.slug, @problem.id)
     else
       flash[:danger] = 'Something wrong when updating problem.'
       render 'edit'

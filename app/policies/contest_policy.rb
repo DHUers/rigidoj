@@ -4,6 +4,12 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:title, :description_raw, :started_at, :end_at, :delayed_till]
+    %i(title
+       description_raw
+       started_at
+       end_at
+       delayed_till
+       frozen_ranklist_from
+       contest_status)
   end
 end
