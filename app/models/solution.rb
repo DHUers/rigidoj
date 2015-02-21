@@ -14,23 +14,6 @@ class Solution < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :platform
 
-  after_create :increment_problem_submission_count
-  after_save :increment_problem_accepted_count
-
-  def increment_problem_submission_count
-    self.problem.update_attribute(self.problem.submission)if (problem = )
-      problem.submission_count += 1
-      problem.save
-    end
-  end
-
-  def increment_problem_accepted_count
-    if (solution_status == 'accept' && problem = self.problem)
-      problem.accepted_count += 1
-      problem.save
-    end
-  end
-
   def ace_mode
     case self.platform
       when 'c', 'c++' then 'c_cpp'
