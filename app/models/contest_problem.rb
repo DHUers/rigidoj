@@ -1,17 +1,21 @@
 class ContestProblem < ActiveRecord::Base
   default_scope { order('position ASC')}
-  self.primary_key = [:contest_id, :problem_id]
   belongs_to :problem
   belongs_to :contest
+
+  def problem_title
+    problem.title
+  end
 end
 
 # == Schema Information
 #
 # Table name: contest_problems
 #
-#  contest_id :integer          primary key
-#  problem_id :integer          primary key
+#  contest_id :integer
+#  problem_id :integer
 #  position   :integer          default("0"), not null
+#  id         :integer          not null, primary key
 #
 # Indexes
 #

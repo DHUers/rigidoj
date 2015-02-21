@@ -1,46 +1,5 @@
 var ready = function() {
-  var engine = new Bloodhound({
-    remote: {
-      url: '/query?include_blurbs=true&search_for_id=true&type_filter=problem&term=%QUERY',
-      filter: function(parsedResponse) {
-        return $.map(parsedResponse.problems, function(problem) {
-          return {
-            id: problem.id,
-            value: "<h1><span>" + problem.id + "</span>" + problem.title + "</h1>" +
-                   "<div class='content'><p>" + problem.description_blurb + "</p></div>"
-          }
-        });
-      }
-    },
-    datumTokenizer: function(d) {
-      return Bloodhound.tokenizers.whitespace(d.val);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-  });
-  engine.initialize();
-
-  var addProblemInputElement = $('#search-add-problem'),
-      problemLists = $('#problem-lists'),
-      appendProblemItem = function(id) {
-        $.get("/problems/" + id + "/excerpt", function(data) {
-          problemLists.append(data);
-        });
-      };
-
-  addProblemInputElement.typeahead({
-    hint: true,
-    minLength: 1,
-    highlight: true
-  }, {
-    name: 'problem-item',
-    source: engine.ttAdapter()
-  }).on('typeahead:selected', function(e, suggestion) {
-    addProblemInputElement.val('');
-    appendProblemItem(suggestion.id);
-  }).on('blur', function() {
-    // typeahead will set query according to value, so nuke it
-    addProblemInputElement.val('');
-  });
+  var problemLists = $('#problem-lists');
 
   // extract problem lists when submit
   problemLists.closest('form').submit(function() {
@@ -79,7 +38,7 @@ var ready = function() {
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
 
-  var initalValue = $('#contest_contest_status').val();
+  var initalValue = $('#contest_contest_type').val();
   // select different group based on judge type
   $('.time-setting').each(function(_, v) {
     if ($(v).data('type').split(' ').indexOf(initalValue) !== -1) {
@@ -88,7 +47,7 @@ var ready = function() {
       $(this).addClass('hidden');
     }
   });
-  $('#contest_contest_status').on('change', function() {
+  $('#contest_contest_type').on('change', function() {
     var selectedValue = $(this).val();
     $('.time-setting').each(function(_, v) {
       if ($(v).data('type').split(' ').indexOf(selectedValue) !== -1) {
@@ -99,17 +58,49 @@ var ready = function() {
     });
   });
 
-  var problemsDescription = $('.contest-problem-list .panel'),
-      formatState = function(state) {
-    if (!state.id) { return state.text; }
-    var $state = $(
-       '<div><h4>' + state.text + '</h4><span>' + '<span>' +
-       $(problemsDescription[state.id]).data('blurb') + '</span></div>'
-    );
-    return $state;
-  };
+  var problemsDescription = $('.contest-problem-list .panel');
   $('#solution_problem_id').select2({
-    templateResult: formatState
+    templateResult: function(state) {
+      if (!state.id) { return state.text; }
+      var $state = $(
+          '<div><h4>' + state.text + '</h4><span>' + '<span>' +
+          $(problemsDescription[state.id]).data('blurb') + '</span></div>'
+      );
+      return $state;
+    }
+  });
+  $('#contest_contest_problem_ids').select2({
+    ajax: {
+      url: "/query?type_filter=problem&search_for_id=true",
+      dataType: 'json',
+      delay: 250,
+      data: function(params) {
+        return {
+          term: params.term
+        };
+      },
+      processResults: function(data) {
+        console.log(data.problems);
+        return {
+          results: data.problems
+        };
+      },
+      cache: true
+    },
+    escapeMarkup: function (markup) { return markup; },
+    minimumInputLength: 1,
+    placeholder: 'Search to add a new problem',
+    templateResult: function(state) {
+      var $state = $(
+          '<div><h4>' + state.title + '</h4><span>' + '<span>' +
+          state.description_blurb + '</span></div>'
+      );
+      return $state;
+    },
+    templateSelection: function(state) {
+      if (state.text) return state.text;
+      return state.title;
+    }
   });
 };
 

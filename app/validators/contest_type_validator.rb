@@ -31,7 +31,5 @@ class ContestTypeValidator < ActiveModel::Validator
         record.errors.add(:delayed_till, :invalid, options)
       end
     end
-
-    record.errors.add(:problems, :invalid, options) unless record.send(:problems).length > 0
   end
 end

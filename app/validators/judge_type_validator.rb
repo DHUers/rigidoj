@@ -21,7 +21,7 @@ class JudgeTypeValidator < ActiveModel::Validator
   end
 
   def validate_judger_program_platform(problem)
-    unless SiteSetting.judger_platforms.split('|').include? problem.send(:judger_program_platform)
+    unless SiteSetting.judger_platforms.include? problem.send(:judger_program_platform)
       problem.errors.add(:judger_program_platform, :invalid, options)
     end
   end

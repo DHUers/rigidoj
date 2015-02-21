@@ -7,11 +7,17 @@ class ContestsController < ApplicationController
 
   def create
     @contest = Contest.new(contest_params)
+    puts params[:problems]
     new_problems_list = MultiJson.load(params[:problems]).uniq.map {|s| s.to_i}
                             .delete_if {|p| p <= 0 || p > Problem.count}
-
+    puts new_problems_list
     if @contest.save
-      new_problems_list.each {|p| @contest.problems << Problem.find(p)}
+      new_problems_list.each_with_index do |p,i|
+        puts "id: #{p}"
+        problem = Problem.find(p)
+        puts problem
+        @contest.contest_problems.build(contest: @contest, problem: problem, position: i)
+      end
       redirect_to show_contest_path(@contest.slug, @contest.id)
     else
       render 'new'
@@ -44,19 +50,6 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
 
     if @contest.update_attributes(contest_params)
-      new_problems_list = MultiJson.load(params[:problems]).uniq.map {|s| s.to_i}
-                              .delete_if {|p| p <= 0 || p > Problem.count}
-      (@contest.problem_ids - new_problems_list).each {|p| @contest.delete(Problem.find(p))}
-      new_problems_list.each_with_index do |p, i|
-        problem = Problem.find(p)
-        if (item = @contest.contest_problems.find_by(problem: problem))
-          item.update_attribute(:position, i)
-        else
-          @contest.contest_problems.build(contest: @contest, problem: problem, position: i)
-        end
-      end
-      @contest.save
-
       redirect_to show_contest_path(@contest.slug, @contest.id)
     else
       render 'edit'
@@ -66,6 +59,8 @@ class ContestsController < ApplicationController
   private
 
   def contest_params
-    params.require(:contest).permit(*policy(@contest || Contest).permitted_attributes)
+    params.require(:contest).permit(:title, :description_raw, :started_at,
+                                    :end_at, :delayed_till, :frozen_ranklist_from,
+                                    :contest_type, :problem_ids => [])
   end
 end

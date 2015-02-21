@@ -43,7 +43,6 @@ gem 'bcrypt'
 gem 'sanitize'
 gem 'fast_xor'
 gem 'rmmseg-cpp', require: false
-gem 'composite_primary_keys', '~> 8.0.0'
 gem 'whenever', require: false
 gem 'unicorn-rails'
 gem 'stringex', require: false

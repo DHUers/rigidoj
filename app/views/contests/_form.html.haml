@@ -1,7 +1,7 @@
 = render 'shared/error_messages', record: @contest
 .form-group
-  %label{:for => "problem-title"} Title
-  = f.text_field :title, class: 'form-control', id: 'problem-title', placeholder: 'Be descriptive'
+  %label{for: 'contest-title'} Title
+  = f.text_field :title, class: 'form-control', id: 'contest-title', placeholder: 'Be descriptive'
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |
@@ -16,14 +16,11 @@
   .problems
   .row
     .col-xs-12
-      = hidden_field_tag :problems, nil, id: 'hidden-problem-list'
-      %ul#problem-lists
-        - @contest.problems.each do |p|
-          = render partial: 'problems/problem_item', locals: {removable: true, :@problem => p}
-      %input#search-add-problem.form-control{placeholder: 'Search problem', type: 'text'}
+      = f.collection_select :contest_problem_ids, ContestProblem.where(contest: @contest).order(:position),
+          :problem_id, :problem_title, {selected: @contest.problem_ids}, {multiple: true}
 .form-group
   %h3 Contest type
-  = f.select :contest_status, [['Normal', 0], ['Delayable', 1]], {}, class: 'form-control'
+  = f.select :contest_type, [['Normal', 'normal'], ['Delayable', 'delayable']], {}, class: 'form-control'
 .form-group
   %h3 Time settings
   .row.time-setting{data: {type: 'normal delayable'}}
@@ -56,7 +53,7 @@
   .row.time-setting{data: {type: 'normal'}}
     .col-xs-2
       %label{for: 'frozen-ranklist-from-datetimepicker'}
-        Frozen ranklist from
+        Frozen ranklist from(optional)
     .col-xs-10
       #frozen-ranklist-from-datetimepicker.input-group.datetimepicker
         = f.text_field :frozen_ranklist_from, class: 'form-control'
