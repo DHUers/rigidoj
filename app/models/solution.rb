@@ -54,6 +54,10 @@ class Solution < ActiveRecord::Base
     MessageBus.publish '/notifications', 1
   end
 
+  def show_details?
+    !%w(draft judging network_error judge_error
+        compile_error output_limit_exceeded).include? solution_status
+  end
 end
 
 # == Schema Information
@@ -73,6 +77,6 @@ end
 #  source          :text             default("")
 #  type            :string
 #  report          :text             default("")
-#  solution_status :string           default(""), not null
 #  source_length   :integer          default("0")
+#  solution_status :integer          default("0"), not null
 #
