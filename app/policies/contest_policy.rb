@@ -10,6 +10,6 @@ class ContestPolicy < ApplicationPolicy
        end_at
        delayed_till
        frozen_ranklist_from
-       contest_status)
+       contest_type)
   end
 end

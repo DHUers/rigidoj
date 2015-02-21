@@ -18,7 +18,7 @@ class Solution < ActiveRecord::Base
   after_save :increment_problem_accepted_count
 
   def increment_problem_submission_count
-    if (problem = self.problem)
+    self.problem.update_attribute(self.problem.submission)if (problem = )
       problem.submission_count += 1
       problem.save
     end
