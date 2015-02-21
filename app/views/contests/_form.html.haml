@@ -23,7 +23,7 @@
       %input#search-add-problem.form-control{placeholder: 'Search problem', type: 'text'}
 .form-group
   %h3 Contest type
-  = f.select :contest_status, [['Normal', 'normal'], ['Delayable', 'delayable']], {}, class: 'form-control'
+  = f.select :contest_status, [['Normal', 0], ['Delayable', 1]], {}, class: 'form-control'
 .form-group
   %h3 Time settings
   .row.time-setting{data: {type: 'normal delayable'}}

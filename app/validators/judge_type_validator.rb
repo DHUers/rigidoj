@@ -6,7 +6,7 @@ class JudgeTypeValidator < ActiveModel::Validator
       presence_of(record, :input_file, :output_file)
     when :program_comparison
       presence_of(record, :judger_program, :judger_program_platform, :input_file, :output_file)
-      judger_program_platform_validator(record)
+      validate_judger_program_platform(record)
     when :remote_proxy
       presence_of(record, :remote_proxy_vendor)
     else
@@ -20,7 +20,7 @@ class JudgeTypeValidator < ActiveModel::Validator
     end
   end
 
-  def judger_program_platform_validator(problem)
+  def validate_judger_program_platform(problem)
     unless SiteSetting.judger_platforms.split('|').include? problem.send(:judger_program_platform)
       problem.errors.add(:judger_program_platform, :invalid, options)
     end
