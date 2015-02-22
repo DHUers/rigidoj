@@ -12,6 +12,7 @@ class SolutionsController < ApplicationController
     additional_params = {user: current_user}
     if (problem_index = params[:solution][:contest_problem_id])
       contest = Contest.find(params[:contest_id])
+      additional_params.merge!({contest: contest})
       problem = contest.problems.fetch(problem_index.to_i)
       additional_params.merge!({problem_id: problem.id}) if problem
     end
@@ -37,8 +38,13 @@ class SolutionsController < ApplicationController
     if params[:problem_id]
       @problem = Problem.find(params[:problem_id])
       solution_scope = @problem.solutions
+    elsif params[:contest_id]
+      @contest = Contest.find(params[:contest_id])
+      solution_scope = Solution.where(contest_id: @contest.id)
     end
     @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
+
+    render 'index'
   end
 
   def show
