@@ -36,11 +36,6 @@ class Contest < ActiveRecord::Base
     self.description_baked = PrettyText::cook(self.description_raw)
   end
 
-  def progress
-    progress = (Time.now - started_at).to_f / (end_time - started_at) * 100
-    progress >= 100 ? 100 : progress
-  end
-
   def end_time
     delayed_till || end_at
   end

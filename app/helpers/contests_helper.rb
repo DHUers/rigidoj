@@ -8,4 +8,11 @@ module ContestsHelper
       ["#{alphabet_offset(i)}: #{p.title}", i]
     end
   end
+
+  def contest_progress(contest)
+    progress = (Time.now - contest.started_at).to_f /
+        (contest.end_time - contest.started_at) * 100
+    progress >= 100 ? 100 : progress
+  end
+
 end

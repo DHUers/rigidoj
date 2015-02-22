@@ -13,7 +13,8 @@
 
 .row
   .col-xs-9
-    .panel{class: @contest.progress >= 0 && @contest.progress <= 100 ? 'panel-success' : 'panel-info'}
+    - progress = contest_progress @contest
+    .panel{class: progress >= 0 && progress <= 100 ? 'panel-success' : 'panel-info'}
       .panel-heading
         .panel-title
           %h1.contest-title
@@ -22,7 +23,6 @@
         .contest-content
           = raw @contest.description_baked
         .timeframe
-          - progress = @contest.progress
           - if progress > 0 && progress < 100
             .progress
               .progress-bar{role: 'progressbar',
