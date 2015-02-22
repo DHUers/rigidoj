@@ -1,3 +1,5 @@
+require 'rigidoj'
+
 class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
@@ -42,12 +44,12 @@ class Solution < ActiveRecord::Base
   def publish_to_judgers
     solution_json = BasicSolutionSerializer.new(self, root: 'solution').to_json
     case problem.judge_type.to_sym
-      when :remote_proxy
-        $rabbitmq_judger_proxy_queue.publish solution_json
-        Rails.logger.info "[Rabbitmq] Sent Solution #{id} to remote proxy queue"
-      else
-        $rabbitmq_judger_queue.publish solution_json
-        Rails.logger.info "[Rabbitmq] Sent Solution #{id} to judge queue"
+    when :remote_proxy
+      $rabbitmq_judger_proxy_queue.publish solution_json
+      Rails.logger.info "[Rabbitmq] Sent Solution #{id} to remote proxy queue"
+    else
+      $rabbitmq_judger_queue.publish solution_json
+      Rails.logger.info "[Rabbitmq] Sent Solution #{id} to judge queue"
     end
   end
 end

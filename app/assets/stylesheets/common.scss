@@ -93,12 +93,6 @@ div.divider {
   z-index: 1000;
 }
 
-.sticky.stuck {
-  margin: 0;
-  position: fixed;
-  top: $navbar-height + $line-height-computed * 2;
-}
-
 .action-list {
   height: 100%;
 }

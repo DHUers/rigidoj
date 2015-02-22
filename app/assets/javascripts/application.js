@@ -44,6 +44,29 @@ Rigidoj.MessageBus = window.MessageBus;
 Rigidoj.MessageBus.callbackInterval = 5000;
 Rigidoj.MessageBus.start();
 
+Rigidoj.Utilities = {
+  showFlyInMessage: function(title, message, alertClass, closeDelay) {
+    if (!closeDelay) { closeDelay = 0 }
+
+    var m = $('#flyover-message');
+    m.removeClass('in info success danger').addClass('in alert-' + alertClass);
+
+    if (closeDelay !== 0) {
+      setTimeout(function() {
+        m.removeClass('in');
+      }, closeDelay);
+    } else {
+      title += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+
+    }
+    m.find('.title').html(title);
+    m.find('.content').html(message);
+    m.find('button').on('click', function() {
+      m.removeClass('in');
+    });
+  }
+};
+
 var ready = function() {
   var notificationBadge = $('#notification-badge'),
       notificationsList = $('#notifications'),

@@ -30,6 +30,15 @@ class ApplicationController < ActionController::Base
     render json: MultiJson.dump(obj)
   end
 
+  def success_json
+    { success: 'OK' }
+  end
+
+  def failed_json
+    { failed: 'FAILED' }
+  end
+
+
   private
 
   def user_not_authorized

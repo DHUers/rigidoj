@@ -59,12 +59,12 @@ var ready = function() {
   });
 
   $('#submit-solution').on('show.bs.modal', function(e) {
-    var problemsDescription = $('.contest-problem-list .panel'),
+    var problemsDescription = $('.problem-panel'),
         position = 0;
     $('.nav.problem-list li').each(function(i) {
       if (i > 0 && $(this).hasClass('active')) { position = i-1; }
     });
-    $('#solution_problem_id').select2({
+    $('#solution_contest_problem_id').select2({
       width: '100%',
       templateResult: function(state) {
         if (!state.id) { return state.text; }
@@ -142,6 +142,24 @@ var ready = function() {
   $('body').scrollspy({
     target: '.action-list',
     offset: 40
+  });
+
+  $('#submit-solution form').submit(function() {
+    $('#submit-solution').modal('hide');
+    // TODO: reject blank input
+//    if (ace.edit('solution_source').getSession().getValue().length <= 0) {
+//      Rigidoj.Utilities.showFlyInMessage('Submission error', '<p>No source</p>', 'danger');
+ //     return false;
+ //   };
+  }).on('ajax:success', function(e, data, status, xhr) {
+    Rigidoj.Utilities.showFlyInMessage('Submit succeed', '', 'success', 2000);
+  }).on('ajax:error', function(e, xhr, status, error) {
+    response = JSON.parse(xhr.responseText);
+    content = ''
+    $.each(response['errors'], function() {
+      content += '<p>' + this + '</p>'
+    });
+    Rigidoj.Utilities.showFlyInMessage('Submission error', content, 'danger');
   });
 };
 
