@@ -103,29 +103,33 @@ var ready = function() {
       if (selection.text) selection.title = selection.text;
       return selection.title;
     }
-  }).data('select2').$container.find('ul').sortable()
-      .closest('form').on('submit', function(e) {
-        // get all sorts of information from the original option list
-        // and store its position accordingly
-        // TODO: remove this if select2 4.0 support the sorting
-        var select = $(contestProblemList[0]),
-            list = contestProblemList.data('select2').$container.find('ul li.select2-selection__choice'),
-            problemID = {};
-        // get the problem id <> title mapping from dom
-        select.find('option').each(function() {
-          var element = $(this),
-              text = element.prop('title') || element.text();
-          // inserted option is different from outputed by rails
-          // so it may be in title or in text.
-          problemID[text.trim()] = element.prop('value');
+  });
+
+  if (contestProblemList.data('select2')) {
+    contestProblemList.data('select2').$container.find('ul').sortable()
+        .closest('form').on('submit', function (e) {
+          // get all sorts of information from the original option list
+          // and store its position accordingly
+          // TODO: remove this if select2 4.0 support the sorting
+          var select = $(contestProblemList[0]),
+              list = contestProblemList.data('select2').$container.find('ul li.select2-selection__choice'),
+              problemID = {};
+          // get the problem id <> title mapping from dom
+          select.find('option').each(function () {
+            var element = $(this),
+                text = element.prop('title') || element.text();
+            // inserted option is different from outputed by rails
+            // so it may be in title or in text.
+            problemID[text.trim()] = element.prop('value');
+          });
+          select.empty();
+          // insert the option tag for sorting
+          list.each(function () {
+            select.append('<option selected="selected" value="' +
+            problemID[this.title.trim()] + '"></option>');
+          });
         });
-        select.empty();
-        // insert the option tag for sorting
-        list.each(function() {
-          select.append('<option selected="selected" value="' +
-              problemID[this.title.trim()] + '"></option>');
-        });
-      });
+  }
 };
 
 $(document).ready(ready);
