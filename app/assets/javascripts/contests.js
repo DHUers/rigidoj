@@ -60,7 +60,10 @@ var ready = function() {
 
   $('#submit-solution').on('show.bs.modal', function(e) {
     var problemsDescription = $('.contest-problem-list .panel'),
-        position = $('.problem-panel:in-viewport').first().data('position');
+        position = 0;
+    $('.nav.problem-list li').each(function(i) {
+      if (i > 0 && $(this).hasClass('active')) { position = i-1; }
+    });
     $('#solution_problem_id').select2({
       width: '100%',
       templateResult: function(state) {

@@ -31,7 +31,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require select2
-//= require isInViewport
 //= require_self
 //= require_tree .
 

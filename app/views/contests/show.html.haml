@@ -68,7 +68,7 @@
           %i.fa.fa-list
           Ranking
       .divider
-      %ul.nav.nav-stacked.list-unstyled
+      %ul.nav.nav-stacked.list-unstyled.problem-list
         %li
           %a{href: "#contest-heading-anchor"}= 'Contest'
         - @contest.problems.each_with_index do |p,i|
@@ -79,6 +79,7 @@
       .divider
       %li
         %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
+
 
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
   .modal-dialog.modal-lg
