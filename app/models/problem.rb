@@ -111,6 +111,10 @@ class Problem < ActiveRecord::Base
     end
     limits
   end
+
+  def unique_id
+    "#{slug}-#{id}"
+  end
 end
 
 # == Schema Information

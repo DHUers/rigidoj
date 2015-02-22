@@ -2,7 +2,7 @@
   .panel-heading
     .panel-title
       %h1.problem-title
-        %a.anchor{href: "##{@problem.slug}", id: @problem.slug}
+        %a.anchor{id: @problem.unique_id}
           %b= "#{alphabet_offset(index)}:"
           = @problem.title
     .meta

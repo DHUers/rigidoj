@@ -15,7 +15,7 @@
       .panel-heading
         .panel-title
           %h1.contest-title
-            %a.anchor{href: "#contest-heading", id: 'contest-heading-anchor'}= @contest.title
+            %a.anchor{id: 'contest-heading-anchor'}= @contest.title
       .panel-body
         .contest-content
           = raw @contest.description_baked
@@ -64,10 +64,10 @@
           Ranking
       .divider
       %li
-        %a{href: "#contest-heading"}= 'Contest'
+        %a{href: "#contest-heading-anchor"}= 'Contest'
       - @contest.problems.each_with_index do |p,i|
         %li
-          %a{href: "##{p.slug}"}
+          %a{href: "##{p.unique_id}"}
             %b= "#{alphabet_offset(i)}:"
             = p.title
       .divider
