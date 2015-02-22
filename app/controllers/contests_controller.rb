@@ -32,6 +32,9 @@ class ContestsController < ApplicationController
 
   def ranking
     @contest = Contest.find(params[:id])
+    @solutions = Solution.where(contest: @contest)
+
+    render 'ranking'
   end
 
   def edit
