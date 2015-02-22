@@ -15,6 +15,7 @@ output.write <<-END.gsub(/^\s*\|/, '')
 |5
 |0
 |2147483647
+|
 END
 input.rewind
 output.rewind
