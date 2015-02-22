@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :contests, except: :show
   get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
-  get '/c/:slug/:id/solutions', to: 'contests#solutions', constraints: {id: /\d+/}, as: :contest_solutions
-  post '/c/:slug/:id/solutions', to: 'contests#create_solutions', constraints: {id: /\d+/}
+  get '/c/:slug/:contest_id/solutions', to: 'solutions#show', constraints: {contest_id: /\d+/}, as: :contest_solutions
+  post '/c/:slug/:contest_id/solutions', to: 'solutions#create', constraints: {contest_id: /\d+/}
   resources :posts
   resources :solutions
   resources :problems, except: :show do

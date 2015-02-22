@@ -1,7 +1,7 @@
 - if record.errors.any?
   #error_explanation
     - flash.each do |name, msg|
-      %div{class: "alert alert-#{name}", role: "alert"}
+      %div{class: "alert alert-#{name} fade in", role: "alert"}
         = msg
         %ul
           - record.errors.full_messages.each do |msg|

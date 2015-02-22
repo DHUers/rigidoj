@@ -13,7 +13,6 @@ class SolutionsController < ApplicationController
     @solution.problem = Problem.find(params[:problem_id].to_i) unless @solution.problem
 
     if @solution.save
-      publish_to_judgers
       redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)
     else
       render 'new'
@@ -35,18 +34,6 @@ class SolutionsController < ApplicationController
   end
 
   private
-
-  def publish_to_judgers
-    solution_json = BasicSolutionSerializer.new(@solution, root: 'solution').to_json
-    case @solution.problem.judge_type.to_sym
-    when :remote_proxy
-      $rabbitmq_judger_proxy_queue.publish solution_json
-      Rails.logger.info "[Rabbitmq] Sent Solution #{@solution.id} to remote proxy queue"
-    else
-      $rabbitmq_judger_queue.publish solution_json
-      Rails.logger.info "[Rabbitmq] Sent Solution #{@solution.id} to judge queue"
-    end
-  end
 
   def solution_params
     params.require(:solution).permit(*policy(@solution || Solution).permitted_attributes)

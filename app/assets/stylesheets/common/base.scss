@@ -7,6 +7,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+body {
+  position: relative;
+}
+
 .profiler-results {
   top: $navbar-height + 1 !important;
 }

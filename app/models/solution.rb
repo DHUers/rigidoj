@@ -14,6 +14,8 @@ class Solution < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :platform
 
+  after_create :publish_to_judgers
+
   def ace_mode
     case self.platform
       when 'c', 'c++' then 'c_cpp'
@@ -37,9 +39,16 @@ class Solution < ActiveRecord::Base
     MessageBus.publish '/notifications', 1
   end
 
-  def show_details?
-    !%w(draft judging network_error judge_error
-        compile_error output_limit_exceeded).include? solution_status
+  def publish_to_judgers
+    solution_json = BasicSolutionSerializer.new(self, root: 'solution').to_json
+    case problem.judge_type.to_sym
+      when :remote_proxy
+        $rabbitmq_judger_proxy_queue.publish solution_json
+        Rails.logger.info "[Rabbitmq] Sent Solution #{id} to remote proxy queue"
+      else
+        $rabbitmq_judger_queue.publish solution_json
+        Rails.logger.info "[Rabbitmq] Sent Solution #{id} to judge queue"
+    end
   end
 end
 

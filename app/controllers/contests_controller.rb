@@ -52,10 +52,6 @@ class ContestsController < ApplicationController
     end
   end
 
-  def create_solutions
-
-  end
-
   private
 
   def contest_params

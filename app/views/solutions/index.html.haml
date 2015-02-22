@@ -28,8 +28,8 @@
                   %td= s.updated_at
                   %td= s.solution_status
                   %td= link_to s.problem.id, show_problem_path(s.problem.slug, s.problem.id)
-                  %td= s.show_details? ? s.time_usage : '-'
-                  %td= s.show_details? ? s.source_length : '-'
+                  %td= show_details?(s) ? s.time_usage : '-'
+                  %td= show_details?(s) ? s.source_length : '-'
                   %td= s.platform
                   %td= link_to s.user.username, s.user
       - else

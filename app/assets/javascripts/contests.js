@@ -58,18 +58,23 @@ var ready = function() {
     });
   });
 
-  var problemsDescription = $('.contest-problem-list .panel');
-  $('#solution_problem_id').select2({
-    width: '100%',
-    templateResult: function(state) {
-      if (!state.id) { return state.text; }
-      var $state = $(
-          '<div><h4>' + state.text + '</h4><span>' + '<span>' +
-          $(problemsDescription[state.id]).data('blurb') + '</span></div>'
-      );
-      return $state;
-    }
+  $('#submit-solution').on('show.bs.modal', function(e) {
+    var problemsDescription = $('.contest-problem-list .panel'),
+        position = $('.problem-panel:in-viewport').first().data('position');
+    $('#solution_problem_id').select2({
+      width: '100%',
+      templateResult: function(state) {
+        if (!state.id) { return state.text; }
+        var $state = $(
+            '<div><h4>' + state.text + '</h4><span>' + '<span>' +
+            $(problemsDescription[state.id]).data('blurb') + '</span></div>'
+        );
+        return $state;
+      }
+    }).val(position).trigger('change');
+    $('#solution_platform').select2({width: '100%'});
   });
+
   var contestProblemList = $('#contest_problem_ids');
   contestProblemList.select2({
     width: '100%',
@@ -130,6 +135,11 @@ var ready = function() {
           });
         });
   }
+
+  $('body').scrollspy({
+    target: '.action-list',
+    offset: 40
+  });
 };
 
 $(document).ready(ready);

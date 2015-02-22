@@ -9,6 +9,8 @@
       %li
         %a{href: edit_contest_path(@contest)}
           Edit contest
+
+
 .row
   .col-xs-9
     .panel{class: @contest.progress >= 0 && @contest.progress <= 100 ? 'panel-success' : 'panel-info'}
@@ -45,11 +47,14 @@
             .timeframe-group
               %label{for: "#{@contest.id}-delayed"}= 'delayed till'
               %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
-    .contest-problem-list
-      - @contest.problems.each_with_index do |p,i|
-        = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
+
+
+    - @contest.problems.each_with_index do |p,i|
+      = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
+
+
   .col-xs-3
-    %ul#toc.action-list.contest-actions.sticky.list-unstyled
+    %ul.action-list.contest-actions.sticky.list-unstyled{role: 'tablist'}
       %li
         %a{data: {toggle: 'modal', target: '#submit-solution'}}
           %i.fa.fa-plus-circle
@@ -63,19 +68,20 @@
           %i.fa.fa-list
           Ranking
       .divider
-      %li
-        %a{href: "#contest-heading-anchor"}= 'Contest'
-      - @contest.problems.each_with_index do |p,i|
+      %ul.nav.nav-stacked.list-unstyled
         %li
-          %a{href: "##{p.unique_id}"}
-            %b= "#{alphabet_offset(i)}:"
-            = p.title
+          %a{href: "#contest-heading-anchor"}= 'Contest'
+        - @contest.problems.each_with_index do |p,i|
+          %li
+            %a{href: "##{p.unique_id}"}
+              %b= "#{alphabet_offset(i)}:"
+              = p.title
       .divider
       %li
         %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
 
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
-  .modal-dialog.modal-full-screen
+  .modal-dialog.modal-lg
     .modal-content
       = form_for :solution, {url: contest_solutions_path(@contest.slug, @contest.id), accept: {charset: 'UTF-8'}, method: :post} do |f|
         .modal-header
