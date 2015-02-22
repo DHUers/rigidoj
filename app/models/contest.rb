@@ -44,6 +44,14 @@ class Contest < ActiveRecord::Base
     self.slug = Slug.for(title, 'contest')
   end
 
+  def started?
+    Time.now > started_at
+  end
+
+  def ended?
+    Time.now > end_time
+  end
+
   def started_at=(started_at)
     write_attribute :started_at, DateTime.parse(started_at)
     self.started_at

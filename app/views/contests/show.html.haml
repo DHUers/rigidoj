@@ -55,19 +55,21 @@
 
   .col-xs-3
     %ul.action-list.contest-actions.sticky.list-unstyled{role: 'tablist'}
-      %li
-        %a{data: {toggle: 'modal', target: '#submit-solution'}}
-          %i.fa.fa-plus-circle
-          Submit
-      %li
-        %a{href: contest_solutions_path(@contest.slug, @contest.id)}
-          %i.fa.fa-history
-          Submitted records
-      %li
-        %a{href: contest_ranking_path(@contest.slug, @contest.id)}
-          %i.fa.fa-list
-          Ranking
-      .divider
+      - if @contest.started?
+        - unless @contest.ended?
+          %li
+            %a{data: {toggle: 'modal', target: '#submit-solution'}}
+              %i.fa.fa-plus-circle
+              Submit
+        %li
+          %a{href: contest_solutions_path(@contest.slug, @contest.id)}
+            %i.fa.fa-history
+            Submitted records
+        %li
+          %a{href: contest_ranking_path(@contest.slug, @contest.id)}
+            %i.fa.fa-list
+            Ranking
+        .divider
       %ul.nav.nav-stacked.list-unstyled.problem-list
         %li
           %a{href: "#contest-heading-anchor"}= 'Contest'
