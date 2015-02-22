@@ -11,6 +11,7 @@ class ContestsController < ApplicationController
       sort_problems_by_ids(contest_params[:problem_ids])
       redirect_to show_contest_path(@contest.slug, @contest.id)
     else
+      flash[:danger] = 'There are problems when create contest.'
       render 'new'
     end
   end
@@ -25,6 +26,8 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+
+    render 'show'
   end
 
   def ranking
@@ -44,8 +47,13 @@ class ContestsController < ApplicationController
       sort_problems_by_ids(contest_params[:problem_ids])
       redirect_to show_contest_path(@contest.slug, @contest.id)
     else
+      flash[:danger] = 'There are problems when update contest.'
       render 'edit'
     end
+  end
+
+  def create_solutions
+
   end
 
   private

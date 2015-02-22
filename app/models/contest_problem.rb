@@ -3,6 +3,8 @@ class ContestProblem < ActiveRecord::Base
   belongs_to :problem
   belongs_to :contest
 
+  validates_associated :problem, :contest
+
   def problem_title
     problem.title
   end

@@ -6,6 +6,8 @@ class Contest < ActiveRecord::Base
   has_many :contest_problems
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
 
+  accepts_nested_attributes_for :problems
+
   enum contest_type: [:normal, :delayable]
   enum contest_status: [:incoming, :delayed, :finished]
 
@@ -40,7 +42,7 @@ class Contest < ActiveRecord::Base
   end
 
   def end_time
-    delayed_till
+    delayed_till || end_at
   end
 
   def create_slug

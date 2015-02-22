@@ -24,9 +24,10 @@
       .timeframe-group
         %label{for: "#{@contest.id}-end"}= 'end at'
         %time{id: "#{@contest.id}-end", datetime: @contest.end_at}= @contest.end_at.to_formatted_s(:short)
-      .timeframe-group
-        %label{for: "#{@contest.id}-delayed"}= 'delayed till'
-        %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
+      - if @contest.contest_type == 'delayable'
+        .timeframe-group
+          %label{for: "#{@contest.id}-delayed"}= 'delayed till'
+          %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
   .col-xs-2.stats
     .stat-problem-count
       %span.text-muted Problems
