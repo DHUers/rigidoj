@@ -8,9 +8,10 @@
       .panel-heading.clearfix
         %h4.pull-left
           Submission
-        %a{role: 'button', class: 'btn btn-default pull-right',
-            href: new_solution_path}
-          Submit
+        - unless params[:contest_id]
+          %a{role: 'button', class: 'btn btn-default pull-right',
+              href: new_solution_path}
+            Submit
       - unless @solutions.blank?
         .table-responsive
           %table#solution-listings.table.table-bordered.table-condensed.table-hover

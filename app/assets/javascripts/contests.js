@@ -141,7 +141,7 @@ var ready = function() {
 
   $('body').scrollspy({
     target: '.action-list',
-    offset: 40
+    offset: 80
   });
 
   $('#submit-solution form').submit(function() {
