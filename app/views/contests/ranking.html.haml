@@ -1,8 +1,16 @@
 - content_for :title, "#{@contest.title} ranking"
 
+.row
+  .col-xs-12
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Contests', contests_path
+      %li= link_to @contest.title, show_contest_path(@contest.slug, @contest.id)
+      %li.active Contest ranking
+
 .panel.panel-info
   .panel-heading
-    = @contest.title
+    %h3= "#{@contest.title} ranking"
   %table.table.table-hover.table-bordered.table-condensed
     %thead
       %tr
