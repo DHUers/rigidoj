@@ -59,8 +59,8 @@ class ContestsController < ApplicationController
 
   def contest_params
     params.require(:contest).permit(:title, :description_raw, :started_at,
-                                    :end_at, :delayed_till, :frozen_ranklist_from,
-                                    :contest_type, :problem_ids => [])
+                                    :end_at, :delayed_till, :frozen_ranking_from,
+                                    :type, :problem_ids => [])
   end
 
   def sort_problems_by_ids(problem_ids)

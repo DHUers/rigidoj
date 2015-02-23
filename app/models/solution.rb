@@ -4,10 +4,10 @@ class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  enum solution_status: [:judging, :network_error, :judge_error,
-                         :accept_answer, :wrong_answer, :time_limit_exceeded,
-                         :memory_limit_exceeded, :presentation_error,
-                         :runtime_error, :compile_error, :output_limit_exceeded]
+  enum status: [:judging, :network_error, :judge_error,
+                :accept_answer, :wrong_answer, :time_limit_exceeded,
+                :memory_limit_exceeded, :presentation_error,
+                :runtime_error, :compile_error, :output_limit_exceeded]
 
   default_scope {order('created_at DESC')}
 
@@ -26,7 +26,7 @@ class Solution < ActiveRecord::Base
   end
 
   def publish_notification
-    text = "Solution result: #{self.solution_status}"
+    text = "Solution result: #{self.status}"
     notification_params = {
         notification_type: 'solution',
         user: self.user,
@@ -58,19 +58,18 @@ end
 #
 # Table name: solutions
 #
-#  id              :integer          not null, primary key
-#  user_id         :integer          not null
-#  problem_id      :integer
-#  contest_id      :integer
-#  memory_usage    :integer          default("0")
-#  time_usage      :integer          default("0")
-#  platform        :string           default(""), not null
-#  revision        :integer          default("0")
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  source          :text             default("")
-#  type            :string
-#  report          :text             default("")
-#  source_length   :integer          default("0")
-#  solution_status :integer          default("0"), not null
+#  id           :integer          not null, primary key
+#  user_id      :integer          not null
+#  problem_id   :integer
+#  contest_id   :integer
+#  memory_usage :integer          default("0")
+#  time_usage   :integer          default("0")
+#  platform     :string           default(""), not null
+#  revision     :integer          default("0")
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  source       :text             default("")
+#  type         :string
+#  report       :text             default("")
+#  status       :integer          default("0"), not null
 #

@@ -34,7 +34,7 @@ basic:
 
 judger:
   judger_platform:
-    default: 'c|c++|java'
+    default: 'C|C++|Java'
 
 user:
   allow_update_username:

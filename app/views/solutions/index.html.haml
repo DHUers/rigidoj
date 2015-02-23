@@ -20,17 +20,15 @@
               %th Status
               %th Problem ID
               %th Execution time
-              %th Source length
               %th Platform
               %th Author
             %tbody
               - @solutions.each do |s|
                 %tr
                   %td= s.updated_at
-                  %td= s.solution_status
+                  %td= s.status
                   %td= link_to s.problem.id, show_problem_path(s.problem.slug, s.problem.id)
                   %td= show_details?(s) ? s.time_usage : '-'
-                  %td= show_details?(s) ? s.source_length : '-'
                   %td= s.platform
                   %td= link_to s.user.username, s.user
       - else

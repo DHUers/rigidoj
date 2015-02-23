@@ -20,10 +20,10 @@
           :problem_id, :problem_title, {selected: @contest.problem_ids}, {multiple: true}
 .form-group
   %h3 Contest type
-  = f.select :contest_type, [['Normal', 'normal'], ['Delayable', 'delayable']], {}, class: 'form-control'
+  = f.select :type, [['Normal', ''], ['Delayable', 'DelayableContest']], {}, class: 'form-control'
 .form-group
   %h3 Time settings
-  .row.time-setting{data: {type: 'normal delayable'}}
+  .row.time-setting{data: {type: 'normal DelayableContest'}}
     .col-xs-2
       %label{for: 'started-at-datetimepicker'}
         Started at
@@ -32,7 +32,7 @@
         = f.text_field :started_at, class: 'form-control'
         %span.input-group-addon
           %i.fa.fa-calendar
-  .row.time-setting{data: {type: 'normal delayable'}}
+  .row.time-setting{data: {type: 'normal DelayableContest'}}
     .col-xs-2
       %label{for: 'end-at-datetimepicker'}
         End at
@@ -41,7 +41,7 @@
         = f.text_field :end_at, class: 'form-control'
         %span.input-group-addon
           %i.fa.fa-calendar
-  .row.time-setting{data: {type: 'delayable'}}
+  .row.time-setting{data: {type: 'DelayableContest'}}
     .col-xs-2
       %label{for: 'delayed-till-datetimepicker'}
         Delayed till
@@ -52,10 +52,10 @@
           %i.fa.fa-calendar
   .row.time-setting{data: {type: 'normal'}}
     .col-xs-2
-      %label{for: 'frozen-ranklist-from-datetimepicker'}
-        Frozen ranklist from(optional)
+      %label{for: 'frozen-ranking-from-datetimepicker'}
+        Frozen ranking from(optional)
     .col-xs-10
-      #frozen-ranklist-from-datetimepicker.input-group.datetimepicker
-        = f.text_field :frozen_ranklist_from, class: 'form-control'
+      #frozen-ranking-from-datetimepicker.input-group.datetimepicker
+        = f.text_field :frozen_ranking_from, class: 'form-control'
         %span.input-group-addon
           %i.fa.fa-calendar

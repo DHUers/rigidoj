@@ -4,20 +4,19 @@ require 'date'
 class Contest < ActiveRecord::Base
   belongs_to :user
   has_many :contest_problems
-  has_many :problems, -> { order('position ASC') }, through: :contest_problems
+  has_many :problems, -> {order('position ASC')}, through: :contest_problems
 
   accepts_nested_attributes_for :problems
 
-  enum contest_type: [:normal, :delayable]
-  enum contest_status: [:incoming, :delayed, :finished]
+  enum status: [:incoming, :delayed, :finished]
 
-  scope :incoming, -> { where(contest_status: Contest.contest_statuses['incoming']) }
-  scope :delayed, -> { where(contest_status: Contest.contest_statuses['delayed']) }
-  scope :finished, -> { where(contest_status: Contest.contest_statuses['finished']) }
+  scope :incoming, -> { where(status: Contest.statuses['incoming']) }
+  scope :delayed, -> { where(status: Contest.statuses['delayed']) }
+  scope :finished, -> { where(status: Contest.statuses['finished']) }
 
   validates_presence_of :title
   validates_presence_of :description_raw
-  validates_presence_of :contest_status
+  validates_presence_of :status
   validates_presence_of :started_at
   validates_presence_of :end_at
   validates_with ::ContestTypeValidator
@@ -45,11 +44,11 @@ class Contest < ActiveRecord::Base
   end
 
   def started?
-    Time.now > started_at
+    started_at.past?
   end
 
   def ended?
-    Time.now > end_time
+    end_time.past?
   end
 
   def started_at=(started_at)
@@ -78,18 +77,18 @@ end
 #
 # Table name: contests
 #
-#  id                   :integer          not null, primary key
-#  title                :string           not null
-#  description_raw      :text             default("")
-#  user_id              :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  description_baked    :text             default("")
-#  contest_status       :integer          default("0"), not null
-#  started_at           :datetime         not null
-#  end_at               :datetime         not null
-#  delayed_till         :datetime
-#  contest_type         :integer          default("0"), not null
-#  slug                 :string
-#  frozen_ranklist_from :datetime
+#  id                  :integer          not null, primary key
+#  title               :string           not null
+#  description_raw     :text             default("")
+#  user_id             :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  description_baked   :text             default("")
+#  status              :integer          default("0"), not null
+#  started_at          :datetime         not null
+#  end_at              :datetime         not null
+#  delayed_till        :datetime
+#  slug                :string
+#  frozen_ranking_from :datetime
+#  type                :string
 #

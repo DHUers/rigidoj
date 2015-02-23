@@ -129,7 +129,6 @@ end
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  public                  :boolean          default("true"), not null
-#  judge_type              :integer          default("0"), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
@@ -141,8 +140,8 @@ end
 #  additional_limits       :jsonb            default("[]")
 #  input_file_uuid         :string
 #  output_file_uuid        :string
-#  judger_program_uuid     :string
 #  submission_count        :integer          default("0"), not null
 #  accepted_count          :integer          default("0"), not null
 #  per_case_limit          :boolean          default("false"), not null
+#  judge_type              :integer          default("0"), not null
 #

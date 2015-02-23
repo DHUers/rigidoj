@@ -42,7 +42,7 @@ module Rigidoj
     Rails.logger.info "[Solution result payload] #{payload}"
     solution = Solution.find payload[:id]
     solution_params = {
-        solution_status: payload[:status],
+        status: payload[:status],
         revision: payload[:revision],
         time_usage: payload[:time_usage],
         memory_usage: payload[:memory_usage]

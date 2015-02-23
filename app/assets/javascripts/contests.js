@@ -22,23 +22,23 @@ var ready = function() {
   var startAtDateTimePicker = $('#started-at-datetimepicker'),
       endAtDateTimePicker = $('#end-at-datetimepicker'),
       delayedTillDateTimePicker = $('#delayed-till-datetimepicker'),
-      frozenRanklistFromDateTimePicker = $('#frozen-ranklist-from-datetimepicker');
+      frozenRankingFromDateTimePicker = $('#frozen-ranking-from-datetimepicker');
   startAtDateTimePicker.on('dp.change', function(e) {
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
     delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
-    frozenRanklistFromDateTimePicker.data('DateTimePicker').minDate(e.date);
+    frozenRankingFromDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
   endAtDateTimePicker.on('dp.change', function(e) {
     startAtDateTimePicker.data('DateTimePicker').maxDate(e.date);
     delayedTillDateTimePicker.data('DateTimePicker').minDate(e.date);
-    frozenRanklistFromDateTimePicker.data('DateTimePicker').maxDate(e.date);
+    frozenRankingFromDateTimePicker.data('DateTimePicker').maxDate(e.date);
   });
   delayedTillDateTimePicker.on('dp.change', function(e) {
     startAtDateTimePicker.data('DateTimePicker').minDate(e.date);
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
 
-  var initalValue = $('#contest_contest_type').val();
+  var initalValue = $('#contest_type').val() || 'normal';
   // select different group based on judge type
   $('.time-setting').each(function(_, v) {
     if ($(v).data('type').split(' ').indexOf(initalValue) !== -1) {
@@ -47,8 +47,8 @@ var ready = function() {
       $(this).addClass('hidden');
     }
   });
-  $('#contest_contest_type').on('change', function() {
-    var selectedValue = $(this).val();
+  $('#contest_type').on('change', function() {
+    var selectedValue = $(this).val() || 'normal';
     $('.time-setting').each(function(_, v) {
       if ($(v).data('type').split(' ').indexOf(selectedValue) !== -1) {
         $(this).removeClass('hidden');
