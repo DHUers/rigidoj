@@ -12,7 +12,7 @@ class BasicProblemSerializer < ActiveModel::Serializer
               per_case_limit: object.per_case_limit}
            end
     if (problem_judge_type == :program_comparison)
-      data.merge!({judger_program_url: object.judger_program.read,
+      data.merge!({judger_program_source: object.judger_program.read,
                    judger_program_platform: object.judger_program_platform})
     end
     data
