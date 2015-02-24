@@ -20,8 +20,8 @@
       %ul.list-inline.judge-limits
         - @problem.judge_limits.each do |platform, limit|
           %li.time-limit
-            = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
-          %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]}"
+            = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]} ms"
+          %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:memory]} KB"
   .panel-body
     .col-xs-9.problem-body
       :preserve
