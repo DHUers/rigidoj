@@ -13,3 +13,7 @@ Fabricator(:erick, from: :user) do
   password 'Wpassword1'
   active true
 end
+
+Fabricator(:admin, from: user) do
+  admin true
+end

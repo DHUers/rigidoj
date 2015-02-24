@@ -67,7 +67,8 @@ class SolutionRanking
   end
 
   def frozen_status?(user_id)
-    return false if user_id == @operator.id # we don't freeze the status to the op
+    # we don't freeze the status to the op
+    return false if user_id == @operator.id || @operator.staff?
     return false if @opts[:skip_frozen] || end_at.past?
     frozen_at.past?
   end
