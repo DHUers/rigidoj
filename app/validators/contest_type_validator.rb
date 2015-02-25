@@ -14,7 +14,7 @@ class ContestTypeValidator < ActiveModel::Validator
 
     record.errors.add(:end_at, :invalid, options) unless end_at > Time.now
     record.errors.add(:end_at, :invalid, options) unless started_at <= end_at
-    if record.send(:type) == 'normal'
+    unless record.send(:type) == 'DelayableContest'
       frozen_from = record.send :frozen_ranking_from
       if frozen_from
         unless started_at < frozen_from && frozen_from < end_at
