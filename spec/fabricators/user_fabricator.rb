@@ -1,7 +1,7 @@
 Fabricator(:user) do
   name 'Erick 管'
-  username { sequence(:username) { |i| "ffffff#{i}" } }
-  email { sequence(:email) { |i| "ffffff#{i}@example.com" } }
+  username {sequence(:username) {|i| "user#{i}"}}
+  email {sequence(:email) {|i| "user#{i}@example.com"}}
   password 'myawesomepassword'
   active true
 end
@@ -14,6 +14,6 @@ Fabricator(:erick, from: :user) do
   active true
 end
 
-Fabricator(:admin, from: user) do
+Fabricator(:admin, from: :user) do
   admin true
 end

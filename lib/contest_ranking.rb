@@ -1,4 +1,4 @@
-class SolutionRanking
+class ContestRanking
   PENALTY_TIME = 20
 
   # Required parameters
@@ -35,8 +35,6 @@ class SolutionRanking
     [user_id, filtered_result(accepted_solutions_count, total_solutions_count, filtered)]
   end
 
-  private
-
   def filtered_result(accepted, total, filtered)
     time = filtered.inject(0) {|acc,m| acc + m[1][0] ? m[1][2] : 0}
     problems = filtered.map {|_,v| v.drop(v[0] ? 2 : 1)}
@@ -70,12 +68,14 @@ class SolutionRanking
     # we don't freeze the status to the op
     return false if user_id == @operator.id || @operator.staff?
     return false if @opts[:skip_frozen] || end_at.past?
-    frozen_at.past?
+    frozen_at ? frozen_at.past? : false
   end
 
   def duration_in_minute(time)
     (time - start_at).to_i / 60
   end
+
+  private
 
   def problem_ids
     @problem_ids ||= @contest.problem_ids
