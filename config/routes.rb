@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   end
   get '/users/:username/bookmarks', to: 'bookmarks#person'
   get '/users/:username/groups', to: 'groups#person'
+  post '/users/is_local_username', to: 'users#is_local_username'
+
+  resources :groups, param: :name
 
   resources :contests, except: :show
   get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest

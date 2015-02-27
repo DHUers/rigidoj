@@ -28,6 +28,13 @@ class UsersController < ApplicationController
 
   end
 
+  def is_local_username
+    params.require(:username)
+    u = params[:username].downcase
+    r = User.exec_sql('SELECT 1 FROM users WHERE username_lower = ?', u).values
+    render json: {valid: r.length == 1}
+  end
+
   private
 
   def user_params

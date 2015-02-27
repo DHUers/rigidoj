@@ -1,0 +1,8 @@
+= render 'shared/error_messages', record: @group
+.form-group
+  %label{for: 'group-title'} Name
+  = f.text_field :name, class: 'form-control', id: 'group-title', placeholder: 'Group name'
+.form-group
+  = f.label :users
+  = f.collection_select :user_ids, User.real,
+          :id, :username, {selected: @group.user_ids}, {multiple: true}

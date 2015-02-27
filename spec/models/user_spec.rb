@@ -128,13 +128,14 @@ describe User do
     end
   end
 
-  context '.username_available?' do
+  describe '.username_available?' do
     it 'returns true for a username that is available' do
       expect(User.username_available?('BruceWayne')).to eq(true)
     end
 
-    it 'returns false when a username is taken' do
-      expect(User.username_available?(Fabricate(:user).username)).to eq(false)
+    context 'returns false when a username is taken' do
+      before { @user = Fabricate(:user) }
+      it { expect(User.username_available?(@user.username)).to eq(false) }
     end
   end
 
@@ -188,59 +189,89 @@ describe User do
     end
   end
 
-  describe '.find_by_username_or_email' do
-    it 'finds users' do
-      bob = Fabricate(:user, username: 'bob', email: 'bob@example.com')
-      found_user = User.find_by_username_or_email('Bob')
-      expect(found_user).to eq bob
+  describe 'find helpers' do
+    before :all do
+      @bob = Fabricate(:user, username: 'bob', email: 'bob@example.com')
+    end
+    after :all do
+      @bob.destroy
+    end
+    context '.find_by_email' do
+      it 'same email but with different capital and small letter' do
+        found_user = User.find_by_email('bob')
+        expect(found_user).to be_nil
 
-      found_user = User.find_by_username_or_email('bob@Example.com')
-      expect(found_user).to eq bob
+        found_user = User.find_by_email('bob@Example.com')
+        expect(found_user).to eq @bob
 
-      found_user = User.find_by_username_or_email('Bob@Example.com')
-      expect(found_user).to eq bob
+        found_user = User.find_by_email('BOB@Example.com')
+        expect(found_user).to eq @bob
+      end
+    end
+    context '.find_by_username' do
+      it 'same username but with different capital and small letter' do
+        found_user = User.find_by_username('bOb')
+        expect(found_user).to eq @bob
+      end
+    end
+    context '.find_by_username_or_email' do
+      it 'same username or email but with different capital and small letter' do
+        found_user = User.find_by_username_or_email('Bob')
+        expect(found_user).to eq @bob
 
-      found_user = User.find_by_username_or_email('bob1')
-      expect(found_user).to be_nil
+        found_user = User.find_by_username_or_email('bob@Example.com')
+        expect(found_user).to eq @bob
 
-      found_user = User.find_by_email('bob@Example.com')
-      expect(found_user).to eq bob
+        found_user = User.find_by_username_or_email('Bob@Example.com')
+        expect(found_user).to eq @bob
 
-      found_user = User.find_by_email('BOB@Example.com')
-      expect(found_user).to eq bob
+        found_user = User.find_by_username_or_email('bob1')
+        expect(found_user).to be_nil
+      end
+    end
+  end
 
-      found_user = User.find_by_email('bob')
-      expect(found_user).to be_nil
+  describe "secure digests" do
+    describe '#new_token' do
+      subject { User.new_token }
+      it { should match(/\S+/) }
+      it 'length should be 22' do
+        expect(subject.length).to be 22
+      end
+    end
 
-      found_user = User.find_by_username('bOb')
-      expect(found_user).to eq bob
+    describe '#digest' do
+      subject { User.digest(User.new_token) }
+      it { should match(/\S+/) }
+      it 'length should be 60' do
+        expect(subject.length).to be 60
+      end
+    end
+
+    describe '.hash_password' do
+      let(:too_long) { 'x' * (User.max_password_length + 1) }
+
+      def hash(password, salt)
+        User.new.send(:hash_password, password, salt)
+      end
+
+      it 'returns the same hash for the same password and salt' do
+        expect(hash('poutine', 'gravy')).to eq(hash('poutine', 'gravy'))
+      end
+
+      it 'returns a different hash for the same salt and different password' do
+        expect(hash('poutine', 'gravy')).not_to eq(hash('fries', 'gravy'))
+      end
+
+      it 'returns a different hash for the same password and different salt' do
+        expect(hash('poutine', 'gravy')).not_to eq(hash('poutine', 'cheese'))
+      end
+
+      it 'raises an error when passwords are too long' do
+        expect { hash(too_long, 'gravy') }.to raise_error
+      end
+
     end
 
   end
-
-  describe "hash_passwords" do
-    let(:too_long) { "x" * (User.max_password_length + 1) }
-
-    def hash(password, salt)
-      User.new.send(:hash_password, password, salt)
-    end
-
-    it 'returns the same hash for the same password and salt' do
-      expect(hash('poutine', 'gravy')).to eq(hash('poutine', 'gravy'))
-    end
-
-    it 'returns a different hash for the same salt and different password' do
-      expect(hash('poutine', 'gravy')).not_to eq(hash('fries', 'gravy'))
-    end
-
-    it 'returns a different hash for the same password and different salt' do
-      expect(hash('poutine', 'gravy')).not_to eq(hash('poutine', 'cheese'))
-    end
-
-    it 'raises an error when passwords are too long' do
-      expect { hash(too_long, 'gravy') }.to raise_error
-    end
-
-  end
-
 end

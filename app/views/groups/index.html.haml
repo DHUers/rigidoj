@@ -1,0 +1,29 @@
+- content_for :title, 'Group list'
+
+.row
+  .col-xs-9
+    .panel.panel-default
+      .panel-heading
+        %h4
+          Groups
+      - unless @solutions.blank?
+        .table-responsive
+          %table#problem-listings.table.table-bordered.table-hover
+            %thead
+              %th Name
+              %th Users
+            %tbody.row-clickable{data: {element: 'tr'}}
+              - @groups.each do |g|
+                %tr
+                  %td= g.name
+                  %td= g.users.count
+      - else
+        .panel-body
+          There is no groups at this time.
+
+  .col-xs-3
+    %ul.action-list.group-actions.sticky.list-unstyled
+      %li
+        %a{href: new_group_path}
+          New group
+  = paginate @groups, window: 3

@@ -11,10 +11,12 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :contests
   has_many :problems
-  has_many :groups_users
-  has_many :groups, through: :groups_users
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   mount_uploader :avatar, AvatarUploader
+
+  scope :real, -> { where('id > 0') }
 
   before_validation :downcase_email
 
