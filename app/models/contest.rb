@@ -70,6 +70,10 @@ class Contest < ActiveRecord::Base
   def duration_with_started_at_in_minute(time)
     (time - started_at).to_i / 60
   end
+
+  def frozen_from_stareted_at_in_minute
+    duration_with_started_at_in_minute(frozen_ranking_from || end_at)
+  end
 end
 
 # == Schema Information

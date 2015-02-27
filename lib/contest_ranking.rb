@@ -6,7 +6,6 @@ class ContestRanking
   def initialize(operator, contest, opts = nil)
     @operator = operator
     @contest = contest
-    @now = Time.now
     @opts = opts || {}
   end
 
@@ -17,52 +16,24 @@ class ContestRanking
 
   # Generate status information for a user
   # Return format:
-  #   1. Accepted submissions count
+  #   1. Solved problems count
   #   2. Time usage, time usage spent on every accepted submission including penalty
-  #   3. Problem list
+  #   3. Tried problems count
+  #   4. Problem list
   #     1. tries, including accepted submission
   #     2. time, accepted submssion time. blank if the solution isn't accepted
-  #   4. Total submissions count
   def user_status(user_id)
     solutions = Solution.where(contest: @contest, user_id: user_id).reorder(created_at: 'ASC')
-    total_solutions_count = solutions.count
-    accepted_solutions_count = solutions.where(status: Solution.statuses['accept_answer']).count
+    solutions = solutions.reject { |s| s.status == 'judge_error' }.group_by(&:problem_id)
 
     # separate the solutions by problem id
-    filtered = Hash[solutions.group_by(&:problem_id).map method(:filter_solutions)]
+    filtered = Hash[if frozen?(user_id)
+                      solutions.map &method(:frozen_filter)
+                    else
+                      solutions.map &method(:filter_solutions)
+                    end]
 
-    [user_id, filtered_result(accepted_solutions_count, total_solutions_count, filtered)]
-  end
-
-  def filtered_result(accepted, total, filtered)
-    time = filtered.inject(0) {|acc,m| acc + m[1][0] ? m[1][2] : 0}
-    problems = filtered.map {|_,v| v.drop(v[0] ? 2 : 1)}
-
-    [accepted, time, problems, total]
-  end
-
-  # Filter and parse the accepted solution. If no solutions were selected,
-  # leave it as is.
-  # Require the solutions exist and are ordered by created time ASC
-  # Doesn't care about the frozen status.
-  # Two circumstances:
-  # - accepted solution exists
-  # - no accepted solution
-  def filter_solutions(problem_id, solutions)
-    # count solutions for comparing the filtered solutions
-    solutions = solutions.reject { |s| s.status == 'judge_error' }
-    count = solutions.count
-    failed_attempts = solutions.take_while { |s| s.status != 'accepted_answer' }
-    fails = failed_attempts.count
-    is_accepted = (fails < count)
-    if is_accepted
-      accpeted_solution = solutions[fails]
-      time_usage = @contest.duration_with_started_at_in_minute(accpeted_solution.created_at) +
-          PENALTY_TIME * fails
-      [problem_id, [is_accepted, fails + 1, time_usage]]
-    else
-      [problem_id, [is_accepted, fails]]
-    end
+    [user_id, filtered_result(filtered)]
   end
 
   def frozen?(user_id)
@@ -72,6 +43,53 @@ class ContestRanking
     return false if user_id == @operator.id || @operator.staff?
     return false if end_at.past?
     frozen_at ? frozen_at.past? : false
+  end
+
+  # Much like filter_solutions, but take care of the frozen state
+  def frozen_filter(data)
+    problem_id, solutions = data
+    _, result = filter_solutions(data)
+    result = [false, solutions.count] if result[0] && result[2] > @contest.frozen_from_stareted_at_in_minute
+    [problem_id, result]
+  end
+
+  # Filter and parse the accepted solution. If no solutions were selected,
+  # leave it as is.
+  # Require:
+  #   - solutions exist
+  #   - ordered by created time ASC
+  #   - solution status is not judge_error
+  # Doesn't care about the frozen status.
+  # Two circumstances:
+  #   - accepted solution exists
+  #   - no accepted solution
+  def filter_solutions(data)
+    problem_id, solutions = data
+    failed_attempts = solutions.take_while { |s| s.status != 'accepted_answer' }
+    fails = failed_attempts.count
+    is_accepted = (fails < solutions.count)
+    if is_accepted
+      solution = solutions[fails]
+      accepted_time = solution.created_at
+      delta = @contest.duration_with_started_at_in_minute(accepted_time)
+      time_usage = delta + PENALTY_TIME * fails
+      [problem_id, [is_accepted, fails + 1, delta, time_usage]]
+    else
+      [problem_id, [is_accepted, fails]]
+    end
+  end
+
+  def filtered_result(filtered)
+    accepted = filtered.inject(0) { |acc,m| acc + (m[1][0] ? 1 : 0) }
+    tried = filtered.size
+    time = filtered.inject(0) { |acc,m| acc + (m[1][0] ? m[1][3] : 0) }
+    problems = filtered.map do |problem_id,result|
+      result.pop if result[0]
+      result.shift
+      [problem_id, result]
+    end
+
+    [accepted, tried, time, Hash[problems]]
   end
 
   private

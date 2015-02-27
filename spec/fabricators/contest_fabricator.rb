@@ -3,7 +3,7 @@ Fabricator(:contest) do
   description_raw 'contest raw'
   started_at '2099-01-01 00:00'
   end_at '2099-01-03 00:00'
-  problems {3.times.map {Fabricate(:problem)}}
+  problems {4.times.map {Fabricate(:problem)}}
   users {3.times.map {Fabricate(:user)}}
 end
 
