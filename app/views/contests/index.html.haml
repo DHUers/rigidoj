@@ -11,18 +11,32 @@
 
 .row
   .col-xs-10
-    .panel{class: @incoming_contests.blank? ? 'panel-default' : ' panel-info'}
+    .panel{class: @live_contests.blank? ? 'panel-default' : ' panel-info'}
       .panel-heading
         %h4
-          Incoming contests
-      - if @incoming_contests.blank?
+          Live contests
+      - if @live_contests.blank?
         .panel-body
-          No incoming contests.
+          No live contests.
       - else
-        %ul.list-group.contest-list.incoming-contests.row-clickable{data: {element: 'li'}}
-          - @incoming_contests.each do |c|
+        %ul.list-group.contest-list.live-contests.row-clickable{data: {element: 'li'}}
+          - @live_contests.each do |c|
             %li.list-group-item.contest-item
               = render partial: 'contests/contest', locals: {:@contest => c}
+
+
+- unless @incoming_contests.blank?
+  .row
+    .col-xs-10
+      .panel.panel-default
+        .panel-heading
+          %h4
+            Incoming contests
+          %ul.list-group.contest-list.incoming-contests.row-clickable{data: {element: 'li'}}
+            - @incoming_contests.each do |c|
+              %li.list-group-item.contest-item
+                = render partial: 'contests/contest', locals: {:@contest => c}
+
 
 - unless @delayed_contests.blank?
   .row
@@ -35,6 +49,7 @@
           - @delayed_contests.each do |c|
             %li.list-group-item.contest-item
               = render partial: 'contests/contest', locals: {:@contest => c}
+
 
 .row
   .col-xs-10

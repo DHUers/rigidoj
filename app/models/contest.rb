@@ -9,11 +9,9 @@ class Contest < ActiveRecord::Base
 
   accepts_nested_attributes_for :problems
 
-  enum status: [:incoming, :delayed, :finished]
-
-  scope :incoming, -> { where(status: Contest.statuses['incoming']) }
-  scope :delayed, -> { where(status: Contest.statuses['delayed']) }
-  scope :finished, -> { where(status: Contest.statuses['finished']) }
+  scope :incoming, -> { where('started_at > ?', Time.now ) }
+  scope :live, -> { where('started_at <= ? AND end_at >= ?', Time.now, Time.now) }
+  scope :finished, -> { where('end_at < ?', Time.now) }
 
   validates_presence_of :title
   validates_presence_of :description_raw
@@ -84,7 +82,6 @@ end
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  description_baked   :text             default("")
-#  status              :integer          default("0"), not null
 #  started_at          :datetime         not null
 #  end_at              :datetime         not null
 #  delayed_till        :datetime

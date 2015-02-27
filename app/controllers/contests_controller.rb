@@ -18,7 +18,8 @@ class ContestsController < ApplicationController
 
   def index
     @incoming_contests = Contest.incoming
-    @delayed_contests = Contest.delayed
+    @live_contests = Contest.live
+    @delayed_contests = DelayableContest.delayed
     @finished_contests = Contest.finished
 
     render 'index'

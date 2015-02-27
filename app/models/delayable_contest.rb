@@ -1,4 +1,5 @@
 class DelayableContest < Contest
+  scope :delayed, -> { where('end_at <= ? AND delayed_till < ?', Time.now, Time.now) }
 end
 
 # == Schema Information
@@ -11,7 +12,6 @@ end
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  description_baked   :text             default("")
-#  status              :integer          default("0"), not null
 #  started_at          :datetime         not null
 #  end_at              :datetime         not null
 #  delayed_till        :datetime
