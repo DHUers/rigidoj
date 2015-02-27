@@ -16,7 +16,7 @@ class Solution < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :platform
 
-  after_create :publish_to_judgers
+  after_create :publish_to_judgers, unless: 'Rails.env.test?'
 
   def ace_mode
     case self.platform

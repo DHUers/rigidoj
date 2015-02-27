@@ -66,6 +66,10 @@ class Contest < ActiveRecord::Base
   rescue ArgumentError
     errors.add(:delayed_till, 'is invalid')
   end
+
+  def duration_with_started_at_in_minute(time)
+    (time - started_at).to_i / 60
+  end
 end
 
 # == Schema Information

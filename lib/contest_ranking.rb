@@ -50,13 +50,15 @@ class ContestRanking
   # - no accepted solution
   def filter_solutions(problem_id, solutions)
     # count solutions for comparing the filtered solutions
+    solutions = solutions.reject { |s| s.status == 'judge_error' }
     count = solutions.count
-    failed_attempts = solutions.take_while {|s| s.status != 'accepted_answer'}
+    failed_attempts = solutions.take_while { |s| s.status != 'accepted_answer' }
     fails = failed_attempts.count
-    if (is_accepted = fails < count)
+    is_accepted = (fails < count)
+    if is_accepted
       accpeted_solution = solutions[fails]
-      time_usage = duration_in_minute(accpeted_solution.created_at) +
-          PENALTY_TIME * fails.count
+      time_usage = @contest.duration_with_started_at_in_minute(accpeted_solution.created_at) +
+          PENALTY_TIME * fails
       [problem_id, [is_accepted, fails + 1, time_usage]]
     else
       [problem_id, [is_accepted, fails]]
@@ -72,18 +74,14 @@ class ContestRanking
     frozen_at ? frozen_at.past? : false
   end
 
-  def duration_in_minute(time)
-    (time - start_at).to_i / 60
-  end
-
   private
 
   def problem_ids
     @problem_ids ||= @contest.problem_ids
   end
 
-  def start_at
-    @start_at ||= @contest.start_at
+  def started_at
+    @started_at ||= @contest.started_at
   end
 
   def frozen_at
