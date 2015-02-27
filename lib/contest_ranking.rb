@@ -3,10 +3,9 @@ class ContestRanking
 
   # Required parameters
   # - operator:
-  def initialize(operator, contest, users, opts = nil)
+  def initialize(operator, contest, opts = nil)
     @operator = operator
     @contest = contest
-    @users = users
     @now = Time.now
     @opts = opts || {}
   end
@@ -64,10 +63,12 @@ class ContestRanking
     end
   end
 
-  def frozen_status?(user_id)
-    # we don't freeze the status to the op
+  def frozen?(user_id)
+    # we don't freeze the status to the operator, staff
+    # user_id will always in the contest
+    return false if @opts[:skip_frozen]
     return false if user_id == @operator.id || @operator.staff?
-    return false if @opts[:skip_frozen] || end_at.past?
+    return false if end_at.past?
     frozen_at ? frozen_at.past? : false
   end
 

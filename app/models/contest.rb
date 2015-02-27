@@ -1,5 +1,5 @@
 require_dependency 'pretty_text'
-require 'date'
+require 'active_support/time'
 
 class Contest < ActiveRecord::Base
   has_many :contest_problems
@@ -15,7 +15,6 @@ class Contest < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :description_raw
-  validates_presence_of :status
   validates_presence_of :started_at
   validates_presence_of :end_at
   validates_with ::ContestTypeValidator
@@ -24,10 +23,7 @@ class Contest < ActiveRecord::Base
   before_save :cook
 
   def self.latest(limit = 3)
-    latest = incoming.limit(limit)
-    latest << delayed.limit(limit - latest.count).flatten if latest.count <= limit
-    latest << finished.limit(limit - latest.count).flatten if latest.count <= limit
-    latest.flatten
+    Contest.all.order(:end_at, :delayed_till, :started_at).limit(limit)
   end
 
   def cook
