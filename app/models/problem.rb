@@ -4,7 +4,6 @@ require 'slug'
 class Problem < ActiveRecord::Base
   include Searchable
 
-  belongs_to :user
   has_one :problem_search_data
   has_many :solutions
   has_many :contest_problems
@@ -125,10 +124,10 @@ end
 #  title                   :string           default(""), not null
 #  raw                     :text             default(""), not null
 #  baked                   :text             default("")
-#  user_id                 :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  public                  :boolean          default("true"), not null
+#  judge_type              :integer          default("0"), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
@@ -143,5 +142,4 @@ end
 #  submission_count        :integer          default("0"), not null
 #  accepted_count          :integer          default("0"), not null
 #  per_case_limit          :boolean          default("false"), not null
-#  judge_type              :integer          default("0"), not null
 #

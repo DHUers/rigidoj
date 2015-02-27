@@ -28,10 +28,21 @@ class Group < ActiveRecord::Base
   end
 
 end
-
 # == Schema Information
 #
 # Table name: groups
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  visible    :boolean          default("true"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_groups_on_name  (name) UNIQUE
+#
+
   #
 #  id         :integer          not null, primary key
 #  name       :string           not null

@@ -8,7 +8,6 @@ end
 #  id                  :integer          not null, primary key
 #  title               :string           not null
 #  description_raw     :text             default("")
-#  user_id             :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  description_baked   :text             default("")

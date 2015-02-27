@@ -2,9 +2,10 @@ require_dependency 'pretty_text'
 require 'date'
 
 class Contest < ActiveRecord::Base
-  belongs_to :user
   has_many :contest_problems
   has_many :problems, -> {order('position ASC')}, through: :contest_problems
+  has_many :contest_users
+  has_many :users, through: :contest_users
 
   accepts_nested_attributes_for :problems
 
@@ -80,7 +81,6 @@ end
 #  id                  :integer          not null, primary key
 #  title               :string           not null
 #  description_raw     :text             default("")
-#  user_id             :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  description_baked   :text             default("")
