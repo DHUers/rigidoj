@@ -29,10 +29,46 @@
     .col-xs-3
       %ul.action-list.problem-actions.sticky.list-unstyled
         %li
-          %a{href: new_problem_solution_path(@problem)}
+          %a{data: {toggle: 'modal', target: '#submit-solution'}}
             %i.fa.fa-plus-circle
             Submit
         %li
           %a{href: problem_solutions_path(@problem)}
             %i.fa.fa-history
             Submitted records
+
+
+#submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      = form_for :solution, {url: problem_solutions_path(@problem.id), accept: {charset: 'UTF-8'}, remote: true, method: :post} do |f|
+        .modal-header
+          %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
+            %span{aria: {hidden: 'true'}}
+              &times;
+          %h4#import-problem-label.modal-title
+            Submit new solution
+        .modal-body
+          .form-horizontal
+            .form-group
+              .col-xs-9
+                = f.label :problem_id
+                %p= @problem.title
+              .col-xs-3
+                = f.label :platform
+                = f.select :platform, platform_select_options, {}, class: 'form-control'
+            .form-group
+              .col-xs-12
+                = render partial: 'components/source_editor',  |
+                  locals: {                                    |
+                  preview_url: '',                             |
+                  ace_mode: 'java',                            |
+                  indent_width: %w(2 4 8),                     |
+                  tab_label: 'Source code',
+                  preview_label: 'Preview',
+                  attribute: f.text_area(:source) }
+        .modal-footer
+          %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}
+            Close
+          %button{type: 'submit', class: 'btn btn-primary'}
+            Submit

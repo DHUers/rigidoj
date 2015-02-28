@@ -71,7 +71,7 @@
         %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
 
 
-#submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
+#submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}
   .modal-dialog.modal-lg
     .modal-content
       = form_for :solution, {url: contest_solutions_path(@contest.slug, @contest.id), accept: {charset: 'UTF-8'}, remote: true, method: :post} do |f|

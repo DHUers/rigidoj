@@ -15,18 +15,20 @@ class SolutionsController < ApplicationController
       additional_params.merge!({contest: contest})
       problem = contest.problems.fetch(problem_index.to_i)
       additional_params.merge!({problem_id: problem.id}) if problem
+    elsif params[:problem_id]
+      additional_params[:problem_id] = params[:problem_id]
     end
     @solution = Solution.new(solution_params.merge(additional_params))
 
     if @solution.save
-      if params[:contest_id] && (contest = Contest.find(params[:contest_id]))
-        contest.add_user current_user
+      if params[:contest_id] || params[:problem_id]
+        contest.add_user current_user if contest
         render json: success_json, status: 201
       else
         redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)
       end
     else
-      if params[:contest_id]
+      if params[:contest_id] || params[:problem_id]
         render json: failed_json.merge({errors: @solution.errors.full_messages}), status: 400
       else
         render 'new'
