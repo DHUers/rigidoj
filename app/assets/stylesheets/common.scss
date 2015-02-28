@@ -4,6 +4,12 @@
 @import "common/navbar";
 @import "common/source_editor";
 
+.go-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+
 .row-clickable:hover {
   cursor: pointer;
 
