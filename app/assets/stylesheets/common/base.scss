@@ -17,19 +17,10 @@ body {
 
 #main {
   z-index: 0;
-  padding-top: 20px;
 }
 
 .meta {
   text-shadow: 0 1px 0 #fff;
-}
-
-.row-clickable:hover {
-  cursor: pointer;
-
-  a {
-    text-decoration: underline;
-  }
 }
 
 html.turbolinks-progress-bar::before {
@@ -121,6 +112,7 @@ html.turbolinks-progress-bar::before {
   margin: 0;
   width: 20%;
   position: fixed;
+  top: $navbar-padding-horizontal;
 }
 
 .ace_editor {

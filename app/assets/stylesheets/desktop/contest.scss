@@ -1,0 +1,27 @@
+.contest-item {
+  cursor: pointer;
+}
+
+.contest-content {
+  position: relative;
+  padding: 1em;
+}
+.contest-content .stats {
+  position: absolute;
+  bottom: 1em;
+  right: 0;
+}
+.contest-content .stats div {
+  padding-top: 1em;
+}
+.contest-content .stats .contest-stat-count {
+  display: block;
+}
+
+.contest-list .contest-item:hover {
+  background-color: #f5f5f5;
+}
+
+.contest-problems .problem-panel {
+  margin-bottom: 5rem;
+}

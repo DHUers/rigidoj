@@ -4,8 +4,12 @@
 @import "common/navbar";
 @import "common/source_editor";
 
-body {
-  padding-top: $navbar-height;
+.row-clickable:hover {
+  cursor: pointer;
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 .udcard img {
@@ -66,26 +70,6 @@ div.divider {
   display: block;
 }
 
-.contest-item {
-  cursor: pointer;
-}
-
-.contest-content {
-  position: relative;
-  padding: 1em;
-}
-.contest-content .stats {
-  position: absolute;
-  bottom: 1em;
-  right: 0;
-}
-.contest-content .stats div {
-  padding-top: 1em;
-}
-.contest-content .stats .contest-stat-count {
-  display: block;
-}
-
 .admin-wrench {
   position: fixed;
   top: 5em;
@@ -104,12 +88,18 @@ div.divider {
   line-height: 2.5em;
   font-size: 1.4rem;
   &:hover {
-    background: #eee;
+    background: #f0f0f0;
   }
 }
 .action-list li .fa {
-  width: 1em;
+  width: 1.2em;
   color: #000;
+}
+.action-list .action-success {
+  font-weight: 700;
+  .fa {
+    color: #06803F;
+  }
 }
 .action-list li a {
   display: block;
@@ -132,7 +122,7 @@ div.divider {
 }
 .action-list .nav > li.active > a {
   color: #563d7c;
-  background: #eee;
+  background: #f0f0f0;
   border-left: 2px solid #563d7c;
   &:hover, &:focus {
     margin-left: 0;
@@ -142,9 +132,6 @@ div.divider {
   border-right: 1px solid #eee;
 }
 
-.contest-list .contest-item:hover {
-  background-color: #f5f5f5;
-}
 
 .timeframe {
   padding-top: 1em;
@@ -154,6 +141,6 @@ div.divider {
   font-size: 1.2rem;
   color: #666;
 }
-.contest-problems .problem-panel {
-  margin-bottom: 5rem;
+.problem-actions.sticky {
+  top: 90px;
 }

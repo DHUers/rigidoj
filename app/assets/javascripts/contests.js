@@ -1,5 +1,6 @@
 var ready = function() {
   smoothScroll.init({
+    speed: 500,
     easing: 'easeOutQuintgs'
   });
 
@@ -21,7 +22,7 @@ var ready = function() {
   $('.datetimepicker').each(function() {
     $(this).datetimepicker({
       format: 'YYYY-MM-DD HH:mm'
-      });
+    });
   });
   var startAtDateTimePicker = $('#started-at-datetimepicker'),
       endAtDateTimePicker = $('#end-at-datetimepicker'),

@@ -45,35 +45,36 @@
     .panel.panel-default.sticky
       .panel-heading
         Actions
-      %ul.action-list.contest-actions.list-unstyled{role: 'tablist'}
-        - if @contest.started?
-          - unless @contest.ended?
+      %nav.action-list
+        %ul.contest-actions.list-unstyled{role: 'tablist'}
+          - if @contest.started?
+            - unless @contest.ended?
+              %li.action-success
+                %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
+                  %i.fa.fa-plus-circle
+                  Submit
             %li
-              %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
-                %i.fa.fa-plus-circle
-                Submit
-          %li
-            %a{ href: contest_solutions_path(@contest.slug, @contest.id) }
-              %i.fa.fa-history
-              Submitted records
-          %li
-            %a{ href: contest_ranking_path(@contest.slug, @contest.id) }
-              %i.fa.fa-list
-              Ranking
-        .divider
-        %label Problem list
-        %ul.nav.nav-stacked.list-unstyled.problem-list
-          %li
-            %a{ href: "#contest-heading-anchor", data: { scroll: true } } Contest infomation
-          - @contest.problems.each_with_index do |p,i|
+              %a{ href: contest_solutions_path(@contest.slug, @contest.id) }
+                %i.fa.fa-history
+                Submitted records
             %li
-              %a{ href: "##{p.unique_id}", data: { scroll: true } }
-                %b= "#{alphabet_offset(i)}:"
-                = p.title
-        .divider
-        %label Time
-        %span
-          %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
+              %a{ href: contest_ranking_path(@contest.slug, @contest.id) }
+                %i.fa.fa-list
+                Ranking
+          .divider
+          %label Problem list
+          %ul.nav.nav-stacked.list-unstyled.problem-list
+            %li
+              %a{ href: "#contest-heading-anchor", data: { scroll: true } } Contest infomation
+            - @contest.problems.each_with_index do |p,i|
+              %li
+                %a{ href: "##{p.unique_id}", data: { scroll: true } }
+                  %b= "#{alphabet_offset(i)}:"
+                  = p.title
+          .divider
+          %label Time
+          %span
+            %time.realtime{data: {unix: Time.zone.now.strftime('%s')}}= Time.zone.now.strftime('%T')
 
 
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}
