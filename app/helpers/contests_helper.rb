@@ -15,4 +15,11 @@ module ContestsHelper
     progress >= 100 ? 100 : progress
   end
 
+  def progress_class(progress)
+    if progress <= 70 then 'info'
+    elsif progress <= 90 then 'warning'
+    else 'danger'
+    end
+  end
+
 end

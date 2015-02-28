@@ -1,0 +1,6 @@
+- if progress > 0 && progress < 100
+  .progress
+    .progress-bar.active.progress-bar-striped{role: 'progressbar',
+            aria: {valuemin: 0, valuemax: 100, valuenow: progress},
+            style: "width: #{progress}%",
+            class: "progress-bar-#{progress_class(progress)}"}

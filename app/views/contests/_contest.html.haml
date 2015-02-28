@@ -3,21 +3,7 @@
     %h2= link_to @contest.title, show_contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     .timeframe
-      - progress = contest_progress(@contest)
-      - if progress > 0 && progress < 100
-        .progress
-          .progress-bar{role: 'progressbar',
-              aria: {valuemin: 0, valuemax: 100, valuenow: progress},
-              style: "width: #{progress <= 60 ? progress : 60}%",
-              class: progress <= 60 ? 'active progress-bar-striped' : nil}
-          - if progress > 60
-            .progress-bar.progress-bar-warning{role: 'progressbar',
-                style: "width: #{progress <= 85 ? progress - 60 : 25}%",
-                class: progress <= 85 ? 'active progress-bar-striped' : nil}
-          - if progress > 85
-            .progress-bar.progress-bar-danger{role: 'progressbar',
-                style: "width: #{progress - 85}%",
-                class: Time.now <= @contest.end_time ? 'active progress-bar-striped' : nil}
+      = render partial: 'contest_progress_bar', locals: {progress: contest_progress(@contest)}
       .timeframe-group
         %label{for: "#{@contest.id}-start"}= 'start at'
         %time{id: "#{@contest.id}-start", datetime: @contest.started_at}= @contest.started_at.to_formatted_s(:short)
