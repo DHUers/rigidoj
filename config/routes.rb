@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :groups, param: :name
 
   resources :contests, except: :show
+  resources :delayable_contests, controller: 'contests', type: 'DelayableContest', except: :show
+
   get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
   get '/c/:slug/:contest_id/solutions', to: 'solutions#index', constraints: {contest_id: /\d+/}, as: :contest_solutions

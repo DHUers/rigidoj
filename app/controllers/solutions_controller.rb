@@ -19,7 +19,7 @@ class SolutionsController < ApplicationController
     @solution = Solution.new(solution_params.merge(additional_params))
 
     if @solution.save
-      if (contest = Contest.find(params[:contest_id]))
+      if params[:contest_id] && (contest = Contest.find(params[:contest_id]))
         contest.add_user current_user
         render json: success_json, status: 201
       else
@@ -42,6 +42,8 @@ class SolutionsController < ApplicationController
     elsif params[:contest_id]
       @contest = Contest.find(params[:contest_id])
       solution_scope = Solution.where(contest_id: @contest.id)
+    else
+      solution_scope = Solution.where(contest_id: nil)
     end
     @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
 

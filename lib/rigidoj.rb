@@ -31,7 +31,7 @@ module Rigidoj
     $rabbitmq_judger_proxy_queue = $rabbitmq_channel.queue(JUDGER_PROXY_QUEUE_NAME, durable: true)
     $rabbitmq_result_queue = $rabbitmq_channel.queue(RESULT_QUEUE_NAME, auto_delete: false)
     $rabbitmq_result_queue.subscribe do |delivery_info, properties, payload|
-      Rails.logger.info "[Solution result consumer] #{$rabbitmq_result_queue.name} received a message: #{payload}"
+      Rails.logger.info "[Rabbitmq] [Solution result consumer] #{$rabbitmq_result_queue.name} received a message: #{payload}"
       resolve_solution_result MultiJson.load(payload)['solution'].symbolize_keys
     end
   rescue Bunny::ChannelAlreadyClosed

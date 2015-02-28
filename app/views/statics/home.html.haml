@@ -18,7 +18,10 @@
       .panel-body
         - unless (l = Contest.latest).blank?
           - l.each do |c|
-            = render partial: 'contests/contest', locals: {:@contest => c}
+            .row.contest-content
+              .col-xs-10.metadata
+                %h2= link_to c.title, show_contest_path(c.slug, c.id)
+                = raw c.description_baked
         - else
           There is no contest.
   .col-xs-4

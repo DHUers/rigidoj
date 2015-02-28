@@ -3,7 +3,7 @@
     %h2= link_to @contest.title, show_contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     .timeframe
-      = render partial: 'contest_progress_bar', locals: {progress: contest_progress(@contest)}
+      = render partial: 'contests/contest_progress_bar', locals: {progress: contest_progress(@contest)}
       .timeframe-group
         %label{for: "#{@contest.id}-start"}= 'start at'
         %time{id: "#{@contest.id}-start", datetime: @contest.started_at}= @contest.started_at.to_formatted_s(:short)
@@ -20,4 +20,4 @@
       %strong.contest-stat-count= @contest.problems.count
     .stat-people-joined
       %span.text-muted People joined
-      %strong.contest-stat-count= '0'
+      %strong.contest-stat-count= @contest.users.count

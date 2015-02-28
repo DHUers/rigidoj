@@ -30,14 +30,15 @@
           .timeframe-group
             %label{for: "#{@contest.id}-end"}= 'end at'
             %time{id: "#{@contest.id}-end", datetime: @contest.end_at}= @contest.end_at.to_formatted_s(:short)
-          - if @contest.type == 'delayable'
+          - if @contest.type == 'DelayableContest'
             .timeframe-group
               %label{for: "#{@contest.id}-delayed"}= 'delayed till'
               %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
 
 
-    - @contest.problems.each_with_index do |p,i|
-      = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
+    .contest-problems
+      - @contest.problems.each_with_index do |p,i|
+        = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
 
 
   .col-xs-3

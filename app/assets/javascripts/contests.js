@@ -38,7 +38,7 @@ var ready = function() {
     endAtDateTimePicker.data('DateTimePicker').minDate(e.date);
   });
 
-  var initalValue = $('#contest_type').val() || 'normal';
+  var initalValue = $('#contest-type').val() || 'normal';
   // select different group based on judge type
   $('.time-setting').each(function(_, v) {
     if ($(v).data('type').split(' ').indexOf(initalValue) !== -1) {
@@ -47,7 +47,7 @@ var ready = function() {
       $(this).addClass('hidden');
     }
   });
-  $('#contest_type').on('change', function() {
+  $('#contest-type').on('change', function() {
     var selectedValue = $(this).val() || 'normal';
     $('.time-setting').each(function(_, v) {
       if ($(v).data('type').split(' ').indexOf(selectedValue) !== -1) {
@@ -78,7 +78,7 @@ var ready = function() {
     $('#solution_platform').select2({width: '100%'});
   });
 
-  var contestProblemList = $('#contest_problem_ids');
+  var contestProblemList = $('#contest-problem-ids');
   contestProblemList.select2({
     width: '100%',
     ajax: {
