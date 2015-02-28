@@ -49,15 +49,15 @@
         %ul.contest-actions.list-unstyled{role: 'tablist'}
           - if @contest.started?
             - unless @contest.ended?
-              %li.action-success
+              %li.action.action-success
                 %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
                   %i.fa.fa-plus-circle
                   Submit
-            %li
+            %li.action
               %a{ href: contest_solutions_path(@contest.slug, @contest.id) }
                 %i.fa.fa-history
                 Submitted records
-            %li
+            %li.action
               %a{ href: contest_ranking_path(@contest.slug, @contest.id) }
                 %i.fa.fa-list
                 Ranking

@@ -10,32 +10,38 @@
         %a{href: edit_problem_path(@problem)}
           Edit problem
 
-.panel.panel-default
-  .panel-heading
-    .panel-title
-      %h1.problem-title
-        = @problem.id
-        = @problem.title
-    .meta
-      %ul.list-inline.judge-limits
-        - @problem.judge_limits.each do |platform, limit|
-          %li.time-limit
-            = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]} ms"
-          %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:memory]} KB"
-  .panel-body
-    .col-xs-9.problem-body
-      :preserve
-        #{raw @problem.baked}
-    .col-xs-3
-      %ul.action-list.problem-actions.sticky.list-unstyled
-        %li
-          %a{data: {toggle: 'modal', target: '#submit-solution'}}
-            %i.fa.fa-plus-circle
-            Submit
-        %li
-          %a{href: problem_solutions_path(@problem)}
-            %i.fa.fa-history
-            Submitted records
+.row
+  .col-xs-9
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          %h1.problem-title
+            = @problem.id
+            = @problem.title
+        .meta
+          %ul.list-inline.judge-limits
+            - @problem.judge_limits.each do |platform, limit|
+              %li.time-limit
+                = "#{platform.capitalize} time limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:time]} ms"
+              %li.memory-limit= "memory limit#{@problem.per_case_limit ? ' per case' : nil}: #{limit[:memory]} KB"
+      .panel-body
+        .problem-body
+          :preserve
+            #{raw @problem.baked}
+  .col-xs-3
+    .panel.panel-default.sticky
+      .panel-heading
+        Actions
+      %nav.action-list.problem-actions
+        %ul.list-unstyled
+          %li.action.action-success
+            %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
+              %i.fa.fa-plus-circle
+              Submit
+          %li.action
+            %a{ href: problem_solutions_path(@problem) }
+              %i.fa.fa-history
+              Submitted records
 
 
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}
