@@ -19,8 +19,8 @@ class SolutionsController < ApplicationController
     @solution = Solution.new(solution_params.merge(additional_params))
 
     if @solution.save
-      if (contest = params[:contest_id])
-        contest.users << current_user
+      if (contest = Contest.find(params[:contest_id]))
+        contest.add_user current_user
         render json: success_json, status: 201
       else
         redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)

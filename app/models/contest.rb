@@ -6,6 +6,7 @@ class Contest < ActiveRecord::Base
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
   has_many :contest_users
   has_many :users, -> { order('username ASC') } , through: :contest_users
+  has_many :solutions
 
   accepts_nested_attributes_for :problems
 
@@ -73,6 +74,13 @@ class Contest < ActiveRecord::Base
 
   def frozen_from_stareted_at_in_minute
     duration_with_started_at_in_minute(frozen_ranking_from || end_at)
+  end
+
+  def add_user(user)
+    begin
+      users.push user unless users.include?(user)
+    rescue ActiveRecord::RecordNotUnique
+    end
   end
 end
 

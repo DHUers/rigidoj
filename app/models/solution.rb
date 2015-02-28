@@ -11,10 +11,7 @@ class Solution < ActiveRecord::Base
 
   default_scope {order('created_at DESC')}
 
-  validates_presence_of :source
-  validates_presence_of :problem_id
-  validates_presence_of :user_id
-  validates_presence_of :platform
+  validates_presence_of :source, :problem_id, :user_id, :platform
 
   after_create :publish_to_judgers, unless: 'Rails.env.test?'
 

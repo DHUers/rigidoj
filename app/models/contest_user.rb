@@ -12,3 +12,7 @@ end
 #  contest_id :integer          not null
 #  user_id    :integer          not null
 #
+# Indexes
+#
+#  index_contest_users_on_contest_id_and_user_id  (contest_id,user_id) UNIQUE
+#

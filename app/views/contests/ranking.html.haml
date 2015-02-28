@@ -11,9 +11,28 @@
 .panel.panel-info
   .panel-heading
     %h3= "#{@contest.title} ranking"
-  %table.table.table-hover.table-bordered.table-condensed
-    %thead
-      %tr
-        %th
-    %tbody
-      %tr
+  - unless @contest.users.blank?
+    %table.table.table-hover.table-bordered.table-condensed
+      %thead
+        %tr
+          %th Rank
+          %th Name
+          %th Solved/Tried
+          %th Time
+          - @contest.problems.each_with_index do |u,i|
+            %th= alphabet_offset(i)
+      %tbody
+        - @contest.user_ids.each_with_index do |u,i|
+          - rank = @ranking[u]
+          - result = rank[4]
+          %tr
+            %td= i + 1
+            %td= User.find(u).name
+            %td= "#{rank[0]}/#{rank[1]}"
+            %td= rank[2]
+            - @contest.problems.each_with_index do |p,i|
+              - problem_result = result[p.id]
+              %td= problem_result.length == 2 ? problem_result.join('/') : "#{problem_result.first}/--"
+  - else
+    .panel-body
+      No one joins the contest.
