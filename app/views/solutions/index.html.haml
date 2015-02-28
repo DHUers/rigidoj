@@ -24,23 +24,25 @@
         .table-responsive
           %table#solution-listings.table.table-bordered.table-condensed.table-hover
             %thead
+              %th #
               %th Submission time
-              %th Status
-              %th Problem
-              %th Time usage
-              %th Memory usage
-              %th Platform
               %th Author
+              %th Problem
+              %th Platform
+              %th Status
+              %th Time
+              %th Memory
             %tbody
               - @solutions.each do |s|
                 %tr
-                  %td= s.created_at.to_formatted_s(:long)
-                  %td= SiteSetting.solution_statuses[Solution.statuses[s.status]]
+                  %td= s.id
+                  %td= s.created_at.to_formatted_s(:long_add_second)
+                  %td= link_to s.user.username, s.user
                   %td= link_to "#{s.problem.id} - #{s.problem.title}", show_problem_path(s.problem.slug, s.problem.id)
+                  %td= s.platform
+                  %td= SiteSetting.solution_statuses[Solution.statuses[s.status]]
                   %td= show_details?(s) ? "#{s.time_usage} ms" : '-'
                   %td= show_details?(s) ? "#{s.memory_usage} KB" : '-'
-                  %td= s.platform
-                  %td= link_to s.user.username, s.user
       - else
         .panel-body
           There is no submission at this time.
