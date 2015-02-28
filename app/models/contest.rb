@@ -47,25 +47,15 @@ class Contest < ActiveRecord::Base
     end_time.past?
   end
 
-  def started_at=(started_at)
-    write_attribute :started_at, DateTime.parse(started_at)
-    self.started_at
-  rescue ArgumentError
-    errors.add(:started_at, 'is invalid')
-  end
-
-  def end_at=(end_at)
-    write_attribute :end_at, DateTime.parse(end_at)
-    self.end_at
-  rescue ArgumentError
-    errors.add(:end_at, 'is invalid')
-  end
-
-  def delayed_till=(delayed_till)
-    write_attribute :delayed_till, DateTime.parse(delayed_till)
-    self.delayed_till
-  rescue ArgumentError
-    errors.add(:delayed_till, 'is invalid')
+  %i(started_at end_at delayed_till).each do |setter|
+    define_method("#{setter}=") do |val|
+      begin
+        write_attribute setter, Time.zone.parse(val)
+        send setter
+      rescue ArgumentError
+        errors.add(setter, :invalid)
+      end
+    end
   end
 
   def duration_with_started_at_in_minute(time)
