@@ -96,7 +96,9 @@ div.divider {
 .action-list {
   height: 100%;
 }
-
+.action-list label {
+  padding: 0 1em;
+}
 .action-list li {
   padding: 0;
   line-height: 2.5em;
@@ -130,6 +132,7 @@ div.divider {
 }
 .action-list .nav > li.active > a {
   color: #563d7c;
+  background: #eee;
   border-left: 2px solid #563d7c;
   &:hover, &:focus {
     margin-left: 0;

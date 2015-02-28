@@ -32,7 +32,7 @@ class Contest < ActiveRecord::Base
   end
 
   def end_time
-    delayed_till || end_at
+    end_at
   end
 
   def create_slug

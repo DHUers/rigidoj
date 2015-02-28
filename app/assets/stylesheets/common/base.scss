@@ -119,8 +119,8 @@ html.turbolinks-progress-bar::before {
 
 .sticky.stuck {
   margin: 0;
+  width: 20%;
   position: fixed;
-  top: $navbar-height + $line-height-computed / 2;
 }
 
 .ace_editor {
