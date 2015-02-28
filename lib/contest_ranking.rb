@@ -1,6 +1,10 @@
 class ContestRanking
   PENALTY_TIME = 20
 
+  def self.rank(operator, contest, opts = nil)
+    ContestRanking.new(operator, contest, opts).execute
+  end
+
   # Required parameters
   # - operator:
   def initialize(operator, contest, opts = nil)
@@ -9,10 +13,27 @@ class ContestRanking
     @opts = opts || {}
   end
 
-  # rank
+  def execute
+    Hash[sorted]
+  end
+
+  # sorted
   # 1. accepted solution count
   # 2. time usage
   # 3. last accepted time
+  # 4. name, user_ids is already sorted
+  def sorted
+    statuses = @contest.user_ids.map { |i| [i, user_status(i)] }
+    statuses.sort! do |a,b|
+      accpeted = a[1][0] <=> b[1][0]
+      if accpeted == 0
+        accpeted
+      else
+        time_usage = a[1][2] <=> b[1][2]
+        time_usage == 0 ? a[1][3] <=> b[1][3] : time_usage
+      end
+    end
+  end
 
   # Generate status information for a user
   # Return format:
@@ -33,9 +54,10 @@ class ContestRanking
                       solutions.map &method(:filter_solutions)
                     end]
 
-    [user_id, filtered_result(filtered)]
+    filtered_result(filtered)
   end
 
+  # Does user is frozen to the opeartor
   def frozen?(user_id)
     # we don't freeze the status to the operator, staff
     # user_id will always in the contest
@@ -83,13 +105,15 @@ class ContestRanking
     accepted = filtered.inject(0) { |acc,m| acc + (m[1][0] ? 1 : 0) }
     tried = filtered.size
     time = filtered.inject(0) { |acc,m| acc + (m[1][0] ? m[1][3] : 0) }
+    last_accepted = 0
     problems = filtered.map do |problem_id,result|
       result.pop if result[0]
       result.shift
+      last_accepted = [last_accepted, result[1]].max if result.length == 2
       [problem_id, result]
     end
 
-    [accepted, tried, time, Hash[problems]]
+    [accepted, tried, time, last_accepted, Hash[problems]]
   end
 
   private

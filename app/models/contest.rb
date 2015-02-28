@@ -3,9 +3,9 @@ require 'active_support/time'
 
 class Contest < ActiveRecord::Base
   has_many :contest_problems
-  has_many :problems, -> {order('position ASC')}, through: :contest_problems
+  has_many :problems, -> { order('position ASC') }, through: :contest_problems
   has_many :contest_users
-  has_many :users, through: :contest_users
+  has_many :users, -> { order('username ASC') } , through: :contest_users
 
   accepts_nested_attributes_for :problems
 
