@@ -32,10 +32,10 @@
         .panel-heading
           %h4
             Incoming contests
-          %ul.list-group.contest-list.incoming-contests.row-clickable{data: {element: 'li'}}
-            - @incoming_contests.each do |c|
-              %li.list-group-item.contest-item
-                = render partial: 'contests/contest', locals: {:@contest => c}
+        %ul.list-group.contest-list.incoming-contests.row-clickable{data: {element: 'li'}}
+          - @incoming_contests.each do |c|
+            %li.list-group-item.contest-item
+              = render partial: 'contests/contest', locals: {:@contest => c}
 
 
 - unless @delayed_contests.blank?
