@@ -68,7 +68,7 @@ class Contest < ActiveRecord::Base
   end
 
   def duration_with_started_at_in_minute(time)
-    (time - started_at).to_i / 60
+    ((time - started_at) / 60).ceil
   end
 
   def frozen_from_stareted_at_in_minute

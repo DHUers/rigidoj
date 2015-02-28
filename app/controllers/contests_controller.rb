@@ -33,7 +33,7 @@ class ContestsController < ApplicationController
 
   def ranking
     @contest = Contest.find(params[:id])
-    @solutions = Solution.where(contest: @contest)
+    @ranking = ContestRanking.rank(current_user, @contest)
 
     render 'ranking'
   end
