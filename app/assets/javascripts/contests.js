@@ -1,4 +1,8 @@
 var ready = function() {
+  smoothScroll.init({
+    easing: 'easeOutQuintgs'
+  });
+
   var problemLists = $('#problem-lists');
 
   // extract problem lists when submit

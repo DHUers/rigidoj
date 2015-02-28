@@ -31,6 +31,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require select2
+//= require smooth-scroll
 //= require_self
 //= require_tree .
 
