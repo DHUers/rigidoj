@@ -33,10 +33,10 @@
             %tbody
               - @solutions.each do |s|
                 %tr
-                  %td= s.updated_at
-                  %td= s.status
+                  %td= s.updated_at.to_formatted_s(:long)
+                  %td= SiteSetting.solution_statuses[Solution.statuses[s.status]]
                   %td= link_to s.problem.id, show_problem_path(s.problem.slug, s.problem.id)
-                  %td= show_details?(s) ? s.time_usage : '-'
+                  %td= show_details?(s) ? "#{s.time_usage}ms" : '-'
                   %td= s.platform
                   %td= link_to s.user.username, s.user
       - else

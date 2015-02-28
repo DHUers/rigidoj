@@ -221,6 +221,11 @@ class SiteSetting < ActiveRecord::Base
   def self.judger_platforms
     @judger_platforms ||= self.judger_platform.split('|')
   end
+
+  def self.solution_statuses
+    @solution_statuses ||= self.solution_status.split('|')
+  end
+
 end
 
 # == Schema Information
