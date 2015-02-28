@@ -41,9 +41,9 @@ describe ContestRanking do
         @problem2 = @contest.problems[1]
         @problem3 = @contest.problems[2]
         @problem4 = @contest.problems[3]
-        @time1 = Time.zone.local(2099, 1, 1, 12) # 2099-01-01 12:00
-        @time2 = Time.zone.local(2099, 1, 1, 13) # 2099-01-01 13:00
-        @time3 = Time.zone.local(2099, 1, 1, 14) # 2099-01-01 14:00
+        @time1 = Time.zone.local(2099, 1, 1, 4) # 2099-01-01 04:00
+        @time2 = Time.zone.local(2099, 1, 1, 5) # 2099-01-01 05:00
+        @time3 = Time.zone.local(2099, 1, 1, 6) # 2099-01-01 06:00
         @ranking = ContestRanking.new(@user1, @contest)
 
         @solutions = []
@@ -221,9 +221,9 @@ describe ContestRanking do
             @problem2 = @contest.problems[1]
             @problem3 = @contest.problems[2]
             @problem4 = @contest.problems[3]
-            @time1 = Time.zone.local(2099, 1, 1, 12) # 2099-01-01 12:00
-            @time2 = Time.zone.local(2099, 1, 2, 12) # 2099-01-02 12:00
-            @time3 = Time.zone.local(2099, 1, 2, 13)
+            @time1 = Time.zone.local(2099, 1, 1, 4) # 2099-01-01 04:00
+            @time2 = Time.zone.local(2099, 1, 2, 4) # 2099-01-02 04:00
+            @time3 = Time.zone.local(2099, 1, 2, 5)
             @ranking1 = ContestRanking.new(@user1, @contest)
             @ranking2 = ContestRanking.new(@user2, @contest)
 
