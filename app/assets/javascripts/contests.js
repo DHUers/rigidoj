@@ -1,6 +1,6 @@
 var ready = function() {
   smoothScroll.init({
-    speed: 500,
+    speed: 300,
     easing: 'easeOutQuintgs'
   });
 
