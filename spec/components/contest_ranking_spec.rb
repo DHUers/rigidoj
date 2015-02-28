@@ -107,7 +107,7 @@ describe ContestRanking do
           expect(@ranking.filter_solutions([@problem2.id, p2])).to match_array [@problem2.id, [true, 1, 240, 240]]
           expect(@ranking.filter_solutions([@problem3.id, p3])).to match_array [@problem3.id, [false, 1]]
           expect(@ranking.filter_solutions([@problem4.id, p4])).to match_array [@problem4.id, [false, 0]]
-      end
+        end
 
         it 'user2' do
           p1 = @user2_solutions.select { |s| s.problem_id == @problem1.id }
@@ -134,15 +134,23 @@ describe ContestRanking do
 
       describe '.user_status' do
         it 'user1' do
-          expect(@ranking.user_status(@user1.id)).to match_array [@user1.id, [2, 3, 560, { @problem1.id => [2, 300], @problem2.id => [1, 240], @problem3.id => [1] }]]
+          expect(@ranking.user_status(@user1.id)).to match_array [2, 3, 560, 300, { @problem1.id => [2, 300], @problem2.id => [1, 240], @problem3.id => [1] }]
         end
 
         it 'user2' do
-          expect(@ranking.user_status(@user2.id)).to match_array [@user2.id, [1, 2, 320, { @problem1.id => [2], @problem4.id => [2, 300] }]]
+          expect(@ranking.user_status(@user2.id)).to match_array [1, 2, 320, 300, { @problem1.id => [2], @problem4.id => [2, 300] }]
         end
 
         it 'user3' do
-          expect(@ranking.user_status(@user3.id)).to match_array [@user3.id, [1, 3, 240, { @problem1.id => [1], @problem2.id => [2], @problem3.id => [1, 240] }]]
+          expect(@ranking.user_status(@user3.id)).to match_array [1, 3, 240, 240, { @problem1.id => [1], @problem2.id => [2], @problem3.id => [1, 240] }]
+        end
+      end
+
+      describe '.sorted' do
+        it 'return the sorted result' do
+          expect(@ranking.sorted).to match_array [[@user1.id, [2, 3, 560, 300, { @problem1.id => [2, 300], @problem2.id => [1, 240], @problem3.id => [1] }]],
+                                                  [@user2.id, [1, 2, 320, 300, { @problem1.id => [2], @problem4.id => [2, 300] }]],
+                                                  [@user3.id, [1, 3, 240, 240, { @problem1.id => [1], @problem2.id => [2], @problem3.id => [1, 240] }]]]
         end
       end
     end
@@ -226,6 +234,7 @@ describe ContestRanking do
             Solution.delete_all
             @user1 = @contest.users[0]
             @user2 = @contest.users[1]
+            @user3 = @contest.users[2]
             @problem1 = @contest.problems[0]
             @problem2 = @contest.problems[1]
             @problem3 = @contest.problems[2]
@@ -277,13 +286,24 @@ describe ContestRanking do
 
           describe '.user_status' do
             it 'user1' do
-              expect(@ranking1.user_status(@user1.id)).to match_array [@user1.id, [2, 4, 1940, { @problem1.id => [2, 1680], @problem2.id => [1], @problem3.id => [1, 240] , @problem4.id => [2] }]]
-              expect(@ranking2.user_status(@user1.id)).to match_array [@user1.id, [1, 4, 240, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [1, 240], @problem4.id => [2] }]]
+              expect(@ranking1.user_status(@user1.id)).to match_array [2, 4, 1940, 1680, { @problem1.id => [2, 1680], @problem2.id => [1], @problem3.id => [1, 240], @problem4.id => [2] }]
+              expect(@ranking2.user_status(@user1.id)).to match_array [1, 4, 240, 240, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [1, 240], @problem4.id => [2] }]
             end
 
             it 'user2' do
-              expect(@ranking1.user_status(@user2.id)).to match_array [@user2.id, [0, 3, 0, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [2] }]]
-              expect(@ranking2.user_status(@user2.id)).to match_array [@user2.id, [2, 3, 3360, { @problem1.id => [1, 1680], @problem2.id => [1, 1680], @problem3.id => [2] }]]
+              expect(@ranking1.user_status(@user2.id)).to match_array [0, 3, 0, 0, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [2] }]
+              expect(@ranking2.user_status(@user2.id)).to match_array [2, 3, 3360, 1680, { @problem1.id => [1, 1680], @problem2.id => [1, 1680], @problem3.id => [2] }]
+            end
+          end
+
+          describe '.sorted' do
+            it 'return the sorted result' do
+              expect(@ranking1.sorted).to match_array [[@user1.id, [2, 4, 1940, 1680, { @problem1.id => [2, 1680], @problem2.id => [1], @problem3.id => [1, 240], @problem4.id => [2] }]],
+                                                       [@user2.id, [0, 3, 0, 0, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [2] }]],
+                                                       [@user3.id, [0, 0, 0, 0, {}]]]
+              expect(@ranking2.sorted).to match_array [[@user1.id, [1, 4, 240, 240, { @problem1.id => [2], @problem2.id => [1], @problem3.id => [1, 240], @problem4.id => [2] }]],
+                                                       [@user2.id, [2, 3, 3360, 1680, { @problem1.id => [1, 1680], @problem2.id => [1, 1680], @problem3.id => [2] }]],
+                                                       [@user3.id, [0, 0, 0, 0, {}]]]
             end
           end
         end
