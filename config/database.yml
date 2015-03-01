@@ -64,6 +64,6 @@ test:
 #
 production:
   <<: *default
-  database: rigidoj_production
+  database: rigidoj
   username: rigidoj
   password: <%= ENV['RIGIDOJ_DATABASE_PASSWORD'] %>
