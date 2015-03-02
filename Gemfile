@@ -77,3 +77,5 @@ group :test do
   gem 'timecop'
   gem 'fakeweb'
 end
+
+gem 'rack-reverse-proxy', require: 'rack/reverse_proxy'

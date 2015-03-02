@@ -57,5 +57,7 @@ Rails.application.routes.draw do
   get '/query', to: 'search#query'
   get '/notifications', to: 'notifications#recent'
 
+  get '/rabbitmq', to: 'proxies#rabbitmq'
+
   root to: 'statics#home'
 end
