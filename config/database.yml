@@ -62,8 +62,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: rigidoj_production
-  username: rigidoj
-  password: <%= ENV['RIGIDOJ_DATABASE_PASSWORD'] %>

@@ -17,6 +17,14 @@ Bundler.require(*Rails.groups)
 
 module Rigidoj
   class Application < Rails::Application
+    def config.database_configuration
+      if Rails.env.production?
+        GlobalSetting.database_config
+      else
+        super
+      end
+    end
+
     require 'rigidoj'
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
