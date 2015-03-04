@@ -11,7 +11,7 @@ class GlobalSetting
   end
 
   def self.database_config
-    hash = { adapter: 'postgresql' }
+    hash = { 'adapter' => 'postgresql' }
     %w{pool timeout socket host port username password}.each do |s|
       if val = self.send("db_#{s}")
         hash[s] = val
@@ -19,8 +19,11 @@ class GlobalSetting
     end
     hash['host_names'] = [ hostname ]
     hash['database'] = db_name
+    hash['encoding'] = 'unicode'
 
-    { production: hash }
+    hash['prepared_statements'] = !!self.db_prepared_statements
+
+    { 'production' => hash }
   end
 
 
