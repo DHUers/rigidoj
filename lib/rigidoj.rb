@@ -48,6 +48,7 @@ module Rigidoj
         memory_usage: payload[:memory_usage]
     }
     solution_params[:report] = payload[:report] if payload[:report]
+    solution_params[:detailed_report] = payload[:detailed_report] if payload[:detailed_report]
     solution.update_attributes solution_params
 
     solution.publish_notification
