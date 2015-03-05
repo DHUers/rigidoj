@@ -12,8 +12,13 @@ class Solution < ActiveRecord::Base
   default_scope {order('created_at DESC')}
 
   validates_presence_of :source, :problem_id, :user_id, :platform
+  validate :contest_solution
 
   after_create :publish_to_judgers, unless: 'Rails.env.test?'
+
+  def contest_solution
+    errors.add(:created_at, :invalid, options) if contest.ended?
+  end
 
   def ace_mode
     case self.platform
