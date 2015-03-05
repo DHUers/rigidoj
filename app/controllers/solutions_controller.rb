@@ -14,6 +14,7 @@ class SolutionsController < ApplicationController
 
     if @solution.save
       if params[:contest_id] || params[:problem_id]
+        contest = Contest.find(params[:contest_id])
         contest.add_user current_user if contest
         render json: success_json, status: 201
       else
@@ -52,7 +53,7 @@ class SolutionsController < ApplicationController
   private
 
   def create_params
-    result = solution_params
+    result = solution_params.merge({ user_id: current_user.id })
     if params[:contest_id]
       contest = Contest.find(params[:contest_id])
       result[:contest_id] = contest.id

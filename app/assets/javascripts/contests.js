@@ -1,23 +1,8 @@
 var ready = function() {
   smoothScroll.init({
-    speed: 300,
+    speed: 500,
     offset: 20,
-    easing: 'easeOutQuintgs'
-  });
-
-  var problemLists = $('#problem-lists');
-
-  // extract problem lists when submit
-  problemLists.closest('form').submit(function() {
-    var lists = $('#problem-lists .problem-info').map(function() {
-      return String($(this).data('problem-id'));
-    }).get();
-    $('#hidden-problem-list').val(JSON.stringify(lists));
-  });
-
-  problemLists.sortable();
-  problemLists.on('click', '.delete-problem', function() {
-    $(this).parent().remove();
+    easing: 'easeOutQuart'
   });
 
   $('.datetimepicker').each(function() {
@@ -158,14 +143,35 @@ var ready = function() {
  //     return false;
  //   };
   }).on('ajax:success', function(e, data, status, xhr) {
-    Rigidoj.Utilities.showFlyInMessage('Submit succeed', '', 'success', 2000);
+    $.notify({
+      // options
+      message: 'Submit succeed'
+    }, {
+      type: 'success',
+      delay: 3000,
+      animate: {
+        enter: 'animated fadeInDown',
+        exit: 'animated fadeOutUp'
+      }
+    });
   }).on('ajax:error', function(e, xhr, status, error) {
     response = JSON.parse(xhr.responseText);
     content = ''
     $.each(response['errors'], function() {
       content += '<p>' + this + '</p>'
     });
-    Rigidoj.Utilities.showFlyInMessage('Submission error', content, 'danger');
+    $.notify({
+      // options
+      title: 'Submit error occurs',
+      message: content
+    }, {
+      type: 'danger',
+      delay: 3000,
+      animate: {
+        enter: 'animated fadeInDown',
+        exit: 'animated fadeOutUp'
+      }
+    });
   });
 };
 

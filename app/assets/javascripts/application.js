@@ -32,6 +32,7 @@
 //= require bootstrap-datetimepicker
 //= require select2
 //= require smooth-scroll
+//= require bootstrap-notify
 //= require_self
 //= require_tree .
 
@@ -44,29 +45,6 @@ Turbolinks.enableProgressBar();
 Rigidoj.MessageBus = window.MessageBus;
 Rigidoj.MessageBus.callbackInterval = 5000;
 Rigidoj.MessageBus.start();
-
-Rigidoj.Utilities = {
-  showFlyInMessage: function(title, message, alertClass, closeDelay) {
-    if (!closeDelay) { closeDelay = 0 }
-
-    var m = $('#flyover-message');
-    m.removeClass('in info success danger').addClass('in alert-' + alertClass);
-
-    if (closeDelay !== 0) {
-      setTimeout(function() {
-        m.removeClass('in');
-      }, closeDelay);
-    } else {
-      title += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-
-    }
-    m.find('.title').html(title);
-    m.find('.content').html(message);
-    m.find('button').on('click', function() {
-      m.removeClass('in');
-    });
-  }
-};
 
 var ready = function() {
   var notificationBadge = $('#notification-badge'),
@@ -123,3 +101,12 @@ var ready = function() {
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
+$.notifyDefaults({
+  template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
+              '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>' +
+              '<span data-notify="icon"></span> <span data-notify="title">{1}</span>' +
+              '<span data-notify="message">{2}</span>' +
+              '<a href="{3}" target="{4}" data-notify="url"></a>' +
+            '</div>'
+});
