@@ -44,6 +44,10 @@ gem 'whenever', require: false
 gem 'unicorn-rails'
 gem 'stringex', require: false
 
+gem 'gctools', require: false, platform: :mri_21
+gem 'stackprof', require: false, platform: :mri_21
+gem 'memory_profiler', require: false, platform: :mri_21
+
 # frontend assets
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.1'
