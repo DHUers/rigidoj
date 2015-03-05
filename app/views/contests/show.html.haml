@@ -13,8 +13,7 @@
 
 .row
   .col-xs-9
-    - progress = contest_progress @contest
-    .panel{class: progress >= 0 && progress <= 100 ? 'panel-success' : 'panel-info'}
+    .panel{ class: @contest.ongoing? ? 'panel-success' : 'panel-default' }
       .panel-heading
         .panel-title
           %h1.contest-title

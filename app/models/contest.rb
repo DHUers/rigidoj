@@ -44,6 +44,10 @@ class Contest < ActiveRecord::Base
     started_at.past?
   end
 
+  def ongoing?
+    started? && !ended?
+  end
+
   def ended?
     end_time.past?
   end
