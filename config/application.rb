@@ -9,7 +9,7 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 require 'active_support/all'
-#require 'redis-store'
+require 'redis-store'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,6 +27,13 @@ module Rigidoj
 
     require 'rigidoj'
 
+    def config.cache_store
+      [:redis_store, {
+          host: GlobalSetting.redis_host, port: GlobalSetting.redis_port, compress: true,
+          expires_in: 8.hours, compress_threshold: 32.kilobytes}
+      ]
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Beijing'
@@ -43,11 +50,10 @@ module Rigidoj
 
     config.autoload_paths << Rails.root.join('lib')
 
-    config.cache_store = :redis_store, {
-        host: 'redis.server', port: 6379, compress: true,
-        expires_in: 8.hours, compress_threshold: 32.kilobytes}
 
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = 'sha256'
+
+
   end
 end
