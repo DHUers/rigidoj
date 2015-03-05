@@ -12,7 +12,7 @@ class Contest < ActiveRecord::Base
 
   scope :incoming, -> { where('started_at > ?', Time.now ) }
   scope :live, -> { where('started_at <= ? AND end_at >= ?', Time.now, Time.now) }
-  scope :finished, -> { where('end_at < ?', Time.now) }
+  scope :finished, -> { where('end_at < ? AND type <> ? OR delayed_till < ?', Time.now, 'DelayableContest', Time.now) }
 
   validates_presence_of :title
   validates_presence_of :description_raw
