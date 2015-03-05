@@ -226,6 +226,9 @@ class SiteSetting < ActiveRecord::Base
     @solution_statuses ||= self.solution_status.split('|')
   end
 
+  def self.solution_colors
+    @solution_colors ||= self.solution_color.split('|')
+  end
 end
 
 # == Schema Information

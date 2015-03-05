@@ -41,7 +41,7 @@
                 %tr
                   %td= s.id
                   %td= link_to s.user.username, s.user
-                  %td= SiteSetting.solution_statuses[Solution.statuses[s.status]]
+                  %td= status_span(s)
                   %td= show_details?(s) ? "#{s.time_usage} ms" : '-'
                   %td= show_details?(s) ? "#{s.memory_usage} KB" : '-'
                   %td= s.platform

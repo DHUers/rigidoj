@@ -36,6 +36,7 @@ judger:
   judger_platform:
     default: 'C|C++|Java'
   solution_status: 'Judging|Network error|Judge error|Accepted|Wrong answer|Time limit exceeded|Memory limit exceeded|Presentation error|Runtime error|Compile error|Output limit exceeded'
+  solution_color: '#333333|#333333|#eeeeee|#333333|#333333|#333333|#333333|#333333|#333333|#333333|#333333'
 
 user:
   allow_update_username:
