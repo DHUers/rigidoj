@@ -25,7 +25,8 @@
           %table#solution-listings.table.table-bordered.table-condensed.table-hover
             %thead
               %tr
-                %th{ rowspan: 2 } #
+                - if current_user.staff?
+                  %th{ rowspan: 2 } ID
                 %th{ rowspan: 2 } Author
                 %th{ rowspan: 2 } Status
                 %th{ rowspan: 2 } Time
@@ -39,7 +40,8 @@
             %tbody
               - @solutions.each do |s|
                 %tr
-                  %td= s.id
+                  - if current_user.staff?
+                    %td= s.id
                   %td= link_to s.user.username, s.user
                   %td= status_span(s)
                   %td= show_details?(s) ? "#{s.time_usage} ms" : '-'
