@@ -7,7 +7,7 @@ class RigidojRedis
 
   def self.raw_connection(config = nil)
     config ||= self.config
-    redis_opts = { ßhost: config['host'], port: config['port'], db: config['db'] }
+    redis_opts = { host: config['host'], port: config['port'], db: config['db'] }
     redis_opts[:password] = config['password'] if config['password']
     Redis.new(redis_opts)
   end
