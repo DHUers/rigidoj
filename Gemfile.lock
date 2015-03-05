@@ -149,7 +149,6 @@ GEM
     minitest (5.5.1)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
-    msgpack (0.5.11)
     multi_json (1.10.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -195,24 +194,8 @@ GEM
       rake
     rdoc (4.2.0)
     redis (3.2.1)
-    redis-actionpack (4.0.0)
-      actionpack (~> 4)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (4.0.0)
-      activesupport (~> 4)
-      redis-store (~> 1.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
-    redis-rack (1.5.0)
-      rack (~> 1.5)
-      redis-store (~> 1.1.0)
-    redis-rails (4.0.0)
-      redis-actionpack (~> 4)
-      redis-activesupport (~> 4)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.4)
-      redis (>= 2.2)
     ref (1.0.5)
     rmmseg-cpp (0.2.9)
     rspec-core (3.2.0)
@@ -341,7 +324,6 @@ DEPENDENCIES
   message_bus
   mini_magick
   momentjs-rails
-  msgpack
   nokogiri
   pg
   pundit
@@ -350,8 +332,6 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-html-sanitizer (~> 1.0)
   redis
-  redis-rails
-  redis-store
   rmmseg-cpp
   rspec-rails
   sanitize

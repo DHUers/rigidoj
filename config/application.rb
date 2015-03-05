@@ -9,7 +9,7 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 require 'active_support/all'
-require 'redis-store'
+require_relative '../app/models/global_setting'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -26,13 +26,10 @@ module Rigidoj
     end
 
     require 'rigidoj'
-
-    def config.cache_store
-      [:redis_store, {
-          host: GlobalSetting.redis_host, port: GlobalSetting.redis_port, compress: true,
-          expires_in: 8.hours, compress_threshold: 32.kilobytes}
-      ]
-    end
+    require 'rigidoj_redis'
+    # Use redis for our cache
+    config.cache_store = RigidojRedis.new_redis_store
+    $redis = RigidojRedis.new
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
