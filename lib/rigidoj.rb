@@ -14,6 +14,7 @@ module Rigidoj
   def self.after_fork
     start_rabbitmq
     MessageBus.after_fork
+    $redis.client.reconnect
   end
 
   def self.start_rabbitmq
