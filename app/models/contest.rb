@@ -18,7 +18,8 @@ class Contest < ActiveRecord::Base
   validates_presence_of :description_raw
   validates_presence_of :started_at
   validates_presence_of :end_at
-  validates_with ::ContestTypeValidator
+  validates_presence_of :problems
+  validates_with ::ContestTypeValidator, on: :create
 
   before_create :create_slug
   before_save :cook
