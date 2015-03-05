@@ -19,13 +19,16 @@ module Rigidoj
   end
 
   def self.start_rabbitmq
-    require 'bunny'
+    unless defined?(Bunny)
+      require 'bunny'
+    end
 
     # the following is *required* for Rails + "preload_app true",
     defined?(ActiveRecord::Base) and
         ActiveRecord::Base.establish_connection
 
-    $rabbitmq_connection = Bunny.new
+    $rabbitmq_connection = Bunny.new({ host: GlobalSetting.rabbitmq_host, port: GlobalSetting.rabbitmq_port,
+                                 username: GlobalSetting.rabbitmq_username, password: GlobalSetting.rabbitmq_password})
     $rabbitmq_connection.start
 
     $rabbitmq_channel = $rabbitmq_connection.create_channel
