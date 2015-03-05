@@ -10,7 +10,7 @@
         New Contest
 
 .row
-  .col-xs-10
+  .col-xs-offset-1.col-xs-10
     .panel{class: @live_contests.blank? ? 'panel-default' : ' panel-info'}
       .panel-heading
         %h4
@@ -27,7 +27,7 @@
 
 - unless @incoming_contests.blank?
   .row
-    .col-xs-10
+    .col-xs-offset-1.col-xs-10
       .panel.panel-default
         .panel-heading
           %h4
@@ -40,7 +40,7 @@
 
 - unless @delayed_contests.blank?
   .row
-    .col-xs-10
+    .col-xs-offset-1.col-xs-10
       .panel.panel-warning
         .panel-heading
           %h4
@@ -52,7 +52,7 @@
 
 
 .row
-  .col-xs-10
+  .col-xs-offset-1.col-xs-10
     .panel.panel-default
       .panel-heading
         %h4
