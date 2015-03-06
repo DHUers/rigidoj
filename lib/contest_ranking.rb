@@ -44,7 +44,10 @@ class ContestRanking
   #     1. tries, including accepted submission
   #     2. time, accepted submssion time. blank if the solution isn't accepted
   def user_status(user_id)
-    solutions = Solution.where(contest: @contest, user_id: user_id).reorder(created_at: 'ASC')
+    solutions = Solution
+                    .where('contest_id = ? AND user_id = ? AND created_at >= ? AND created_at <= ?',
+                           @contest.id, user_id, @contest.started_at, @contest.end_time)
+                    .reorder(created_at: 'ASC')
     solutions = solutions.reject { |s| s.status == 'judge_error' }.group_by(&:problem_id)
 
     # separate the solutions by problem id

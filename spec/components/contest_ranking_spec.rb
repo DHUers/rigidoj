@@ -79,6 +79,10 @@ describe ContestRanking do
                                 created_at: @time1, status: :accepted_answer)
         @solutions << Fabricate(:solution, user_id: @user3.id, problem_id: @problem3.id, contest_id: @contest.id,
                                 created_at: @time2, status: :accepted_answer)
+        Fabricate(:solution, user_id: @user1.id, problem_id: @problem3.id, contest_id: @contest.id,
+                  created_at: Time.zone.local(2000, 1, 1, 6), status: :accepted_answer)
+        Fabricate(:solution, user_id: @user1.id, problem_id: @problem3.id, contest_id: @contest.id,
+                  created_at: Time.zone.local(3500, 1, 1, 6), status: :accepted_answer)
 
         @user1_solutions = @solutions.select { |s| s.user_id == @user1.id && s.status != 'judge_error' }
         @user2_solutions = @solutions.select { |s| s.user_id == @user2.id && s.status != 'judge_error' }
@@ -88,7 +92,7 @@ describe ContestRanking do
         Solution.delete_all
       end
 
-      describe 'filters' do
+      describe 'filters reject the solution outside the contest time scope' do
         it 'user1' do
           p1 = @user1_solutions.select { |s| s.problem_id == @problem1.id }
           p2 = @user1_solutions.select { |s| s.problem_id == @problem2.id }
