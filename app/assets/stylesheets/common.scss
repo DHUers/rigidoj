@@ -88,6 +88,9 @@ div.divider {
 .action-list {
   height: 100%;
 }
+.action-list ul {
+  margin: .5rem 0;
+}
 .action-list label {
   padding: 0 1em;
 }
@@ -147,4 +150,47 @@ div.divider {
 }
 .problem-actions.sticky {
   top: 90px;
+}
+
+.panel {
+  font-size: 1.4rem;
+}
+
+.panel .panel-heading {
+  font-size: 1em;
+}
+
+.panel-heading .meta {
+  margin-top: .5em;
+}
+
+.panel-heading .panel-title {
+  font-size: .75em;
+}
+
+.panel-body {
+  font-size: 1em;
+  h1, h2, h3, h4, h5, h6 {
+    margin: .2em 0;
+    padding: .1em 0;
+  }
+}
+.panel-body h1 {
+  font-size: 2.4em;
+}
+.panel-body h2 {
+  font-size: 2.2em;
+  border-bottom: 1px solid #999;
+}
+.panel-body h3 {
+  font-size: 2.2em;
+}
+.panel-body h4 {
+  font-size: 2em;
+}
+.panel-body h5 {
+  font-size: 1.8em;
+}
+.panel-body h6 {
+  font-size: 1.6em;
 }
