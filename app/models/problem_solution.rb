@@ -6,7 +6,7 @@ class ProblemSolution < ActiveRecord::Base
   enum state: [:viewed, :tried, :accepted]
 
   validate :ensure_newer_solution
-  before_save :update_states
+  before_update :update_states
 
   def ensure_newer_solution
     if last_submitted_at && solution &&
