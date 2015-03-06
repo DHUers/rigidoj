@@ -56,6 +56,8 @@ module Rigidoj
     solution_params[:detailed_report] = payload[:detailed_report] if payload[:detailed_report]
     solution.update_attributes solution_params
 
+    solution.user.user_stat.problems_solved.increment!
+    solution.problem.accepted_count.increment! unless solution.contest
     solution.publish_notification
   end
 end
