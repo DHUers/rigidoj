@@ -63,4 +63,5 @@ Rails.application.routes.draw do
 
     root to: 'statics#home'
   end
+  root to: redirect('/new'), as: :faked_root
 end
