@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :contests
   has_many :problems
+  has_many :problem_solutions
   has_many :group_users
   has_many :groups, through: :group_users
   has_many :notifications

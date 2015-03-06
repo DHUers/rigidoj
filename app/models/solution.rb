@@ -4,6 +4,7 @@ class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
+  has_many :problem_solutions
   enum status: [:judging, :network_error, :judge_error,
                 :accepted_answer, :wrong_answer, :time_limit_exceeded,
                 :memory_limit_exceeded, :presentation_error,

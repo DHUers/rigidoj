@@ -6,6 +6,7 @@ class Problem < ActiveRecord::Base
 
   has_one :problem_search_data
   has_many :solutions
+  has_many :problem_solutions
   has_many :contest_problems
   has_many :contests, through: :contest_problems
   scope :published, -> { where(public: true) }

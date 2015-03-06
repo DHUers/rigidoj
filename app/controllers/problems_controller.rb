@@ -43,6 +43,9 @@ class ProblemsController < ApplicationController
 
   def show
     load_resource
+    unless ProblemSolution.where(user_id: current_user).first
+      ProblemSolution.create(user: current_user, problem: @problem)
+    end
 
     render :show
   end
