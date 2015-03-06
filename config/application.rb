@@ -41,6 +41,6 @@ module Rigidoj
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = 'sha256'
 
-
+    config.assets.prefix = '/new/assets'
   end
 end
