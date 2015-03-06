@@ -1,0 +1,20 @@
+- report = Notification.recent_report(current_user)
+#notification-badge.dropdown
+  %a#dLabel.dropdown-toggle{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-target' => '#',
+                             'data-toggle' => 'dropdown', href: '/notification', role: 'button'}
+    - unread = report.inject(0) { |acc,n| n.read ? acc : acc + 1 }
+    %span.notification-badge-number{ class: unread > 0 ? 'active' : nil }= unread
+  %ul#notifications.dropdown-menu{ role: 'menu', 'aria-labelledby' => 'dLabel' }
+    .notification-heading
+      %h4.menu-title Notifications
+    %li.divider
+    .notifications-wrapper
+      - report.each do |n|
+        = render partial: 'components/notification_badge_item', locals: n.item_hash
+    %li.divider
+    .notification-footer
+      %h4.menu-title.hidden
+        View all
+        %i.fa.fa-arrow-circle-right
+      %h4.menu-title.pull-right
+        %a.mark-read{ href: '#' } Mark all read

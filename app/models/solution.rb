@@ -32,17 +32,17 @@ class Solution < ActiveRecord::Base
   end
 
   def publish_notification
-    text = "Solution result: #{self.status}"
-    notification_params = {
-        notification_type: 'solution',
-        user: self.user,
-        data: text,
-        solution: self
+    text = problem ? "Solution for #{problem.title}" : "Solution"
+    params = {
+        notification_type: :solution_report,
+        user_id: user.id,
+        data: "#{text}: #{pretty_solution_status}",
+        solution_id: id
     }
-    notification_params[:problem] = self.problem if self.problem
-    notification_params[:contest] = self.contest if self.contest
-    puts notification_params
-    Notification.create!(notification_params)
+    params[:problem_id] = problem.id if problem
+    params[:contest_id] = contest.id if contest
+    puts params
+    Notification.create!(params)
 
     MessageBus.publish '/notifications', 1
   end
@@ -57,6 +57,10 @@ class Solution < ActiveRecord::Base
       $rabbitmq_judger_queue.publish solution_json
       Rails.logger.info "[Rabbitmq] Sent Solution #{id} to judge queue"
     end
+  end
+
+  def pretty_solution_status
+    SiteSetting.solution_statuses[Solution.statuses[status]]
   end
 end
 

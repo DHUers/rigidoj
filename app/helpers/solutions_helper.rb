@@ -6,9 +6,8 @@ module SolutionsHelper
 
   def status_span(solution)
     status = solution.status
-    internal_id = Solution.statuses[status]
-    pretty_text = SiteSetting.solution_statuses[internal_id]
-    color = SiteSetting.solution_colors[internal_id]
+    pretty_text = solution.pretty_solution_status
+    color = SiteSetting.solution_colors[Solution.statuses[status]]
     raw "<span class='solution-status-text #{status}' style='color: #{color}'>#{pretty_text}</span>"
   end
 end

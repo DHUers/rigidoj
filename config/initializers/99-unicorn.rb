@@ -4,3 +4,4 @@ if defined? Unicorn::HttpServer
     Middleware::UnicornOobgc.init
   end
 end
+require "unicorn_rails"

@@ -49,30 +49,34 @@ Rigidoj.MessageBus.start();
 var ready = function() {
   var notificationBadge = $('#notification-badge'),
       notificationsList = $('#notifications'),
-      notificationContainer = $('.notification-container', notificationsList),
+      notificationMarkRead = $('.mark-read', notificationsList),
       notificationNumber = $('.notification-badge-number', notificationBadge);
 
   Rigidoj.MessageBus.subscribe("/notifications", function(data) {
-    var number = $('.notification-badge-number', notificationBadge);
-    number.text(parseInt(number.text()) + parseInt(data));
+    notificationNumber.text(parseInt(notificationNumber.text()) + parseInt(data));
     notificationNumber.addClass('active');
-  });
-
-  notificationBadge.click(function() {
-    notificationsList.addClass('active');
-
-    $.get('/notifications', function(data) {
+    $.get('/notifications').done(function(data) {
       notificationsList.removeClass('active');
       if (data === undefined) {
         return;
       }
 
-      notificationNumber.removeClass('active');
-      notificationContainer.empty();
-      $.each(data, function() {
-        notificationContainer.prepend("<li role='presentation'>" + this.data + "</li>");
-      });
+      var wrapperName = '.notifications-wrapper',
+          wrapper = $('.notifications-wrapper', notificationsList);
+      wrapper.empty().html($($(data).find(wrapperName)[0]).html());
     });
+  });
+
+  notificationMarkRead.on('click', function(e) {
+    notificationIds = $('.notification-item.unread', notificationsList).map(function() {
+      return $(this).data('notification-id');
+    }).get();
+    if (notificationIds !== undefined && notificationIds.length > 0) {
+      $.post('/notifications/read', { notificationIds: notificationIds }).done(function() {
+        notificationNumber.removeClass('active');
+        notificationNumber.text('0');
+      });
+    }
   });
 
   if ($('.sticky').length != 0) {

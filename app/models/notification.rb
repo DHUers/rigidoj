@@ -4,13 +4,28 @@ class Notification < ActiveRecord::Base
   belongs_to :solution
   belongs_to :contest
 
-  enum notification_type: %i(site solution)
+  enum notification_type: %i(solution_report)
 
   validates_presence_of :data
   validates_presence_of :notification_type
 
   scope :unread, lambda { where(read: false) }
-  scope :recent, lambda {|n=nil| n ||= 10; order('created_at DESC').limit(n) }
+  scope :recent, lambda { |n=10| order('created_at DESC').limit(n) }
+
+  def self.recent_report(user, count = 10)
+    user.notifications
+        .recent(count)
+        .to_a
+  end
+
+  def item_hash
+    h = { unread: !read, id: id, content: data }
+    h[:icon_class] = case notification_type
+                     when 'solution_report' then 'code'
+                     end
+    h
+  end
+
 end
 
 # == Schema Information

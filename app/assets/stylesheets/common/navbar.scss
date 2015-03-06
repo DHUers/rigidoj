@@ -7,6 +7,22 @@
   font-weight: bold;
 }
 
+.nav.navbar-nav .login-btn {
+  padding: 0;
+}
+
+#search-box {
+  width: 250px;
+}
+
+.navbar-header .navbar-brand {
+  padding: $line-height-computed / 2 2rem;
+}
+
+#notification-badge {
+  padding: 15px 1em;
+}
+
 .notification-badge-number {
   color: #aaa;
   font-weight: normal;
@@ -23,14 +39,65 @@
   background: linear-gradient(#dd0033, #cc0819);
 }
 
-.nav.navbar-nav .login-btn {
-  padding: 0;
+#notifications {
+  min-width: 420px;
+  font-size: 1.5rem;
 }
 
-#search-box {
-  width: 250px;
+#notifications .notification-heading,
+#notifications .notification-footer  {
+  margin: .4em 0;
+  padding: 0 .8em;
+}
+#notifications .notification-heading {
+  font-size: .7em;
+}
+#notifications .notification-footer {
+  font-size: .5em;
 }
 
-.navbar-header .navbar-brand {
-  padding: $line-height-computed / 2 2rem;
+#notifications .menu-title {
+  color: $red;
 }
+
+#notifications .menu-title a {
+  color: $grey;
+}
+
+.notifications-wrapper {
+  overflow: auto;
+  font-size: .9em;
+  max-height: 40rem;
+}
+
+#notifications.dropdown-menu .divider {
+  margin: 0;
+}
+
+#notifications a.content {
+  text-decoration: none;
+  background: #fff;
+}
+
+#notifications .notification-item.unread {
+  background: $lime;
+  &:hover {
+    background: $lime;
+  }
+}
+
+#notifications .fa {
+  font-size: 1em;
+  color: $icon-color;
+}
+
+#notifications .notification-item {
+  padding: .5em;
+  background: transparent;
+  font-size: 1em;
+  color: $lightbg-text-color;
+  &:hover {
+    background: $lightgrey;
+  }
+}
+

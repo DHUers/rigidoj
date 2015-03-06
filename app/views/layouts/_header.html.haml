@@ -23,13 +23,7 @@
             = link_to login_path, class: 'login-btn' do
               %button.btn.btn-default.navbar-btn{:type => "button"} Log In
         - else
-          %li#notification-badge.dropdown
-            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-target" => "#", "data-toggle" => "dropdown", :href => "/notification", :role => "button"}
-              %span.notification-badge-number 0
-            %ul#notifications.dropdown-menu.has-spinner
-              .spinner
-                %i.fa.fa-spinner.fa-spin
-              .notification-container
+          %li= render partial: 'components/notification_badge'
           %li
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-no-turbolink" => "", "data-target" => "#", "data-toggle" => "dropdown", :href => user_path(current_user), :role => "button"}
               = current_user.username

@@ -41,7 +41,8 @@ gem 'sanitize'
 gem 'fast_xor'
 gem 'rmmseg-cpp', require: false
 gem 'whenever', require: false
-gem 'unicorn-rails'
+gem 'unicorn-rails', require: false
+gem 'thin', require: false
 gem 'stringex', require: false
 
 gem 'gctools', require: false, platform: :mri_21

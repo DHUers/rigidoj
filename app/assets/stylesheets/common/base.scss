@@ -35,6 +35,10 @@ h6, .h6 {
   font-size: 1.2em; /* equal to 12px */
 }
 
+a, a:link, a:hover, a:visited, a:active, a:focus {
+  text-decoration: none;
+}
+
 .profiler-results {
   top: $navbar-height + 1 !important;
 }
