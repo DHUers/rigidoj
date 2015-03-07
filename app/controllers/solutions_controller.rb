@@ -6,11 +6,13 @@ class SolutionsController < ApplicationController
     else
       @solution = Solution.new
     end
+    authorize @solution
   end
 
   def create
     params = create_params
     @solution = Solution.new(params)
+    authorize @solution
 
     if @solution.save
       if params[:contest_id] || params[:problem_id]

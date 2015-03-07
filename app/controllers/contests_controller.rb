@@ -1,12 +1,13 @@
 class ContestsController < ApplicationController
   def new
     @contest = Contest.new
-
-    render 'new'
+    authorize @contest
   end
 
   def create
     @contest = Contest.new(contest_params)
+    authorize @contest
+
     if @contest.save
       sort_problems_by_ids(contest_params[:problem_ids])
       redirect_to show_contest_path(@contest.slug, @contest.id)
@@ -17,35 +18,34 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @incoming_contests = Contest.incoming
-    @live_contests = Contest.live
-    @delayed_contests = DelayableContest.delayed
-    @finished_contests = Contest.finished
-
-    render 'index'
+    @incoming_contests = policy_scope Contest.incoming
+    @live_contests = policy_scope Contest.live
+    @delayed_contests = policy_scope DelayableContest.delayed
+    @finished_contests = policy_scope Contest.finished
   end
 
   def show
     @contest = Contest.find(params[:id])
-
-    render 'show'
+    authorize @contest
   end
 
   def ranking
     @contest = Contest.find(params[:id])
+    authorize @contest
     @ranking = ContestRanking.rank(current_user, @contest)
+    authorize @ranking
 
     render 'ranking'
   end
 
   def edit
     @contest = Contest.find(params[:id])
-
-    render 'edit'
+    authorize @contest
   end
 
   def update
     @contest = Contest.find(params[:id])
+    authorize @contest
 
     if @contest.update_attributes(contest_params(@contest.type))
       sort_problems_by_ids(contest_params(@contest.type)[:problem_ids])
