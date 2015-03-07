@@ -22,6 +22,9 @@ body {
 
   color: rgba(255,255,255,1);
 }
+.landing-header .navbar {
+  box-shadow: none;
+}
 #landing-nav {
   font-size: 1.6rem;
   text-transform: uppercase;
@@ -138,6 +141,9 @@ body {
 #footer .footer-nav {
   list-style: none;
   float: right;
+}
+#footer .footer-nav.navbar {
+  box-shadow: none;
 }
 #footer .footer-nav li {
   margin-left: 0.6rem;
