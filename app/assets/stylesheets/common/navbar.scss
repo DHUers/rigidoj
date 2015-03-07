@@ -34,9 +34,10 @@
 }
 
 .notification-badge-number.active {
+  background-color: #d71900;
+  background: linear-gradient(#d71900, #C43C35);
+  border-color:#af2525;
   color: #fff;
-  background-color: #cc0819;
-  background: linear-gradient(#dd0033, #cc0819);
 }
 
 #notifications {
