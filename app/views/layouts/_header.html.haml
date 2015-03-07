@@ -7,7 +7,7 @@
       = link_to root_path, class: 'navbar-brand' do
         %img{:src => SiteSetting.logo_url, :width => "32"}/
     #navbar-drawer.collapse.navbar-collapse
-      %form.navbar-form.navbar-left{:role => "search"}
+      %form.navbar-form.navbar-left.hidden{:role => "search"}
         .form-group
           %input#search-box.form-control{:placeholder => "Search", :type => "text"}/
       %ul.nav.navbar-nav.navbar-links
