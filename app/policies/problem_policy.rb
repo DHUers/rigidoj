@@ -6,8 +6,7 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def create?
-    raise Pundit::NotAuthorizedError, "must be logged in" unless user
-    user && user.staff?
+    staff?
   end
 
   def import?
@@ -15,7 +14,11 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def excerpt?
-    create?
+    show?
+  end
+
+  def show?
+    true
   end
 
   def update?

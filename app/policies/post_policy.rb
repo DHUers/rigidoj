@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def create?
-    @user
+    true
   end
 
   def update?
