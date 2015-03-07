@@ -4,7 +4,7 @@ class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  has_many :problem_solutions
+  has_many :user_problem_stats
   enum status: [:judging, :network_error, :judge_error,
                 :accepted_answer, :wrong_answer, :time_limit_exceeded,
                 :memory_limit_exceeded, :presentation_error,
@@ -16,6 +16,42 @@ class Solution < ActiveRecord::Base
   validate :contest_solution
 
   after_create :publish_to_judgers, unless: 'Rails.env.test?'
+  after_create :update_first_created
+
+  around_save :update_stats
+
+  def update_first_created
+    unless user.user_stat.submitted?
+      user.user_stat.set_first_solution! created_at
+    end
+  end
+
+  def update_stats
+    new_record = new_record?
+
+    yield
+
+    stat = UserProblemStat
+        .where(user_id: user_id, problem_id: problem_id)
+        .first_or_create
+    stat.keep_track_latest_solution!(created_at)
+    if new_record
+      user.user_stat.solutions_created.increment!
+    else
+      update_accepted_stats(stat) if accepted?
+    end
+  end
+
+  def update_accepted_stats(stat)
+    unless stat.already_accepted?
+      user.user_stat.problems_solved.increment!
+      stat.mark_accepted_solution!(created_at)
+    end
+  end
+
+  def accepted?
+    status == 'accepted_answer'
+  end
 
   def contest_solution
     errors.add(:created_at, :invalid, options) if contest.ended?

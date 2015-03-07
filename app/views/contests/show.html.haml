@@ -47,11 +47,12 @@
       %nav.action-list
         %ul.contest-actions.list-unstyled{role: 'tablist'}
           - if @contest.started?
-            - unless @contest.ended?
-              %li.action.action-success
-                %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
-                  %i.fa.fa-plus-circle
-                  Submit
+            - if current_user
+              - unless @contest.ended?
+                %li.action.action-success
+                  %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
+                    %i.fa.fa-plus-circle
+                    Submit
             %li.action
               %a{ href: contest_solutions_path(@contest.slug, @contest.id) }
                 %i.fa.fa-history

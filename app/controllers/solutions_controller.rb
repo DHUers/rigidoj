@@ -20,12 +20,6 @@ class SolutionsController < ApplicationController
       else
         redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)
       end
-
-      if problem_solution = ProblemSolution.where(user_id: current_user).first
-        problem_solution.update_attribute(:solution_id, @solution.id)
-      else
-        ProblemSolution.create(user: current_user, problem: @problem, solution: @solution)
-      end
     else
       if params[:contest_id] || params[:problem_id]
         render json: failed_json.merge({errors: @solution.errors.full_messages}), status: 400

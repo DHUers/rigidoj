@@ -200,3 +200,10 @@ div.divider {
 .panel-body h6 {
   font-size: 1.4em;
 }
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}

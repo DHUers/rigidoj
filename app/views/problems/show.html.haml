@@ -34,10 +34,11 @@
         Actions
       %nav.action-list.problem-actions
         %ul.list-unstyled
-          %li.action.action-success
-            %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
-              %i.fa.fa-plus-circle
-              Submit
+          - if current_user
+            %li.action.action-success
+              %a{ href: '#', data: { toggle: 'modal', target: '#submit-solution' } }
+                %i.fa.fa-plus-circle
+                Submit
           %li.action
             %a{ href: problem_solutions_path(@problem) }
               %i.fa.fa-history
