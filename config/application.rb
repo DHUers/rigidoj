@@ -3,6 +3,8 @@ require 'rails/all'
 
 require_relative '../app/models/global_setting'
 
+require 'pry-rails' if Rails.env.development?
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
