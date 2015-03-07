@@ -1,4 +1,10 @@
 class ProblemPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
+  end
+
   def create?
     raise Pundit::NotAuthorizedError, "must be logged in" unless user
     user && user.staff?

@@ -1,8 +1,6 @@
 class ProblemsController < ApplicationController
   def index
     @problems = policy_scope(Problem.published).order(:id).page(params[:page]).per(20)
-
-    render :index
   end
 
   def new
@@ -42,22 +40,25 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    load_resource
-
-    render :show
+    @problem = Problem.find(params[:id])
+    authorize @problem
   end
 
   def excerpt
-    load_resource
+    @problem = Problem.find(params[:id])
+    authorize @problem
+
     render partial: 'problems/problem_item', locals: {removable: params[:removeable] == true || true}
   end
 
   def edit
-    load_resource
+    @problem = Problem.find(params[:id])
+    authorize @problem
   end
 
   def update
-    load_resource
+    @problem = Problem.find(params[:id])
+    authorize @problem
 
     if @problem.update_attributes(problem_params)
       redirect_to show_problem_path(@problem.slug, @problem.id)
@@ -68,7 +69,8 @@ class ProblemsController < ApplicationController
   end
 
   def destory
-    load_resource
+    @problem = Problem.find(params[:id])
+    authorize @problem
 
     if @problem.destroy
       render 'index'
@@ -79,10 +81,5 @@ class ProblemsController < ApplicationController
 
   def problem_params
     params.require(:problem).permit(*policy(@problem || Problem).permitted_attributes)
-  end
-
-  def load_resource
-    @problem = Problem.find(params[:id])
-    authorize @problem
   end
 end

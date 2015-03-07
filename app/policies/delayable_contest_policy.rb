@@ -1,0 +1,3 @@
+class DelayableContestPolicy < ContestPolicy
+
+end

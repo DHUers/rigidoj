@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  #rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  after_filter :verify_authorized,  except: :index
+  after_filter :verify_policy_scoped, only: :index
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def serialize_data(obj, serializer, opts={})
     # If it's an array, apply the serializer as an each_serializer to the elements
@@ -37,7 +40,6 @@ class ApplicationController < ActionController::Base
   def failed_json
     { failed: 'FAILED' }
   end
-
 
   private
 

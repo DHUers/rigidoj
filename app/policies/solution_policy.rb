@@ -1,9 +1,12 @@
 class SolutionPolicy < ApplicationPolicy
-  def create?
-    true
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 
-  def update?
+  def create?
+    true
   end
 
   def permitted_attributes
