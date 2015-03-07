@@ -22,4 +22,10 @@ module ContestsHelper
     end
   end
 
+  def contest_class_by_status(contest)
+    status = 'default'
+    status = 'info' if contest.started?
+    status = 'warning' if contest.delayed?
+    status
+  end
 end

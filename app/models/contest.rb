@@ -48,6 +48,10 @@ class Contest < ActiveRecord::Base
     started? && !ended?
   end
 
+  def delayed?
+    false
+  end
+
   def ended?
     end_time.past?
   end

@@ -4,7 +4,6 @@ class Solution < ActiveRecord::Base
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  has_many :user_problem_stats
   enum status: [:judging, :network_error, :judge_error,
                 :accepted_answer, :wrong_answer, :time_limit_exceeded,
                 :memory_limit_exceeded, :presentation_error,
@@ -36,9 +35,9 @@ class Solution < ActiveRecord::Base
     stat = UserProblemStat
         .where(user_id: user_id, problem_id: problem_id)
         .first_or_create
-    stat.keep_track_latest_solution!(created_at)
+    stat.keep_track_latest_solution_time!(created_at)
     if new_record
-      user.user_stat.solutions_created.increment!
+      user.user_stat.increment!(:solutions_created)
     else
       update_accepted_stats(stat) if accepted?
     end
@@ -46,8 +45,8 @@ class Solution < ActiveRecord::Base
 
   def update_accepted_stats(stat)
     unless stat.already_accepted?
-      user.user_stat.problems_solved.increment!
-      stat.mark_accepted_solution!(created_at)
+      user.user_stat.increment!(:problems_solved)
+      stat.mark_accepted_solution_time!(created_at)
     end
   end
 
@@ -55,12 +54,8 @@ class Solution < ActiveRecord::Base
     status == 'accepted_answer'
   end
 
-  def announce_judged_result
-
-  end
-
   def contest_solution
-    errors.add(:created_at, :invalid, options) if contest.ended?
+    errors.add(:created_at, :invalid, options) if (!contest.nil?) && contest.ended?
   end
 
   def ace_mode

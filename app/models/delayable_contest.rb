@@ -1,6 +1,10 @@
 class DelayableContest < Contest
   scope :delayed, -> { where('end_at <= ? AND delayed_till > ?', Time.now, Time.now) }
 
+  def delayed?
+    end_at.past?
+  end
+
   def end_time
     delayed_till
   end

@@ -13,7 +13,7 @@
 
 .row
   .col-xs-9
-    .panel{ class: @contest.ongoing? ? 'panel-info' : 'panel-default' }
+    .panel{ class: "panel-#{contest_class_by_status(@contest)}" }
       .panel-heading
         .panel-title
           %h1.contest-title
