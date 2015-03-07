@@ -146,6 +146,7 @@ GEM
       eventmachine
       rack (>= 1.1.3)
       redis
+    method_source (0.8.2)
     mime-types (2.4.3)
     mini_magick (4.0.4)
     mini_portile (0.6.2)
@@ -158,6 +159,14 @@ GEM
     nokogumbo (1.2.0)
       nokogiri
     pg (0.18.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
+    pry-rails (0.3.3)
+      pry (>= 0.9.10)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     rack (1.6.0)
@@ -336,6 +345,8 @@ DEPENDENCIES
   momentjs-rails
   nokogiri
   pg
+  pry-nav
+  pry-rails
   pundit
   rack-mini-profiler
   rack-reverse-proxy

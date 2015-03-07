@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
 gem 'message_bus'
+gem 'pry-rails', require: false
 
 gem 'bunny'
 gem 'hiredis'
@@ -62,6 +63,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'codeclimate-test-reporter', require: nil
   gem 'spring'
+  gem 'pry-nav'
   gem 'librarian'
 end
 
