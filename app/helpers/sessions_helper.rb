@@ -17,6 +17,7 @@ module SessionsHelper
 
   def log_in(user)
     session[:user_id] = user.id
+    make_developer_admin(user)
   end
 
   def log_out
@@ -35,5 +36,14 @@ module SessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
+  end
+
+  def make_developer_admin(user)
+    if user.active? && !user.admin &&
+        Rails.configuration.x.respond_to?(:developer_emails) &&
+        Rails.configuration.x.developer_emails.include?(user.email)
+      user.admin = true
+      user.save
+    end
   end
 end

@@ -75,4 +75,11 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # a comma delimited list of emails your devs have
+  # developers have god like rights and may impersonate anyone in the system
+  # normal admins may only impersonate other moderators (not admins)
+  if emails = GlobalSetting.developer_emails
+    config.x.developer_emails = emails.split(",").map(&:strip)
+  end
 end
