@@ -18,6 +18,8 @@ class Solution < ActiveRecord::Base
   after_create :publish_to_judgers, unless: 'Rails.env.test?'
   after_create :update_first_created
 
+  after_update :announce_judged_result
+
   around_save :update_stats
 
   def update_first_created
@@ -53,6 +55,10 @@ class Solution < ActiveRecord::Base
     status == 'accepted_answer'
   end
 
+  def announce_judged_result
+
+  end
+
   def contest_solution
     errors.add(:created_at, :invalid, options) if contest.ended?
   end
@@ -68,7 +74,7 @@ class Solution < ActiveRecord::Base
     status == 'accepted_answer'
   end
 
-  def publish_notification
+  def announce_judged_result
     text = problem ? "Solution for #{problem.title}" : "Solution"
     params = {
         notification_type: :solution_report,
@@ -78,7 +84,7 @@ class Solution < ActiveRecord::Base
     }
     params[:problem_id] = problem.id if problem
     params[:contest_id] = contest.id if contest
-    puts params
+
     Notification.create!(params)
 
     MessageBus.publish '/notifications', 1
