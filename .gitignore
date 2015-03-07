@@ -8,6 +8,7 @@
 /.bundle
 /.idea
 /public/uploads
+/public/new
 /public/secure_uploads
 /db/structure.sql
 

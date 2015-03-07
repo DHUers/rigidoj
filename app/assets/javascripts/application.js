@@ -44,6 +44,7 @@ Turbolinks.enableProgressBar();
 
 Rigidoj.MessageBus = window.MessageBus;
 Rigidoj.MessageBus.callbackInterval = 5000;
+Rigidoj.MessageBus.baseUrl = '/new/';
 Rigidoj.MessageBus.start();
 
 var ready = function() {

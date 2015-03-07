@@ -40,6 +40,6 @@ module Rigidoj
 
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = 'sha256'
-
+    config.action_controller.relative_url_root = '/new'
   end
 end

@@ -7,4 +7,6 @@ use Rack::ReverseProxy do
   reverse_proxy /^\/rabbitmq(\/.*)$/, "http://#{ENV['RIGIDOJ_RABBITMQ_HOST']}:15672$1", username: ENV['RIGIDOJ_RABBITMQ_USERNAME'], password: ENV['RIGIDOJ_RABBITMQ_PASSWORD'], timeout: 500, preserve_host: true
 end
 
-run Rails.application
+map Rigidoj::Application.config.relative_url_root || "/" do
+  run Rails.application
+end
