@@ -15,4 +15,8 @@ module ApplicationHelper
     return "<p class='error-explanation'>#{errors.first}</p>".html_safe if errors.any?
     return "<p class='note'>#{description}</p>".html_safe if description
   end
+
+  def staff?
+    current_user ? current_user.staff? : false
+  end
 end

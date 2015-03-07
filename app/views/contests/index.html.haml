@@ -1,13 +1,14 @@
 - content_for :title, 'Contest list'
 
-#contest-index-admin.admin-wrench.btn-group
-  %button{type: 'button', class: 'btn btn-default dropdown-toggle',
-      data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
-    %i.fa.fa-wrench
-  %ul.dropdown-menu.pull-right{role: 'menu'}
-    %li
-      %a{href: new_contest_path}
-        New Contest
+- if staff?
+  #contest-index-admin.admin-wrench.btn-group
+    %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+        data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+      %i.fa.fa-wrench
+    %ul.dropdown-menu.pull-right{role: 'menu'}
+      %li
+        %a{href: new_contest_path}
+          New Contest
 
 .row
   .col-xs-offset-1.col-xs-10

@@ -1,6 +1,6 @@
 - content_for :title, 'Problem list'
 
-- if current_user && current_user.staff?
+- if staff?
   #problem-index-admin.admin-wrench.btn-group
     %button{type: 'button', class: 'btn btn-default dropdown-toggle',
         data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}

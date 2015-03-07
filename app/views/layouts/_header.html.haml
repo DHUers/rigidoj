@@ -34,7 +34,7 @@
               %li= link_to 'Groups', groups_path
               %li= link_to 'Bookmarks', "/users/#{current_user.username_lower}/bookmarks"
               %li= link_to 'Notes', user_notes_path(current_user)
-              - if current_user.staff?
+              - if staff?
                 %li= link_to 'Admin', admin_dashboard_path
               %li.divider
               %li= link_to 'Log out', logout_path, method: :delete, data: { confirm: 'Are you sure?' }
