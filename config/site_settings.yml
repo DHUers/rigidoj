@@ -13,14 +13,14 @@ required:
     default: ''
     type: username
   logo_url:
-    default: '/new/uploads/defaults/default-logo.png'
+    default: '/new/defaults/default-logo.png'
   digest_logo_url:
     default: ''
   mobile_logo_url:
     default: ''
   favicon_url:
-    default: '/new/uploads/defaults/default-favicon.ico'
-  apple_touch_icon_url: '/new/uploads/defaults/default-apple-touch-icon.png'
+    default: '/new/defaults/default-favicon.ico'
+  apple_touch_icon_url: '/new/defaults/default-apple-touch-icon.png'
 
 basic:
   default_locale:

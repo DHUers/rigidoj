@@ -6,6 +6,11 @@
 
 @import "common/solution";
 
+a.anchor {
+  text-decoration: none;
+  color: $lightbg-text;
+}
+
 .go-top {
   position: fixed;
   right: 1rem;
@@ -16,7 +21,7 @@
   cursor: pointer;
 
   a {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -116,8 +121,8 @@ div.divider {
   display: block;
   width: 100%;
   height: 100%;
-  &:visited, &:hover, &:active {
-    color: black;
+  &, &:link, &:hover, &:visited  &:active {
+    color: $lightbg-text-color;
     text-decoration: none;
   }
 }
@@ -153,7 +158,7 @@ div.divider {
 }
 
 .panel {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .panel .panel-heading {
@@ -170,27 +175,28 @@ div.divider {
 
 .panel-body {
   font-size: 1em;
+  line-height: 1.5em;
   h1, h2, h3, h4, h5, h6 {
     margin: .2em 0;
     padding: .1em 0;
   }
 }
 .panel-body h1 {
-  font-size: 2.4em;
+  font-size: 2.2em;
 }
 .panel-body h2 {
-  font-size: 2.2em;
+  font-size: 2em;
   border-bottom: 1px solid #999;
 }
 .panel-body h3 {
-  font-size: 2.2em;
-}
-.panel-body h4 {
   font-size: 2em;
 }
-.panel-body h5 {
+.panel-body h4 {
   font-size: 1.8em;
 }
-.panel-body h6 {
+.panel-body h5 {
   font-size: 1.6em;
+}
+.panel-body h6 {
+  font-size: 1.4em;
 }

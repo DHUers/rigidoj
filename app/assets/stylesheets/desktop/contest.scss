@@ -1,7 +1,12 @@
 .contest-item {
   cursor: pointer;
 }
-
+.contest-item a {
+  &, &:link, &:hover, &:visited  &:active {
+    color: $lightbg-text-color;
+    text-decoration: none;
+  }
+}
 .contest-content {
   position: relative;
   padding: 1em;
