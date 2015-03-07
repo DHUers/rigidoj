@@ -73,7 +73,7 @@ var ready = function() {
   contestProblemList.select2({
     width: '100%',
     ajax: {
-      url: "/query?type_filter=problem&search_for_id=true",
+      url: Rigidoj.BASE_URL + "/query?type_filter=problem&search_for_id=true",
       dataType: 'json',
       delay: 250,
       data: function(params) {

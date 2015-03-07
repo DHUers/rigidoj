@@ -33,10 +33,9 @@
 //= require select2
 //= require smooth-scroll
 //= require bootstrap-notify
+//= require rigidoj
 //= require_self
 //= require_tree .
-
-Rigidoj = {};
 
 hljs.initHighlightingOnLoad();
 Turbolinks.enableTransitionCache();
@@ -44,7 +43,7 @@ Turbolinks.enableProgressBar();
 
 Rigidoj.MessageBus = window.MessageBus;
 Rigidoj.MessageBus.callbackInterval = 5000;
-Rigidoj.MessageBus.baseUrl = '/new/';
+Rigidoj.MessageBus.baseUrl = Rigidoj.BASE_URL + '/';
 Rigidoj.MessageBus.start();
 
 var ready = function() {
@@ -56,7 +55,7 @@ var ready = function() {
   Rigidoj.MessageBus.subscribe("/notifications", function(data) {
     notificationNumber.text(parseInt(notificationNumber.text()) + parseInt(data));
     notificationNumber.addClass('active');
-    $.get('/notifications').done(function(data) {
+    $.get(Rigidoj.BASE_URL + '/notifications').done(function(data) {
       notificationsList.removeClass('active');
       if (data === undefined) {
         return;
@@ -73,7 +72,7 @@ var ready = function() {
       return $(this).data('notification-id');
     }).get();
     if (notificationIds !== undefined && notificationIds.length > 0) {
-      $.post('/notifications/read', { notificationIds: notificationIds }).done(function() {
+      $.post(Rigidoj.BASE_URL + '/notifications/read', { notificationIds: notificationIds }).done(function() {
         notificationNumber.removeClass('active');
         notificationNumber.text('0');
       });
