@@ -16,7 +16,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Rails Html Sanitizer for HTML sanitization
 gem 'rails-html-sanitizer', '~> 1.0'
 
-gem 'refile', require: ['refile/rails', 'refile/image_processing']
+gem 'refile', require: ['refile/rails', 'refile/image_processing'], git: 'https://github.com/refile/refile.git'
 
 gem 'mini_magick'
 gem 'rack-mini-profiler', require: false
