@@ -16,7 +16,7 @@ class Problem < ActiveRecord::Base
   attachment :output_file, type: :code
   attachment :judger_program, type: :code
 
-  #validates_with ::JudgeTypeValidator
+  validates_with ::JudgeTypeValidator
   validates_presence_of :title, :raw
 
   before_save :cook

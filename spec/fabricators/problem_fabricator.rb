@@ -3,7 +3,7 @@ Fabricator(:problem) do
   raw 'problem'
   judge_type :full_text
   before_create do |p|
-    p.input_file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'local_problem', 'dummy_input.in'))
-    p.output_file = File.open(File.join(Rails.root, 'spec', 'fixtures', 'local_problem', 'dummy_output.out'))
+    File.open(File.join(Rails.root, 'spec', 'fixtures', 'local_problem', 'dummy_input.txt')) { |f| p.input_file = f }
+    File.open(File.join(Rails.root, 'spec', 'fixtures', 'local_problem', 'dummy_output.txt'))  { |f| p.output_file = f }
   end
 end
