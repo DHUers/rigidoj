@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Contest do
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to validate_presence_of :description_raw }
+  it_behaves_like 'slugable'
+
   describe '.duration_with_started_at_in_minute' do
     before do
       @contest = Fabricate :contest

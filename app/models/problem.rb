@@ -1,8 +1,8 @@
 require 'pretty_text'
-require 'slug'
 
 class Problem < ActiveRecord::Base
   include Searchable
+  include Slugable
 
   has_one :problem_search_data
   has_many :solutions
@@ -17,11 +17,9 @@ class Problem < ActiveRecord::Base
   mount_uploader :judger_program, PlainTextUploader
 
   validates_with ::JudgeTypeValidator
-  validates :title, presence: true
-  validates :raw, presence: true
+  validates_presence_of :title, :raw
 
   before_save :cook
-  before_create :create_slug
 
   VALID_DESCRIPTION_CLASS_NAMES = %w(description
                                      input

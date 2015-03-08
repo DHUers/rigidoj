@@ -2,6 +2,8 @@ require_dependency 'pretty_text'
 require 'active_support/time'
 
 class Contest < ActiveRecord::Base
+  include Slugable
+
   has_many :contest_problems
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
   has_many :contest_users
@@ -14,14 +16,9 @@ class Contest < ActiveRecord::Base
   scope :live, -> { where('started_at <= ? AND end_at >= ?', Time.now, Time.now) }
   scope :finished, -> { where('end_at < ? AND type <> ? OR delayed_till < ?', Time.now, 'DelayableContest', Time.now) }
 
-  validates_presence_of :title
-  validates_presence_of :description_raw
-  validates_presence_of :started_at
-  validates_presence_of :end_at
-  validates_presence_of :problems
+  validates_presence_of :title, :description_raw, :started_at, :end_at, :problems
   validates_with ::ContestTypeValidator, on: :create
 
-  before_create :create_slug
   before_save :cook
 
   def self.latest(limit = 3)
@@ -34,10 +31,6 @@ class Contest < ActiveRecord::Base
 
   def end_time
     end_at
-  end
-
-  def create_slug
-    self.slug = Slug.for(title, 'contest')
   end
 
   def started?
