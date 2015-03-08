@@ -72,9 +72,15 @@ module PrettyText
     baked
   end
 
-  def self.cook(text, opts={})
+  def self.cook(text, opts = {})
     cloned = opts.dup
     markdown(text.dup, cloned)
+  end
+
+  def self.cook_for_problem(text, opts = {})
+    cloned = opts.dup
+    md = markdown(text.dup, cloned)
+    add_problem_meta_class(md)
   end
 
   protected
@@ -110,5 +116,35 @@ module PrettyText
       ctx.load(app_root + file)
     end
   end
+
+  private
+
+  # Separate elements by header tag for better styling
+  def add_problem_meta_class(html)
+    fragment = Nokogiri::HTML.fragment(html)
+    processed = ''
+    insert_div_end = false
+    fragment.xpath('./*').each do |node|
+      # Split blocks according to h* tags
+      if %w(h1 h2 h3 h4 h5 h6).include? node.name
+        if insert_div_end
+          processed << '</div>'
+          insert_div_end = false
+        end
+
+        # Try to extract the class name from header tag's text
+        parsed_header_text = node.text.strip.downcase.gsub(' ', '-')
+        class_name = VALID_DESCRIPTION_CLASS_NAMES.include?(parsed_header_text) ?
+            ' ' + parsed_header_text : ''
+        processed << "<div class='problem-section#{class_name}'>"
+        insert_div_end = true
+      end
+
+      processed << node.to_html
+    end
+    processed << '</div>' if insert_div_end
+    processed
+  end
+
 
 end

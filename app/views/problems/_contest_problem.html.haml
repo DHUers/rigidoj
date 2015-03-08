@@ -1,8 +1,8 @@
-.panel.panel-default.problem-panel{data: {blurb: @problem.description_blurb}}
+.panel.panel-default.problem-panel{ data: { blurb: description_blurb(@problem) } }
   .panel-heading
     .panel-title
       %h1.problem-title
-        %a.anchor{id: @problem.unique_id}
+        %a.anchor{ id: unique_anchor_id(@problem) }
           %b= "#{alphabet_offset(index)}:"
           = @problem.title
     .meta

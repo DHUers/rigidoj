@@ -29,39 +29,8 @@ class Problem < ActiveRecord::Base
                                      sample-output
                                      source)
 
-  class TextHelper
-    extend ActionView::Helpers::TextHelper
-  end
-
   def cook
-      self.baked = add_description_class(PrettyText::cook(self.raw))
-  end
-
-  # Separate elements by header tag for better styling
-  def add_description_class(html)
-    fragment = Nokogiri::HTML.fragment(html)
-    processed = ''
-    insert_div_end = false
-    fragment.xpath('./*').each do |node|
-      # Split blocks according to h* tags
-      if %w(h1 h2 h3 h4 h5 h6).include? node.name
-        if insert_div_end
-          processed << '</div>'
-          insert_div_end = false
-        end
-
-        # Try to extract the class name from header tag's text
-        parsed_header_text = node.text.strip.downcase.gsub(' ', '-')
-        class_name = VALID_DESCRIPTION_CLASS_NAMES.include?(parsed_header_text) ?
-            ' ' + parsed_header_text : ''
-        processed << "<div class='problem-section#{class_name}'>"
-        insert_div_end = true
-      end
-
-      processed << node.to_html
-    end
-    processed << '</div>' if insert_div_end
-    processed
+    self.baked = PrettyText::cook_for_problem(self.raw)
   end
 
   def update_index
@@ -69,35 +38,6 @@ class Problem < ActiveRecord::Base
 
     search_data = title << ' ' << Problem.scrub_html_for_search(baked)
     Problem.update_search_index 'problem', self.id, search_data
-  end
-
-  def blurb(problem)
-    cooked = HtmlScrubber.scrub(baked).squish
-    terms = @term.split(/\s+/)
-    blurb = TextHelper.excerpt(cooked, terms.first, radius: 100)
-    blurb = TextHelper.truncate(cooked, length: 200) if blurb.blank?
-    Sanitize.clean(blurb)
-  end
-
-  def accepted_rate
-    return '-' if self.submission_count == 0
-
-    "#{self.accepted_count / self.submission_count * 100}%"
-  end
-
-  def description_blurb
-    fragment = Nokogiri::HTML.fragment(self.baked)
-    processed = ''
-    fragment.css('.problem-section.description p').each do |node|
-      processed << node.to_html
-    end
-    cooked = HtmlScrubber.scrub(processed).squish
-    blurb = TextHelper.truncate(cooked, length: 200)
-    Sanitize.clean(blurb)
-  end
-
-  def create_slug
-    self.slug = Slug.for(title, 'problem')
   end
 
   def judge_limits
@@ -110,9 +50,6 @@ class Problem < ActiveRecord::Base
     limits
   end
 
-  def unique_id
-    "#{slug}-#{id}"
-  end
 end
 
 # == Schema Information

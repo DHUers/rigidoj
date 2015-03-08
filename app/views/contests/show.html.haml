@@ -68,7 +68,7 @@
               %a{ href: "#contest-heading-anchor", data: { scroll: true } } Contest infomation
             - @contest.problems.each_with_index do |p,i|
               %li
-                %a{ href: "##{p.unique_id}", data: { scroll: true } }
+                %a{ href: "##{unique_anchor_id(p)}", data: { scroll: true } }
                   %b= "#{alphabet_offset(i)}:"
                   = p.title
           .divider
