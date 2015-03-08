@@ -1,22 +1,26 @@
 class JudgeTypeValidator < ActiveModel::Validator
   def validate(record)
-    presence_of(record, :judge_type)
+    record.errors.add(:judge_type, :blank, options) unless record.send(:judge_type).present?
+
     case record.send(:judge_type).to_sym
     when :full_text
-      presence_of(record, :input_file_id, :output_file_id)
+      file_present(record, :input_file, :output_file)
     when :program_comparison
-      presence_of(record, :judger_program_id, :judger_program_platform, :input_file_id, :output_file_id)
+      file_present(record, :judger_program, :input_file, :output_file)
       validate_judger_program_platform(record)
     when :remote_proxy
-      presence_of(record, :remote_proxy_vendor)
+      record.errors.add(:remote_proxy_vendor, :blank, options) unless record.send(:remote_proxy_vendor).present?
     else
       record.errors.add(:judge_type, :invalid, options)
     end
   end
 
-  def presence_of(problem, *attrs)
+  def file_present(problem, *attrs)
     attrs.each do |attr|
-      problem.errors.add(attr, :blank, options) if problem.send(attr).blank?
+      unless problem.send(attr).present?
+        attacher = "#{attr}_attacher"
+        problem.errors.add(attr, :blank, options) unless problem.send(attacher).present?
+      end
     end
   end
 
