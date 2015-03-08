@@ -40,14 +40,4 @@ Rails.application.configure do
 
   config.pbkdf2_iterations = 10
 
-  # https://gist.github.com/1058477
-  module CarrierWave::MiniMagick
-    def quality(percentage)
-      manipulate! do |img|
-        img.quality(percentage.to_s)
-        img = yield(img) if block_given?
-        img
-      end
-    end
-  end
 end
