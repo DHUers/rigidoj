@@ -12,8 +12,8 @@ class Problem < ActiveRecord::Base
   scope :published, -> { where(public: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
-  attachment :input_file, content_type: 'text/plain'
-  attachment :output_file, content_type: 'text/plain'
+  attachment :input_file, type: :code
+  attachment :output_file, type: :code
   attachment :judger_program, type: :code
 
   #validates_with ::JudgeTypeValidator
