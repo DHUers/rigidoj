@@ -21,14 +21,6 @@ class Problem < ActiveRecord::Base
 
   before_save :cook
 
-  VALID_DESCRIPTION_CLASS_NAMES = %w(description
-                                     input
-                                     output
-                                     author
-                                     sample-input
-                                     sample-output
-                                     source)
-
   def cook
     self.baked = PrettyText::cook_for_problem(self.raw)
   end

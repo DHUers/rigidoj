@@ -2,6 +2,13 @@ require 'v8'
 require 'nokogiri'
 
 module PrettyText
+  VALID_DESCRIPTION_CLASS_NAMES = %w(description
+                                     input
+                                     output
+                                     author
+                                     sample-input
+                                     sample-output
+                                     source)
 
   class Helpers
 
@@ -120,7 +127,7 @@ module PrettyText
   private
 
   # Separate elements by header tag for better styling
-  def add_problem_meta_class(html)
+  def self.add_problem_meta_class(html)
     fragment = Nokogiri::HTML.fragment(html)
     processed = ''
     insert_div_end = false
