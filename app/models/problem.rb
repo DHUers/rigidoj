@@ -12,11 +12,11 @@ class Problem < ActiveRecord::Base
   scope :published, -> { where(public: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
-  mount_uploader :input_file, PlainTextUploader
-  mount_uploader :output_file, PlainTextUploader
-  mount_uploader :judger_program, PlainTextUploader
+  attachment :input_file, content_type: 'text/plain'
+  attachment :output_file, content_type: 'text/plain'
+  attachment :judger_program, type: :code
 
-  validates_with ::JudgeTypeValidator
+  #validates_with ::JudgeTypeValidator
   validates_presence_of :title, :raw
 
   before_save :cook
@@ -60,13 +60,11 @@ end
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
 #  judger_program_platform :string           default("")
-#  input_file              :string           default("")
-#  output_file             :string           default("")
-#  judger_program          :string           default("")
+#  input_file_id           :string           default("")
+#  output_file_id          :string           default("")
+#  judger_program_id       :string           default("")
 #  remote_proxy_vendor     :string           default("")
 #  additional_limits       :jsonb            default("[]")
-#  input_file_uuid         :string
-#  output_file_uuid        :string
 #  submission_count        :integer          default("0"), not null
 #  accepted_count          :integer          default("0"), not null
 #  per_case_limit          :boolean          default("false"), not null

@@ -6,7 +6,7 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def create?
-    staff?
+    user.staff?
   end
 
   def import?

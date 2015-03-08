@@ -3,9 +3,9 @@ class JudgeTypeValidator < ActiveModel::Validator
     presence_of(record, :judge_type)
     case record.send(:judge_type).to_sym
     when :full_text
-      presence_of(record, :input_file, :output_file)
+      presence_of(record, :input_file_id, :output_file_id)
     when :program_comparison
-      presence_of(record, :judger_program, :judger_program_platform, :input_file, :output_file)
+      presence_of(record, :judger_program_id, :judger_program_platform, :input_file_id, :output_file_id)
       validate_judger_program_platform(record)
     when :remote_proxy
       presence_of(record, :remote_proxy_vendor)

@@ -10,9 +10,9 @@
     = render 'layouts/header'
     %section#main
       .container
-      - flash.each do |type, msg|
-        %div{ class: "alert alert-#{type} fade in", role: 'alert' }
-          %button.close{ data: { dismiss: 'alert' } } ×
-          = msg
-      = yield
+        - flash.each do |type, msg|
+          %div{ class: "alert alert-#{type} fade in", role: 'alert' }
+            %button.close{ data: { dismiss: 'alert' } } ×
+            = msg
+        = yield
     = render 'layouts/footer'

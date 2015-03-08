@@ -1,10 +1,12 @@
 class UserSettingsController < ApplicationController
   def profile
+    authorize :user_setting, :profile?
     render 'users/settings/profile'
   end
 
   def update_profile
     @user = current_user
+    authorize @user
 
     if @user.update_attributes(profile_params)
       flash[:info] = 'Successfully update.'

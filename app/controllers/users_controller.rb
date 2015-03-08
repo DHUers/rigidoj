@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-    render 'new'
+    authorize @user
   end
 
   def create
     @user = User.new(user_params)
+    authorize @user
 
     if @user.save
       flash[:success] = "Successfully created your account. You can log in now."
@@ -18,10 +19,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username_lower: params[:username])
+    authorize @user
   end
 
   def edit
     @user = User.find_by(username_lower: params[:username])
+    authorize @user
   end
 
   def update

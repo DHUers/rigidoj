@@ -16,7 +16,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Rails Html Sanitizer for HTML sanitization
 gem 'rails-html-sanitizer', '~> 1.0'
 
-gem 'carrierwave'
+gem 'refile', require: ['refile/rails', 'refile/image_processing']
 
 gem 'mini_magick'
 gem 'rack-mini-profiler', require: false

@@ -1,6 +1,6 @@
 - if record.errors.any?
   #error_explanation
-    %div{ class: "alert alert-#{name} fade in", role: 'alert' }
+    %div{ class: "alert alert-danger fade in", role: 'alert' }
       %ul
         - record.errors.full_messages.each do |msg|
           %li= msg
