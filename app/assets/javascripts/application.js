@@ -33,6 +33,7 @@
 //= require select2
 //= require smooth-scroll
 //= require bootstrap-notify
+//= require refile
 //= require rigidoj
 //= require_self
 //= require_tree .
