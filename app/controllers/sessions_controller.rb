@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
+  def new
+    authorize :session, :login?
+  end
+  
   def create
     user = User.find_by_username_or_email(params[:session][:login])
-    authorize user, :login?
+    authorize :session, :login?
     if user && user.authenticate!(params[:session][:password])
       log_in user
       remember user
@@ -13,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    authorize current_user, :logout?
+    authorize :session, :logout?
     log_out if logged_in?
     redirect_to root_url
   end

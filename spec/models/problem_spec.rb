@@ -27,7 +27,7 @@ describe Problem do
     after { @problem.destroy }
 
     it 'can generates default limits' do
-      expect(@problem.judge_limits).should include({ default: { time: 1000, memory: 65535 }) }
+      expect(@problem.judge_limits).should include({ default: { time: 1000, memory: 65535 } })
     end
   end
 end
