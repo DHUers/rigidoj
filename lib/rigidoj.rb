@@ -12,10 +12,10 @@ module Rigidoj
   end
 
   def self.after_fork
-    start_rabbitmq
     MessageBus.after_fork
     $redis.client.reconnect
     ActiveRecord::Base.establish_connection
+    start_rabbitmq
   end
 
   def self.start_rabbitmq
@@ -36,24 +36,10 @@ module Rigidoj
     $rabbitmq_judger_proxy_queue = $rabbitmq_channel.queue(JUDGER_PROXY_QUEUE_NAME, durable: true)
     $rabbitmq_result_queue = $rabbitmq_channel.queue(RESULT_QUEUE_NAME, auto_delete: false)
     $rabbitmq_result_queue.subscribe do |delivery_info, properties, payload|
-      Rails.logger.info "[Rabbitmq] [Solution result consumer] #{$rabbitmq_result_queue.name} received a message: #{payload}"
-      resolve_solution_result MultiJson.load(payload)['solution'].symbolize_keys
+      ManageSolution.resolve_solution_result MultiJson.load(payload)['solution'].symbolize_keys
     end
   rescue Bunny::ChannelAlreadyClosed
     Rails.logger.error "Queue is closed."
   end
 
-  def self.resolve_solution_result(payload)
-    Rails.logger.info "[Solution result payload] #{payload}"
-    solution = Solution.find payload[:id]
-    solution_params = {
-        status: payload[:status],
-        revision: payload[:revision],
-        time_usage: payload[:time_usage],
-        memory_usage: payload[:memory_usage]
-    }
-    solution_params[:report] = payload[:report] if payload[:report]
-    solution_params[:detailed_report] = payload[:detailed_report] if payload[:detailed_report]
-    solution.update_attributes solution_params
-  end
 end

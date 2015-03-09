@@ -14,7 +14,6 @@ class Solution < ActiveRecord::Base
   validates_presence_of :source, :problem_id, :user_id, :platform
   validate :contest_solution
 
-  after_create :publish_to_judgers, unless: 'Rails.env.test?'
   after_create :update_first_created
 
   after_update :announce_judged_result
@@ -67,34 +66,6 @@ class Solution < ActiveRecord::Base
 
   def accpted?
     status == 'accepted_answer'
-  end
-
-  def announce_judged_result
-    text = problem ? "Solution for #{problem.title}" : "Solution"
-    params = {
-        notification_type: :solution_report,
-        user_id: user.id,
-        data: "#{text}: #{pretty_solution_status}",
-        solution_id: id
-    }
-    params[:problem_id] = problem.id if problem
-    params[:contest_id] = contest.id if contest
-
-    Notification.create!(params)
-
-    MessageBus.publish '/notifications', 1
-  end
-
-  def publish_to_judgers
-    solution_json = BasicSolutionSerializer.new(self, root: 'solution').to_json
-    case problem.judge_type.to_sym
-    when :remote_proxy
-      $rabbitmq_judger_proxy_queue.publish solution_json
-      Rails.logger.info "[Rabbitmq] Sent Solution #{id} to remote proxy queue"
-    else
-      $rabbitmq_judger_queue.publish solution_json
-      Rails.logger.info "[Rabbitmq] Sent Solution #{id} to judge queue"
-    end
   end
 
   def pretty_solution_status

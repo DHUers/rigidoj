@@ -15,6 +15,7 @@ class SolutionsController < ApplicationController
     authorize @solution
 
     if @solution.save
+      ManageSolution.publish_to_judgers(@solution)
       if params[:contest_id] || params[:problem_id]
         contest = Contest.find(params[:contest_id])
         contest.add_user current_user if contest
