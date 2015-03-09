@@ -1,14 +1,14 @@
 - content_for :title, 'Edit group'
 
 .row
-  .col-xs-9
+  .col-md-9
     %ol.breadcrumb
       %li= link_to 'Home', root_path
       %li= link_to 'Group', groups_path
       %li.active Edit group
 
 .row
-  .col-xs-9
+  .col-md-9
     = form_for @group, html: {role: 'form', class: 'edit-group group-form'} do |f|
       = render partial: 'form', locals: { f: f }
       = f.button 'Update', class: 'btn btn-warning'

@@ -1,8 +1,8 @@
 .row
-  .col-xs-offset-1.col-xs-10
+  .col-md-offset-1.col-md-10
     %h2= @post.title
     = image_tag @post.user.avatar.small.url, alt: @post.user.name
 .row
-  .col-xs-offset-1.col-xs-10
+  .col-md-offset-1.col-md-10
     = raw @post.baked
 = link_to 'Edit', edit_post_path(@post.id)

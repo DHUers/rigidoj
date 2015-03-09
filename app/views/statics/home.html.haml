@@ -1,27 +1,27 @@
 - content_for :title, 'Home'
 
 .row
-  .col-xs-8
+  .col-md-8
     - @posts.each do |p|
       %section.pined-post
         %h2= p.title
         = p.raw
-  .col-xs-4
+  .col-md-4
     .panel.panel-default
       .panel-heading Links
       .panel-body
         Related links.
 .row
-  .col-xs-8
+  .col-md-8
     .panel.panel-default
       .panel-heading Contests
       .panel-body
         - unless (l = Contest.latest).blank?
           - l.each do |c|
             .row.contest-content
-              .col-xs-10.metadata
+              .col-md-10.metadata
                 %h2= link_to c.title, show_contest_path(c.slug, c.id)
                 = raw c.description_baked
         - else
           There is no contest.
-  .col-xs-4
+  .col-md-4

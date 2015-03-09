@@ -1,10 +1,10 @@
 .row
-  .col-xs-2.col-xs-offset-10
+  .col-md-2.col-md-offset-10
     = button_to 'New Post', new_post_path, class: 'btn btn-primary', |
       html: {type: 'button'}, method: :get
 - @posts.each do |p|
   .row
-    .col-xs-10.col-xs-offset-1
+    .col-md-10.col-md-offset-1
       %h2= p.title
       = image_tag p.user.avatar.small.url, alt: p.user.name
       = raw p.baked

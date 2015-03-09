@@ -3,14 +3,14 @@
 - if params[:contest_id]
   - contest = Contest.find(params[:contest_id])
   .row
-    .col-xs-12
+    .col-md-12
       %ol.breadcrumb
         %li= link_to 'Home', root_path
         %li= link_to 'Contests', contests_path
         %li= link_to contest.title, show_contest_path(contest.slug, contest.id)
         %li.active Solutions
 .row
-  .col-xs-12
+  .col-md-12
     .panel.panel-default
       .panel-heading.clearfix
         %h4.pull-left

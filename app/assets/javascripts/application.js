@@ -108,7 +108,7 @@ $(document).ready(ready);
 $(document).on('page:load', ready);
 
 $.notifyDefaults({
-  template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
+  template: '<div data-notify="container" class="col-md-11 col-sm-4 alert alert-{0}" role="alert">' +
               '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>' +
               '<span data-notify="icon"></span> <span data-notify="title">{1}</span>' +
               '<span data-notify="message">{2}</span>' +

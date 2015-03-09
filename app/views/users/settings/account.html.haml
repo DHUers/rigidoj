@@ -1,6 +1,6 @@
 .row
   = render 'users/settings/navlist'
-  .col-xs-9
+  .col-md-9
     - flash.each do |name, msg|
       %div{:class => "alert alert-#{name} alert-dismissible", :role => "alert"}
         %button.close{"data-dismiss" => "alert", :type => "button"}

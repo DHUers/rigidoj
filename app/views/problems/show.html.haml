@@ -11,7 +11,7 @@
           Edit problem
 
 .row
-  .col-xs-9
+  .col-md-9
     .panel.panel-default
       .panel-heading
         .panel-title
@@ -28,7 +28,7 @@
         .problem-body
           :preserve
             #{raw @problem.baked}
-  .col-xs-3
+  .col-md-3
     .panel.panel-default.sticky
       .panel-heading
         Actions
@@ -58,14 +58,14 @@
         .modal-body
           .form-horizontal
             .form-group
-              .col-xs-9
+              .col-md-9
                 = f.label :problem_id
                 %p= @problem.title
-              .col-xs-3
+              .col-md-3
                 = f.label :platform
                 = f.select :platform, platform_select_options, {}, class: 'form-control'
             .form-group
-              .col-xs-12
+              .col-md-12
                 = render partial: 'components/source_editor',  |
                   locals: {                                    |
                   preview_url: '',                             |

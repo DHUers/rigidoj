@@ -11,14 +11,14 @@
         .modal-body
           .form-horizontal
             .form-group
-              %label.control-label.col-xs-3{for: 'import-problem-from-vendor'}
+              %label.control-label.col-md-3{for: 'import-problem-from-vendor'}
                 Vendor
-              .col-xs-8
+              .col-md-8
                 = select_tag :vendor, options_for_select(ProblemDownloader::AVAILABLE_STRATEGIES_LIST), id: 'import-problem-from-vendor', class: 'form-control'
             .form-group
-              %label.control-label.col-xs-3{for: 'import-problem-from-vendor-index'}
+              %label.control-label.col-md-3{for: 'import-problem-from-vendor-index'}
                 Problem ID
-              .col-xs-8
+              .col-md-8
                 = text_field_tag :id, '', id: 'import-problem-from-vendor-index', class: 'form-control'
         .modal-footer
           %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}

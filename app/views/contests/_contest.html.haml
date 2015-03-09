@@ -1,5 +1,5 @@
 .row.contest-content
-  .col-xs-10.metadata
+  .col-md-10.metadata
     %h2= link_to @contest.title, show_contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     .timeframe
@@ -14,7 +14,7 @@
         .timeframe-group
           %label{for: "#{@contest.id}-delayed"}= 'delayed till'
           %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
-  .col-xs-2.stats
+  .col-md-2.stats
     .stat-problem-count
       %span.text-muted Problems
       %strong.contest-stat-count= @contest.problems.count

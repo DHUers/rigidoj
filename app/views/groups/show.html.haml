@@ -1,7 +1,7 @@
 - content_for :title, @group.name
 
 .row
-  .col-xs-9
+  .col-md-9
     .panel.panel-default
       .panel-heading
         %h4= @group.name
@@ -14,7 +14,7 @@
               %tr
                 %td= u.username
 
-  .col-xs-3
+  .col-md-3
     %ul.action-list.group-actions.sticky.list-unstyled
       %li
         %a{href: edit_group_path}
