@@ -33,11 +33,11 @@ class Problem < ActiveRecord::Base
   end
 
   def judge_limits
-    limits = {default: {
+    limits = { default: {
         time: default_time_limit,
-        memory: default_memory_limit}}
+        memory: default_memory_limit } }
     additional_limits.each do |l|
-      limits.store(l['platform'], {time: l['timeLimit'], memory: l['memoryLimit']})
+      limits.store(l['platform'], { time: l['timeLimit'], memory: l['memoryLimit'] })
     end
     limits
   end
