@@ -27,7 +27,9 @@ describe Problem do
     after { @problem.destroy }
 
     it 'can generates default limits' do
-      expect(@problem.judge_limits).should include({ default: { time: 1000, memory: 65535 } })
+      expect(@problem.judge_limits).to have_key :default
+      expect(@problem.judge_limits[:default]).to have_key :time
+      expect(@problem.judge_limits[:default]).to have_key :memory
     end
   end
 end
