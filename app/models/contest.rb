@@ -12,9 +12,9 @@ class Contest < ActiveRecord::Base
 
   accepts_nested_attributes_for :problems
 
-  scope :incoming, -> { where('started_at > ?', Time.now ) }
-  scope :live, -> { where('started_at <= ? AND end_at >= ?', Time.now, Time.now) }
-  scope :finished, -> { where('end_at < ? AND type <> ? OR delayed_till < ?', Time.now, 'DelayableContest', Time.now) }
+  scope :incoming, -> { where('started_at > ?', Time.zone.now ) }
+  scope :live, -> { where('started_at <= ? AND end_at >= ?', Time.zone.now, Time.zone.now) }
+  scope :finished, -> { where('end_at < ? AND type <> ? OR delayed_till < ?', Time.zone.now, 'DelayableContest', Time.zone.now) }
 
   validates_presence_of :title, :description_raw, :started_at, :end_at, :problems
   validates_with ::ContestTypeValidator, on: :create
@@ -34,7 +34,7 @@ class Contest < ActiveRecord::Base
   end
 
   def started?
-    started_at.past?
+    started_at.past? || Time.current == started_at
   end
 
   def ongoing?
@@ -46,10 +46,10 @@ class Contest < ActiveRecord::Base
   end
 
   def ended?
-    end_time.past?
+    end_time.past? || Time.current == end_time
   end
 
-  %i(started_at end_at delayed_till).each do |setter|
+  %i(started_at end_at delayed_till frozen_ranking_from).each do |setter|
     define_method("#{setter}=") do |val|
       begin
         write_attribute setter, Time.zone.parse(val)
