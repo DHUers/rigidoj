@@ -107,6 +107,7 @@ GEM
     gctools (0.2.3)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
+    groupify (0.6.1)
     haml (4.0.6)
       tilt
     haml-rails (0.8.2)
@@ -341,6 +342,7 @@ DEPENDENCIES
   fast_xor
   font-awesome-rails
   gctools
+  groupify
   haml
   haml-rails
   hiredis
