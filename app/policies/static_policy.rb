@@ -19,4 +19,8 @@ class StaticPolicy < Struct.new(:user, :static)
   def help?
     true
   end
+
+  def search?
+    true
+  end
 end

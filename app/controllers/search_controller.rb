@@ -2,6 +2,7 @@ require_dependency 'search'
 
 class SearchController < ApplicationController
   def query
+    authorize :static, :search?
     params.require(:term)
 
     search_args = {}

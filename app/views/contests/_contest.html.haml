@@ -1,6 +1,6 @@
 .row.contest-content
   .col-md-10.metadata
-    %h2= link_to @contest.title, show_contest_path(@contest.slug, @contest.id)
+    %h2= link_to @contest.title, contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     .timeframe
       = render partial: 'contests/contest_progress_bar', locals: {progress: contest_progress(@contest)}

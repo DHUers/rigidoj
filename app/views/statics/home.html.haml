@@ -20,7 +20,7 @@
           - l.each do |c|
             .row.contest-content
               .col-md-10.metadata
-                %h2= link_to c.title, show_contest_path(c.slug, c.id)
+                %h2= link_to c.title, contest_path(c.slug, c.id)
                 = raw c.description_baked
         - else
           There is no contest.

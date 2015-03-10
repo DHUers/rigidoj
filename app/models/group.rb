@@ -27,6 +27,7 @@ class Group < ActiveRecord::Base
   end
 
 end
+
 # == Schema Information
 #
 # Table name: groups
@@ -36,6 +37,7 @@ end
 #  visible    :boolean          default(TRUE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  group_name :string
 #
 # Indexes
 #

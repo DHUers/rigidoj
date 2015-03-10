@@ -6,7 +6,7 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def create?
-    staff?
+    user.staff?
   end
 
   def show?
@@ -14,11 +14,11 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def update?
-    staff?
+    user.staff?
   end
 
   def destroy?
-    staff?
+    user.staff?
   end
 
   def ranking?

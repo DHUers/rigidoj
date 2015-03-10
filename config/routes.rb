@@ -10,21 +10,31 @@ Rails.application.routes.draw do
 
   resources :groups, param: :name
 
-  resources :contests, except: :show
   resources :delayable_contests, controller: 'contests', type: 'DelayableContest', except: :show
 
-  get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :show_contest
+  get '/contests', to: 'contests#index', as: :contests
+  post '/contests', to: 'contests#create'
+  get '/contests/new', to: 'contests#new', as: :new_contest
+  get '/c/:slug/:id', to: 'contests#show', constraints: {id: /\d+/}, as: :contest
+  get '/c/:slug/:id/edit', to: 'contests#edit', constraints: {id: /\d+/}, as: :edit_contest
+  match '/c/:slug/:id', to: 'contests#update', constraints: {id: /\d+/}, via: [:patch, :put]
+  delete '/c/:slug/:id', to: 'contests#destroy', constraints: {id: /\d+/}
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
   get '/c/:slug/:contest_id/solutions', to: 'solutions#index', constraints: {contest_id: /\d+/}, as: :contest_solutions
   post '/c/:slug/:contest_id/solutions', to: 'solutions#create', constraints: {contest_id: /\d+/}
+
   resources :posts
   resources :solutions
-  resources :problems, except: :show do
-    resources :solutions
-  end
-  get '/p/:slug/:id', to: 'problems#show', constraints: {id: /\d+/}, as: :show_problem
+  get '/problems', to: 'problems#index', as: :problems
+  post '/problems', to: 'problems#create'
+  get '/problems/new', to: 'problems#new', as: :new_problem
+  get '/p/:slug/:id', to: 'problems#show', constraints: {id: /\d+/}, as: :problem
+  get '/p/:slug/:id/edit', to: 'problems#edit', constraints: {id: /\d+/}, as: :edit_problem
+  match '/p/:slug/:id', to: 'problems#update', constraints: {id: /\d+/}, via: [:patch, :put]
+  delete '/p/:slug/:id', to: 'problems#destroy', constraints: {id: /\d+/}
   post '/problems/import', to: 'problems#import'
   get '/problems/:id/excerpt', to: 'problems#excerpt'
+  get '/p/:slug/:problem_id/solutions', to: 'solutions#index', constraints: {problem_id: /\d+/}, as: :problem_solutions
 
   namespace :admin do
     get '/dashboard', to: 'admin#dashboard'

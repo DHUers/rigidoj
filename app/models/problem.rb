@@ -12,14 +12,18 @@ class Problem < ActiveRecord::Base
   scope :published, -> { where(public: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
-  attachment :input_file, type: :code
-  attachment :output_file, type: :code
-  attachment :judger_program, type: :code
+  attachment :input_file
+  attachment :output_file
+  attachment :judger_program
 
   validates_with ::JudgeTypeValidator
   validates_presence_of :title, :raw
 
   before_save :cook
+
+  class TextHelper
+    extend ActionView::Helpers::TextHelper
+  end
 
   def cook
     self.baked = PrettyText::cook_for_problem(self.raw)
@@ -30,6 +34,17 @@ class Problem < ActiveRecord::Base
 
     search_data = title << ' ' << Problem.scrub_html_for_search(baked)
     Problem.update_search_index 'problem', self.id, search_data
+  end
+
+  def description_blurb
+    fragment = Nokogiri::HTML.fragment(self.baked)
+    processed = ''
+    fragment.css('.problem-section.description p').each do |node|
+      processed << node.to_html
+    end
+    cooked = HtmlScrubber.scrub(processed).squish
+    blurb = TextHelper.truncate(cooked, length: 200)
+    Sanitize.clean(blurb)
   end
 
   def judge_limits

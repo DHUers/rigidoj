@@ -7,7 +7,7 @@
       %i.fa.fa-wrench
     %ul.dropdown-menu.pull-right{role: 'menu'}
       %li
-        %a{href: edit_contest_path(@contest)}
+        %a{href: edit_contest_path(@contest.slug, @contest.id)}
           Edit contest
 
 

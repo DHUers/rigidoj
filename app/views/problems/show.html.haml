@@ -7,7 +7,7 @@
       %i.fa.fa-wrench
     %ul.dropdown-menu.pull-right{role: 'menu'}
       %li
-        %a{href: edit_problem_path(@problem)}
+        %a{href: edit_problem_path(@problem.slug, @problem.id)}
           Edit problem
 
 .row
@@ -40,7 +40,7 @@
                 %i.fa.fa-plus-circle
                 Submit
           %li.action
-            %a{ href: problem_solutions_path(@problem) }
+            %a{ href: problem_solutions_path(@problem.slug, @problem.id) }
               %i.fa.fa-history
               Submitted records
 
@@ -48,7 +48,7 @@
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}
   .modal-dialog.modal-lg
     .modal-content
-      = form_for :solution, {url: problem_solutions_path(@problem.id), accept: {charset: 'UTF-8'}, remote: true, method: :post} do |f|
+      = form_for :solution, {url: problem_solutions_path(@problem.slug, @problem.id), accept: {charset: 'UTF-8'}, remote: true, method: :post} do |f|
         .modal-header
           %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
             %span{aria: {hidden: 'true'}}

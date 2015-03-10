@@ -21,7 +21,7 @@ class SolutionsController < ApplicationController
         contest.add_user current_user if contest
         render json: success_json, status: 201
       else
-        redirect_to show_problem_path(@solution.problem.slug, @solution.problem.id)
+        redirect_to problem_path(@solution.problem.slug, @solution.problem.id)
       end
     else
       if params[:contest_id] || params[:problem_id]

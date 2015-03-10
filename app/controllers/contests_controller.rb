@@ -10,7 +10,7 @@ class ContestsController < ApplicationController
 
     if @contest.save
       sort_problems_by_ids(contest_params[:problem_ids])
-      redirect_to show_contest_path(@contest.slug, @contest.id)
+      redirect_to contest_path(@contest.slug, @contest.id)
     else
       flash[:danger] = 'There are problems when create contest.'
       render 'new'
@@ -49,7 +49,7 @@ class ContestsController < ApplicationController
 
     if @contest.update_attributes(contest_params(@contest.type))
       sort_problems_by_ids(contest_params(@contest.type)[:problem_ids])
-      redirect_to show_contest_path(@contest.slug, @contest.id)
+      redirect_to contest_path(@contest.slug, @contest.id)
     else
       flash[:danger] = 'There are problems when update contest.'
       render 'edit'

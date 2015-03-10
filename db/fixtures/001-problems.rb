@@ -1,6 +1,4 @@
-input = Tempfile.new(['input', '.in'])
-output = Tempfile.new(['output', '.out'])
-input.write <<END.gsub(/^\s*\|/, '')
+input = StringIO.new <<END.gsub(/^\s*\|/, '')
 |1 2
 |4 6
 |-1 1
@@ -8,7 +6,7 @@ input.write <<END.gsub(/^\s*\|/, '')
 |0 0
 |2147483646 1
 END
-output.write <<-END.gsub(/^\s*\|/, '')
+output = StringIO.new <<-END.gsub(/^\s*\|/, '')
 |3
 |10
 |0
@@ -17,10 +15,8 @@ output.write <<-END.gsub(/^\s*\|/, '')
 |2147483647
 |
 END
-input.rewind
-output.rewind
 
-Problem.seed do |p|
+a = Problem.seed do |p|
   p.id = 1
   p.title = 'A + B Problem'
   p.public = true
@@ -40,8 +36,3 @@ Problem.seed do |p|
   p.input_file = input
   p.output_file = output
 end
-
-input.close
-input.unlink
-output.close
-output.unlink

@@ -7,7 +7,7 @@
       %ol.breadcrumb
         %li= link_to 'Home', root_path
         %li= link_to 'Contests', contests_path
-        %li= link_to contest.title, show_contest_path(contest.slug, contest.id)
+        %li= link_to contest.title, contest_path(contest.slug, contest.id)
         %li.active Solutions
 .row
   .col-md-12
@@ -47,8 +47,8 @@
                   %td= show_details?(s) ? "#{s.memory_usage} KB" : '-'
                   %td= s.platform
                   %td= s.created_at.to_formatted_s(:long_add_second)
-                  %td= link_to s.problem.id, show_problem_path(s.problem.slug, s.problem.id)
-                  %td= link_to s.problem.title, show_problem_path(s.problem.slug, s.problem.id)
+                  %td= link_to s.problem.id, problem_path(s.problem.slug, s.problem.id)
+                  %td= link_to s.problem.title, problem_path(s.problem.slug, s.problem.id)
       - else
         .panel-body
           There is no submission at this time.
