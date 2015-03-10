@@ -26,7 +26,7 @@ end
 #  problem_id        :integer          not null
 #  user_id           :integer          not null
 #  last_submitted_at :datetime
-#  state             :integer          default("0")
+#  state             :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  first_accepted_at :datetime

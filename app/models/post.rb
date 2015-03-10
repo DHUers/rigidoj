@@ -25,5 +25,5 @@ end
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  published  :boolean          default("false"), not null
+#  published  :boolean          default(FALSE), not null
 #

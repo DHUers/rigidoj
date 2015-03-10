@@ -36,7 +36,7 @@ end
 #  notification_type :integer          not null
 #  user_id           :integer          not null
 #  data              :string           not null
-#  read              :boolean          default("false"), not null
+#  read              :boolean          default(FALSE), not null
 #  problem_id        :integer
 #  solution_id       :integer
 #  contest_id        :integer

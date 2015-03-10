@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get '/:category', to: 'admin#show_settings', as: :settings
       put '/:category', to: 'admin#update_settings'
     end
+    get '/groups', to: 'admin#groups', as: :groups
 
     root to: 'admin#dashboard'
   end

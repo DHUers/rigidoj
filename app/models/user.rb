@@ -185,26 +185,26 @@ end
 #  email                   :string(300)      not null
 #  password_hash           :string(64)
 #  salt                    :string(32)
-#  active                  :boolean          default("false"), not null
+#  active                  :boolean          default(FALSE), not null
 #  last_seen_at            :datetime
-#  admin                   :boolean          default("false"), not null
+#  admin                   :boolean          default(FALSE), not null
 #  ip_address              :inet
 #  registration_ip_address :inet
 #  remember_hash           :string(60)
 #  username_lower          :string(60)       not null
-#  suspended               :boolean          default("false"), not null
+#  suspended               :boolean          default(FALSE), not null
 #  suspended_at            :datetime
 #  suspended_till          :datetime
 #  last_emailed_at         :datetime
-#  moderator               :boolean          default("false")
-#  blocked                 :boolean          default("false")
-#  email_notification      :boolean          default("true")
-#  email_digest            :boolean          default("false")
-#  email_contest_result    :boolean          default("true")
-#  email_solution_result   :boolean          default("false")
+#  moderator               :boolean          default(FALSE)
+#  blocked                 :boolean          default(FALSE)
+#  email_notification      :boolean          default(TRUE)
+#  email_digest            :boolean          default(FALSE)
+#  email_contest_result    :boolean          default(TRUE)
+#  email_solution_result   :boolean          default(FALSE)
 #  avatar_id               :string
 #  avatar_filename         :string
-#  show_email              :boolean          default("true"), not null
+#  show_email              :boolean          default(TRUE), not null
 #  website                 :string(255)
 #
 # Indexes

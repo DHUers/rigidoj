@@ -1,19 +1,13 @@
 - content_for :title, 'Settings - Admin'
-= render 'admin/admin/navbar'
-.container
-  - flash.each do |name, msg|
-    %div{:class => "alert alert-#{name} alert-dismissible", :role => "alert"}
-      %button.close{"data-dismiss" => "alert", :type => "button"}
-        %span{"aria-hidden" => "true"} &times;
-        %span.sr-only Close
-      = msg
+= render partial: 'admin/admin/navbar'
+
 .row
-  .col-md-2
+  .col-md-3
     .list-group
       - SiteSetting.category_listings.each do |category|
         = link_to category, admin_settings_path(category),               |
           class: "list-group-item #{active_class_if_category(category)}" |
-  .col-md-10
+  .col-md-9
     = form_for :settings,                             |
       html: {role: 'form', class: 'form-horizontal'}, |
       method: :put do |f|                             |

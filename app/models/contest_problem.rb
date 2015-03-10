@@ -16,7 +16,7 @@ end
 #
 #  contest_id :integer
 #  problem_id :integer
-#  position   :integer          default("0"), not null
+#  position   :integer          default(0), not null
 #  id         :integer          not null, primary key
 #
 # Indexes

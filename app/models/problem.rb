@@ -54,8 +54,8 @@ end
 #  baked                   :text             default("")
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  public                  :boolean          default("true"), not null
-#  judge_type              :integer          default("0"), not null
+#  public                  :boolean          default(TRUE), not null
+#  judge_type              :integer          default(0), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
 #  slug                    :string           default("")
@@ -64,8 +64,8 @@ end
 #  output_file_id          :string           default("")
 #  judger_program_id       :string           default("")
 #  remote_proxy_vendor     :string           default("")
-#  additional_limits       :jsonb            default("[]")
-#  submission_count        :integer          default("0"), not null
-#  accepted_count          :integer          default("0"), not null
-#  per_case_limit          :boolean          default("false"), not null
+#  additional_limits       :jsonb            default([])
+#  submission_count        :integer          default(0), not null
+#  accepted_count          :integer          default(0), not null
+#  per_case_limit          :boolean          default(FALSE), not null
 #

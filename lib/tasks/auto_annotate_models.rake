@@ -29,6 +29,4 @@ if Rails.env.development?
       'trace'                => "false",
     })
   end
-
-  Annotate.load_tasks
 end

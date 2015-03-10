@@ -15,8 +15,8 @@ end
 # Table name: user_stats
 #
 #  user_id                   :integer          not null, primary key
-#  contests_joined           :integer          default("0"), not null
-#  solutions_created         :integer          default("0"), not null
+#  contests_joined           :integer          default(0), not null
+#  solutions_created         :integer          default(0), not null
 #  first_solution_created_at :datetime
 #  problems_solved           :string           default("0"), not null
 #

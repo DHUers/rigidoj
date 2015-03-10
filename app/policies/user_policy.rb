@@ -15,12 +15,8 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id || user.staff?
   end
 
-  def login?
-    true
-  end
-
-  def logout?
-    true
+  def admin?
+    user.admin?
   end
 
   def permitted_attributes

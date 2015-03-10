@@ -1,4 +1,4 @@
-class Admin::AdminController < ApplicationController
+class Admin::AdminController < Admin::AdminBaseController
   def dashboard
     render 'admin/admin/dashboard'
   end
@@ -26,6 +26,9 @@ class Admin::AdminController < ApplicationController
     else
 
     end
+  end
+
+  def groups
   end
 
   private
