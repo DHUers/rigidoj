@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   has_many :contests
   has_many :problems
   has_many :user_problem_stats
+  has_many :group_users
+  has_many :groups, through: :group_users
   has_many :notifications
-  groupify :group_member
-  groupify :named_group_member
 
   attachment :avatar, type: :image
 
