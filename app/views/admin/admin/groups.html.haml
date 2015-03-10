@@ -3,5 +3,10 @@
 
 .row
   .col-md-3
+    %input.search-for-group.form-control{ placeholder: 'Filter the group name' }
     .list-group
+      - Group.all.each do |g|
+        = link_to g.name, admin_group_path(g.name),               |
+          class: "list-group-item"
+    %button.add.btn.btn-default Add
   .col-md-9

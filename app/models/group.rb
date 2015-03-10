@@ -7,7 +7,6 @@ class Group < ActiveRecord::Base
   scope :visible, -> { where(visible: true) }
 
   validates_presence_of :name
-  validates_presence_of :users
 
   def usernames
     users.pluck(:username).join(',')
@@ -24,7 +23,7 @@ class Group < ActiveRecord::Base
   protected
 
   def name_format_validator
-    UsernameValidator.perform_validation(self, 'name')
+    UsernameValidator.perform_validation(self, 'group_name')
   end
 
 end
@@ -35,18 +34,6 @@ end
 #  id         :integer          not null, primary key
 #  name       :string           not null
 #  visible    :boolean          default(TRUE), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_groups_on_name  (name) UNIQUE
-#
-
-  #
-#  id         :integer          not null, primary key
-#  name       :string           not null
-#  visible    :boolean          default("true"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
