@@ -9,8 +9,11 @@
       %h4.menu-title Notifications
     %li.divider
     .notifications-wrapper
-      - report.each do |n|
-        = render partial: 'components/notification_badge_item', locals: n.item_hash
+      - if report.any?
+        - report.each do |n|
+          = render partial: 'components/notification_badge_item', locals: n.item_hash
+      - else
+        .notification-item No notification.
     %li.divider
     .notification-footer
       %h4.menu-title.hidden
