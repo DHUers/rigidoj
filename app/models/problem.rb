@@ -9,7 +9,9 @@ class Problem < ActiveRecord::Base
   has_many :user_problem_stats
   has_many :contest_problems
   has_many :contests, through: :contest_problems
-  scope :published, -> { where(public: true) }
+  belongs_to :visible_to_group, class_name: 'Group', foreign_key: 'visible_to_group', validate: true
+
+  scope :published, -> { where(visible: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]
 
   attachment :input_file
@@ -69,7 +71,7 @@ end
 #  baked                   :text             default("")
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  public                  :boolean          default(TRUE), not null
+#  visible                 :boolean          default(TRUE), not null
 #  judge_type              :integer          default(0), not null
 #  default_memory_limit    :string           default("65535"), not null
 #  default_time_limit      :string           default("1000"), not null
@@ -83,4 +85,5 @@ end
 #  submission_count        :integer          default(0), not null
 #  accepted_count          :integer          default(0), not null
 #  per_case_limit          :boolean          default(FALSE), not null
+#  visible_to_group        :integer
 #

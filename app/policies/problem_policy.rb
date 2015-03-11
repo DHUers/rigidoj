@@ -18,7 +18,7 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user.admin? || record.visible || record.visible_to_group
   end
 
   def update?

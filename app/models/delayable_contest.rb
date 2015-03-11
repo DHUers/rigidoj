@@ -26,4 +26,5 @@ end
 #  slug                :string
 #  frozen_ranking_from :datetime
 #  type                :string
+#  judger_group        :integer
 #

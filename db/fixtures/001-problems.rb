@@ -19,7 +19,7 @@ END
 a = Problem.seed do |p|
   p.id = 1
   p.title = 'A + B Problem'
-  p.public = true
+  p.visible = true
   p.judge_type = :full_text
   p.raw = <<-END.gsub(/^\s+\|/, '')
     |## Description

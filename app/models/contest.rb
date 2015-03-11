@@ -9,6 +9,7 @@ class Contest < ActiveRecord::Base
   has_many :contest_users
   has_many :users, -> { order('username ASC') } , through: :contest_users
   has_many :solutions
+  belongs_to :judger_group, class_name: 'Group', foreign_key: 'judger_group', validate: true
 
   accepts_nested_attributes_for :problems
 
@@ -92,4 +93,5 @@ end
 #  slug                :string
 #  frozen_ranking_from :datetime
 #  type                :string
+#  judger_group        :integer
 #
