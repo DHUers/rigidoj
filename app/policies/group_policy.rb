@@ -1,7 +1,14 @@
 class GroupPolicy < ApplicationPolicy
   def create?
-    raise Pundit::NotAuthorizedError, "must be logged in" unless user
-    user && user.staff?
+    admin?
+  end
+
+  def admin?
+    user.admin?
+  end
+
+  def show?
+    user
   end
 
   def update?

@@ -31,6 +31,35 @@ class Admin::AdminController < Admin::AdminBaseController
   def groups
   end
 
+  def group
+    @group = Group.find_by(group_name: params[:group_name])
+    authorize @group, :admin?
+  end
+
+  def create_group
+    @group = Group.new(group_name: params[:group_name], name: params[:name])
+    authorize @group, :create?
+
+    if @group.save
+      redirect_to admin_groups_path
+    else
+      flash[:danger] = 'Error when create group.'
+      render admin_groups_path
+    end
+  end
+
+  def update_group
+    @group = Group.find_by(group_name: params[:group_name])
+    authorize @group, :update?
+
+    if @group.update_attributes(group_params)
+      flash[:success] = 'Successfully updated the group.'
+    else
+      flash[:danger] = 'Error when updating group.'
+    end
+    redirect_to admin_group_path(@group.group_name)
+  end
+
   private
 
   def filter_settings_in_a_category
@@ -42,4 +71,9 @@ class Admin::AdminController < Admin::AdminBaseController
     params.require(:settings).permit(
         filter_settings_in_a_category.map {|s| s[:setting]})
   end
+
+  def group_params
+    params.require(:group).permit(:group_name, :name, :user_ids => [])
+  end
+
 end

@@ -3,10 +3,35 @@
 
 .row
   .col-md-3
-    %input.search-for-group.form-control{ placeholder: 'Filter the group name' }
+    /%input.search-for-group.form-control{ placeholder: 'Filter the group name' }
     .list-group
       - Group.all.each do |g|
-        = link_to g.name, admin_group_path(g.name),               |
-          class: "list-group-item"
-    %button.add.btn.btn-default Add
+        = link_to g.name, admin_group_path(g.name), class: 'list-group-item'
+    %button.add.btn.btn-default{ data: { toggle: 'modal', target: '#add-group' } } Add
   .col-md-9
+
+#add-group.modal.fade{ tabindex: '-1', role: 'dialog', aria: { labelledby: 'Add new group', hidden: 'true' } }
+  .modal-dialog
+    .modal-content
+      = form_for :group, { url: admin_groups_path, accept: { charset: 'UTF-8' }, method: :post } do |f|
+        .modal-header
+          %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
+            %span{aria: {hidden: 'true'}}
+              &times;
+          %h4#import-problem-label.modal-title
+            Add new group
+        .modal-body
+          .form
+            .form-group
+              %label.control-label{ for: 'group_name' }
+                Group name(only English characters)
+              = text_field_tag :group_name, nil, class: 'form-control'
+            .form-group
+              %label.control-label{ for: 'group_name' }
+                Name(Shown for public)
+              = text_field_tag :name, nil, class: 'form-control'
+        .modal-footer
+          %button{type: 'button', class: 'btn btn-default', data: {dismiss: 'modal'}}
+            Close
+          %button{type: 'submit', class: 'btn btn-primary'}
+            Create

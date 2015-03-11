@@ -12,7 +12,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id == record.id || user.staff?
+    user.id == record.id || admin?
+  end
+
+  def search?
+    admin?
   end
 
   def admin?

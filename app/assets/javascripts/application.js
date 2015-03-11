@@ -104,8 +104,7 @@ var ready = function() {
   });
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).on('ready page:load', ready);
 
 $.notifyDefaults({
   template: '<div data-notify="container" class="col-md-11 col-sm-4 alert alert-{0}" role="alert">' +

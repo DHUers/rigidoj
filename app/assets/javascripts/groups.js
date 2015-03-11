@@ -3,7 +3,4 @@ var ready = function() {
     width: '100%'
   });
 };
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
-
+$(document).on('ready page:load', ready);

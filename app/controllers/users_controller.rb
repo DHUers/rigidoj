@@ -1,4 +1,24 @@
 class UsersController < ApplicationController
+  def search_users
+    authorize current_user, :search?
+
+    term = params[:term].to_s.strip
+    users = User.order(User.sql_fragment("CASE WHEN username_lower = ? THEN 0 ELSE 1 END ASC", term.downcase))
+    if term.present?
+      query = Search.ts_query(@term, "simple")
+      users = users.includes(:user_search_data)
+                   .references(:user_search_data)
+                   .where("username_lower LIKE :term_like OR user_search_data.search_data @@ #{query}",
+                          term: @term, term_like: @term_like)
+                   .order(User.sql_fragment("CASE WHEN username_lower LIKE ? THEN 0 ELSE 1 END ASC", @term_like))
+    end
+
+    users.order("CASE WHEN last_seen_at IS NULL THEN 0 ELSE 1 END DESC, last_seen_at DESC, username ASC")
+         .limit(@limit)
+
+    render_serialized(users, BasicUserSerializer)
+  end
+
   def new
     @user = User.new
     authorize @user

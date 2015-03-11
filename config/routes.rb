@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/users/:username/bookmarks', to: 'bookmarks#person'
   get '/users/:username/groups', to: 'groups#person'
   post '/users/is_local_username', to: 'users#is_local_username'
+  get '/users/search/users' => "users#search_users"
 
   resources :groups, param: :name
 
@@ -43,7 +44,9 @@ Rails.application.routes.draw do
       put '/:category', to: 'admin#update_settings'
     end
     get '/groups', to: 'admin#groups', as: :groups
+    post '/groups', to: 'admin#create_group'
     get '/groups/:group_name', to: 'admin#group', as: :group
+    put '/groups/:group_name', to: 'admin#update_group'
 
     root to: 'admin#dashboard'
   end
