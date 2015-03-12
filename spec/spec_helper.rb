@@ -46,6 +46,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include HTMLSpecHelper
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   # RSpec Rails can automatically mix in different behaviours to your tests

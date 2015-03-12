@@ -11,7 +11,7 @@
           New Contest
 
 .row
-  .col-sm-12.col-md-offset-1.col-md-10
+  .col-md-12
     .panel{class: @live_contests.blank? ? 'panel-default' : ' panel-info'}
       .panel-heading
         %h4
@@ -28,7 +28,7 @@
 
 - unless @incoming_contests.blank?
   .row
-    .col-sm-12.col-md-offset-1.col-md-10
+    .col-md-12
       .panel.panel-default
         .panel-heading
           %h4
@@ -41,7 +41,7 @@
 
 - unless @delayed_contests.blank?
   .row
-    .col-sm-12.col-md-offset-1.col-md-10
+    .col-md-12
       .panel.panel-warning
         .panel-heading
           %h4
@@ -52,7 +52,7 @@
               = render partial: 'contests/contest', locals: {:@contest => c}
 
 .row
-  .col-sm-12.col-md-offset-1.col-md-10
+  .col-md-12
     .panel.panel-default
       .panel-heading
         %h4

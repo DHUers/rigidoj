@@ -1,0 +1,15 @@
+%footer#footer
+  .container
+    .cat-logo
+      = image_tag ['pirate-cat.png', 'cat-acrobat.png', 'cat-birdhouse.png', 'cat-cart.png',
+                   'cat-gift.png', 'cat-hungry.png', 'cat-laptop.png', 'cat-paper.png',
+                   'cat-rascal.png', 'cat-sleep.png', 'cat-upsidedown.png'].sample
+    .row
+      .col-md-7
+        © 2014 - 2015
+        %a{ href: 'https://github.com/DHUers/rigidoj', title: "Rigidoj's Github" }
+          Powered by RigidOJ.
+      .col-md-5
+        %ul.footer-nav.navbar
+          %li= link_to 'Help', help_path
+          %li= link_to 'About', about_path
