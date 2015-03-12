@@ -14,6 +14,10 @@ Fabricator(:erick, from: :user) do
   active true
 end
 
+Fabricator(:moderator, from: :user) do
+  moderator true
+end
+
 Fabricator(:admin, from: :user) do
   admin true
 end

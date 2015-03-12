@@ -60,7 +60,7 @@
             .form-group
               .col-md-9
                 = f.label :problem_id
-                %p= @problem.title
+                = text_field_tag :problem_title, @problem.title, disabled: true, class: 'form-control'
               .col-md-3
                 = f.label :platform
                 = f.select :platform, platform_select_options, {}, class: 'form-control'

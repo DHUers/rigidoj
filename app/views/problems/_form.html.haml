@@ -73,6 +73,9 @@
 .form-group
   .row
     .col-md-4
-      .checkbox
-        = f.label :visible
-        = f.check_box :visible, value: 'yes'
+      = f.label :visible
+  .row
+    .col-md-1
+      = f.check_box :visible, value: 'yes'
+    .col-md-11
+      = f.collection_select :visible_to_group, Group.all, :id, :group_name, {}, { id: 'visible-to-group' }

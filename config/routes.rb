@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   get '/users/:username/bookmarks', to: 'bookmarks#person'
   get '/users/:username/groups', to: 'groups#person'
   post '/users/is_local_username', to: 'users#is_local_username'
-  get '/users/search/users' => "users#search_users"
+  get '/users/search/users', to: 'users#search_users'
 
-  resources :groups, param: :name
+  resources :groups, param: :group_name
 
   resources :delayable_contests, controller: 'contests', type: 'DelayableContest', except: :show
 

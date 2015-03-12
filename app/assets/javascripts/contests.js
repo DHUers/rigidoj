@@ -173,5 +173,7 @@ var ready = function() {
       }
     });
   });
+
+  $('#contest-group-ids').select2({width: '100%'});
 };
 $(document).on('ready page:load', ready);

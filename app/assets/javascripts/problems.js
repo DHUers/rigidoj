@@ -52,5 +52,9 @@ var ready = function() {
     $(this).closest('.additional-limit-group').remove();
   });
 
+  $('#visible-to-group').select2({
+    width: '100%'
+  });
+
 };
 $(document).on('ready page:load', ready);

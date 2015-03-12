@@ -13,7 +13,6 @@
     attribute: f.text_area(:description_raw) }
 .form-group
   %h3 Problem listing
-  .problems
   .row
     .col-md-12
       = f.collection_select :problem_ids, ContestProblem.where(contest: @contest).order(:position),
@@ -59,3 +58,10 @@
         = f.text_field :frozen_ranking_from, class: 'form-control'
         %span.input-group-addon
           %i.fa.fa-calendar
+
+.form-group
+  %h3 Only visible to these groups
+  .row
+    .col-md-12
+      = f.collection_select :group_ids, Group.all,
+          :id, :group_name, { selected: @contest.group_ids }, { id: 'contest-group-ids', multiple: true }

@@ -7,3 +7,7 @@ Fabricator(:problem) do
     File.open(File.join(Rails.root, 'spec', 'fixtures', 'local_problem', 'dummy_output.txt'))  { |f| p.output_file = f }
   end
 end
+
+Fabricator(:invisible_problem, from: :problem) do
+  visible false
+end

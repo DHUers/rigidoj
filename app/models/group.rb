@@ -7,6 +7,11 @@ class Group < ActiveRecord::Base
   scope :visible, -> { where(visible: true) }
 
   validates_presence_of :name
+  before_save :downcase_groupname
+
+  def downcase_groupname
+    self.group_name = group_name.downcase
+  end
 
   def usernames
     users.pluck(:username).join(',')

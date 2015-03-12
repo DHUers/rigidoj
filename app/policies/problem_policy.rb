@@ -1,32 +1,36 @@
 class ProblemPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user.admin?
+        scope.all
+      else
+        scope.where('visible = ? OR visible_to_group in (?)', true, user ? user.group_ids : [])
+      end
     end
   end
 
   def create?
-    user.staff?
+    user ? user.staff? : false
   end
 
-  def import?
-    create?
-  end
-
-  def excerpt?
-    show?
-  end
+  alias_method :import?, :create?
 
   def show?
-    user.admin? || record.visible || record.visible_to_group
+    record.visible || if user
+                        user.admin? || record.visible_to_group? && record.visible_to_group.user_ids.include?(user.id)
+                      else
+                        false
+                      end
   end
 
+  alias_method :excerpt?, :show?
+
   def update?
-    create?
+    user && user.staff? && show?
   end
 
   def destroy?
-    create?
+    user && user.admin?
   end
 
   def permitted_attributes
