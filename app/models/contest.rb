@@ -9,7 +9,8 @@ class Contest < ActiveRecord::Base
   has_many :contest_users
   has_many :users, -> { order('username ASC') } , through: :contest_users
   has_many :solutions
-  has_many :groups
+  has_many :contest_groups
+  has_many :groups, through: :contest_groups
   belongs_to :judger_group, class_name: 'Group', foreign_key: 'judger_group', validate: true
 
   accepts_nested_attributes_for :problems, :groups

@@ -174,6 +174,9 @@ var ready = function() {
     });
   });
 
-  $('#contest-group-ids').select2({width: '100%'});
+  $('#contest-group-ids').select2({
+    width: '100%',
+    placeholder: 'Visible to all'
+  });
 };
 $(document).on('ready page:load', ready);

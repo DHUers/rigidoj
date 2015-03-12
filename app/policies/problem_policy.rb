@@ -10,14 +10,14 @@ class ProblemPolicy < ApplicationPolicy
   end
 
   def create?
-    user ? user.staff? : false
+    user && user.staff?
   end
 
   alias_method :import?, :create?
 
   def show?
     record.visible || if user
-                        user.admin? || record.visible_to_group? && record.visible_to_group.user_ids.include?(user.id)
+                        user.admin? || record.visible_to_group? && record.visible_to_group.users.include?(user)
                       else
                         false
                       end
@@ -26,7 +26,7 @@ class ProblemPolicy < ApplicationPolicy
   alias_method :excerpt?, :show?
 
   def update?
-    user && user.staff? && show?
+    create? && show?
   end
 
   def destroy?
