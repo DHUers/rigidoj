@@ -38,17 +38,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username_lower: params[:username])
+    @user = User.includes(:groups).find_by(username_lower: params[:username].downcase)
     authorize @user
+    @groups = @user.groups
+    @problems = policy_scope(Problem).includes(:user_problem_stats).where(user_problem_stats: { user_id: @user.id }).order(:id).page(params[:page]).per(30)
   end
 
   def edit
     @user = User.find_by(username_lower: params[:username])
     authorize @user
-  end
-
-  def update
-
   end
 
   def is_local_username

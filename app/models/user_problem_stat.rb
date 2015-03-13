@@ -5,7 +5,7 @@ class UserProblemStat < ActiveRecord::Base
   enum state: [:null, :tried, :accepted]
 
   def already_accepted?
-    stat.state == 'accepted'
+    state == 'accepted'
   end
 
   def mark_accepted_solution_time!(solution_created_at)
@@ -16,6 +16,10 @@ class UserProblemStat < ActiveRecord::Base
     if last_submitted_at.nil? || last_submitted_at < solution_created_at
       update_attribute(:last_submitted_at, solution_created_at)
     end
+  end
+
+  def latest_submission_time
+    (already_accepted? ? first_accepted_at : last_submitted_at).to_formatted_s(:long_add_second)
   end
 end
 

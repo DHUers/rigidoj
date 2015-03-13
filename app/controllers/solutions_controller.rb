@@ -1,34 +1,20 @@
 class SolutionsController < ApplicationController
   def new
-    if params[:problem_id]
-      @problem = Problem.find(params[:problem_id])
-      @solution = Solution.new(problem: @problem, platform: 'java')
-    else
-      @solution = Solution.new
-    end
+    @solution = Solution.new
     authorize @solution
   end
 
   def create
-    params = create_params
-    @solution = Solution.new(params)
+    @solution = Solution.new(solution_params)
     authorize @solution
+
+    @solution.user_id = current_user.id
 
     if @solution.save
       ManageSolution.publish_to_judgers(@solution)
-      if params[:contest_id] || params[:problem_id]
-        contest = Contest.find(params[:contest_id])
-        contest.add_user current_user if contest
-        render json: success_json, status: 201
-      else
-        redirect_to problem_path(@solution.problem.slug, @solution.problem.id)
-      end
+      redirect_to solutions_path
     else
-      if params[:contest_id] || params[:problem_id]
-        render json: failed_json.merge({errors: @solution.errors.full_messages}), status: 400
-      else
-        render 'new'
-      end
+      render 'new'
     end
   end
 

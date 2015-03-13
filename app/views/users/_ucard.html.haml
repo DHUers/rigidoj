@@ -10,9 +10,9 @@
         %i.fa.fa-envelope-o
         %a.email{:href => "mailto:#{@user.email}"}= @user.email
   .udcard-stats
-    = link_to user_solved_problems_path(@user), class: 'udcard-stat' do
+    .udcard-stat
       %strong.udcard-stat-count= @user.user_stat.problems_solved
       %span.text-muted Problems solved
-    = link_to user_joined_contests_path(@user), class: 'udcard-stat' do
+    .udcard-stat
       %strong.udcard-stat-count= @user.user_stat.contests_joined
       %span.text-muted Contests joined

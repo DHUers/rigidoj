@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   resources :users, param: :username do
     resources :notes
-    get '/solved_problems', to: 'users#solved_problems', as: :solved_problems
-    get '/joined_contests', to: 'users#joined_contests', as: :joined_contests
   end
-  get '/users/:username/bookmarks', to: 'bookmarks#person'
-  get '/users/:username/groups', to: 'groups#person'
   post '/users/is_local_username', to: 'users#is_local_username'
   get '/users/search/users', to: 'users#search_users'
 
@@ -55,7 +51,6 @@ Rails.application.routes.draw do
   post '/preview/problems', to: 'preview#problem', as: :preview_problem
   post '/preview/solutions', to: 'preview#solution', as: :preview_solution
 
-  get '/settings', to: redirect('/settings/profile'), as: :settings_root
   get '/settings/profile', to: 'user_settings#profile', as: :settings_profile
   post '/settings/profile', to: 'user_settings#update_profile'
   get '/settings/account', to: 'user_settings#account', as: :settings_account

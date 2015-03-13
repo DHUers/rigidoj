@@ -3,15 +3,10 @@
   .row
     .col-md-8
       = f.label :problem_id
-      = f.text_field :problem_id, class: 'form-control',
-          disabled: params[:problem_id] ? true : false, min: 1, step: 1, type: 'number'
+      = f.select :problem_id, {}, class: 'form-control'
     .col-md-4
       = f.label :platform
       = f.select :platform, platform_select_options, {}, class: 'form-control'
-.form-group.problem-excerpt
-- if @problem
-  .well
-    = render partial: 'problems/problem', locals: {removable: false}
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |

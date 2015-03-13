@@ -6,7 +6,7 @@ class UserSettingsController < ApplicationController
 
   def update_profile
     @user = current_user
-    authorize @user
+    authorize :user_setting, :profile?
 
     if @user.update_attributes(profile_params)
       flash[:info] = 'Successfully update.'
@@ -17,11 +17,14 @@ class UserSettingsController < ApplicationController
   end
 
   def account
+    authorize :user_setting, :account?
+
     render 'users/settings/account'
   end
 
   def update_account
     @user = current_user
+    authorize :user_setting, :account?
 
     if @user.authenticate!(params[:old_password]) &&
         params[:new_password] == params[:confirmation_password]
@@ -38,11 +41,14 @@ class UserSettingsController < ApplicationController
   end
 
   def notification
+    authorize :user_setting, :notification?
+
     render 'users/settings/notification'
   end
 
   def update_notification
     @user = current_user
+    authorize :user_setting, :notification?
 
     if @user.update_attributes(notification_params)
       flash[:info] = 'Successfully update.'

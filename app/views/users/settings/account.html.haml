@@ -7,7 +7,7 @@
           %span{"aria-hidden" => "true"} &times;
           %span.sr-only Close
         = msg
-    .panel.panel-default
+    .panel.setting-panel.panel-default
       .panel-heading
         %h3.panel-title Change password
       .panel-body
@@ -22,7 +22,7 @@
             = f.label :confirmation_password
             = f.password_field :confirmation_password, class: 'form-control'
           = f.submit 'Update password', class: 'btn btn-default'
-    .panel.panel-default
+    .panel.setting-panel.panel-default
       .panel-heading
         %h3.panel-title Change email
       .panel-body
@@ -32,7 +32,7 @@
             = f.label :email
             = f.password_field :email, class: 'form-control'
           = f.submit 'Change email', class: 'btn btn-default'
-    .panel.panel-default
+    .panel.setting-panel.panel-default
       .panel-heading
         %h3.panel-title Delete account
       .panel-body

@@ -8,11 +8,11 @@ class UserSettingPolicy < Struct.new(:user, :user_setting)
     true
   end
 
-  def about?
+  def notification?
     true
   end
 
-  def help?
+  def account?
     true
   end
 end

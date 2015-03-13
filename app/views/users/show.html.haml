@@ -1,58 +1,42 @@
+- content_for :title, @user.username
+
 .row
   .col-md-3
-    = render partial: 'users/ucard', locals: {:@user => @user}
-  .col-md-9
-    %ul.nav.nav-tabs
-      %li{role: 'presentation', class: request.path == user_path(@user) ? 'active' : nil}
-        %a{href: user_path} Problems
-      %li{role: 'presentation', class: request.path.downcase == "/users/#{@user.username_lower}/groups" ? 'active' : nil}
-        %a{href: "/users/#{@user.username_lower}/groups"} Groups
-      %li{role: 'presentation', class: request.path.downcase == "/users/#{@user.username_lower}/bookmarks" ? 'active' : nil}
-        %a{href: "/users/#{@user.username_lower}/bookmarks"} Bookmarks
-    .panel.panel-default
-      .panel-heading
-        = case request.path.downcase
-          - when "/users/#{@user.username_lower}" then 'Problem list'
-          - when "/users/#{@user.username_lower}/groups" then 'Groups'
-          - when "/users/#{@user.username_lower}/bookmarks" then 'Bookmarks'
-          - else nil
-      - case request.path.downcase
-        - when "/users/#{@user.username_lower}"
-          %table.table.table-bordered.table-hover.table-condensed
-            %thead
-              %tr
-                %th
-                  %i.fa.fa-check
-                %th
-                  Problem ID
-                %th
-                  Problem title
-            %tbody
+    = render partial: 'users/ucard', object: @user
+  .col-md-9{ role: 'tabpanel' }
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      %li.active{ role: 'presentation' }
+        %a{ href: '#problems', aria: { controls: 'problems' }, role: 'tab', data: { toggle: 'tab' } } Problems
+      %li{ role: 'presentation' }
+        %a{ href: '#groups', aria: { controls: 'groups' }, role: 'tab', data: { toggle: 'tab' } } Groups
+      -#%li{ role: 'presentation' }
+        %a{ href: '#bookmarks', aria: { controls: 'bookmarks' }, role: 'tab', data: { toggle: 'tab' } } Bookmarks
+    .tab-content
+      #problems.tab-pane.active.fade.in{ role: 'tabpanel' }
+        %table.table.table-hover
+          %thead
+            %tr
+              %th
+              %th Problem ID
+              %th Problem title
+              %th Time
+          %tbody
+            - @problems.each do |p|
+              - stat = UserProblemStat.find_by(user_id: @user.id, problem_id: p.id)
               %tr
                 %td
-                  %i.fa.fa-check
-                %td
-                  Dummy
-                %td
-                  Dummy
-        - when "/users/#{@user.username}/groups"
-          %table.table.table-bordered.table-hover.table-condensed
-            %thead
-              %tr
-                %th
-                  Group name
-                %th
-                  Members
-            %tbody
-              %tr
-                %td
-                  Dummy
-                %td
-                  Dummy
-        - when "/users/#{@user.username}/bookmarks"
-          %ul.list-group
-            %li.list-group-item
-              Dummy
-            %li.list-group-item
-              Dummy
-        - else nil
+                  - if stat.already_accepted?
+                    %i.fa.fa-check
+                %td= link_to p.id, problem_path(p.slug, p.id)
+                %td= link_to p.title, problem_path(p.slug, p.id)
+                %td= stat.latest_submission_time
+        = paginate @problems, window: 3
+      #groups.tab-pane.fade{ role: 'tabpanel' }
+        - @groups.each do |g|
+          %span= g.name
+      #bookmarks.tab-pane.fade{ role: 'tabpanel' }
+        %ul.list-group
+          %li.list-group-item
+            Dummy
+          %li.list-group-item
+            Dummy

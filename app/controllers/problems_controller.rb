@@ -15,8 +15,6 @@ class ProblemsController < ApplicationController
     end
     @problem ||= Problem.new
     authorize @problem
-
-    render :new
   end
 
   def import
