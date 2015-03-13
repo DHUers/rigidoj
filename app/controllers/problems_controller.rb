@@ -77,7 +77,28 @@ class ProblemsController < ApplicationController
     end
   end
 
+  def create_solution
+    @solution = Solution.new(solution_params)
+    authorize @solution, :create?
+    @problem = Problem.find(params[:problem_id])
+    authorize @problem, :show?
+
+    @solution.user_id = current_user.id
+    @solution.problem_id = @problem.id
+
+    if @solution.save
+      ManageSolution.publish_to_judgers(@solution)
+      render json: success_json, status: 201
+    else
+      render json: failed_json.merge({ errors: @solution.errors.full_messages }), status: 400
+    end
+  end
+
   private
+
+  def solution_params
+    params.require(:solution).permit(*policy(Solution).permitted_attributes)
+  end
 
   def problem_params
     params.require(:problem).permit(*policy(@problem || Problem).permitted_attributes)

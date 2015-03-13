@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   delete '/c/:slug/:id', to: 'contests#destroy', constraints: {id: /\d+/}
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
   get '/c/:slug/:contest_id/solutions', to: 'solutions#index', constraints: {contest_id: /\d+/}, as: :contest_solutions
-  post '/c/:slug/:contest_id/solutions', to: 'solutions#create', constraints: {contest_id: /\d+/}
+  post '/c/:slug/:contest_id/solutions', to: 'contests#create_solution', constraints: {contest_id: /\d+/}
 
   resources :posts
   resources :solutions
@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   delete '/p/:slug/:id', to: 'problems#destroy', constraints: {id: /\d+/}
   post '/problems/import', to: 'problems#import'
   get '/problems/:id/excerpt', to: 'problems#excerpt'
-  get '/p/:slug/:problem_id/solutions', to: 'solutions#index', constraints: {problem_id: /\d+/}, as: :problem_solutions
+  get '/p/:slug/:problem_id/solutions', to: 'solutions#index', constraints: { problem_id: /\d+/ }, as: :problem_solutions
+  post '/p/:slug/:problem_id/solutions', to: 'problems#create_solution', constraints: { problem_id: /\d+/ }
 
   namespace :admin do
     get '/dashboard', to: 'admin#dashboard'

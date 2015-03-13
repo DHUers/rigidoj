@@ -31,9 +31,8 @@ class ContestsController < ApplicationController
 
   def ranking
     @contest = Contest.find(params[:id])
-    authorize @contest
+    authorize @contest, :show_details?
     @ranking = ContestRanking.rank(current_user, @contest)
-    authorize @contest, :ranking?
 
     render 'ranking'
   end
@@ -56,7 +55,32 @@ class ContestsController < ApplicationController
     end
   end
 
+  def create_solution
+    @solution = Solution.new(solution_params)
+    authorize @solution, :create?
+    @contest = Contest.find(params[:contest_id])
+    authorize @contest, :create_solution?
+
+    @solution.user_id = current_user.id
+    if params[:solution][:contest_problem_id]
+      problem = @contest.problems.fetch(params[:solution][:contest_problem_id].to_i)
+      @solution.problem_id = problem.id
+    end
+    @solution.contest_id = @contest.id
+
+    if @solution.save
+      ManageSolution.publish_to_judgers(@solution)
+      render json: success_json, status: 201
+    else
+      render json: failed_json.merge({ errors: @solution.errors.full_messages }), status: 400
+    end
+  end
+
   private
+
+  def solution_params
+    params.require(:solution).permit(*policy(Solution).permitted_attributes)
+  end
 
   def contest_params(type = nil)
     type = type ? type.underscore.to_sym : :contest
