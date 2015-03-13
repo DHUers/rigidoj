@@ -18,11 +18,7 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def show_details?
-    if public_contest?
-      record.started? || supervise?
-    else
-      in_visible_to_group? && (record.started? || supervise?)
-    end
+    show? && (record.started? || supervise?)
   end
 
   def update?
@@ -30,7 +26,7 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def create_solution?
-    user && (user.admin? || (show_details? && (in_judger_group? || record.ongoing?)))
+    user && show_details? && (record.ongoing? || user.admin? || in_judger_group?)
   end
 
   def rejudge_solution?
@@ -54,11 +50,11 @@ class ContestPolicy < ApplicationPolicy
   end
 
   def in_judger_group?
-    @in_judger_group ||= user.groups.include?(record.judger_group)
+    @in_judger_group ||= user && user.groups.include?(record.judger_group)
   end
 
   def in_visible_to_group?
-    @in_visible_to_group ||= record.groups.any? { |g| user.groups.include?(g) }
+    @in_visible_to_group ||= user && record.groups.any? { |g| user.groups.include?(g) }
   end
 
   def in_group?
