@@ -35,9 +35,10 @@
               %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
 
 
-    .contest-problems
-      - @contest.problems.each_with_index do |p,i|
-        = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
+    - if @contest_policy.show_details?
+      .contest-problems
+        - @contest.problems.each_with_index do |p,i|
+          = render partial: 'problems/contest_problem', locals: {:@problem => p, index: i}
 
 
   .col-md-3
@@ -66,11 +67,12 @@
           %ul.nav.nav-stacked.list-unstyled.problem-list
             %li
               %a{ href: "#contest-heading-anchor", data: { scroll: true } } Contest infomation
-            - @contest.problems.each_with_index do |p,i|
-              %li
-                %a{ href: "##{unique_anchor_id(p)}", data: { scroll: true } }
-                  %b= "#{alphabet_offset(i)}:"
-                  = p.title
+            - if @contest_policy.show_details?
+              - @contest.problems.each_with_index do |p,i|
+                %li
+                  %a{ href: "##{unique_anchor_id(p)}", data: { scroll: true } }
+                    %b= "#{alphabet_offset(i)}:"
+                    = p.title
           .divider
           %label Time
           %span

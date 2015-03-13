@@ -27,14 +27,21 @@ class ContestsController < ApplicationController
   def show
     @contest = Contest.find(params[:id])
     authorize @contest
+
+    @contest_policy = policy(@contest)
+    if @contest_policy.show_details? && !current_user.admin?
+      if @contest.public_contest?
+        @contest.add_user(current_user) unless @contest.in_judger_group?(current_user)
+      else
+        @contest.add_user(current_user) if @contest.in_visible_to_group?(current_user)
+      end
+    end
   end
 
   def ranking
     @contest = Contest.find(params[:id])
     authorize @contest, :show_details?
     @ranking = ContestRanking.rank(current_user, @contest)
-
-    render 'ranking'
   end
 
   def edit
@@ -74,6 +81,15 @@ class ContestsController < ApplicationController
     else
       render json: failed_json.merge({ errors: @solution.errors.full_messages }), status: 400
     end
+  end
+
+  def solutions
+    @contest = Contest.find(params[:contest_id])
+    authorize @contest, :show_details?
+
+    @solutions = Solution.where(contest_id: @contest.id).order(:id).page(params[:page]).per(20)
+
+    render 'solutions/index'
   end
 
   private

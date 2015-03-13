@@ -92,6 +92,15 @@ class ProblemsController < ApplicationController
     end
   end
 
+  def solutions
+    @problem = Problem.find(params[:problem_id])
+    authorize @problem, :show?
+
+    @solutions = Solution.where(contest_id: nil, problem_id: @problem.id).order(:id).page(params[:page]).per(20)
+
+    render 'solutions/index'
+  end
+
   private
 
   def solution_params

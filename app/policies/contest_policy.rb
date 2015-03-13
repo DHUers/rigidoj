@@ -43,18 +43,16 @@ class ContestPolicy < ApplicationPolicy
     user && user.admin?
   end
 
-  private
-
   def public_contest?
-    @public_contest ||= record.groups.empty?
+    @public_contest ||= record.public_contest?
   end
 
   def in_judger_group?
-    @in_judger_group ||= user && user.groups.include?(record.judger_group)
+    @in_judger_group ||= record.in_judger_group?(user)
   end
 
   def in_visible_to_group?
-    @in_visible_to_group ||= user && record.groups.any? { |g| user.groups.include?(g) }
+    @in_visible_to_group ||= record.in_visible_to_group?(user)
   end
 
   def in_group?

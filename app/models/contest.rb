@@ -77,6 +77,19 @@ class Contest < ActiveRecord::Base
     rescue ActiveRecord::RecordNotUnique
     end
   end
+
+  def in_judger_group?(user)
+    user && user.groups.include?(judger_group)
+  end
+
+  def in_visible_to_group?(user)
+    user && groups.any? { |g| user.groups.include?(g) }
+  end
+
+  def public_contest?
+    groups.empty?
+  end
+
 end
 
 # == Schema Information
