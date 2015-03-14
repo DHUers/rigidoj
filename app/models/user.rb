@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_one :user_stat, dependent: :destroy
   has_many :solutions
   has_many :posts
+  has_many :comments
   has_many :contests
   has_many :problems
   has_many :user_problem_stats
