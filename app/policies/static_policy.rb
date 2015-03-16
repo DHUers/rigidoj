@@ -23,4 +23,8 @@ class StaticPolicy < Struct.new(:user, :static)
   def search?
     true
   end
+
+  def notifications?
+    user
+  end
 end

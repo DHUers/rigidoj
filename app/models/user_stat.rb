@@ -1,5 +1,5 @@
 class UserStat < ActiveRecord::Base
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 
   def submitted?
     first_solution_created_at != nil

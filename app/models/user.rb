@@ -7,13 +7,13 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token
 
   has_one :user_stat, dependent: :destroy
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
   has_many :posts
   has_many :comments
   has_many :contests
   has_many :problems
-  has_many :user_problem_stats
-  has_many :group_users
+  has_many :user_problem_stats, dependent: :destroy
+  has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :notifications
 
