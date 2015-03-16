@@ -16,7 +16,7 @@ class ManageSolution
   def self.resolve_solution_result(payload)
     Rails.logger.info "[Rabbitmq] [Solution result consumer] #{$rabbitmq_result_queue.name} received a message: #{payload}"
     Rails.logger.info "[Solution result payload] #{payload}"
-    solution = Solution.find payload[:id]
+    solution = Solution.find payload[:id].to_i
     solution_params = {
         status: payload[:status],
         revision: payload[:revision],
