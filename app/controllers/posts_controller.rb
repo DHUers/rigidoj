@@ -1,26 +1,29 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.published.all
+    @posts = policy_scope(Post.all)
   end
 
   def new
     @post = Post.new
+    authorize @post
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = CommentCreator.create(current_user, post_params)
     authorize @post
 
-    @post.author = current_user.id
-    if @post.save
-      redirect_to @post
+    unless @post.errors.any?
+      redirect_to post_path(@post)
     else
+      flash[:danger] = 'Error creating the post.'
       render 'new'
     end
   end
 
   def show
     @post = Post.find(params[:id])
+    authorize @post
+    @comment = Comment.new
   end
 
   def edit
@@ -50,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(*policy(@post || Post).permitted_attributes)
+    params.require(:comment).permit(*policy(@post || Post).permitted_attributes)
   end
 end

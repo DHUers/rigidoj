@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get '/c/:slug/:contest_id/solutions', to: 'contests#solutions', constraints: {contest_id: /\d+/}, as: :contest_solutions
   post '/c/:slug/:contest_id/solutions', to: 'contests#create_solution', constraints: {contest_id: /\d+/}
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   resources :solutions
   get '/problems', to: 'problems#index', as: :problems
   post '/problems', to: 'problems#create'

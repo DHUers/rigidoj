@@ -3,7 +3,7 @@ class StaticsController < ApplicationController
     authorize :static
 
     return landing unless logged_in?
-    @posts = Post.published.limit(10)
+    @posts = Post.pinned.limit(10)
     render 'home', layout: 'application'
   end
 
@@ -16,16 +16,16 @@ class StaticsController < ApplicationController
   def about
     authorize :static
 
-    @post = Post.find_by(user: Rigidoj.system_user, title: 'About')
-
+    @post = Post.find(3)
+    @comment = Comment.new
     render 'posts/show'
   end
 
   def help
     authorize :static
 
-    @post = Post.find_by(user: Rigidoj.system_user, title: 'Help')
-
+    @post = Post.find(2)
+    @comment = Comment.new
     render 'posts/show'
   end
 end

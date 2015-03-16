@@ -1,6 +1,15 @@
 class Comment < ActiveRecord::Base
-  belongs_to :post
+  belongs_to :post, dependent: :destroy
   belongs_to :user
+
+  before_save :cook
+
+  validates_presence_of :raw
+
+  def cook
+    self.baked = PrettyText::cook(self.raw)
+  end
+
 end
 
 # == Schema Information

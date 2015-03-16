@@ -5,12 +5,14 @@
     - @posts.each do |p|
       %section.pined-post
         %h2= p.title
-        = p.raw
+        = p.first_comment.raw
   .col-md-4
     .panel.panel-default
       .panel-heading Links
       .panel-body
-        Related links.
+        %ul.list-unstyled
+          - SiteSetting.related_links.split('|').each do |l|
+            %li= raw l
 .row
   .col-md-8
     .panel.panel-default
@@ -18,10 +20,9 @@
       .panel-body
         - unless (l = Contest.latest).blank?
           - l.each do |c|
-            .row.contest-content
-              .col-md-10.metadata
-                %h2= link_to c.title, contest_path(c.slug, c.id)
-                = raw c.description_baked
+            .contest-description
+              %h3= link_to c.title, contest_path(c.slug, c.id)
+              = raw c.description_baked
         - else
           There is no contest.
   .col-md-4

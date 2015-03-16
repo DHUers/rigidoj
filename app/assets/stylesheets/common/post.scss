@@ -1,0 +1,28 @@
+.post-list {
+  margin-top: 1rem;
+}
+
+.post-box {
+  margin-bottom: 2rem;
+  background: #fff;
+  box-shadow: 0 -1px 0 #e5e5e5, 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
+}
+.post-box .meta {
+  padding: 2rem;
+  border-bottom: 1px solid #eee;
+}
+.post-box .heading {
+  padding: 2rem 2rem 0;
+}
+.post-box .heading img {
+  margin-right: 1em;
+}
+.post-box .content {
+  padding: 2rem;
+}
+.comments .comment {
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom: none;
+  }
+}

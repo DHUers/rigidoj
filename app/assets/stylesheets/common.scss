@@ -4,6 +4,7 @@
 @import "common/navbar";
 @import "common/source_editor";
 
+@import "common/post";
 @import "common/solution";
 @import "common/admin";
 
@@ -234,4 +235,10 @@ h6:hover .header-link {
 }
 .setting-panel .panel-heading h3 {
   font-size: 1.5rem;
+}
+.contest-description {
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom: none;
+  }
 }

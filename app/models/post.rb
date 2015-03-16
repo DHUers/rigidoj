@@ -1,17 +1,14 @@
 require 'pretty_text'
 
 class Post < ActiveRecord::Base
-  belongs_to :user
-  has_many :comments
+  has_many :comments, -> { order('comment_number ASC') }
   scope :published, -> { where(published: true) }
+  scope :pinned, -> { where(pinned: true) }
 
   validates :title, length: { in: 2..60 }, presence: true
-  validates :author, presence: true
 
-  before_save :cook
-
-  def cook
-    self.baked = PrettyText::cook(self.raw)
+  def first_comment
+    comments.first
   end
 end
 

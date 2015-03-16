@@ -3,11 +3,16 @@
     %h2 Create a post
 .row
   .col-md-offset-1.col-md-10
-    = form_for @post, html: {role: 'form'} do |f|
+    = form_for :comment, url: posts_path(@post), html: {role: 'form'} do |f|
       = render partial: 'form', locals: { f: f }
-      .checkbox
-        %label
-          = f.check_box :published
-          Publish now?
+      - if current_user && current_user.admin?
+        .checkbox
+          %label
+            = f.check_box :pinned
+            Pinned at home page
+        .checkbox
+          %label
+            = f.check_box :published
+            Visible
       = f.button 'Create', class: 'btn btn-success'
       = link_to 'Cancel', problems_path

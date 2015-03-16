@@ -1,3 +1,6 @@
+uncategorized:
+  related_links: '<a href="example.com">example.com</a>|<a href="example.org">example.org</a>'
+
 required:
   title:
     default: 'Rigidoj'
@@ -43,3 +46,4 @@ user:
     default: false
   allow_update_name:
     default: true
+

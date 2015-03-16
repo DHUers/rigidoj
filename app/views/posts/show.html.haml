@@ -1,8 +1,29 @@
+- content_for :title, @post.title
+
 .row
-  .col-md-offset-1.col-md-10
-    %h2= @post.title
-    = image_tag @post.user.avatar.small.url, alt: @post.user.name
-.row
-  .col-md-offset-1.col-md-10
-    = raw @post.baked
-= link_to 'Edit', edit_post_path(@post.id)
+  .col-md-12
+    .post.post-box
+      .meta.clearfix
+        %h2.pull-left= @post.title
+        = attachment_image_tag @post.first_comment.user, :avatar, :limit, 50, 50,
+            alt: @post.first_comment.user.name, class: 'pull-right'
+      .content= raw @post.first_comment.baked
+    .comments.post-box
+      - @post.comments[1..-1].each do |c|
+        .comment
+          .heading
+            = attachment_image_tag c.user, :avatar, :limit, 50, 50, alt: c.user.name
+            = link_to c.user.name, user_path(c.user)
+            %span.text-muted= c.created_at.to_formatted_s(:long_add_second)
+          .content
+            = raw c.baked
+
+- if current_user
+  .row
+    .col-md-12
+      = form_for [@post, @comment], html: { class: 'post-box' } do |f|
+        .meta
+          Add a new comment
+        .content
+          = f.text_area :raw
+          %button.btn.btn-success Reply

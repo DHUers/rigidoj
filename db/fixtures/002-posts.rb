@@ -1,33 +1,49 @@
 Post.seed do |p|
   p.id = 1
   p.title = 'Welcome to RigidOJ!'
-  p.raw = <<-END.gsub(/^\s+\|/, '')
-    |Add or import problem to get started.
-  END
-  p.user_id = -1
-  p.published = true
+  p.pinned = true
 end
 
 Post.seed do |p|
   p.id = 2
   p.title = 'Help'
-  p.raw = <<-END.gsub(/^\s+\|/, '')
-    |Helpful information for your user.
-    |
-    |Edit this post to get started.
-  END
-  p.user_id = -1
-  p.published = false
 end
 
 Post.seed do |p|
   p.id = 3
   p.title = 'About'
-  p.raw = <<-END.gsub(/^\s+\|/, '')
-    |About this site & TOS information.
-    |
-    |Edit this post to get started.
-  END
-  p.user_id = -1
-  p.published = false
+end
+
+Comment.seed do |s|
+  s.id = 1
+  s.user_id = Rigidoj::SYSTEM_USER_ID
+  s.post_id = 1
+  s.comment_number = 1
+  s.raw = <<END
+Add or import problem to get started.
+END
+end
+
+Comment.seed do |s|
+  s.id = 2
+  s.user_id = Rigidoj::SYSTEM_USER_ID
+  s.post_id = 2
+  s.comment_number = 1
+  s.raw = <<END
+Helpful information for your user.
+
+Edit this post to get started.
+END
+end
+
+Comment.seed do |s|
+  s.id = 3
+  s.user_id = Rigidoj::SYSTEM_USER_ID
+  s.post_id = 3
+  s.comment_number = 1
+  s.raw = <<END
+About this site & TOS information.
+
+Edit this post to get started.
+END
 end
