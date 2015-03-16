@@ -3,4 +3,8 @@ class CommentPolicy < ApplicationPolicy
     true
   end
 
+  def destroy?
+    user && user.admin?
+  end
+
 end

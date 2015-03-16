@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       @post = Post.find(params[:post_id])
       authorize @post, :show?
       @comment.post_id = @post.id
-      @comment.comment_number = @post.comments.count + 1
+      @comment.comment_number = @post.comment_count + 1
     end
 
     if @comment.save
@@ -20,6 +20,17 @@ class CommentsController < ApplicationController
     else
       flash[:danger] = "Can't be blank."
       redirect_to post_path(@post)
+    end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id] || params[:comment_id])
+    authorize @comment
+
+    if @comment.destroy
+      redirect_to post_path(@comment.post)
+    else
+      render json: failed_json, status: 400
     end
   end
 

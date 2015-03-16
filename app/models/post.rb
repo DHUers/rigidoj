@@ -1,7 +1,7 @@
 require 'pretty_text'
 
 class Post < ActiveRecord::Base
-  has_many :comments, -> { order('comment_number ASC') }
+  has_many :comments, -> { order('comment_number ASC') }, dependent: :destroy
   scope :published, -> { where(published: true) }
   scope :pinned, -> { where(pinned: true) }
 
@@ -16,9 +16,11 @@ end
 #
 # Table name: posts
 #
-#  id         :integer          not null, primary key
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  published  :boolean          default(FALSE), not null
+#  id            :integer          not null, primary key
+#  title         :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  published     :boolean          default(FALSE), not null
+#  pinned        :boolean          default(FALSE)
+#  comment_count :integer          default(0), not null
 #

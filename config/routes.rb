@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post '/c/:slug/:contest_id/solutions', to: 'contests#create_solution', constraints: {contest_id: /\d+/}
 
   resources :posts do
+    put '/pinned', to: 'posts#toggle_pinned', as: :pinned
+    put '/visible', to: 'posts#toggle_visible', as: :visible
     resources :comments
   end
   resources :solutions

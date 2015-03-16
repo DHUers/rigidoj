@@ -4,7 +4,7 @@ class Notification < ActiveRecord::Base
   belongs_to :solution
   belongs_to :contest
 
-  enum notification_type: %i(solution_report)
+  enum notification_type: %i(solution_report contest_started contest_delayed)
 
   validates_presence_of :data
   validates_presence_of :notification_type

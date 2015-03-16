@@ -11,7 +11,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user
   end
 
   def show?
@@ -23,7 +23,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    create?
+    user.admin?
   end
 
   def permitted_attributes

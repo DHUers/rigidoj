@@ -1,3 +1,3 @@
-every 1.minute do
-  runner 'ReceiveSolutionResultJob.perform_now'
+every 15.minute do
+  runner 'AnnounceContestJob.perform_now'
 end

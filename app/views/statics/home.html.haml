@@ -3,7 +3,7 @@
 .row
   .col-md-8
     - @posts.each do |p|
-      %section.pined-post
+      %section.pinned-post
         %h2= p.title
         = p.first_comment.raw
   .col-md-4

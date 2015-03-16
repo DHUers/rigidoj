@@ -1,3 +1,5 @@
+- content_for :title, 'New post'
+
 .row
   .col-md-offset-1.col-md-10
     %h2 Create a post
@@ -5,14 +7,5 @@
   .col-md-offset-1.col-md-10
     = form_for :comment, url: posts_path(@post), html: {role: 'form'} do |f|
       = render partial: 'form', locals: { f: f }
-      - if current_user && current_user.admin?
-        .checkbox
-          %label
-            = f.check_box :pinned
-            Pinned at home page
-        .checkbox
-          %label
-            = f.check_box :published
-            Visible
       = f.button 'Create', class: 'btn btn-success'
       = link_to 'Cancel', problems_path

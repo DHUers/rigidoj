@@ -27,4 +27,6 @@ end
 #  frozen_ranking_from :datetime
 #  type                :string
 #  judger_group        :integer
+#  started_notified    :boolean          default(FALSE), not null
+#  delayed_notified    :boolean          default(FALSE), not null
 #

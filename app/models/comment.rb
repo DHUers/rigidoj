@@ -1,13 +1,18 @@
 class Comment < ActiveRecord::Base
-  belongs_to :post, dependent: :destroy
+  belongs_to :post
   belongs_to :user
 
   before_save :cook
+  after_save :update_comment_count
 
   validates_presence_of :raw
 
   def cook
     self.baked = PrettyText::cook(self.raw)
+  end
+
+  def update_comment_count
+    post.increment!(:comment_count)
   end
 
 end

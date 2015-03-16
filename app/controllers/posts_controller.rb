@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = CommentCreator.create(current_user, post_params)
+    @post = CommentCreator.create(current_user, post_params).post
     authorize @post
 
     unless @post.errors.any?
@@ -47,6 +47,28 @@ class PostsController < ApplicationController
 
     if @post.destroy
       render 'index'
+    end
+  end
+
+  def toggle_pinned
+    @post = Post.find(params[:post_id])
+    authorize @post, :destroy?
+
+    if @post.update_attribute(:pinned, !@post.pinned)
+      render json: success_json
+    else
+      render json: failed_json, status: 400
+    end
+  end
+
+  def toggle_visible
+    @post = Post.find(params[:post_id])
+    authorize @post, :destroy?
+
+    if @post.update_attribute(:visible, !@post.visible)
+      render json: success_json
+    else
+      render json: failed_json, status: 400
     end
   end
 

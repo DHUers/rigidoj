@@ -60,7 +60,7 @@ class CommentCreator
   def setup_post
     if new_post?
       begin
-        post = Post.create(title: @opts[:title], published: @opts[:published])
+        post = Post.create(title: @opts[:title], published: @opts[:published] || true)
         @errors = post.errors
       rescue ActiveRecord::Rollback => ex
         # In the event of a rollback, grab the errors from the topic
@@ -77,7 +77,7 @@ class CommentCreator
   def setup_comment
     comment = @post.comments.new(raw: @opts[:raw],
                                  user: @user,
-                                 comment_number: @post.comments.count + 1)
+                                 comment_number: @post.comment_count + 1)
 
     post.created_at = Time.zone.parse(@opts[:created_at].to_s) if @opts[:created_at].present?
 
