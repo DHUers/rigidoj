@@ -34,9 +34,9 @@ class ManageSolution
     text = solution.problem ? "Solution for #{solution.problem.title}" : "Solution"
     params = {
         notification_type: :solution_report,
-        user_id: user.id,
+        user_id: solution.user.id,
         data: "#{text}: #{solution.pretty_solution_status}",
-        solution_id: id
+        solution_id: solution.id
     }
     params[:problem_id] = solution.problem.id if solution.problem
     params[:contest_id] = solution.contest.id if solution.contest
