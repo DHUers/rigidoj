@@ -16,8 +16,6 @@ class Solution < ActiveRecord::Base
 
   after_create :update_first_created
 
-  after_update :announce_judged_result
-
   around_save :update_stats
 
   def update_first_created
