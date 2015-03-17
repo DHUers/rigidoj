@@ -25,6 +25,6 @@ class StaticPolicy < Struct.new(:user, :static)
   end
 
   def notifications?
-    user
+    true
   end
 end

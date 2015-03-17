@@ -70,10 +70,12 @@ var ready = function() {
 
   notificationMarkRead.on('click', function(e) {
     notificationIds = $('.notification-item.unread', notificationsList).map(function() {
-      return $(this).data('notification-id');
+      var ele = $(this);
+      ele.removeClass('unread');
+      return ele.data('notification-id');
     }).get();
     if (notificationIds !== undefined && notificationIds.length > 0) {
-      $.post(Rigidoj.BASE_URL + '/notifications/read', { notificationIds: notificationIds }).done(function() {
+      $.post(Rigidoj.BASE_URL + '/notifications/read', { notification_ids: notificationIds }).done(function() {
         notificationNumber.removeClass('active');
         notificationNumber.text('0');
       });
