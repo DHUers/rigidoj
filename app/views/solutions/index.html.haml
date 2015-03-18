@@ -37,7 +37,10 @@
               - @solutions.each do |s|
                 %tr
                   - if staff?
-                    %td= s.id
+                    %td
+                      %a.popoverable{ tabindex: 0, role: 'button', title: 'Solution admin report',
+                        data: { toogle: 'popover', trigger: 'focus', html: 'true', content: s.detailed_report } }
+                        = s.id
                   %td= link_to s.user.username, s.user
                   %td
                     %a.popoverable{ tabindex: 0, role: 'button', title: 'Solution report',

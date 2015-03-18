@@ -9,16 +9,14 @@ class Solution < ActiveRecord::Base
                 :memory_limit_exceeded, :presentation_error,
                 :runtime_error, :compile_error, :output_limit_exceeded]
 
-  default_scope {order('created_at DESC')}
+  default_scope { order('created_at DESC') }
 
   validates_presence_of :source, :problem_id, :user_id, :platform
   validate :contest_solution
 
   after_initialize :set_default_report
-
-  after_create :update_first_created
-
   around_save :update_stats
+  after_create :update_first_created
 
   def update_first_created
     unless user.user_stat.submitted?
@@ -75,7 +73,8 @@ class Solution < ActiveRecord::Base
   end
 
   def set_default_report
-    self.report = "<p>Judging</p>"
+    self.report = "<p>Judging</p>" unless self.report.present?
+    self.detailed_report = "<p>Not updated yet.</p>" unless self.detailed_report.present?
   end
 end
 
