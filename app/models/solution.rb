@@ -35,6 +35,7 @@ class Solution < ActiveRecord::Base
     stat.keep_track_latest_solution_time!(created_at)
     if new_record
       user.user_stat.increment!(:solutions_created)
+      problem.increment!(:submission_count) unless solution
     else
       update_accepted_stats(stat) if accepted?
     end
@@ -44,6 +45,7 @@ class Solution < ActiveRecord::Base
     unless stat.already_accepted?
       user.user_stat.increment!(:problems_solved)
       stat.mark_accepted_solution_time!(created_at)
+      problem.increment!(:accepted_count) unless solution
     end
   end
 

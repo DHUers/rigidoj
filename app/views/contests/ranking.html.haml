@@ -8,7 +8,7 @@
       %li= link_to @contest.title, contest_path(@contest.slug, @contest.id)
       %li.active Contest ranking
 
-.panel.panel-info
+.panel{ class: "panel-#{contest_class_by_status(@contest)}" }
   .panel-heading
     %h3= "#{@contest.title} ranking"
   - unless @contest.users.blank?
