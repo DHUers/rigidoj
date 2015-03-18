@@ -4,10 +4,8 @@ module SolutionsHelper
         compile_error output_limit_exceeded).include? solution.status
   end
 
-  def status_span(solution)
+  def solution_status_color(solution)
     status = solution.status
-    pretty_text = solution.pretty_solution_status
-    color = SiteSetting.solution_colors[Solution.statuses[status]]
-    raw "<span class='solution-status-text #{status}' style='color: #{color}'>#{pretty_text}</span>"
+    SiteSetting.solution_colors[Solution.statuses[status]]
   end
 end

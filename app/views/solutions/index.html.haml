@@ -39,7 +39,12 @@
                   - if staff?
                     %td= s.id
                   %td= link_to s.user.username, s.user
-                  %td= status_span(s)
+                  %td
+                    %a.popoverable{ tabindex: 0, role: 'button', title: 'Solution report',
+                      data: { toogle: 'popover', trigger: 'focus', html: 'true', content: s.report } }
+                      %span.solution-status-text{ class: s.status, style: "color: #{solution_status_color(s)}" }
+                        = s.pretty_solution_status
+
                   %td= show_details?(s) ? "#{s.time_usage} ms" : '-'
                   %td= show_details?(s) ? "#{s.memory_usage} KB" : '-'
                   %td= s.platform

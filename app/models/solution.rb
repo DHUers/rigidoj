@@ -14,6 +14,8 @@ class Solution < ActiveRecord::Base
   validates_presence_of :source, :problem_id, :user_id, :platform
   validate :contest_solution
 
+  after_initialize :set_default_report
+
   after_create :update_first_created
 
   around_save :update_stats
@@ -35,7 +37,7 @@ class Solution < ActiveRecord::Base
     stat.keep_track_latest_solution_time!(created_at)
     if new_record
       user.user_stat.increment!(:solutions_created)
-      problem.increment!(:submission_count) unless solution
+      problem.increment!(:submission_count) unless contest
     else
       update_accepted_stats(stat) if accepted?
     end
@@ -45,7 +47,7 @@ class Solution < ActiveRecord::Base
     unless stat.already_accepted?
       user.user_stat.increment!(:problems_solved)
       stat.mark_accepted_solution_time!(created_at)
-      problem.increment!(:accepted_count) unless solution
+      problem.increment!(:accepted_count) unless contest
     end
   end
 
@@ -70,6 +72,10 @@ class Solution < ActiveRecord::Base
 
   def pretty_solution_status
     SiteSetting.solution_statuses[Solution.statuses[status]]
+  end
+
+  def set_default_report
+    self.report = "<p>Judging</p>"
   end
 end
 

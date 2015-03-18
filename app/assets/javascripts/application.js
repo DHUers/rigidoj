@@ -104,6 +104,8 @@ var ready = function() {
       ele.text(moment().format('hh:mm:ss'));
     }, 1000);
   });
+
+  $('.popoverable').popover();
 };
 
 $(document).on('ready page:load', ready);
