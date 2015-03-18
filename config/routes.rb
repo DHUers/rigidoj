@@ -25,7 +25,9 @@ Rails.application.routes.draw do
     put '/visible', to: 'posts#toggle_visible', as: :visible
     resources :comments
   end
-  resources :solutions
+  resources :solutions do
+    get '/report', to: 'solutions#report'
+  end
   get '/problems', to: 'problems#index', as: :problems
   post '/problems', to: 'problems#create'
   get '/problems/new', to: 'problems#new', as: :new_problem

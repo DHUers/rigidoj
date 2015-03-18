@@ -39,6 +39,15 @@ class SolutionsController < ApplicationController
     authorize @solution
   end
 
+  def report
+    @solution = Solution.find(params[:solution_id])
+    authorize @solution
+
+    report = @solution.user_id == current_user ? @solution.report : ''
+    report << @solution.detailed_report if current_user.admin?
+    render json: { report: report }
+  end
+
   private
 
   def create_params

@@ -46,5 +46,15 @@ var ready = function() {
     editorContainer.attr('data-mode', 'ace/mode/' + selectedValue);
   }).select2({width: '100%'});
 
+  $('#solution-listings').on('click', 'tr', function() {
+    var solutionId = $(this).find('td:first').text(),
+        modal = $('#solution-details'),
+        modalBody = modal.find('.modal-body');
+    modalBody.empty();
+    $.ajax(Rigidoj.BASE_URL + '/solutions/' + solutionId + '/report').done(function(result) {
+      modal.find('.modal-body').html(result.report);
+    });
+    modal.modal();
+  });
 };
 $(document).on('ready page:load', ready);

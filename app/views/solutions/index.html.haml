@@ -16,16 +16,15 @@
         %h4.pull-left
           Solutions
         - unless params[:contest_id]
-          %a{role: 'button', class: 'btn btn-default pull-right',
-              href: new_solution_path}
+          %a{ role: 'button', class: 'btn btn-default pull-right',
+              href: new_solution_path }
             Submit
       - unless @solutions.blank?
         .table-responsive
           %table#solution-listings.table.table-bordered.table-condensed.table-hover
             %thead
               %tr
-                - if staff?
-                  %th ID
+                %th ID
                 %th Author
                 %th Status
                 %th Time
@@ -36,17 +35,11 @@
             %tbody
               - @solutions.each do |s|
                 %tr
-                  - if staff?
-                    %td
-                      %a.popoverable{ tabindex: 0, role: 'button', title: 'Solution admin report',
-                        data: { toogle: 'popover', trigger: 'focus', html: 'true', content: s.detailed_report } }
-                        = s.id
+                  %td.id= s.id
                   %td= link_to s.user.username, s.user
                   %td
-                    %a.popoverable{ tabindex: 0, role: 'button', title: 'Solution report',
-                      data: { toogle: 'popover', trigger: 'focus', html: 'true', content: s.report } }
-                      %span.solution-status-text{ class: s.status, style: "color: #{solution_status_color(s)}" }
-                        = s.pretty_solution_status
+                    %span.solution-status-text{ class: s.status, style: "color: #{solution_status_color(s)}" }
+                      = s.pretty_solution_status
 
                   %td= show_details?(s) ? "#{s.time_usage} ms" : '-'
                   %td= show_details?(s) ? "#{s.memory_usage} KB" : '-'
@@ -57,3 +50,14 @@
         .panel-body
           There is no submission at this time.
     = paginate @solutions, window: 3
+
+#solution-details.modal.fade{ tabindex: -1, role: 'dialog', aria: { labelledby: 'solution-details-label', hidden: 'true' } }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span{ aria: { hidden: 'true' } } &times;
+        %h4#solution-details-label.modal-title Solution details
+      .modal-body
+      .modal-footer
+        %button.btn.btn-default{ type: 'button', data: { dismiss: 'modal' } } Close

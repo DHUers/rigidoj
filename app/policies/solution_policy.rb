@@ -9,6 +9,10 @@ class SolutionPolicy < ApplicationPolicy
     true
   end
 
+  def report?
+    true
+  end
+
   def permitted_attributes
     [:platform, :source, :problem_id]
   end
