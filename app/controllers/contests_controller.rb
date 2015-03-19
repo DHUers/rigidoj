@@ -98,11 +98,11 @@ class ContestsController < ApplicationController
     params.require(:solution).permit(*policy(Solution).permitted_attributes)
   end
 
-  def contest_params(type = nil)
-    type = type ? type.underscore.to_sym : :contest
+  def contest_params(type = '')
+    type = type.blank? ? :contest : type.underscore.to_sym
     params.require(type).permit(:title, :description_raw, :started_at,
                                 :end_at, :delayed_till, :frozen_ranking_from,
-                                :type, :problem_ids => [])
+                                :type, :problem_ids => [], :group_ids => [])
   end
 
   def sort_problems_by_ids(problem_ids)

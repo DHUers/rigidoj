@@ -72,6 +72,38 @@ class PostsController < ApplicationController
     end
   end
 
+  def index_with_contest
+    @contest = Contest.find(params[:contest_id])
+    authorize @contest, :rejudge_solution?
+    @posts = @contest.posts
+  end
+
+  def new_with_contest
+    @contest = Contest.find(params[:contest_id])
+    authorize @contest, :create_solution?
+    @post = Post.new
+    render :new
+  end
+
+  def create_with_contest
+    @contest = Contest.find(params[:contest_id])
+    authorize @contest, :create_solution?
+    @post = Post.new(post_params)
+    @post.contest_id = @contest.id
+
+    if @post.save
+      redirect_to contest_post_path(@contest.slug, @contest.id, @post.id)
+    else
+      render :new
+    end
+  end
+
+  def show_with_contest
+    @post = Post.find(params[:post_id])
+
+    render :show
+  end
+
   private
 
   def post_params

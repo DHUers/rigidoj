@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
   get '/c/:slug/:contest_id/solutions', to: 'contests#solutions', constraints: {contest_id: /\d+/}, as: :contest_solutions
   post '/c/:slug/:contest_id/solutions', to: 'contests#create_solution', constraints: {contest_id: /\d+/}
+  get '/c/:slug/:contest_id/posts', to: 'posts#index_with_contest', constraints: {contest_id: /\d+/}, as: :contest_posts
+  post '/c/:slug/:contest_id/posts', to: 'posts#create_with_contest', constraints: {contest_id: /\d+/}
+  get '/c/:slug/:contest_id/posts/new', to: 'posts#new_with_contest', constraints: {contest_id: /\d+/}, as: :new_contest_post
+  get '/c/:slug/:contest_id/:post_id', to: 'posts#show_with_contest', constraints: {contest_id: /\d+/, post_id: /\d+/}, as: :contest_post
 
   resources :posts do
     put '/pinned', to: 'posts#toggle_pinned', as: :pinned
