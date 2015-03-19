@@ -65,7 +65,8 @@ class ContestRanking
     # we don't freeze the status to the operator, staff
     # user_id will always in the contest
     return false if @opts[:skip_frozen]
-    return false if user_id == @operator.id || @operator.staff?
+    return true unless @operator
+    return false if @operator && (user_id == @operator.id || @operator.staff?)
     return false if end_at.past?
     frozen_at ? frozen_at.past? : false
   end
