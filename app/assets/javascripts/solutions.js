@@ -46,8 +46,8 @@ var ready = function() {
     editorContainer.attr('data-mode', 'ace/mode/' + selectedValue);
   }).select2({width: '100%'});
 
-  $('#solution-listings').on('click', 'tr', function() {
-    var solutionId = $(this).find('td:first').text(),
+  $('#solution-listings').on('click', '.solution-status-text', function() {
+    var solutionId = $(this).parent().parent().find('td:first').text(),
         modal = $('#solution-details'),
         modalBody = modal.find('.modal-body');
     modalBody.empty();

@@ -12,7 +12,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id == record.id || admin?
+    user && (user.id == record.id || admin?)
   end
 
   def search?
@@ -20,7 +20,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def admin?
-    user.admin?
+    user && user.admin?
   end
 
   def permitted_attributes

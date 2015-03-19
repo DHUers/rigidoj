@@ -44,10 +44,9 @@ class ContestRanking
   #     1. tries, including accepted submission
   #     2. time, accepted submssion time. blank if the solution isn't accepted
   def user_status(user_id)
-    solutions = Solution
-                    .where('contest_id = ? AND user_id = ? AND created_at >= ? AND created_at <= ?',
-                           @contest.id, user_id, @contest.started_at, @contest.end_time)
-                    .reorder(created_at: 'ASC')
+    solutions = Solution.where('contest_id = ? AND user_id = ? AND created_at >= ? AND created_at <= ?',
+                               @contest.id, user_id, @contest.started_at, @contest.end_time)
+                         .reorder(created_at: 'ASC')
     solutions = solutions.reject { |s| s.status == 'judge_error' }.group_by(&:problem_id)
 
     # separate the solutions by problem id
@@ -65,7 +64,6 @@ class ContestRanking
     # we don't freeze the status to the operator, staff
     # user_id will always in the contest
     return false if @opts[:skip_frozen]
-    return true unless @operator
     return false if @operator && (user_id == @operator.id || @operator.staff?)
     return false if end_at.past?
     frozen_at ? frozen_at.past? : false
