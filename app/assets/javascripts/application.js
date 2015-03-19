@@ -82,11 +82,12 @@ var ready = function() {
     }
   });
 
-  if ($('.sticky').length != 0) {
+  if ($('.sticky').length !== 0) {
     var sticky = new Waypoint.Sticky({
       element: $('.sticky'),
+      offset: 70,
       handler: function() {
-        $('.stuck').width($('.action-list').width());
+        $('.stuck').width($('.sticky-wrapper').width());
       }
     });
   }

@@ -59,6 +59,7 @@ html {
 }
 
 body {
+  padding-top: 70px;
   position: relative;
   color: $lightbg-text;
 }
@@ -186,7 +187,7 @@ html.turbolinks-progress-bar::before {
   margin: 0;
   width: 20%;
   position: fixed;
-  top: $navbar-padding-horizontal;
+  top: 70px;
 }
 
 .ace_editor {

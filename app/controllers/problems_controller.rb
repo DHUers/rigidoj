@@ -18,6 +18,8 @@ class ProblemsController < ApplicationController
   end
 
   def import
+    authorize :problem, :new?
+
     if params[:vendor].to_s && params[:id].to_s
       render nothing: true, location: new_problem_path(vendor: params[:vendor], id: params[:id]), status: 303
     else

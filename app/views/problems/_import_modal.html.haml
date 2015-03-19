@@ -1,7 +1,7 @@
 #import-problem.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Import new problem', hidden: 'true'}}
   .modal-dialog
     .modal-content
-      = form_for :import, {url: '/problems/import', accept: {charset: 'UTF-8'}, method: :post} do |f|
+      = form_for :import, { url: problems_import_path , accept: {charset: 'UTF-8'}, method: :post } do |f|
         .modal-header
           %button{type: 'button', class: 'close', data: {dismiss: 'modal', label: 'Close'}}
             %span{aria: {hidden: 'true'}}
