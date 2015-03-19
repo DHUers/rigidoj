@@ -15,7 +15,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def show?
-    record.published? || user.admin?
+    record.published? || (user && user.admin?)
   end
 
   def update?
@@ -23,7 +23,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user && user.admin?
   end
 
   def permitted_attributes

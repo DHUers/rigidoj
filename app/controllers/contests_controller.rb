@@ -29,7 +29,7 @@ class ContestsController < ApplicationController
     authorize @contest
 
     @contest_policy = policy(@contest)
-    if @contest_policy.show_details? && !current_user.admin?
+    if @contest_policy.show_details? && (current_user && !current_user.admin?)
       if @contest.public_contest?
         @contest.add_user(current_user) unless @contest.in_judger_group?(current_user)
       else
