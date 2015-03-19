@@ -1,11 +1,12 @@
 - content_for :title, 'New post'
 
 .row
-  .col-md-offset-1.col-md-10
-    %h2 Create a post
-.row
-  .col-md-offset-1.col-md-10
-    = form_for :comment, url: posts_path(@post), html: {role: 'form'} do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Create', class: 'btn btn-success'
-      = link_to 'Cancel', problems_path
+  .col-md-10
+    .panel.panel-default
+      .panel-heading
+        %h4 Create a post
+      .panel-body
+        = form_for :comment, url: posts_path(@post), html: {role: 'form'} do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Create', class: 'btn btn-success'
+          = link_to 'Cancel', problems_path
