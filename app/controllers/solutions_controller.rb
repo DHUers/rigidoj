@@ -45,7 +45,7 @@ class SolutionsController < ApplicationController
 
     report = @solution.user_id == current_user ? @solution.report : ''
     report << "<pre><code>#{@solution.source}</code></pre>" if current_user && (current_user.id == @solution.user_id || current_user.admin?)
-    report << @solution.detailed_report if current_user && current_user.admin?
+    report << "<hr>#{@solution.detailed_report}" if current_user && current_user.admin?
 
     report = "<p>Not authorized.</p>" if report.blank?
     render json: { report: report }
