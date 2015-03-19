@@ -8,7 +8,7 @@ class SolutionsController < ApplicationController
     @solution = Solution.new(solution_params)
     authorize @solution
 
-    @solution.user_id = current_user.id
+    @solution.user_id = current_user.id if current_user
 
     if @solution.save
       ManageSolution.publish_to_judgers(@solution)
