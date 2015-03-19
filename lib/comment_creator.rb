@@ -5,6 +5,7 @@ class CommentCreator
   # Acceptable options:
   #
   #   raw                     - raw text of comment
+  #   contest_id              - binding to contest
   #   created_at              - Comment creation time (optional)
   #
   #   When replying to a comment:
@@ -60,7 +61,7 @@ class CommentCreator
   def setup_post
     if new_post?
       begin
-        post = Post.create(title: @opts[:title], published: @opts[:published] || true)
+        post = Post.create(title: @opts[:title], published: @opts[:published] || true, contest_id: @opts[:contest_id])
         @errors = post.errors
       rescue ActiveRecord::Rollback => ex
         # In the event of a rollback, grab the errors from the topic
@@ -85,9 +86,11 @@ class CommentCreator
   end
 
   def save_comment
-    unless @comment.save(validate: !skip_validations?)
-      @errors = @comment.errors
-      raise ActiveRecord::Rollback.new
+    if @post.valid?
+      unless @comment.save(validate: !skip_validations?)
+        @errors = @comment.errors
+        raise ActiveRecord::Rollback.new
+      end
     end
   end
 

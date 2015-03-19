@@ -9,10 +9,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = CommentCreator.create(current_user, post_params).post
-    authorize @post
-
-    unless @post.errors.any?
+    authorize :post
+    creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title]))
+    @comment = creator.create
+    @post = @comment.post
+    unless creator.errors.any?
       redirect_to post_path(@post)
     else
       flash[:danger] = 'Error creating the post.'
@@ -41,12 +42,12 @@ class PostsController < ApplicationController
     end
   end
 
-  def destory
+  def destroy
     @post = Post.find(params[:id])
     authorize @post
 
     if @post.destroy
-      render 'index'
+      redirect_to posts_path
     end
   end
 
@@ -88,18 +89,21 @@ class PostsController < ApplicationController
   def create_with_contest
     @contest = Contest.find(params[:contest_id])
     authorize @contest, :create_solution?
-    @post = Post.new(post_params)
-    @post.contest_id = @contest.id
-
-    if @post.save
+    creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title]))
+    @comment = creator.create
+    @post = @comment.post
+    unless creator.errors.any?
       redirect_to contest_post_path(@contest.slug, @contest.id, @post.id)
     else
+      flash[:danger] = 'Error creating the post.'
       render :new
     end
   end
 
   def show_with_contest
     @post = Post.find(params[:post_id])
+    @comment = Comment.new
+    authorize @post
 
     render :show
   end

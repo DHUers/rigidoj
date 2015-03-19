@@ -1,6 +1,6 @@
 .form-group
   = f.label :title, 'Post title'
-  = f.text_field :title, class: 'form-control', id: 'post-title', placeholder: 'Title'
+  = text_field_tag 'post[title]', @post && @post.title, class: 'form-control', id: 'post-title', placeholder: 'Title'
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |

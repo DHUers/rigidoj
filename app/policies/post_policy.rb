@@ -18,6 +18,10 @@ class PostPolicy < ApplicationPolicy
     record.published? || (user && user.admin?)
   end
 
+  def show_with_contest?
+    user && (user.id == record.comments.first.user_id || user.admin? || record.contest.in_judger_group?)
+  end
+
   def update?
     create?
   end
