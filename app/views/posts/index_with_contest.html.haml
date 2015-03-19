@@ -1,0 +1,13 @@
+- content_for :title, 'Posts'
+
+.pull-right
+  = button_to 'New Post', new_post_path, class: 'btn btn-primary', |
+    html: { type: 'button' }, method: :get
+.row
+  .col-md-12
+    .list-group.post-list
+      - @posts.each do |p|
+        .list-group-item
+          .list-group-item-heading= link_to p.title, post_path(p)
+          .list-group-item-text
+            .author= p.first_comment.user.username

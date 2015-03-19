@@ -2,6 +2,8 @@ require 'pretty_text'
 
 class Post < ActiveRecord::Base
   has_many :comments, -> { order('comment_number ASC') }, dependent: :destroy
+  belongs_to :contests
+
   scope :published, -> { where(published: true) }
   scope :pinned, -> { where(pinned: true) }
 

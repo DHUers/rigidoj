@@ -62,6 +62,10 @@
               %a{ href: contest_ranking_path(@contest.slug, @contest.id) }
                 %i.fa.fa-list
                 Ranking
+            %li.action
+              %a{ href: new_contest_post_path(@contest.slug, @contest.id) }
+                %i.fa.fa-question-circle
+                Ask question
           .divider
           %label Problem list
           %ul.nav.nav-stacked.list-unstyled.problem-list
