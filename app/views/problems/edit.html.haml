@@ -9,7 +9,11 @@
       %li.active Update problem
 .row
   .col-md-9
-    = form_for @problem, url: problem_path(@problem.slug, @problem.id), html: {role: 'form', class: 'problem-form'} do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Update', class: 'btn btn-warning'
-      = link_to 'Cancel', problems_path
+    .panel.panel-default
+      .panel-heading
+        %h4= "Editing #{@problem.title}"
+      .panel-body
+        = form_for @problem, url: problem_path(@problem.slug, @problem.id), html: {role: 'form', class: 'problem-form'} do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Update', class: 'btn btn-warning'
+          = link_to 'Cancel', problems_path

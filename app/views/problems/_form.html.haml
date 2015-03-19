@@ -5,7 +5,7 @@
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |
-    preview_url: preview_problem_path(@problem), |
+    preview_url: preview_text_path,              |
     ace_mode: 'markdown',                        |
     indent_width: %w(2 4 8),                     |
     tab_label: 'Edit content',                   |
@@ -16,7 +16,7 @@
     .col-md-4
       %label Jugder configuration
   .row.limit-group
-    .col-md-1.platform
+    .col-md-2.platform
       %span Default
     .col-md-3.time-limit-group
       .input-group
@@ -29,7 +29,7 @@
   = f.hidden_field :additional_limits
   - @problem.additional_limits.each do |limit|
     .row.additional-limit-group
-      .col-md-1.platform
+      .col-md-2.platform
         %span(contenteditable="true")= limit['platform'] || ''.capitalize
       .col-md-3.time-limit-group
         .input-group
@@ -77,5 +77,5 @@
   .row
     .col-md-1
       = f.check_box :visible, value: 'yes'
-    .col-md-11
+    .col-md-11.visible-to-group
       = f.collection_select :visible_to_group, Group.all, :id, :group_name, {}, { id: 'visible-to-group' }

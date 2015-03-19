@@ -12,9 +12,13 @@
 
 .row
   .col-md-9
-    = form_for @problem, html: {role: 'form', class: 'create-problem problem-form'} do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Create', class: 'btn btn-success'
-      = link_to 'Cancel', problems_path
+    .panel.panel-default
+      .panel-heading
+        %h4 Create new problem
+      .panel-body
+        = form_for @problem, html: {role: 'form', class: 'create-problem problem-form'} do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Create', class: 'btn btn-success'
+          = link_to 'Cancel', problems_path
 
 = render partial: 'problems/import_modal'

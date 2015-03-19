@@ -7,7 +7,11 @@
       %li.active Create new contest
 .row
   .col-md-9
-    = form_for @contest do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Create', class: 'btn btn-success'
-      = button_to 'Cancel', contests_path, class: 'btn btn-default'
+    .panel.panel-default
+      .panel-heading
+        %h4 Create new contest
+      .panel-body
+        = form_for @contest do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Create', class: 'btn btn-success'
+          = button_to 'Cancel', contests_path, class: 'btn btn-default'

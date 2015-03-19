@@ -1,4 +1,4 @@
-- content_for :title, 'Editing ' + @contest.title
+- content_for :title, "Editing #{@contest.title}"
 
 .row
   .col-md-9
@@ -6,10 +6,14 @@
       %li= link_to 'Home', root_path
       %li= link_to 'Contest', contests_path
       %li= link_to @contest.title, contest_path(@contest.slug, @contest.id)
-      %li.active Update the contest
+      %li.active= "Editing #{@contest.title}"
 .row
   .col-md-9
-    = form_for @contest, url: contest_path(@contest.slug, @contest.id), html: {role: 'form', class: 'contest-form'} do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Update', class: 'btn btn-warning'
-      = button_to 'Cancel', contests_path(params[:id]), class: 'btn btn-default'
+    .panel.panel-default
+      .panel-heading
+        %h4= "Editing #{@contest.title}"
+      .panel-body
+        = form_for @contest, url: contest_path(@contest.slug, @contest.id), html: {role: 'form', class: 'contest-form'} do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Update', class: 'btn btn-warning'
+          = button_to 'Cancel', contests_path(params[:id]), class: 'btn btn-default'

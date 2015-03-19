@@ -56,5 +56,12 @@ var ready = function() {
     width: '100%'
   });
 
+  $('#problem_visible').on('change', function() {
+    if ($('#problem_visible').prop('checked')) {
+      $('.visible-to-group').hide();
+    } else {
+      $('.visible-to-group').show();
+    }
+  }).trigger('change');
 };
 $(document).on('ready page:load', ready);

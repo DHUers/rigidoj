@@ -58,8 +58,8 @@ Rails.application.routes.draw do
     root to: 'admin#dashboard'
   end
 
-  post '/preview/problems', to: 'preview#problem', as: :preview_problem
-  post '/preview/solutions', to: 'preview#solution', as: :preview_solution
+  post '/preview/text', to: 'preview#preview_text', as: :preview_text
+  post '/preview/code', to: 'preview#preview_code', as: :preview_code
 
   get '/settings/profile', to: 'user_settings#profile', as: :settings_profile
   post '/settings/profile', to: 'user_settings#update_profile'
