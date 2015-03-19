@@ -2,12 +2,6 @@
 
 .row
   .col-md-offset-3.col-md-6
-    - flash.each do |name, msg|
-      %div{:class => "alert alert-#{name} alert-dismissible", :role => "alert"}
-        %button.close{"data-dismiss" => "alert", :type => "button"}
-          %span{"aria-hidden" => "true"} &times;
-          %span.sr-only Close
-        = msg
     .panel.panel-default
       .panel-heading
         %h2 Log in

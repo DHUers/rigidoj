@@ -1,7 +1,7 @@
 class ProblemPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.admin?
+      if user && user.admin?
         scope.all
       else
         scope.where('visible = ? OR visible_to_group in (?)', true, user ? user.group_ids : [])
