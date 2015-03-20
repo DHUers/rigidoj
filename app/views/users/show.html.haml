@@ -14,27 +14,33 @@
           %a{ href: '#bookmarks', aria: { controls: 'bookmarks' }, role: 'tab', data: { toggle: 'tab' } } Bookmarks
     .content.tab-content
       #problems.tab-pane.active.fade.in{ role: 'tabpanel' }
-        %table.table.table-hover
-          %thead
-            %tr
-              %th
-              %th Problem ID
-              %th Problem title
-              %th Time
-          %tbody
-            - @problems.each do |p|
-              - stat = UserProblemStat.find_by(user_id: @user.id, problem_id: p.id)
+        - if @problems.any?
+          %table.table.table-hover
+            %thead
               %tr
-                %td
-                  - if stat.already_accepted?
-                    %i.fa.fa-check
-                %td= link_to p.id, problem_path(p.slug, p.id)
-                %td= link_to p.title, problem_path(p.slug, p.id)
-                %td= stat.latest_submission_time
-        = paginate @problems, window: 3
+                %th
+                %th Problem ID
+                %th Problem title
+                %th Time
+            %tbody
+              - @problems.each do |p|
+                - stat = UserProblemStat.find_by(user_id: @user.id, problem_id: p.id)
+                %tr
+                  %td
+                    - if stat.already_accepted?
+                      %i.fa.fa-check
+                  %td= link_to p.id, problem_path(p.slug, p.id)
+                  %td= link_to p.title, problem_path(p.slug, p.id)
+                  %td= stat.latest_submission_time
+          = paginate @problems, window: 3
+        - else
+          The user doesn't submit the code.
       #groups.tab-pane.fade{ role: 'tabpanel' }
-        - @groups.each do |g|
-          %span= g.name
+        - if @groups.any?
+          - @groups.each do |g|
+            %span= g.name
+        - else
+          The user doesn't belong to any group.
       #bookmarks.tab-pane.fade{ role: 'tabpanel' }
         %ul.list-group
           %li.list-group-item

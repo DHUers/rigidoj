@@ -61,14 +61,14 @@
         .panel-body
           No finished contests.
       - else
-        %table.table.table-hovered.table-bordered.contest-list.finished-contests.row-clickable{ data: { element: 'tr' } }
+        %table.table.table-hovered.table-bordered.contest-list.finished-contests
           %thead
             %tr
               %th Name
               %th Description
               %th Started at
               %th Closed at
-          %tbody
+          %tbody.row-clickable{ data: { element: 'tr' } }
             - @finished_contests.each do |c|
               %tr.contest-item
                 %td= link_to c.title, contest_path(c.slug, c.id)

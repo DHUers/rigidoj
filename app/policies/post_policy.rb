@@ -4,9 +4,8 @@ class PostPolicy < ApplicationPolicy
       if user && user.admin?
         scope.all
       else
-        scope.where(published: false)
+        scope.where(published: true)
       end
-
     end
   end
 

@@ -1,6 +1,6 @@
 .udcard
   = link_to current_user ? settings_profile_path : attachment_url(@user, :avatar) do
-    = attachment_image_tag @user, :avatar, alt: 'People avatar'
+    = attachment_image_tag @user, :avatar, alt: 'People avatar', fallback: 'avatar.jpg'
   %h1.udcard-names
     %span.udcard-fullname= @user.name
     %span.udcard-username= @user.username
