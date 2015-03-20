@@ -178,5 +178,11 @@ var ready = function() {
     width: '100%',
     placeholder: 'Visible to all'
   });
+
+  $('.timeframe-group').each(function() {
+    var ele = $(this),
+        unix = ele.find('time').data('unix');
+    ele.attr('title', moment.unix(unix).fromNow());
+  }).tooltip();
 };
 $(document).on('ready page:load', ready);

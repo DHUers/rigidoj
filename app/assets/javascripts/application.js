@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-watch
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack
@@ -24,7 +23,6 @@
 //= require ace/mode-markdown
 //= require ace/mode-c_cpp
 //= require ace/mode-java
-//= require typeahead.bundle
 //= require message-bus
 //= require jquery.waypoints
 //= require sticky
@@ -102,7 +100,7 @@ var ready = function() {
   $('time.realtime').each(function() {
     var ele = $(this);
     setInterval(function() {
-      ele.text(moment().format('hh:mm:ss'));
+      ele.text(moment().format('HH:mm:ss'));
     }, 1000);
   });
 
