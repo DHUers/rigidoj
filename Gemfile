@@ -34,7 +34,7 @@ gem 'bunny'
 gem 'hiredis'
 gem 'redis', require: ['redis', 'redis/connection/hiredis']
 
-gem 'seed-fu'
+gem 'seed-fu', git: 'https://github.com/DHUers/seed-fu.git'
 
 gem 'active_model_serializers'
 gem 'bcrypt'
