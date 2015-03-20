@@ -1,48 +1,51 @@
 = content_for :title, 'Sign up'
 
 .row
-  .col-md-offset-1.col-md-10
-    %h1 Join RigidOJ
+  .col-md-12
+    %h3 Join RigidOJ
     %p Conquer the problems and win the contests.
 .row
-  .col-md-offset-1.col-md-7
+  .col-md-9
     = render 'shared/error_messages', record: @user
-    = form_for @user, html: {role: 'form'} do |f|
-      %h2 Create your personal account
-      .form-group
-        = f.label :username
-        = f.text_field :username, class: 'form-control'
-        = field_describer @user.errors[:username], 'This will be your username.'
-      .form-group
-        = f.label :email, 'Email Address'
-        = f.text_field :email, class: 'form-control'
-        = field_describer @user.errors[:email], 'You will occasionally receive account related emails.'
-      .form-group
-        = f.label :name
-        = f.text_field :name, class: 'form-control'
-        = field_describer @user.errors[:name], 'Your full name.'
-      .form-group
-        = f.label :password
-        = f.password_field :password, class: 'form-control'
-        = field_describer @user.errors[:password]
-      %p.tos-info
-        By clicking on "Create an account" below, you are agreeing to the
-        \#{link_to 'Terms of Service'} and the
-        \#{link_to 'Privacy Policy'}.
-      = button_tag 'Create an account', class: 'btn btn-success pull-right'
-  .col-md-4
     .panel.panel-default
       .panel-heading
-        %h2 Enjoy rigidoj
+        %h4 Create your personal account
       .panel-body
-        %ul.features-list
+        = form_for @user, html: {role: 'form'} do |f|
+          .form-group
+            = f.label :username
+            = f.text_field :username, class: 'form-control'
+            = field_describer @user.errors[:username], 'This will be your username.'
+          .form-group
+            = f.label :email, 'Email Address'
+            = f.text_field :email, class: 'form-control'
+            = field_describer @user.errors[:email], 'You will occasionally receive account related emails.'
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+            = field_describer @user.errors[:name], 'Your full name.'
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control'
+            = field_describer @user.errors[:password]
+          %p.tos-info
+            By clicking on "Create an account" below, you are agreeing to the
+            \#{link_to 'Terms of Service'} and the
+            \#{link_to 'Privacy Policy'}.
+          = button_tag 'Create an account', class: 'btn btn-success pull-right'
+  .col-md-3
+    .panel.panel-default
+      .panel-heading
+        %h4 Enjoy rigidoj
+      .panel-body
+        %ul.features-list.list-unstyled
           %li
             %strong Intensive
             contests
           %li
             %strong Challenging
             puzzles
-          %li.divider
+          .divider
           %li
             %i.fa.fa-check
             Helpful communication
