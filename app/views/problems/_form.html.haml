@@ -78,4 +78,4 @@
     .col-md-1
       = f.check_box :visible, value: 'yes'
     .col-md-11.visible-to-group
-      = f.collection_select :visible_to_group, Group.all, :id, :group_name, {}, { id: 'visible-to-group' }
+      = f.collection_select :visible_to_group_id, Group.all, :id, :group_name, {}, { id: 'visible-to-group' }

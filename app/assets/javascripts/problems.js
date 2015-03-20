@@ -53,7 +53,9 @@ var ready = function() {
   });
 
   $('#visible-to-group').select2({
-    width: '100%'
+    width: '100%',
+    placeholder: "Choose a group",
+    allowClear: true
   });
 
   $('#problem_visible').on('change', function() {

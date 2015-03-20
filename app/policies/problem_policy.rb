@@ -4,7 +4,7 @@ class ProblemPolicy < ApplicationPolicy
       if user && user.admin?
         scope.all
       else
-        scope.where('visible = ? OR visible_to_group in (?)', true, user ? user.group_ids : [])
+        scope.where('visible = ? OR visible_to_group_id IN (?)', true, user ? user.group_ids : [])
       end
     end
   end
@@ -46,6 +46,8 @@ class ProblemPolicy < ApplicationPolicy
        input_file
        output_file
        judger_program
-       additional_limits)
+       additional_limits
+       visible
+       visible_to_group_id)
   end
 end

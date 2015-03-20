@@ -9,7 +9,7 @@ class Problem < ActiveRecord::Base
   has_many :user_problem_stats
   has_many :contest_problems
   has_many :contests, through: :contest_problems
-  belongs_to :visible_to_group, class_name: 'Group', foreign_key: 'visible_to_group', validate: true
+  belongs_to :visible_to_group, class_name: 'Group', foreign_key: 'visible_to_group_id', validate: true
 
   scope :published, -> { where(visible: true) }
   enum judge_type: [:full_text, :program_comparison, :remote_proxy]

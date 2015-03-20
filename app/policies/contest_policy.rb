@@ -1,7 +1,17 @@
 class ContestPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user
+        if user.admin?
+          scope.all
+        else
+          g = ContestGroup.arel_table
+          scope.joins(:groups)
+               .where('contest_groups.group_idcontest_groups.group_id IN (?)', user.group_ids)
+        end
+      else
+        scope.includes(:groups).where(groups: { id: nil }) # when the groups are set, visitors can't see them
+      end
     end
   end
 
