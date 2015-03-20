@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = policy_scope(Post.all)
+    @posts = policy_scope(Post.all).page(params[:page]).per(20)
   end
 
   def new

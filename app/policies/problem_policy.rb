@@ -17,7 +17,7 @@ class ProblemPolicy < ApplicationPolicy
 
   def show?
     record.visible || if user
-                        user.admin? || record.visible_to_group? && record.visible_to_group.users.include?(user)
+                        user.admin? || record.visible_to_group && record.visible_to_group.users.include?(user)
                       else
                         false
                       end

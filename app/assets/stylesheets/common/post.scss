@@ -26,3 +26,14 @@
     border-bottom: none;
   }
 }
+.post-item div {
+  vertical-align: top;
+}
+.post-item .avatar {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
+.post-item .content {
+  display: inline-block;
+}
