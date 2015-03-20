@@ -2,18 +2,7 @@
   .col-md-10.metadata
     %h2= link_to @contest.title, contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
-    .timeframe
-      = render partial: 'contests/contest_progress_bar', locals: {progress: contest_progress(@contest)}
-      .timeframe-group
-        %label{for: "#{@contest.id}-start"}= 'start at'
-        %time{id: "#{@contest.id}-start", datetime: @contest.started_at}= @contest.started_at.to_formatted_s(:short)
-      .timeframe-group
-        %label{for: "#{@contest.id}-end"}= 'end at'
-        %time{id: "#{@contest.id}-end", datetime: @contest.end_at}= @contest.end_at.to_formatted_s(:short)
-      - if @contest.type == 'DelayableContest'
-        .timeframe-group
-          %label{for: "#{@contest.id}-delayed"}= 'delayed till'
-          %time{id: "#{@contest.id}-delayed", datetime: @contest.delayed_till}= @contest.delayed_till.to_formatted_s(:short)
+    = render partial: 'contests/timeframe', object: @contest
   .col-md-2.stats
     .stat-problem-count
       %span.text-muted Problems

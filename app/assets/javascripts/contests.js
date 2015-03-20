@@ -184,5 +184,11 @@ var ready = function() {
         unix = ele.find('time').data('unix');
     ele.attr('title', moment.unix(unix).fromNow());
   }).tooltip();
+
+  $('#judger-group').select2({
+    width: '100%',
+    placeholder: "Choose a group",
+    allowClear: true
+  });
 };
 $(document).on('ready page:load', ready);

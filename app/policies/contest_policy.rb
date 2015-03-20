@@ -5,12 +5,13 @@ class ContestPolicy < ApplicationPolicy
         if user.admin?
           scope.all
         else
-          g = ContestGroup.arel_table
-          scope.joins(:groups)
-               .where('contest_groups.group_idcontest_groups.group_id IN (?)', user.group_ids)
+          scope.includes(:groups).where(groups: { id: [nil, user.group_ids].flatten })
         end
       else
-        scope.includes(:groups).where(groups: { id: nil }) # when the groups are set, visitors can't see them
+        # when the groups are set, visitors can't see them
+        # here we load the contest without a group
+        # means it's visible to all
+        scope.includes(:groups).where(groups: { id: nil })
       end
     end
   end

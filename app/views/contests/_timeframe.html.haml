@@ -1,0 +1,12 @@
+.timeframe
+  = render partial: 'contest_progress_bar', locals: {progress: contest_progress(@contest)}
+  .timeframe-group{ data: { toggle: 'tooltip', placement: 'bottom' }, title: @contest.started_at }
+    %label{for: "contest-#{@contest.id}-start"}= 'start at'
+    %time{id: "contest-#{@contest.id}-start", data: { unix: @contest.started_at.to_i } }= @contest.started_at.to_formatted_s(:short)
+  .timeframe-group{ data: { toggle: 'tooltip', placement: 'bottom' }, title: @contest.end_at }
+    %label{for: "contest-#{@contest.id}-end"}= 'end at'
+    %time{id: "contest-#{@contest.id}-end", data: { unix: @contest.end_at.to_i } }= @contest.end_at.to_formatted_s(:short)
+  - if @contest.type == 'DelayableContest'
+    .timeframe-group{ data: { toggle: 'tooltip', placement: 'bottom' }, title: @contest.delayed_till }
+      %label{for: "contest-#{@contest.id}-delayed"}= 'delayed till'
+      %time{id: "contest-#{@contest.id}-delayed", data: { unix: @contest.delayed_till.to_i } }= @contest.delayed_till.to_formatted_s(:short)

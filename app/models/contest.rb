@@ -12,7 +12,7 @@ class Contest < ActiveRecord::Base
   has_many :contest_groups
   has_many :groups, through: :contest_groups
   has_many :posts
-  belongs_to :judger_group, class_name: 'Group', foreign_key: 'judger_group', validate: true
+  belongs_to :judger_group, class_name: 'Group', foreign_key: 'judger_group_id', validate: true
 
   accepts_nested_attributes_for :problems, :groups
 

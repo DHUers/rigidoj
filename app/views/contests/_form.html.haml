@@ -65,3 +65,8 @@
     .col-md-12
       = f.collection_select :group_ids, Group.all,
           :id, :group_name, { selected: @contest.group_ids }, { id: 'contest-group-ids', multiple: true }
+.form-group
+  %h3 Judger group
+  .row
+    .col-md-12
+      = f.collection_select :judger_group_id, Group.all, :id, :group_name, {}, { id: 'judger-group' }
