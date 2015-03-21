@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery-watch
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require highlight.pack

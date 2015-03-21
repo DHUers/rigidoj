@@ -83,13 +83,14 @@ class PostsController < ApplicationController
     @contest = Contest.find(params[:contest_id])
     authorize @contest, :create_solution?
     @post = Post.new
+    @posts = @contest.posts.where(user_id: current_user.id)
     render :new
   end
 
   def create_with_contest
     @contest = Contest.find(params[:contest_id])
     authorize @contest, :create_solution?
-    creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title]))
+    creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title], contest_id: @contest.id))
     @comment = creator.create
     @post = @comment.post
     unless creator.errors.any?

@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    Question list
+  - if @posts.any?
+    %table.table.table-hover.table-bordered
+      - @posts.each do |p|
+        %tr
+          %td= link_to p.title, contest_post_path(p.contest.slug, p.contest.id, p.id)
+  - else
+    .panel-body
+      You didn't submit a question.

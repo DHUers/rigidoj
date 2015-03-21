@@ -61,7 +61,7 @@ class CommentCreator
   def setup_post
     if new_post?
       begin
-        post = Post.create(title: @opts[:title], published: @opts[:published] || true, contest_id: @opts[:contest_id])
+        post = Post.create(title: @opts[:title], published: @opts[:published] || true, contest_id: @opts[:contest_id], user_id: @user.id)
         @errors = post.errors
       rescue ActiveRecord::Rollback => ex
         # In the event of a rollback, grab the errors from the topic

@@ -1,9 +1,9 @@
 .row.contest-content
-  .col-md-10.metadata
-    %h2= link_to @contest.title, contest_path(@contest.slug, @contest.id)
+  .col-sm-10.metadata
+    %h3= link_to @contest.title, contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     = render partial: 'contests/timeframe', object: @contest
-  .col-md-2.stats
+  .col-sm-2.stats
     .stat-problem-count
       %span.text-muted Problems
       %strong.contest-stat-count= @contest.problems.count

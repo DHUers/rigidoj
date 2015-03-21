@@ -18,5 +18,5 @@ end
 #  contests_joined           :integer          default(0), not null
 #  solutions_created         :integer          default(0), not null
 #  first_solution_created_at :datetime
-#  problems_solved           :string           default("0"), not null
+#  problems_solved           :integer          default(0), not null
 #

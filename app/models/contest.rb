@@ -109,7 +109,7 @@ end
 #  slug                :string
 #  frozen_ranking_from :datetime
 #  type                :string
-#  judger_group        :integer
+#  judger_group_id     :integer
 #  started_notified    :boolean          default(FALSE), not null
 #  delayed_notified    :boolean          default(FALSE), not null
 #

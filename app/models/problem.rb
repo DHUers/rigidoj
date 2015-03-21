@@ -85,5 +85,5 @@ end
 #  submission_count        :integer          default(0), not null
 #  accepted_count          :integer          default(0), not null
 #  per_case_limit          :boolean          default(FALSE), not null
-#  visible_to_group        :integer
+#  visible_to_group_id     :integer
 #

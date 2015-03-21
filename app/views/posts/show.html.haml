@@ -10,6 +10,16 @@
       %li= link_to 'Pinned at home page', post_pinned_path(@post), method: :put, remote: true
       %li= link_to 'Toggle visble', post_visible_path(@post), method: :put, remote: true
 
+- if params[:contest_id]
+  - contest = Contest.find(params[:contest_id])
+  .row
+    .col-md-12
+      %ol.breadcrumb
+        %li= link_to 'Home', root_path
+        %li= link_to 'Contests', contests_path
+        %li= link_to contest.title, contest_path(contest.slug, contest.id)
+        %li.active problem
+
 .row
   .col-md-12
     .post.post-box
