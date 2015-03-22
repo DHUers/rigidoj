@@ -215,5 +215,10 @@ var ready = function() {
       });
     }
   }
+
+  rankTable.find('.user').each(function() {
+    var ele = $(this);
+    ele.attr('title', ele.data('title'));
+  }).tooltip()
 };
 $(document).on('ready page:load', ready);

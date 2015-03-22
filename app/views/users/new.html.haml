@@ -25,6 +25,14 @@
             = f.text_field :name, class: 'form-control'
             = field_describer @user.errors[:name], 'Your full name.'
           .form-group
+            = f.label :crew, 'Class'
+            = f.text_field :crew, class: 'form-control'
+            = field_describer @user.errors[:crew], 'Your class'
+          .form-group
+            = f.label :student_id, 'Student ID'
+            = f.text_field :student_id, class: 'form-control'
+            = field_describer @user.errors[:student_id], 'Your student ID.'
+          .form-group
             = f.label :password
             = f.password_field :password, class: 'form-control'
             = field_describer @user.errors[:password]

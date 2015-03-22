@@ -46,3 +46,7 @@ user:
     default: false
   allow_update_name:
     default: true
+
+contest:
+  show_user_class_in_ranking: true
+  show_user_full_name_in_ranking: false

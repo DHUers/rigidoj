@@ -5,7 +5,7 @@
     %span.udcard-fullname= @user.name
     %span.udcard-username= @user.username
   %ul.udcard-details
-    - if current_user.staff? or @user.show_email
+    - if current_user && current_user.staff? or @user.show_email
       %li.udcard-detail
         %i.fa.fa-envelope-o
         %a.email{:href => "mailto:#{@user.email}"}= @user.email

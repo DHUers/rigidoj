@@ -24,6 +24,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:username, :name, :email, :password, :password_confirmation]
+    [:username, :name, :email, :password, :password_confirmation, :student_id, :crew]
   end
 end

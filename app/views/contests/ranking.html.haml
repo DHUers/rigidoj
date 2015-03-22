@@ -32,7 +32,9 @@
             %thead
               %tr
                 %th Rank
-                %th Name
+                %th= SiteSetting.show_user_full_name_in_ranking ? 'Name' : 'Username'
+                - if SiteSetting.show_user_class_in_ranking
+                  %th Class
                 %th Solved
                 %th Time
                 - @contest.problems.each_with_index do |u,i|
@@ -43,7 +45,11 @@
                 - result = rank[4]
                 %tr{ class: current_user && current_user.id == u ? 'current-user' : nil }
                   %td= i + 1
-                  %td= User.find(u).name
+                  - user = User.find(u)
+                  %td= link_to SiteSetting.show_user_full_name_in_ranking ? user.name : user.username, user_path(user)
+                  - if SiteSetting.show_user_class_in_ranking
+                    %td
+                      %span.user{ data: { title: user.student_id, toggle: 'tooltip', placement: 'bottom' } }= user.crew
                   %td= rank[0] # "#{rank[0]}/#{rank[1]}"
                   %td= rank[2]
                   - @contest.problems.each_with_index do |p,i|
