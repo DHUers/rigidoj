@@ -8,31 +8,49 @@
       %li= link_to @contest.title, contest_path(@contest.slug, @contest.id)
       %li.active Contest ranking
 
-.panel{ class: "panel-#{contest_class_by_status(@contest)}" }
-  .panel-heading
-    %h3= "#{@contest.title} ranking"
-  - unless @contest.users.blank?
-    %table.table.table-hover.table-bordered.table-condensed
-      %thead
-        %tr
-          %th Rank
-          %th Name
-          %th Solved
-          %th Time
-          - @contest.problems.each_with_index do |u,i|
-            %th= alphabet_offset(i)
-      %tbody
-        - @contest.user_ids.each_with_index do |u,i|
-          - rank = @ranking[u]
-          - result = rank[4]
-          %tr
-            %td= i + 1
-            %td= User.find(u).name
-            %td= rank[0] # "#{rank[0]}/#{rank[1]}"
-            %td= rank[2]
-            - @contest.problems.each_with_index do |p,i|
-              - problem_result = result[p.id]
-              %td= problem_result.length == 2 ? problem_result.join(' / ') : "#{problem_result.first} / --"
-  - else
-    .panel-body
-      No one joins the contest.
+.row
+  .col-md-12
+    .figure-example.pull-right
+      %span.first-solved.accpeted First to solve
+      %span.accpeted Solved
+      %span.tried Tried
+      - if @contest.type.present?
+        %span.first-solved.accpeted.delayed First to solve but in delay time
+        %span.accpeted.delayed Solved in delay time
+
+.row
+  .col-md-12
+    .panel{ class: "panel-#{contest_class_by_status(@contest)}" }
+      .panel-heading
+        %h3= "#{@contest.title} ranking"
+      - unless @contest.users.blank?
+        %table#ranking-table.table.table-hover.table-bordered.table-condensed{ data: { |
+            end_minute: @contest.duration_with_started_at_in_minute(@contest.end_at),  |
+            problem_count: @contest.problems.count } }        |
+          %thead
+            %tr
+              %th Rank
+              %th Name
+              %th Solved
+              %th Time
+              - @contest.problems.each_with_index do |u,i|
+                %th.problem-id= alphabet_offset(i)
+          %tbody
+            - @contest.user_ids.each_with_index do |u,i|
+              - rank = @ranking[u]
+              - result = rank[4]
+              %tr{ class: current_user && current_user.id == u ? 'current-user' : nil }
+                %td= i + 1
+                %td= User.find(u).name
+                %td= rank[0] # "#{rank[0]}/#{rank[1]}"
+                %td= rank[2]
+                - @contest.problems.each_with_index do |p,i|
+                  - problem_result = result[p.id]
+                  %td{ class: "problem-#{i} #{problem_stat(problem_result)}", data: { solved_at: problem_result && problem_result[1] ? problem_result[1] : nil } }
+                    - if problem_result
+                      = problem_result.length == 2 ? problem_result.join(' / ') : "#{problem_result.first} / --"
+                    - else
+                      = '-'
+      - else
+        .panel-body
+          No one joins the contest.

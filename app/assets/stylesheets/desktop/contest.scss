@@ -36,3 +36,31 @@
 .contest-panels .panel {
   margin-bottom: 32px;
 }
+.figure-example {
+  margin-bottom: 20px;
+}
+.figure-example span {
+  padding: 5px 10px;
+}
+
+#ranking-table, .figure-example {
+
+  .current-user {
+    background-color: #f5f5f5;
+  }
+  .first-solved.accpeted {
+    background-color: $lightgreen;
+  }
+  .accpeted {
+    background-color: $lightgreen;
+  }
+  .tried {
+    background-color: #eeb3b6;
+  }
+  .first-solved.delayed.accpeted {
+    background-color: $lightgreen;
+  }
+  .delayed.accpeted {
+    background-color: $lightgreen;
+  }
+}

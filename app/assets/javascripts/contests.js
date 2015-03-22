@@ -190,5 +190,30 @@ var ready = function() {
     placeholder: "Choose a group",
     allowClear: true
   });
+
+  var rankTable = $('#ranking-table'),
+      contestEndAt = rankTable.data('end-minute'),
+      contestProblemCount = rankTable.data('problem-count'),
+      minSolvedTime = -1,
+      solvedAt,
+      solutionStat;
+
+  for (var i = 0; i < contestProblemCount; i++) {
+    minSolvedTime = Math.min.apply(Math, rankTable.find('.problem-' + i).map(function() {
+      return $(this).data('solved-at');
+    }).get());
+    if (isFinite(minSolvedTime)) { // get a min value
+      rankTable.find('.problem-' + i).each(function() {
+        solutionStat = $(this);
+        solvedAt = solutionStat.data('solved-at');
+        if (solvedAt == minSolvedTime) {
+          solutionStat.addClass('first-solved');
+        }
+        if (solvedAt >= contestEndAt) {
+          solutionStat.addClass('delayed');
+        }
+      });
+    }
+  }
 };
 $(document).on('ready page:load', ready);

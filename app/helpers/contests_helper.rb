@@ -29,4 +29,9 @@ module ContestsHelper
     end
     status
   end
+
+  def problem_stat(stat)
+    return nil unless stat
+    stat.length == 2 ? 'accpeted' : 'tried'
+  end
 end
