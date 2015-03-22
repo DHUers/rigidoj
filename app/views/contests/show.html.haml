@@ -94,8 +94,8 @@
               .col-md-12
                 = render partial: 'components/source_editor',  |
                   locals: {                                    |
-                  preview_url: '',                             |
-                  ace_mode: 'java',                            |
+                  preview_url: preview_code_path,              |
+                  ace_mode: 'c_cpp',                           |
                   indent_width: %w(2 4 8),                     |
                   tab_label: 'Source code',                    |
                   preview_label: 'Preview',

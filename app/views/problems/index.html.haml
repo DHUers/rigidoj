@@ -32,5 +32,7 @@
                 %td= p.id
                 %td= link_to p.title, problem_path(p.slug, p.id)
                 %td= p.submission_count > 0 ? p.submission_count : '-'
-                %td= accepted_rate(p)
+                - rate = accepted_rate(p)
+                %td= rate === 0 ? '-' : "#{rate}%"
+
     = paginate @problems, window: 3

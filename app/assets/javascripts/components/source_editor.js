@@ -1,7 +1,9 @@
-$(document).on('page:change', function() {
+$(document).on('ready page:change', function() {
   // setup editor
-  $('.source-editor').each(function() {
+  $('.source-editor').each(function(i) {
     var container = $(this);
+    if (container.data('loaded')) return;
+    container.data('loaded', 'true');
     var mode = container.data('mode');
     var editorArea = container.find('textarea');
     var previewArea = container.find('.preview-area');
@@ -15,7 +17,7 @@ $(document).on('page:change', function() {
       height: editorArea.height(),
       'class': editorArea.attr('class')
     }).insertBefore(editorArea);
-    editorArea.css('display', 'none');
+    editorArea.hide();
 
     var editor = ace.edit(editDiv[0]);
 

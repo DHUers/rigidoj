@@ -1,4 +1,6 @@
 class SolutionsController < ApplicationController
+  include ERB::Util
+
   def new
     @solution = Solution.new
     authorize @solution
@@ -40,14 +42,17 @@ class SolutionsController < ApplicationController
   end
 
   def report
+
     @solution = Solution.find(params[:solution_id])
     authorize @solution
 
-    report = @solution.user_id == current_user ? @solution.report : ''
-    report << "<pre><code>#{@solution.source}</code></pre>" if current_user && (current_user.id == @solution.user_id || current_user.admin?)
+    report = if current_user && (current_user.id == @solution.user_id || current_user.admin?)
+               "#{@solution.report}<pre><code>#{html_escape(@solution.source)}</code></pre>"
+             else
+               'You are not allowed to see this.'
+             end
     report << "<hr>#{@solution.detailed_report}" if current_user && current_user.admin?
 
-    report = "<p>Not authorized.</p>" if report.blank?
     render json: { report: report }
   end
 

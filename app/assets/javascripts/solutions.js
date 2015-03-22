@@ -52,7 +52,9 @@ var ready = function() {
         modalBody = modal.find('.modal-body');
     modalBody.empty();
     $.ajax(Rigidoj.BASE_URL + '/solutions/' + solutionId + '/report').done(function(result) {
-      modal.find('.modal-body').html(result.report);
+      modal.find('.modal-body').html(result.report).find('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
     });
     modal.modal();
   });
