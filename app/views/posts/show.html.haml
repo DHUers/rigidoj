@@ -27,7 +27,9 @@
         %h2.pull-left= @post.title
         = attachment_image_tag @post.first_comment.user, :avatar, :limit, 50, 50,
             alt: @post.first_comment.user.name, class: 'pull-right'
-      .content= raw @post.first_comment.baked
+      .content
+        %span.pull-right= link_to 'Edit', edit_post_path(@post)
+        = raw @post.first_comment.baked
     .comments.post-box
       - @post.comments[1..-1].each do |c|
         .comment

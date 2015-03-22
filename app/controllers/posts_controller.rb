@@ -29,13 +29,16 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def update
     @post = Post.find(params[:id])
     authorize @post
+    @comment = @post.first_comment
+    @comment.raw = params[:comment][:raw]
 
-    if @post.save
+    if @post.save && @comment.save
       redirect_to @post
     else
       render 'edit'

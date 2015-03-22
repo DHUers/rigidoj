@@ -22,7 +22,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    user && (user.admin? || record.user.id == user.id)
   end
 
   def destroy?
