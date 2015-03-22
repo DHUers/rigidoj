@@ -16,6 +16,7 @@ module SessionsHelper
   end
 
   def log_in(user)
+    cookies[:message_bus_user_id] = user.id
     session[:user_id] = user.id
     make_developer_admin(user)
   end
