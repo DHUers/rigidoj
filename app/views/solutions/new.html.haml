@@ -2,6 +2,10 @@
 
 .row
   .col-md-10
-    = form_for @solution, html: { role: 'form', class: 'solution-form' } do |f|
-      = render partial: 'form', locals: { f: f }
-      = f.button 'Submit', class: 'btn btn-success'
+    .panel.panel-default
+      .panel-heading
+        %h4 Create new solution
+      .panel-body
+        = form_for @solution, html: { role: 'form', class: 'solution-form' } do |f|
+          = render partial: 'form', locals: { f: f }
+          = f.button 'Submit', class: 'btn btn-success'

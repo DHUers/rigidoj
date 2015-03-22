@@ -17,7 +17,7 @@ class AnnounceContestJob < ActiveJob::Base
           data: "#{text}: #{type == 'contest_started' ? 'started' : 'delayed' }"
       }
       Notification.create!(params)
-      MessageBus.publish '/notifications', 1
+      MessageBus.publish '/notifications', 1, user_ids: contest.user_ids
     end
   end
 

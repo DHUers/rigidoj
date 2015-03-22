@@ -43,7 +43,7 @@ class ManageSolution
 
     Notification.create!(params)
 
-    MessageBus.publish '/notifications', 1
+    MessageBus.publish '/notifications', 1, user_ids: [solution.user_id]
   end
 
   def self.ensure_queue_established
