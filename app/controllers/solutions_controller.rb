@@ -47,11 +47,11 @@ class SolutionsController < ApplicationController
     authorize @solution
 
     report = if current_user && (current_user.id == @solution.user_id || current_user.admin?)
-               "#{@solution.report}<pre><code>#{html_escape(@solution.source)}</code></pre>"
+               "#{@solution.report}<div class='row'><div class='col-md-12'><pre><code>#{html_escape(@solution.source)}</code></pre></div></div>"
              else
-               'You are not allowed to see this.'
+               "<div class='row'><div class='col-md-12'>You are not allowed to see this.</div></div>"
              end
-    report << "<hr>#{@solution.detailed_report}" if current_user && current_user.admin?
+    report << "<hr><div class='row'><div class='col-md-12'>#{@solution.detailed_report}</div></div>" if current_user && current_user.admin?
 
     render json: { report: report }
   end

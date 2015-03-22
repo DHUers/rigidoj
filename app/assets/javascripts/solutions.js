@@ -49,10 +49,10 @@ var ready = function() {
   $('#solution-listings').on('click', '.solution-status-text', function() {
     var solutionId = $(this).parent().parent().find('td:first').text(),
         modal = $('#solution-details'),
-        modalBody = modal.find('.modal-body');
+        modalBody = modal.find('#solution-report');
     modalBody.empty();
     $.ajax(Rigidoj.BASE_URL + '/solutions/' + solutionId + '/report').done(function(result) {
-      modal.find('.modal-body').html(result.report).find('pre code').each(function(i, block) {
+      modalBody.html(result.report).find('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
       });
     });
