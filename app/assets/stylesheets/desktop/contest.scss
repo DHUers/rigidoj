@@ -46,21 +46,25 @@
 #ranking-table, .figure-example {
 
   .current-user {
-    background-color: #f5f5f5;
+    background-color: #F5F5F5;
   }
   .first-solved.accpeted {
-    background-color: $lightgreen;
+    background-color: #4AD322;
+    color: white !important;
+    font-weight: bold;
   }
   .accpeted {
-    background-color: $lightgreen;
+    background-color: #C7FFB7;
   }
   .tried {
-    background-color: #eeb3b6;
+    background-color: #FFD1D1;
   }
   .first-solved.delayed.accpeted {
-    background-color: $lightgreen;
+    background-color: #46A3E5;
+    color: white !important;
+    font-weight: bold;
   }
   .delayed.accpeted {
-    background-color: $lightgreen;
+    background-color: #B5D7FF;
   }
 }
