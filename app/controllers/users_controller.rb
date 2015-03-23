@@ -56,6 +56,30 @@ class UsersController < ApplicationController
     render json: {valid: r.length == 1}
   end
 
+  def grant_admin
+    user = User.find_by(username: params[:username])
+    authorize current_user, :admin?
+    user.update_attribute(:admin, !user.admin) unless current_user == user
+
+    redirect_to user_path(user)
+  end
+
+  def grant_moderator
+    user = User.find_by(username: params[:username])
+    authorize current_user, :admin?
+    user.update_attribute(:moderator, !user.moderator) unless current_user == user
+
+    redirect_to user_path(user)
+  end
+
+  def block
+    user = User.find_by(username: params[:username])
+    authorize current_user, :admin?
+    user.update_attribute(:block, !user.block) unless current_user == user
+
+    redirect_to user_path(user)
+  end
+
   private
 
   def user_params

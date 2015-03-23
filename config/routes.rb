@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :users, param: :username do
     resources :notes
   end
+  get '/users/:username/admin', to: 'users#grant_admin', as: :user_grant_admin
+  get '/users/:username/moderator', to: 'users#grant_moderator', as: :user_grant_moderator
+  get '/users/:username/block', to: 'users#block', as: :user_block
   post '/users/is_local_username', to: 'users#is_local_username'
   get '/users/search/users', to: 'users#search_users'
 

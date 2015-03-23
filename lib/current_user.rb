@@ -49,6 +49,10 @@ module CurrentUser
         current_user = User.find_by(auth_token: auth_token)
       end
 
+      if current_user.blocked?
+        current_user = nil
+      end
+
       @env[CURRENT_USER_KEY] = current_user
     end
 

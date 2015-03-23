@@ -1,5 +1,18 @@
 - content_for :title, @user.username
 
+- if current_user && current_user.admin?
+  .admin-wrench.btn-group
+    %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+        data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+      %i.fa.fa-wrench
+    %ul.dropdown-menu.pull-right{role: 'menu'}
+      %li
+        %a{ href: user_grant_admin_path(@user) }
+          Grant/Ungrant admin
+      %li
+        %a{ href: user_grant_moderator_path(@user) }
+          Grant/Ungrant moderator
+
 .row
   .col-md-3
     = render partial: 'users/ucard', object: @user

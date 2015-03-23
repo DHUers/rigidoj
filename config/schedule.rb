@@ -1,3 +1,3 @@
-every 15.minute do
+every 15.minutes do
   runner 'AnnounceContestJob.perform_now'
 end
