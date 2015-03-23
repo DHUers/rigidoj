@@ -56,9 +56,12 @@ Rails.application.routes.draw do
     post '/groups', to: 'admin#create_group'
     get '/groups/:group_name', to: 'admin#group', as: :group
     put '/groups/:group_name', to: 'admin#update_group'
+    get '/uploads', to: 'admin#uploads_index', as: :uploads
 
     root to: 'admin#dashboard'
   end
+
+  resources :uploads
 
   post '/preview/text', to: 'preview#preview_text', as: :preview_text
   post '/preview/code', to: 'preview#preview_code', as: :preview_code

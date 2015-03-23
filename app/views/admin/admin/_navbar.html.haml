@@ -6,3 +6,5 @@
       = link_to 'Settings', admin_settings_path('required')
     %li{ role: "presentation #{active_class_if_admin_action('groups')}"}
       = link_to 'Groups', admin_groups_path
+    %li{ role: "presentation #{active_class_if_admin_action('uploads')}"}
+      = link_to 'Uploads', admin_uploads_path

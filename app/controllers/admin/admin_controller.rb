@@ -60,6 +60,14 @@ class Admin::AdminController < Admin::AdminBaseController
     redirect_to admin_group_path(@group.group_name)
   end
 
+  def uploads_index
+    @uploads = Upload.all
+    authorize @uploads, :create?
+    @upload = Upload.new
+
+    render 'admin/admin/uploads_index'
+  end
+
   private
 
   def filter_settings_in_a_category
