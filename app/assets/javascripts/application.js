@@ -111,7 +111,7 @@ var ready = function() {
 
   $('.row-clickable').each(function() {
     var element = $(this).data('element');
-    $(this).on('click', element, function() {
+    $(this).on('click', element, function(e) {
       window.location.href = $(this).find('a').attr('href');
     });
   });

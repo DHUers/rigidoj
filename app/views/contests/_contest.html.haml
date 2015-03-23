@@ -3,10 +3,21 @@
     %h3= link_to @contest.title, contest_path(@contest.slug, @contest.id)
     = raw @contest.description_baked
     = render partial: 'contests/timeframe', object: @contest
-  .col-sm-2.stats
-    .stat-problem-count
-      %span.text-muted Problems
-      %strong.contest-stat-count= @contest.problems.count
-    .stat-people-joined
-      %span.text-muted People joined
-      %strong.contest-stat-count= @contest.users.count
+  .col-sm-2
+    - if @contest.started?
+      .btn-group-vertical.btn-group-sm{ role: 'group' }
+        %button.btn.btn-default
+          %a{ href: contest_solutions_path(@contest.slug, @contest.id) }
+            %i.fa.fa-history
+            Submitted records
+        %button.btn.btn-default
+          %a{ href: contest_ranking_path(@contest.slug, @contest.id) }
+            %i.fa.fa-list
+            Ranking
+    .stats
+      .stat-problem-count
+        %span.text-muted Problems
+        %strong.contest-stat-count= @contest.problems.count
+      .stat-people-joined
+        %span.text-muted People joined
+        %strong.contest-stat-count= @contest.users.count

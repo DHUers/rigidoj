@@ -219,6 +219,14 @@ var ready = function() {
   rankTable.find('.user').each(function() {
     var ele = $(this);
     ele.attr('title', ele.data('title'));
-  }).tooltip()
+  }).tooltip();
+
+  $('.contest-list').on('click', 'button', function(e) {
+    console.log('hi');
+    e.stopPropagation();
+  }).on('click', 'li', function() {
+    console.log('2');
+    window.location.href = $(this).find('a').attr('href');
+  });
 };
 $(document).on('ready page:load', ready);
