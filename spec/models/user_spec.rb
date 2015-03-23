@@ -232,22 +232,6 @@ describe User do
   end
 
   describe "secure digests" do
-    describe '#new_token' do
-      subject { User.new_token }
-      it { should match(/\S+/) }
-      it 'length should be 22' do
-        expect(subject.length).to be 22
-      end
-    end
-
-    describe '#digest' do
-      subject { User.digest(User.new_token) }
-      it { should match(/\S+/) }
-      it 'length should be 60' do
-        expect(subject.length).to be 60
-      end
-    end
-
     describe '.hash_password' do
       let(:too_long) { 'x' * (User.max_password_length + 1) }
 
