@@ -63,13 +63,13 @@
                 = text_field_tag :problem_title, @problem.title, disabled: true, class: 'form-control'
               .col-md-3
                 = f.label :platform
-                = f.select :platform, platform_select_options, {}, class: 'form-control'
+                = f.select :platform, platform_select_options, { selected: current_user && current_user.default_platform }, class: 'form-control'
             .form-group
               .col-md-12
                 = render partial: 'components/source_editor',  |
                   locals: {                                    |
                   preview_url: '',                             |
-                  ace_mode: 'java',                            |
+                  ace_mode: 'c_cpp',                            |
                   indent_width: %w(2 4 8),                     |
                   tab_label: 'Source code',
                   preview_label: 'Preview',

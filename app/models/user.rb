@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   validate :password_validator, on: [:create]
 
   before_create :build_user_stat
+  before_create :set_default_platform
 
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
@@ -147,9 +148,8 @@ class User < ActiveRecord::Base
     moderator? || admin?
   end
 
-  def default_platform
-    # dummy
-    'c'
+  def set_default_platform
+    self.default_platform = 'C++'
   end
 
 end

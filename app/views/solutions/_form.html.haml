@@ -6,7 +6,7 @@
       = f.select :problem_id, {}, class: 'form-control'
     .col-md-4
       = f.label :platform
-      = f.select :platform, platform_select_options, {}, class: 'form-control'
+      = f.select :platform, platform_select_options, { selected: current_user && current_user.default_platform }, class: 'form-control'
 .form-group
   = render partial: 'components/source_editor',  |
     locals: {                                    |

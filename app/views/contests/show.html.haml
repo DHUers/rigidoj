@@ -92,7 +92,7 @@
                 = f.select :contest_problem_id, contest_problem_select_options(@contest.problems), {}, class: 'form-control'
               .col-md-3
                 = f.label :platform
-                = f.select :platform, platform_select_options, {}, class: 'form-control'
+                = f.select :platform, platform_select_options, { selected: current_user && current_user.default_platform }, class: 'form-control'
             .form-group
               .col-md-12
                 = render partial: 'components/source_editor',  |
