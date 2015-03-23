@@ -3,8 +3,9 @@ class Notification < ActiveRecord::Base
   belongs_to :problem
   belongs_to :solution
   belongs_to :contest
+  belongs_to :post
 
-  enum notification_type: %i(solution_report contest_started contest_delayed contest_notification)
+  enum notification_type: %i(solution_report contest_started contest_delayed contest_notification post_replied)
 
   validates_presence_of :data
   validates_presence_of :notification_type
@@ -33,4 +34,5 @@ end
 #  contest_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  post_id           :integer
 #

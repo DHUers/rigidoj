@@ -2,6 +2,7 @@ require 'pretty_text'
 
 class Post < ActiveRecord::Base
   has_many :comments, -> { order('comment_number ASC') }, dependent: :destroy
+  has_many :notifications
   belongs_to :contest
   belongs_to :user
 

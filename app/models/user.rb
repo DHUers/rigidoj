@@ -169,7 +169,7 @@ end
 #  admin                   :boolean          default(FALSE), not null
 #  ip_address              :inet
 #  registration_ip_address :inet
-#  remember_hash           :string(60)
+#  auth_token              :string(60)
 #  username_lower          :string(60)       not null
 #  suspended               :boolean          default(FALSE), not null
 #  suspended_at            :datetime
@@ -185,6 +185,8 @@ end
 #  avatar_filename         :string
 #  show_email              :boolean          default(TRUE), not null
 #  website                 :string(255)
+#  crew                    :string
+#  student_id              :string
 #
 # Indexes
 #

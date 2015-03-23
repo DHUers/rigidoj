@@ -13,6 +13,15 @@ class CommentsController < ApplicationController
       authorize @post, :show?
       @comment.post_id = @post.id
       @comment.comment_number = @post.comment_count + 1
+
+      if (contest = @comment.post.contest) && contest.in_judger_group?(current_user)
+        Notification.create(user_id: @post.user_id,
+                            contest_id: contest.id,
+                            post_id: @post.id,
+                            notification_type: 'post_replied',
+                            data: 'New comment to your answer.')
+        MessageBus.publish '/notifications', 1, user_ids: [@post.user_id]
+      end
     end
 
     if @comment.save

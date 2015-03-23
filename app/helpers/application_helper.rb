@@ -25,7 +25,7 @@ module ApplicationHelper
     case notification.notification_type
     when 'solution_report'
       h[:icon_class] = 'code'
-      h[:link] = "/solutions?username=#{current_user.username}"
+      h[:link] = solutions_path + "?username=#{current_user.username}"
     when 'contest_started'
       h[:icon_class] = 'clock-o'
       h[:link] = contest_path(notification.contest.slug, notification.contest.id)
@@ -35,6 +35,9 @@ module ApplicationHelper
     when 'contest_notification'
       h[:icon_class] = 'envelope-o'
       h[:link] = contest_path(notification.contest.slug, notification.contest.id)
+    when 'post_replied'
+      h[:icon_class] = 'reply'
+      h[:link] = contest_post_path(notification.contest.slug, notification.contest.id, notification.post.id)
     end
     h
   end
