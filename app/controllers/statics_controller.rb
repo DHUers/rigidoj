@@ -2,7 +2,7 @@ class StaticsController < ApplicationController
   def home
     authorize :static
 
-    return landing unless logged_in?
+    return landing unless current_user
     @posts = Post.pinned.limit(10)
     render 'home', layout: 'application'
   end
