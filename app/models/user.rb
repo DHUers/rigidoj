@@ -1,10 +1,7 @@
 require 'pbkdf2'
-require 'bcrypt'
 
 class User < ActiveRecord::Base
   include Searchable
-
-  attr_accessor :remember_token
 
   has_one :user_stat, dependent: :destroy
   has_many :solutions, dependent: :destroy
@@ -46,12 +43,6 @@ class User < ActiveRecord::Base
 
   def self.new_token
     SecureRandom.urlsafe_base64
-  end
-
-  def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
   end
 
   def self.find_by_email(email)
@@ -133,19 +124,6 @@ class User < ActiveRecord::Base
   def authenticate!(password)
     return false unless password_hash && salt
     self.password_hash == hash_password(password, salt)
-  end
-
-  def remember
-    self.remember_token = User.new_token
-    update_column(:remember_hash, User.digest(self.remember_token))
-  end
-
-  def authenticated?(remember_token)
-    BCrypt::Password.new(remember_hash).is_password?(remember_token)
-  end
-
-  def forget
-    update_column(:remember_hash, nil)
   end
 
   def change_username(new_username)

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/c/:slug/:id/edit', to: 'contests#edit', constraints: {id: /\d+/}, as: :edit_contest
   match '/c/:slug/:id', to: 'contests#update', constraints: {id: /\d+/}, via: [:patch, :put]
   delete '/c/:slug/:id', to: 'contests#destroy', constraints: {id: /\d+/}
+  get 'c/:slug/:id/notifications/new', to: 'contests#new_notification', constraints: {id: /\d+/}, as: :new_contest_notification
+  post 'c/:slug/:id/notifications', to: 'contests#create_notification', constraints: {id: /\d+/}, as: :contest_notifications
   get '/c/:slug/:id/ranking', to: 'contests#ranking', constraints: {id: /\d+/}, as: :contest_ranking
   get '/c/:slug/:contest_id/solutions', to: 'contests#solutions', constraints: {contest_id: /\d+/}, as: :contest_solutions
   post '/c/:slug/:contest_id/solutions', to: 'contests#create_solution', constraints: {contest_id: /\d+/}

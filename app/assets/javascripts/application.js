@@ -67,11 +67,29 @@ var ready = function() {
     });
   });
 
+  var ele, notificationItem, url, notificationIds;
+
+  notificationsList.on('click', 'a.content', function(e) {
+    ele = $(this);
+    url = ele.data('href');
+    notificationItem = ele.find('.notification-item.unread');
+    if (notificationItem.length !== 0) {
+      $.post(Rigidoj.BASE_URL + '/notifications/read', { notification_ids: [ele.data('notification-id')] }).done(function() {
+        if (parseInt(notificationNumber.text()) <= 1) {
+          notificationNumber.removeClass('active');
+          notificationNumber.text('0');
+        }
+        notificationItem.removeClass('unread');
+      });
+    }
+    if (window.location.pathname !== url)
+      window.location.href = url;
+  });
+
   notificationMarkRead.on('click', function(e) {
     notificationIds = $('.notification-item.unread', notificationsList).map(function() {
-      var ele = $(this);
-      ele.removeClass('unread');
-      return ele.data('notification-id');
+      $(this).removeClass('unread');
+      return $(this).parent().data('notification-id');
     }).get();
     if (notificationIds !== undefined && notificationIds.length > 0) {
       $.post(Rigidoj.BASE_URL + '/notifications/read', { notification_ids: notificationIds }).done(function() {

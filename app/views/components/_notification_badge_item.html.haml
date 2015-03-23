@@ -1,4 +1,4 @@
-%a.content{ href: '#' }
-  .notification-item{ 'data-notification-id' => id, class: unread ? 'unread' : nil }
+%a.content{ href: '#', data: { href: link, notification: { id: id } } }
+  .notification-item{ class: unread ? 'unread' : nil }
     %i.fa{ class: "fa-#{icon_class}" }
     = content

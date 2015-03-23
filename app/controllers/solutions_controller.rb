@@ -31,9 +31,14 @@ class SolutionsController < ApplicationController
     else
       solution_scope = Solution.where(contest_id: nil)
     end
+    if params[:username] && (user = User.find_by(username: params[:username]))
+      if current_user && (current_user.id == user.id || current_user.admin?)
+        solution_scope = Solution.where(user_id: user.id)
+      else
+        solution_scope = Solution.where(user_id: user.id, contest_id: nil)
+      end
+    end
     @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
-
-    render 'index'
   end
 
   def show

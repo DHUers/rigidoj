@@ -92,6 +92,30 @@ class ContestsController < ApplicationController
     render 'solutions/index'
   end
 
+  def new_notification
+    @contest = Contest.find_by(id: params[:id])
+    authorize @contest, :rejudge_all_solution?
+
+    @notification = Notification.new
+  end
+
+  def create_notification
+    @contest = Contest.find_by(id: params[:id])
+    authorize @contest, :rejudge_all_solution?
+
+    if params[:notification][:data]
+      @contest.user_ids.each do |u|
+        Notification.create(user_id: u, contest_id: @contest.id, notification_type: 'contest_notification', data: params[:notification][:data])
+      end
+      MessageBus.publish '/notifications', 1, user_ids: @contest.user_ids
+      redirect_to contest_path(@contest.slug, @contest.id)
+    else
+      @notification = Notification.new
+      @notification.errors.add(:invalid, :data)
+      render 'new_notification'
+    end
+  end
+
   private
 
   def solution_params

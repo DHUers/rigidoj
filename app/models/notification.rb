@@ -4,7 +4,7 @@ class Notification < ActiveRecord::Base
   belongs_to :solution
   belongs_to :contest
 
-  enum notification_type: %i(solution_report contest_started contest_delayed)
+  enum notification_type: %i(solution_report contest_started contest_delayed contest_notification)
 
   validates_presence_of :data
   validates_presence_of :notification_type
@@ -17,15 +17,6 @@ class Notification < ActiveRecord::Base
         .recent(count)
         .to_a
   end
-
-  def item_hash
-    h = { unread: !read, id: id, content: data }
-    h[:icon_class] = case notification_type
-                     when 'solution_report' then 'code'
-                     end
-    h
-  end
-
 end
 
 # == Schema Information

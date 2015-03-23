@@ -1,0 +1,30 @@
+- content_for :title, 'Send a notification'
+
+.row
+  .col-md-9
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Contest', contests_path
+      %li= link_to @contest.title, contest_path(@contest.slug, @contest.id)
+      %li.active Send a notification
+
+.row
+  .col-md-9
+    .panel.panel-default
+      .panel-heading
+        %h4 Send a notification
+      .panel-body
+        = form_for @notification, url: contest_notifications_path(@contest.slug, @contest.id) do |f|
+          = render 'shared/error_messages', record: @notification
+          .form-group
+            = f.label 'HTML only.'
+            = render partial: 'components/source_editor',  |
+              locals: {                                    |
+              preview_url: preview_text_path,              |
+              ace_mode: 'markdown',                        |
+              indent_width: %w(2 4 8),                     |
+              tab_label: 'Edit description',               |
+              preview_label: 'Preview',
+              attribute: f.text_area(:data) }
+          = f.button 'Send', class: 'btn btn-success'
+          = button_to 'Cancel', contest_path(@contest.slug, @contest.id), class: 'btn btn-default'

@@ -1,7 +1,7 @@
 class SolutionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(contest_id: nil)
+      scope.all
     end
   end
 

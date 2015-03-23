@@ -11,7 +11,7 @@
     .notifications-wrapper
       - if report.any?
         - report.each do |n|
-          = render partial: 'components/notification_badge_item', locals: n.item_hash
+          = render partial: 'components/notification_badge_item', locals: notification_item(n)
       - else
         .notification-item No notification.
     %li.divider

@@ -19,4 +19,23 @@ module ApplicationHelper
   def staff?
     current_user ? current_user.staff? : false
   end
+
+  def notification_item(notification)
+    h = { unread: !notification.read, id: notification.id, content: notification.data }
+    case notification.notification_type
+    when 'solution_report'
+      h[:icon_class] = 'code'
+      h[:link] = "/solutions?username=#{current_user.username}"
+    when 'contest_started'
+      h[:icon_class] = 'clock-o'
+      h[:link] = contest_path(notification.contest.slug, notification.contest.id)
+    when 'contest_delayed'
+      h[:icon_class] = 'exclamation-triangle'
+      h[:link] = contest_path(notification.contest.slug, notification.contest.id)
+    when 'contest_notification'
+      h[:icon_class] = 'envelope-o'
+      h[:link] = contest_path(notification.contest.slug, notification.contest.id)
+    end
+    h
+  end
 end
