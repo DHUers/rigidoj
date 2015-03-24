@@ -37,7 +37,7 @@
                 %th Time
             %tbody
               - @problems.each do |p|
-                - stat = UserProblemStat.find_by(user_id: @user.id, problem_id: p.id)
+                - stat = UserProblemStat.where(user_id: @user.id, problem_id: p.id).first_or_create
                 %tr
                   %td
                     - if stat.already_accepted?

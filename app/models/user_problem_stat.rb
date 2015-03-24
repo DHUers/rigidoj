@@ -14,12 +14,18 @@ class UserProblemStat < ActiveRecord::Base
 
   def keep_track_latest_solution_time!(solution_created_at)
     if last_submitted_at.nil? || last_submitted_at < solution_created_at
-      update_attribute(:last_submitted_at, solution_created_at)
+      self.last_submitted_at = solution_created_at
+      save!
+    end
+    if user.user_stat.first_solution_created_at.nil?
+      user.user_stat.set_first_solution!(solution_created_at)
     end
   end
 
   def latest_submission_time
-    (already_accepted? ? first_accepted_at : last_submitted_at).to_formatted_s(:long_add_second)
+    time = already_accepted? ? first_accepted_at : last_submitted_at
+
+    time ? time.to_formatted_s(:long_add_second) : nil
   end
 end
 

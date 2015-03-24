@@ -41,7 +41,13 @@ class UsersController < ApplicationController
     @user = User.includes(:groups).find_by(username_lower: params[:username].downcase)
     authorize @user
     @groups = @user.groups
-    @problems = policy_scope(Problem).includes(:user_problem_stats).where(user_problem_stats: { user_id: @user.id }).order(:id).page(params[:page]).per(30)
+    @problems = policy_scope(Problem)
+                    .includes(:user_problem_stats)
+                    .where(user_problem_stats: { user_id: @user.id })
+                    .where.not(user_problem_stats: { state: 'null' })
+                    .order(:id)
+                    .page(params[:page])
+                    .per(30)
   end
 
   def edit
