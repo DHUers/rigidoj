@@ -72,6 +72,12 @@
       = f.text_field :remote_proxy_vendor, class: 'form-control'
 .form-group
   .row
+    .col-md-2
+      = f.label :per_case_limit
+    .col-md-4
+      = f.check_box :per_case_limit
+.form-group
+  .row
     .col-md-4
       = f.label :visible
   .row

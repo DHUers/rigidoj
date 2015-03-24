@@ -47,6 +47,7 @@ class ProblemPolicy < ApplicationPolicy
        output_file
        judger_program
        additional_limits
+       per_case_limit
        visible
        visible_to_group_id)
   end
