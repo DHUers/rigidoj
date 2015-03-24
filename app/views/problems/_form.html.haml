@@ -64,7 +64,7 @@
       = f.attachment_field :judger_program, direct: true
     .col-md-6
       = f.label :judger_program_platform
-      = f.text_field :judger_program_platform, class: 'form-control'
+      = f.select :judger_program_platform, platform_select_options, { selected: current_user && current_user.default_platform }, class: 'form-control'
 .form-group.judge-vendor-group{data: {type: 'remote_proxy'}}
   .row
     .col-md-5
