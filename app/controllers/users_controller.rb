@@ -59,25 +59,37 @@ class UsersController < ApplicationController
   def grant_admin
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:admin, !user.admin) unless current_user == user
+    if user
+      user.update_attribute(:admin, !user.admin) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   def grant_moderator
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:moderator, !user.moderator) unless current_user == user
+    if user
+      user.update_attribute(:moderator, !user.moderator) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   def block
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:block, !user.block) unless current_user == user
+    if user
+      user.update_attribute(:block, !user.block) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   private

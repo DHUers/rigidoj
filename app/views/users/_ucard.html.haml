@@ -3,12 +3,23 @@
     = attachment_image_tag @user, :avatar, alt: 'People avatar', fallback: 'avatar.jpg'
   %h1.udcard-names
     %span.udcard-fullname= @user.name
-    %span.udcard-username= @user.username
+    %span.udcard-username
+      = @user.username
+      - if @user.admin?
+        %i.fa.fa-shield
+      - elsif @user.moderator?
+        %i.fa.fa-user
   %ul.udcard-details
     - if current_user && current_user.staff? or @user.show_email
       %li.udcard-detail
         %i.fa.fa-envelope-o
         %a.email{:href => "mailto:#{@user.email}"}= @user.email
+    %li.udcard-detail
+      %i.fa.fa-users
+      %span= @user.crew
+    %li.udcard-detail
+      %i.fa.fa-lemon-o
+      %span= @user.student_id
   .udcard-stats
     .udcard-stat
       %strong.udcard-stat-count= @user.user_stat.problems_solved
