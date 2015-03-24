@@ -46,8 +46,11 @@ $(document).on('ready page:change', function() {
       var select = $(this);
       var optionName = select.data('option');
       editor.setOption(optionName, select.val());
-      select.on('change', function() {
-        editor.setOption(optionName, 0);
+      select.change(function() {
+        var value = select.val();
+        if (value === 'true') value = true;
+        else if (value === 'false') value = false;
+        editor.setOption(optionName, value);
       });
     });
 
