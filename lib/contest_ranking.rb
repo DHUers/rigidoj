@@ -1,4 +1,5 @@
 class ContestRanking
+  # TODO: make it OO, it would be much easier to read and use
   PENALTY_TIME = 20
 
   def self.rank(operator, contest, opts = nil)
@@ -21,7 +22,8 @@ class ContestRanking
   # 1. accepted solution count, more is better
   # 2. time usage, less is better
   # 3. last accepted time, less is better
-  # 4. name, user_ids is already sorted
+  # 4. submitted count
+  # 5. name, user_ids is already sorted
   def sorted
     statuses = @contest.user_ids.map { |i| [i, user_status(i)] }
     statuses.sort! do |a,b|
@@ -30,7 +32,13 @@ class ContestRanking
       if result == 0
         # compare time usage
         result = a[1][2] <=> b[1][2]
-        result == 0 ? a[1][3] <=> b[1][3] : result
+        if result == 0
+          result = a[1][3] <=> b[1][3]
+          # compare submitted time
+          if result == 0
+            a[1][1] <=> b[1][1]
+          end
+        end
       end
       result
     end
