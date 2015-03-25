@@ -38,7 +38,7 @@
                 %th Solved
                 %th Time
                 - @contest.problems.each_with_index do |u,i|
-                  %th.problem-id= alphabet_offset(i)
+                  %th.problem-id{ style: "width: #{70.0 / @contest.problems.count}%" }= alphabet_offset(i)
             %tbody
               - @ranking.each_with_index do |rank,i|
                 %tr{ class: current_user && current_user.id == rank[0] ? 'current-user' : nil }
