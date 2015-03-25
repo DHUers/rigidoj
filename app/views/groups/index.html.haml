@@ -6,7 +6,7 @@
       .panel-heading
         %h4
           Groups
-      - unless @solutions.blank?
+      - unless @groups.blank?
         .table-responsive
           %table#problem-listings.table.table-bordered.table-hover
             %thead
@@ -15,15 +15,10 @@
             %tbody.row-clickable{data: {element: 'tr'}}
               - @groups.each do |g|
                 %tr
-                  %td= g.name
+                  %td= link_to g.name, group_path(g.group_name)
                   %td= g.users.count
+        = paginate @groups, window: 3
       - else
         .panel-body
           There is no groups at this time.
 
-  .col-md-3
-    %ul.action-list.group-actions.sticky.list-unstyled
-      %li
-        %a{href: new_group_path}
-          New group
-  = paginate @groups, window: 3

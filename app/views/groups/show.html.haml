@@ -1,21 +1,22 @@
 - content_for :title, @group.name
 
 .row
+  .col-md-12
+    %ol.breadcrumb
+      %li= link_to 'Home', root_path
+      %li= link_to 'Groups', groups_path
+      %li.active= @group.name
+
+.row
   .col-md-9
     .panel.panel-default
       .panel-heading
         %h4= @group.name
       .table-responsive
-        %table#group-listings.table.table-bordered.table-hover
+        %table#group-listings.table.table-bordered
           %thead
             %th Users
           %tbody
             - @group.users.each do |u|
               %tr
                 %td= u.username
-
-  .col-md-3
-    %ul.action-list.group-actions.sticky.list-unstyled
-      %li
-        %a{href: edit_group_path}
-          Edit group
