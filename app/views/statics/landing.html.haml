@@ -1,57 +1,58 @@
-.landing-header
-  %nav.navbar.navbar-success.navbar-static-top{:role => "navigation"}
-    .container
-      .navbar-header
-        %button.navbar-toggle.collapsed{"data-target" => "#navbar-drawer", "data-toggle" => "collapse", :type => "button"}
-          %span.sr-only Toogle navigation
-          %i.fa.fa-bars
-        = link_to root_path, class: 'navbar-brand' do
-          %img{:src => SiteSetting.logo_url, :width => "32"}/
-      #navbar-drawer.collapse.navbar-collapse
-        %ul#landing-nav.nav.navbar-nav.navbar-right
-          %li
-            = link_to 'Problem', problems_path
-            %span
-          %li
-            = link_to 'Contest', contests_path
-            %span
-          %li
-            = link_to 'Help', help_path
-            %span
-          %li
-            = link_to 'About', about_path
-            %span
-          %li= button_to 'Log in', login_path, class: 'btn btn-default', method: :get
-  .header-content
+- cache 0 do
+  .landing-header
+    %nav.navbar.navbar-success.navbar-static-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"data-target" => "#navbar-drawer", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toogle navigation
+            %i.fa.fa-bars
+          = link_to root_path, class: 'navbar-brand' do
+            %img{:src => SiteSetting.logo_url, :width => "32"}/
+        #navbar-drawer.collapse.navbar-collapse
+          %ul#landing-nav.nav.navbar-nav.navbar-right
+            %li
+              = link_to 'Problem', problems_path
+              %span
+            %li
+              = link_to 'Contest', contests_path
+              %span
+            %li
+              = link_to 'Help', help_path
+              %span
+            %li
+              = link_to 'About', about_path
+              %span
+            %li= button_to 'Log in', login_path, class: 'btn btn-default', method: :get
+    .header-content
+      .container
+        .row
+          .center-block.text-center
+            %h1 Conquer All Puzzles
+        .row
+          .text-center
+            = button_to 'Sign up', registration_path, class: 'btn btn-default', method: :get
+  %section#main
     .container
       .row
-        .center-block.text-center
-          %h1 Conquer All Puzzles
+        .col-sm-4
+          .thumbnail
+            = image_tag 'history.svg'
+            .caption
+              %h3 History
+              %p Keeping all your data. And analyzed for you.
+        .col-sm-4
+          .thumbnail
+            = image_tag 'notification.svg'
+            .caption
+              %h3 Notification
+              %p Notification will be sent to you in real time or email. Never interrupt you.
+        .col-sm-4
+          .thumbnail
+            = image_tag 'search.png'
+            .caption
+              %h3 Search
+              %p Search everything. Problem, contests, old solution, whatever.
       .row
         .text-center
-          = button_to 'Sign up', registration_path, class: 'btn btn-default', method: :get
-%section#main
-  .container
-    .row
-      .col-sm-4
-        .thumbnail
-          = image_tag 'history.svg'
-          .caption
-            %h3 History
-            %p Keeping all your data. And analyzed for you.
-      .col-sm-4
-        .thumbnail
-          = image_tag 'notification.svg'
-          .caption
-            %h3 Notification
-            %p Notification will be sent to you in real time or email. Never interrupt you.
-      .col-sm-4
-        .thumbnail
-          = image_tag 'search.png'
-          .caption
-            %h3 Search
-            %p Search everything. Problem, contests, old solution, whatever.
-    .row
-      .text-center
-        = button_to 'Sign up', registration_path, class: 'btn btn-default landing-btn', method: :get
+          = button_to 'Sign up', registration_path, class: 'btn btn-default landing-btn', method: :get
 = render partial: 'layouts/footer'
