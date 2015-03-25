@@ -5,6 +5,7 @@
 %meta{:content => "width=device-width,initial-scale=1,user-scalable=no", :name => "viewport"}/
 %link{:href => SiteSetting.favicon_url, :rel => "shortcut icon", :type => "image/x-icon"}/
 %link{:href => SiteSetting.apple_touch_icon_url, :rel => "apple-touch-icon", :sizes => "256x256"}/
-/[if lt IE 9]
-  = javascript_include_tag 'html5shiv'
+== <!--[if lt IE 9]>
+= javascript_include_tag 'html5shiv'
+== <![endif]-->
 = javascript_include_tag 'application', 'data-turbolinks-track' => true
