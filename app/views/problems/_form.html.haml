@@ -54,14 +54,17 @@
     .col-md-6
       = f.label :input_file
       = f.attachment_field :input_file, direct: true
+      %p= attachment_url @problem, :input_file
     .col-md-6
       = f.label :output_file
       = f.attachment_field :output_file, direct: true
+      %p= attachment_url @problem, :output_file
 .form-group.judge-vendor-group{data: {type: 'program_comparison'}}
   .row
     .col-md-6
       = f.label :judger_program
       = f.attachment_field :judger_program, direct: true
+      %p= attachment_url @problem, :judger_program
     .col-md-6
       = f.label :judger_program_platform
       = f.select :judger_program_platform, platform_select_options, { selected: current_user && current_user.default_platform }, class: 'form-control'
