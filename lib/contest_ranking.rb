@@ -35,9 +35,7 @@ class ContestRanking
         if result == 0
           result = a[1][3] <=> b[1][3]
           # compare submitted time
-          if result == 0
-            a[1][1] <=> b[1][1]
-          end
+          result == 0 ? a[1][1] <=> b[1][1] : result
         end
       end
       result
