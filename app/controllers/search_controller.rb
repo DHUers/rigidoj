@@ -13,6 +13,7 @@ class SearchController < ApplicationController
       search_args[:include_blurbs] = params[:include_blurbs] == "true"
     end
     search_args[:search_for_id] = true if params[:search_for_id].present?
+    search_args[:user] = current_user if current_user
 
     search = Search.new(params[:term], search_args.symbolize_keys)
     result = search.execute
