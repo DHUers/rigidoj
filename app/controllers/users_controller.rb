@@ -3,14 +3,16 @@ class UsersController < ApplicationController
     authorize current_user, :search?
 
     term = params[:term].to_s.strip
-    users = User.order(User.sql_fragment("CASE WHEN username = ? THEN 0 ELSE 1 END ASC", term.downcase))
+    users = User.where(active: true).order(User.sql_fragment("CASE WHEN username = ? THEN 0 ELSE 1 END ASC", term.downcase))
+
     if term.present?
-      query = Search.ts_query(@term, "simple")
-      users = users.includes(:user_search_data)
-                   .references(:user_search_data)
-                   .where("username LIKE :term_like OR user_search_data.search_data @@ #{query}",
-                          term: @term, term_like: @term_like)
-                   .order(User.sql_fragment("CASE WHEN username LIKE ? THEN 0 ELSE 1 END ASC", @term_like))
+      query = Search.ts_query(term)
+      term_like = "#{term.downcase}%"
+      users = users.includes(:user_search_datas)
+                   .references(:user_search_datas)
+                   .where("username LIKE :term_like OR user_search_datas.search_data @@ #{query}",
+                          term: term, term_like: term_like)
+                   .order(User.sql_fragment("CASE WHEN username LIKE ? THEN 0 ELSE 1 END ASC", term_like))
     end
 
     render_serialized(users, BasicUserSerializer)
@@ -86,8 +88,10 @@ class UsersController < ApplicationController
   def block
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    if user
-      user.update_attribute(:block, !user.block) unless current_user == user
+    if user && current_user != user
+      user.block = !user.block
+      user.active = !user.block
+      user.save!
 
       redirect_to user_path(user)
     else

@@ -68,6 +68,12 @@ class Search
     @results
   end
 
+  def self.ts_query(term, joiner = '&')
+    all_terms = term.gsub(/[*:()&!'"]/,'').squish.split
+    query = Problem.sanitize(all_terms.map {|t| "#{PG::Connection.escape_string(t)}:*"}.join(" #{joiner} "))
+    "TO_TSQUERY('simple', #{query})"
+  end
+
   private
 
   def find_single_problem

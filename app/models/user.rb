@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :contests
   has_many :problems
   has_many :user_problem_stats, dependent: :destroy
+  has_many :user_search_datas, dependent: :destroy
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :notifications
