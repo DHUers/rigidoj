@@ -33,7 +33,7 @@
                 %th Submission time
                 %th Problem
             %tbody
-              - @solutions.each do |s|
+              - @solutions.select { |s| ProblemPolicy.new(current_user, s.problem).show? }.each do |s|
                 %tr
                   %td.id= s.id
                   %td= link_to s.user.username, s.user

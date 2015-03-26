@@ -38,7 +38,7 @@ class SolutionsController < ApplicationController
         solution_scope = Solution.where(user_id: user.id, contest_id: nil)
       end
     end
-    @solutions = policy_scope(solution_scope).order(:id).page(params[:page]).per(20)
+    @solutions = policy_scope(solution_scope).includes(:problem).order(:id).page(params[:page]).per(20)
   end
 
   def show
