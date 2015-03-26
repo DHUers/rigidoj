@@ -1,4 +1,5 @@
 class ContestRanking
+  # TODO: make it OO, it would be much easier to read and use
   PENALTY_TIME = 20
 
   def self.rank(operator, contest, opts = nil)
@@ -14,25 +15,34 @@ class ContestRanking
   end
 
   def execute
-    Hash[sorted]
+    sorted
   end
 
   # sorted
-  # 1. accepted solution count
-  # 2. time usage
-  # 3. last accepted time
-  # 4. name, user_ids is already sorted
+  # 1. accepted solution count, more is better
+  # 2. time usage, less is better
+  # 3. last accepted time, less is better
+  # 4. submitted count
+  # 5. name, user_ids is already sorted
   def sorted
     statuses = @contest.user_ids.map { |i| [i, user_status(i)] }
     statuses.sort! do |a,b|
-      accpeted = a[1][0] <=> b[1][0]
-      if accpeted == 0
-        accpeted
-      else
-        time_usage = a[1][2] <=> b[1][2]
-        time_usage == 0 ? a[1][3] <=> b[1][3] : time_usage
+      # compare AC count
+      result = b[1][0] <=> a[1][0]
+      if result == 0
+        # compare time usage
+        result = a[1][2] <=> b[1][2]
+        if result == 0
+          result = a[1][3] <=> b[1][3]
+          # compare submitted time
+          if result == 0
+            a[1][1] <=> b[1][1]
+          end
+        end
       end
+      result
     end
+    statuses
   end
 
   # Generate status information for a user

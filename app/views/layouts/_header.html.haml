@@ -14,7 +14,8 @@
         %li= link_to 'Problem', problems_path
         %li= link_to 'Contest', contests_path
         %li= link_to 'Solution', solutions_path
-        %li= link_to 'Post', posts_path
+        - if current_user
+          %li= link_to 'Post', posts_path
         %li= link_to 'Help', help_path
       %ul.nav.navbar-nav.navbar-right
         - unless current_user

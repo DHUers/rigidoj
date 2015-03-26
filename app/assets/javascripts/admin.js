@@ -6,8 +6,9 @@ var ready = function() {
       dataType: 'json',
       delay: 250,
       data: function(params) {
+        console.log(params);
         return {
-          username: params.username
+          username: params.term
         };
       },
       processResults: function(data) {

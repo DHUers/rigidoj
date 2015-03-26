@@ -56,8 +56,14 @@ a.anchor {
   color: #aaa;
   font-size: 1.5rem;
 }
-.udcard .udcard-detail .fa {
-  margin-right: 3px;
+.udcard .udcard-detail {
+  .fa {
+    margin-right: 3px;
+  }
+  span {
+    color: $lightbg-text;
+  }
+  padding-bottom: 5px;
 }
 .udcard .udcard-stats {
   text-align: center;

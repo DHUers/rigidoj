@@ -1,8 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = policy_scope(Group.visible).order(:id).page(params[:page]).per(20)
-
-    render 'index'
+    @groups = policy_scope(Group).order(:id).page(params[:page]).per(20)
   end
 
   def new
@@ -25,19 +23,19 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find_by(name: params[:name])
-
-    render 'show'
+    @group = Group.find_by(group_name: params[:group_name])
+    authorize @group
   end
 
   def edit
-    @group = Group.find_by(name: params[:name])
+    @group = Group.find_by(group_name: params[:group_name])
 
     render 'edit'
   end
 
   def person
     @user = User.find_by(username_lower: params[:username])
+    authorize @user, :show?
     render 'users/show'
   end
 

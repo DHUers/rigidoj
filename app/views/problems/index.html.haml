@@ -22,6 +22,8 @@
       .table-responsive
         %table#problem-listings.table.table-bordered.table-hover
           %thead
+            - if current_user
+              %th
             %th ID
             %th Title
             %th Submitted
@@ -29,6 +31,11 @@
           %tbody.row-clickable{data: {element: 'tr'}}
             - @problems.each do |p|
               %tr
+                - if current_user
+                  %td
+                    - stat = UserProblemStat.where(user_id: current_user.id, problem_id: p.id).first_or_create
+                    - if stat.state == 'accepted'
+                      %i.fa.fa-check
                 %td= p.id
                 %td= link_to p.title, problem_path(p.slug, p.id)
                 %td= p.submission_count > 0 ? p.submission_count : '-'

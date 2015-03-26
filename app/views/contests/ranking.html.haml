@@ -38,20 +38,19 @@
                 %th Solved
                 %th Time
                 - @contest.problems.each_with_index do |u,i|
-                  %th.problem-id= alphabet_offset(i)
+                  %th.problem-id{ style: "width: #{70.0 / @contest.problems.count}%" }= alphabet_offset(i)
             %tbody
-              - @contest.user_ids.each_with_index do |u,i|
-                - rank = @ranking[u]
-                - result = rank[4]
-                %tr{ class: current_user && current_user.id == u ? 'current-user' : nil }
+              - @ranking.each_with_index do |rank,i|
+                %tr{ class: current_user && current_user.id == rank[0] ? 'current-user' : nil }
                   %td= i + 1
-                  - user = User.find(u)
+                  - user = User.find(rank[0])
                   %td= link_to SiteSetting.show_user_full_name_in_ranking ? user.name : user.username, user_path(user)
                   - if SiteSetting.show_user_class_in_ranking
                     %td
                       %span.user{ data: { title: user.student_id, toggle: 'tooltip', placement: 'bottom' } }= user.crew
-                  %td= rank[0] # "#{rank[0]}/#{rank[1]}"
-                  %td= rank[2]
+                  %td= rank[1][0] # "#{rank[0]}/#{rank[1]}"
+                  %td= rank[1][2]
+                  - result = rank[1][4]
                   - @contest.problems.each_with_index do |p,i|
                     - problem_result = result[p.id]
                     %td{ class: "problem-#{i} #{problem_stat(problem_result)}", data: { solved_at: problem_result && problem_result[1] ? problem_result[1] : nil } }

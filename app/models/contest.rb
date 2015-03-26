@@ -73,9 +73,17 @@ class Contest < ActiveRecord::Base
   end
 
   def add_user(user)
+    flag = false
     begin
-      users.push user unless users.include?(user)
+      unless users.include?(user)
+        users.push user
+        flag = true
+      end
     rescue ActiveRecord::RecordNotUnique
+      flag = false
+    end
+    if flag
+      user.user_stat.increment!(:contests_joined)
     end
   end
 

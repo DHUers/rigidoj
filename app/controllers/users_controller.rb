@@ -3,18 +3,15 @@ class UsersController < ApplicationController
     authorize current_user, :search?
 
     term = params[:term].to_s.strip
-    users = User.order(User.sql_fragment("CASE WHEN username_lower = ? THEN 0 ELSE 1 END ASC", term.downcase))
+    users = User.order(User.sql_fragment("CASE WHEN username = ? THEN 0 ELSE 1 END ASC", term.downcase))
     if term.present?
       query = Search.ts_query(@term, "simple")
       users = users.includes(:user_search_data)
                    .references(:user_search_data)
-                   .where("username_lower LIKE :term_like OR user_search_data.search_data @@ #{query}",
+                   .where("username LIKE :term_like OR user_search_data.search_data @@ #{query}",
                           term: @term, term_like: @term_like)
-                   .order(User.sql_fragment("CASE WHEN username_lower LIKE ? THEN 0 ELSE 1 END ASC", @term_like))
+                   .order(User.sql_fragment("CASE WHEN username LIKE ? THEN 0 ELSE 1 END ASC", @term_like))
     end
-
-    users.order("CASE WHEN last_seen_at IS NULL THEN 0 ELSE 1 END DESC, last_seen_at DESC, username ASC")
-         .limit(@limit)
 
     render_serialized(users, BasicUserSerializer)
   end
@@ -41,7 +38,13 @@ class UsersController < ApplicationController
     @user = User.includes(:groups).find_by(username_lower: params[:username].downcase)
     authorize @user
     @groups = @user.groups
-    @problems = policy_scope(Problem).includes(:user_problem_stats).where(user_problem_stats: { user_id: @user.id }).order(:id).page(params[:page]).per(30)
+    @problems = policy_scope(Problem)
+                    .includes(:user_problem_stats)
+                    .where(user_problem_stats: { user_id: @user.id })
+                    .where.not(user_problem_stats: { state: 'null' })
+                    .order(:id)
+                    .page(params[:page])
+                    .per(30)
   end
 
   def edit
@@ -59,25 +62,37 @@ class UsersController < ApplicationController
   def grant_admin
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:admin, !user.admin) unless current_user == user
+    if user
+      user.update_attribute(:admin, !user.admin) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   def grant_moderator
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:moderator, !user.moderator) unless current_user == user
+    if user
+      user.update_attribute(:moderator, !user.moderator) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   def block
     user = User.find_by(username: params[:username])
     authorize current_user, :admin?
-    user.update_attribute(:block, !user.block) unless current_user == user
+    if user
+      user.update_attribute(:block, !user.block) unless current_user == user
 
-    redirect_to user_path(user)
+      redirect_to user_path(user)
+    else
+      render nothing: 200
+    end
   end
 
   private

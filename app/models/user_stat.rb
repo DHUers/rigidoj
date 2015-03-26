@@ -6,7 +6,8 @@ class UserStat < ActiveRecord::Base
   end
 
   def set_first_solution!(time)
-
+    self.first_solution_created_at = time
+    save!
   end
 end
 

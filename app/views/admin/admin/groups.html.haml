@@ -6,7 +6,7 @@
     /%input.search-for-group.form-control{ placeholder: 'Filter the group name' }
     .list-group
       - Group.all.each do |g|
-        = link_to g.name, admin_group_path(g.name), class: 'list-group-item'
+        = link_to g.name, admin_group_path(g.group_name), class: 'list-group-item'
     %button.add.btn.btn-default{ data: { toggle: 'modal', target: '#add-group' } } Add
   .col-md-9
 
