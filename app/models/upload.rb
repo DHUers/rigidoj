@@ -1,6 +1,8 @@
 class Upload < ActiveRecord::Base
   attachment :upload, type: :image
 
+  default_scope { order('created_at DESC') }
+
   validates_presence_of :upload
 end
 

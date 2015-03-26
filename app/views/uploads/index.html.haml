@@ -1,0 +1,22 @@
+- content_for :title, 'Uploads'
+
+.row
+  .col-md-12
+    = form_for @upload, url: uploads_path, html: { role: 'form' } do |f|
+      = f.attachment_field :upload, direct: true
+      = f.button 'Upload', class: 'btn btn-default'
+
+.row
+  .col-md-12
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th ID
+          %th Name
+          %th Url
+      %tbody
+        - @uploads.each do |u|
+          %tr
+            %td= u.id
+            %td= u.upload_filename
+            %td= '/new' + attachment_url(u, :upload)
