@@ -26,9 +26,9 @@ class UserSettingsController < ApplicationController
     @user = current_user
     authorize :user_setting, :account?
 
-    if @user.authenticate!(params[:old_password]) &&
-        params[:new_password] == params[:confirmation_password]
-      @user.password = params[:new_password]
+    if @user.authenticate!(params[:user][:old_password]) &&
+        params[:user][:new_password] == params[:user][:confirmation_password]
+      @user.password = params[:user][:new_password]
       if @user.save
         flash[:info] = 'Successfully update.'
       else
@@ -38,6 +38,18 @@ class UserSettingsController < ApplicationController
       flash[:danger] = 'Old password is incorrect.'
     end
     render 'users/settings/account'
+  end
+
+  def update_email
+    @user = current_user
+    authorize :user_setting, :account?
+
+    if @user.update_attributes(account_params)
+      flash[:info] = 'Successfully update.'
+    else
+      flash[:danger] = 'Something wrong.'
+    end
+    redirect_to settings_account_path
   end
 
   def notification
@@ -61,11 +73,11 @@ class UserSettingsController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:name, :username, :website, :avatar)
+    params.require(:user).permit(:name, :username, :website, :avatar, :crew, :student_id)
   end
 
   def account_params
-    params.require(:user).permit(:old_password, :new_password, :confirmation_password)
+    params.require(:user).permit(:old_password, :new_password, :confirmation_password, :email)
   end
 
   def notification_params

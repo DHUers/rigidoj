@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   post '/settings/profile', to: 'user_settings#update_profile'
   get '/settings/account', to: 'user_settings#account', as: :settings_account
   post '/settings/account', to: 'user_settings#update_account'
+  post '/settings/email', to: 'user_settings#update_email', as: :settings_email
   get '/settings/notifications', to: 'user_settings#notification', as: :settings_notification
   post '/settings/notifications', to: 'user_settings#update_notification'
 
