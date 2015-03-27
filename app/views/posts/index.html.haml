@@ -9,7 +9,8 @@
     .list-group.post-list
       - @posts.each do |p|
         .list-group-item.post-item
-          .avatar= attachment_image_tag p.comments.first.user, :avatar, alt: p.comments.first.user.username, fallback: 'avatar.jpg'
+          - if p.first_comment.user
+            .avatar= attachment_image_tag p.first_comment.user, :avatar, alt: p.first_comment.user.username, fallback: 'avatar.jpg'
           .content
             .list-group-item-heading= link_to p.title, post_path(p)
             .list-group-item-text
