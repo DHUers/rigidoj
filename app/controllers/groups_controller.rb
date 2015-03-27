@@ -6,8 +6,6 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
     @group.users << current_user
-
-    render 'new'
   end
 
   def create
@@ -29,8 +27,6 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find_by(group_name: params[:group_name])
-
-    render 'edit'
   end
 
   def person

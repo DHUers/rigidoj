@@ -19,4 +19,4 @@
           %tbody
             - @group.users.each do |u|
               %tr
-                %td= u.username
+                %td= link_to u.username, user_path(u)

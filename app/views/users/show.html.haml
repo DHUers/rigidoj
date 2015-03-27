@@ -51,7 +51,7 @@
       #groups.tab-pane.fade{ role: 'tabpanel' }
         - if @groups.any?
           - @groups.each do |g|
-            %span= g.name
+            %span= link_to g.name, group_path(g.group_name)
         - else
           The user doesn't belong to any group.
       #bookmarks.tab-pane.fade{ role: 'tabpanel' }
