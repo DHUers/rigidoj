@@ -36,6 +36,10 @@
             = f.label :password
             = f.password_field :password, class: 'form-control'
             = field_describer @user.errors[:password]
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, class: 'form-control'
+            = field_describer @user.errors[:password_confirmation]
           %p.tos-info
             By clicking on "Create an account" below, you are agreeing to the
             \#{link_to 'Terms of Service'} and the

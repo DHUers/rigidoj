@@ -3,6 +3,8 @@ require 'pbkdf2'
 class User < ActiveRecord::Base
   include Searchable
 
+  attr_accessor :password_confirmation
+
   has_one :user_stat, dependent: :destroy
   has_many :solutions, dependent: :destroy
   has_many :posts
@@ -104,6 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def password_validator
+    errors.add(:password_confirmation, :invalid) if password_confirmation != @raw_password
     PasswordValidator.new(attributes: :password).validate_each(self, :password, @raw_password)
   end
 
