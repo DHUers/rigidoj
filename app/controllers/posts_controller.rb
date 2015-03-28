@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title]))
     @comment = creator.create
     @post = @comment.post
-    unless creator.errors.any?
+    unless creator.errors.any? || @comment.errors.any?
       redirect_to post_path(@post)
     else
       flash[:danger] = 'Error creating the post.'

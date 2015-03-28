@@ -86,11 +86,9 @@ class CommentCreator
   end
 
   def save_comment
-    if @post.valid?
-      unless @comment.save(validate: !skip_validations?)
-        @errors = @comment.errors
-        raise ActiveRecord::Rollback.new
-      end
+    unless @comment.save(validate: !skip_validations?)
+      @errors = @comment.errors
+      raise ActiveRecord::Rollback.new
     end
   end
 
