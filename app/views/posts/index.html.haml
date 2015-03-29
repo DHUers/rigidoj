@@ -1,9 +1,10 @@
 - content_for :title, 'Posts'
 
 - if PostPolicy.new(current_user, :post).create?
-  .pull-right
-    = button_to 'New Post', new_post_path, class: 'btn btn-primary', |
-      html: { type: 'button' }, method: :get
+  .row
+    .col-md-12
+      = button_to 'New Post', new_post_path, class: 'btn btn-primary pull-right', |
+        html: { type: 'button' }, method: :get
 .row
   .col-md-12
     .list-group.post-list
