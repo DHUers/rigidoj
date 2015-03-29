@@ -3,6 +3,7 @@ Fabricator(:user) do
   username {sequence(:username) {|i| "user#{i}"}}
   email {sequence(:email) {|i| "user#{i}@example.com"}}
   password 'myawesomepassword'
+  password_confirmation 'myawesomepassword'
   active true
 end
 
@@ -11,6 +12,7 @@ Fabricator(:erick, from: :user) do
   username 'erick'
   email 'ff@ww.com'
   password 'Wpassword1'
+  password_confirmation 'Wpassword1'
   active true
 end
 

@@ -151,6 +151,7 @@ describe User do
     before do
       @user = Fabricate.build(:user, active: false)
       @user.password = 'ilovepasta'
+      @user.password_confirmation = 'ilovepasta'
       @user.save!
     end
 
