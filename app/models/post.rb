@@ -1,6 +1,7 @@
 require 'pretty_text'
 
 class Post < ActiveRecord::Base
+  has_one :post_search_data, dependent: :destroy
   has_many :comments, -> { order('comment_number ASC') }, dependent: :destroy
   has_many :notifications
   belongs_to :contest

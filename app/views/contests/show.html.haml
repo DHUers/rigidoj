@@ -1,18 +1,20 @@
 - content_for :title, @contest.title
 
-#contest-admin.admin-wrench.btn-group
-  %button{type: 'button', class: 'btn btn-default dropdown-toggle',
-      data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
-    %i.fa.fa-wrench
-  %ul.dropdown-menu.pull-right{role: 'menu'}
-    - if current_user && current_user.staff?
-      %li
-        %a{href: edit_contest_path(@contest.slug, @contest.id)}
-          Edit contest
-    - if @contest.in_judger_group?(current_user) || current_user && current_user.admin?
-      %li
-        %a{href: new_contest_notification_path(@contest.slug, @contest.id)}
-          Send notification
+- if current_user && (current_user.staff? || @contest.in_judger_group?(current_user))
+
+  #contest-admin.admin-wrench.btn-group
+    %button{type: 'button', class: 'btn btn-default dropdown-toggle',
+        data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+      %i.fa.fa-wrench
+    %ul.dropdown-menu.pull-right{role: 'menu'}
+      - if current_user && current_user.staff?
+        %li
+          %a{href: edit_contest_path(@contest.slug, @contest.id)}
+            Edit contest
+      - if @contest.in_judger_group?(current_user) || current_user && current_user.admin?
+        %li
+          %a{href: new_contest_notification_path(@contest.slug, @contest.id)}
+            Send notification
 
 .row
   .col-md-9.contest-panels

@@ -4,6 +4,7 @@ require 'active_support/time'
 class Contest < ActiveRecord::Base
   include Slugable
 
+  has_one :contest_search_data, dependent: :destroy
   has_many :contest_problems
   has_many :problems, -> { order('position ASC') }, through: :contest_problems
   has_many :contest_users
