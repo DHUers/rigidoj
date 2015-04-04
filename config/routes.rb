@@ -44,6 +44,11 @@ Rails.application.routes.draw do
   get '/p/:slug/:id/edit', to: 'problems#edit', constraints: {id: /\d+/}, as: :edit_problem
   match '/p/:slug/:id', to: 'problems#update', constraints: {id: /\d+/}, via: [:patch, :put]
   delete '/p/:slug/:id', to: 'problems#destroy', constraints: {id: /\d+/}
+  get '/p/:slug/:problem_id/posts', to: 'posts#index_with_problem', constraints: {id: /\d+/}, as: :problem_posts
+  post '/p/:slug/:problem_id/posts', to: 'posts#create_with_problem', constraints: {id: /\d+/}
+  get '/p/:slug/:problem_id/posts/new', to: 'posts#new_with_problem', constraints: {id: /\d+/}, as: :new_problem_post
+  get '/p/:slug/:problem_id/posts/:post_id', to: 'posts#show_with_problem', constraints: {id: /\d+/}, as: :problem_post
+  delete '/p/:slug/:id', to: 'problems#destroy', constraints: {id: /\d+/}
   post '/problems/import', to: 'problems#import', as: :problems_import
   get '/problems/:id/excerpt', to: 'problems#excerpt'
   get '/p/:slug/:problem_id/solutions', to: 'problems#solutions', constraints: { problem_id: /\d+/ }, as: :problem_solutions

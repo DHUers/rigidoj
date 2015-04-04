@@ -43,6 +43,10 @@
             %a{ href: problem_solutions_path(@problem.slug, @problem.id) }
               %i.fa.fa-history
               Submitted records
+          %li.action
+            %a{ href: problem_posts_path(@problem.slug, @problem.id) }
+              %i.fa.fa-list
+              Posts
 
 
 #submit-solution.modal.fade{tabindex: '-1', role: 'dialog', aria: {labelledby: 'Submit new solution', hidden: 'true'}}

@@ -6,7 +6,10 @@
       .panel-heading
         %h4 Create a post
       .panel-body
-        = form_for :comment, url: @contest ? contest_posts_path(@contest.slug, @contest.id) : posts_path, html: {role: 'form'} do |f|
+        - url = posts_path
+        - url = contest_posts_path(@contest.slug, @contest.id) if @contest
+        - url = problem_posts_path(@problem.slug, @problem.id) if @problem
+        = form_for :comment, url: url, html: {role: 'form'} do |f|
           = render partial: 'form', locals: { f: f }
           = f.button 'Create', class: 'btn btn-success'
           = link_to 'Cancel', @contest ? contest_path(@contest.slug, @contest.id) : posts_path

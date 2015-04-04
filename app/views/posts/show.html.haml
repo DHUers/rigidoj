@@ -20,6 +20,17 @@
         %li= link_to contest.title, contest_path(contest.slug, contest.id)
         %li.active problem
 
+- if params[:problem_id]
+  - problem = Problem.find(params[:problem_id])
+  .row
+    .col-md-12
+      %ol.breadcrumb
+        %li= link_to 'Home', root_path
+        %li= link_to 'Problem', problems_path
+        %li= link_to problem.title, problem_path(problem.slug, problem.id)
+        %li= link_to 'Posts', problem_posts_path(problem.slug, problem.id)
+        %li.active problem
+
 .row
   .col-md-12
     .post.post-box

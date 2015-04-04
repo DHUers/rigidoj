@@ -112,6 +112,42 @@ class PostsController < ApplicationController
     render :show
   end
 
+  def index_with_problem
+    @problem = Problem.find(params[:problem_id])
+    authorize @problem, :show?
+    @posts = @problem.posts
+  end
+
+  def new_with_problem
+    @problem = Problem.find(params[:problem_id])
+    authorize @problem, :show?
+    @post = Post.new
+    render :new
+  end
+
+  def create_with_problem
+    @problem = Problem.find(params[:problem_id])
+    authorize @problem, :show?
+    creator = CommentCreator.new(current_user, post_params.merge(title: params[:post][:title], problem_id: @problem.id))
+    @comment = creator.create
+    @post = @comment.post
+    unless creator.errors.any?
+      redirect_to problem_post_path(@problem.slug, @problem.id, @post.id)
+    else
+      flash[:danger] = 'Error creating the post.'
+      render :new
+    end
+  end
+
+  def show_with_problem
+    @problem = Problem.find(params[:problem_id])
+    @post = Post.find(params[:post_id])
+    @comment = Comment.new
+    authorize @problem, :show?
+
+    render :show
+  end
+
   private
 
   def post_params

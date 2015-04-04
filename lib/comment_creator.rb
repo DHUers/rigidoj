@@ -6,6 +6,7 @@ class CommentCreator
   #
   #   raw                     - raw text of comment
   #   contest_id              - binding to contest
+  #   problem_id              - binding to problem
   #   created_at              - Comment creation time (optional)
   #
   #   When replying to a comment:
@@ -19,6 +20,7 @@ class CommentCreator
   def initialize(user, opts)
     @user = user
     @opts = opts || {}
+    @opts[:published] = true unless @opts[:published]
   end
 
   def skip_validations?
@@ -61,7 +63,7 @@ class CommentCreator
   def setup_post
     if new_post?
       begin
-        post = Post.create(title: @opts[:title], published: @opts[:published] || true, contest_id: @opts[:contest_id], user_id: @user.id)
+        post = Post.create(title: @opts[:title], published: @opts[:published], contest_id: @opts[:contest_id], problem_id: @opts[:problem_id], user_id: @user.id)
         @errors = post.errors
       rescue ActiveRecord::Rollback => ex
         # In the event of a rollback, grab the errors from the topic
