@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.3'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.0'
@@ -16,7 +16,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Rails Html Sanitizer for HTML sanitization
 gem 'rails-html-sanitizer', '~> 1.0'
 
-gem 'refile', require: ['refile/rails', 'refile/image_processing'], git: 'https://github.com/refile/refile.git'
+gem "refile", require: "refile/rails"
+gem "refile-mini_magick"
 
 gem 'mini_magick'
 gem 'rack-mini-profiler', require: false
@@ -25,8 +26,7 @@ gem 'pundit'
 gem 'nokogiri'
 gem 'sidekiq'
 gem 'kaminari'
-gem 'haml'
-gem 'haml-rails'
+gem 'hamlit'
 gem 'message_bus'
 gem 'pry-rails', require: false
 
@@ -52,7 +52,7 @@ gem 'memory_profiler', require: false, platform: :mri_21
 
 # frontend assets
 gem 'jquery-rails'
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass', '~> 3.3.5'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
